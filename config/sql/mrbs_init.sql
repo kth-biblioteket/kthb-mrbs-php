@@ -18,9 +18,9 @@ SET time_zone = "+00:00";
 
 --
 -- Databas: `mrbs_APPNAME`
--- Se till att sätta rätt databasnamn!
+-- Ta bort s från sCREATE och se till att sätta rätt databasnamn!
 --
-CREATE DATABASE IF NOT EXISTS `mrbs_handledning` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+sCREATE DATABASE IF NOT EXISTS `mrbs_handledning` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE `mrbs_handledning`;
 
 -- --------------------------------------------------------
