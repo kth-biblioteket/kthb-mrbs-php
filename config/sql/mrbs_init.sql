@@ -33,7 +33,7 @@ DROP TABLE IF EXISTS `kth_areatype`;
 CREATE TABLE IF NOT EXISTS `kth_areatype` (
   `id` int(11) NOT NULL,
   `areatype` varchar(50) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumpning av Data i tabell `kth_areatype`
@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS `kth_area_instructors` (
   `id` int(11) NOT NULL,
   `area_id` int(11) NOT NULL,
   `instructor_id` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumpning av Data i tabell `kth_area_instructors`
@@ -79,7 +79,7 @@ CREATE TABLE IF NOT EXISTS `kth_area_places` (
   `id` int(11) NOT NULL,
   `area_id` int(11) NOT NULL,
   `places_id` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumpning av Data i tabell `kth_area_places`
@@ -103,39 +103,41 @@ CREATE TABLE IF NOT EXISTS `kth_entry_custom_fields` (
   `sort_order` int(11) NOT NULL,
   `visible` int(11) NOT NULL,
   `enabled` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumpning av Data i tabell `kth_entry_custom_fields`
 --
 /*
 INSERT INTO `kth_entry_custom_fields` (`id`, `area_id`, `entry_field_name`, `type`, `sort_order`, `visible`, `enabled`) VALUES
-(1, 1, 'email', 'custom', 200, 1, 1),
-(2, 1, 'phone', 'custom', 300, 1, 1),
-(3, 1, 'user_group', 'custom', 150, 1, 0),
-(4, 1, 'campus', 'custom', 130, 1, 1),
-(5, 1, 'program', 'custom', 500, 1, 1),
-(6, 1, 'study_info', 'custom', 600, 1, 1),
-(7, 1, 'previously', 'custom', 700, 1, 1),
-(8, 1, 'subject_keywords', 'custom', 800, 1, 1),
-(9, 1, 'instructor', 'custom', 110, 1, 1),
-(10, 1, 'preferred_language', 'custom', 120, 1, 1),
-(11, 1, 'start_time', 'standard', 100, 1, 1),
-(12, 1, 'end_time', 'standard', 101, 1, 1),
-(13, 1, 'name', 'standard', 140, 1, 1),
-(14, 2, 'email', 'custom', 200, 1, 1),
-(15, 2, 'phone', 'custom', 300, 1, 1),
-(16, 2, 'user_group', 'custom', 150, 1, 0),
-(17, 2, 'preferred_language', 'custom', 800, 1, 1),
-(18, 2, 'instructor', 'custom', 110, 0, 0),
-(19, 2, 'start_time', 'standard', 100, 1, 1),
-(20, 2, 'end_time', 'standard', 101, 1, 1),
-(21, 2, 'name', 'standard', 140, 1, 1),
-(22, 2, 'other_info', 'custom', 900, 1, 1),
-(23, 3, 'name', 'standard', 100, 1, 1),
-(24, 3, 'start_time', 'standard', 110, 1, 1),
-(25, 3, 'end_time', 'standard', 120, 1, 1),
-(26, 3, 'confirmation_status', 'standard', 130, 1, 1);
+(1, 'email', 'custom', 200, 1, 1),
+(1, 'phone', 'custom', 300, 1, 1),
+(1, 'user_group', 'custom', 150, 1, 0),
+(1, 'campus', 'custom', 130, 1, 1),
+(1, 'program', 'custom', 500, 1, 1),
+(1, 'study_info', 'custom', 600, 1, 1),
+(1, 'previously', 'custom', 700, 1, 1),
+(1, 'subject_keywords', 'custom', 800, 1, 1),
+(1, 'instructor', 'custom', 110, 1, 1),
+(1, 'preferred_language', 'custom', 120, 1, 1),
+(1, 'start_time', 'standard', 100, 1, 1),
+(1, 'end_time', 'standard', 101, 1, 1),
+(1, 'name', 'standard', 140, 1, 1),
+INSERT INTO `kth_entry_custom_fields` (`area_id`, `entry_field_name`, `type`, `sort_order`, `visible`, `enabled`) VALUES
+(1, 'email', 'custom', 200, 1, 1),
+(1, 'phone', 'custom', 300, 1, 1),
+(1, 'user_group', 'custom', 150, 1, 0),
+(1, 'preferred_language', 'custom', 800, 1, 1),
+(1, 'instructor', 'custom', 110, 0, 0),
+(1, 'start_time', 'standard', 100, 1, 1),
+(1, 'end_time', 'standard', 101, 1, 1),
+(1, 'name', 'standard', 140, 1, 1),
+(1, 'other_info', 'custom', 900, 1, 1)
+INSERT INTO `kth_entry_custom_fields` (`area_id`, `entry_field_name`, `type`, `sort_order`, `visible`, `enabled`) VALUES
+(1, 'name', 'standard', 100, 1, 1),
+(1, 'start_time', 'standard', 110, 1, 1),
+(1, 'end_time', 'standard', 120, 1, 1),
+(1, 'confirmation_status', 'standard', 130, 1, 1);
 */
 
 -- --------------------------------------------------------
@@ -164,7 +166,7 @@ CREATE TABLE IF NOT EXISTS `kth_instructors` (
   `id` int(11) NOT NULL,
   `full_name` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumpning av Data i tabell `kth_instructors`
@@ -188,7 +190,7 @@ CREATE TABLE IF NOT EXISTS `kth_periods` (
   `entry_start_time` varchar(5) NOT NULL,
   `weekday` int(11) NOT NULL DEFAULT '0',
   `area_id` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumpning av Data i tabell `kth_periods`
@@ -209,7 +211,7 @@ CREATE TABLE IF NOT EXISTS `kth_places` (
   `id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
   `name_en` varchar(100) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumpning av Data i tabell `kth_places`
@@ -303,20 +305,20 @@ CREATE TABLE IF NOT EXISTS `mrbs_area` (
   `reminder_email_enabled` tinyint(1) NOT NULL DEFAULT '0',
   `area_map` tinyint(1) NOT NULL DEFAULT '0',
   `area_map_image` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumpning av Data i tabell `mrbs_area`
 --
 
 /*
-INSERT INTO `mrbs_area` (`id`, `disabled`, `area_name`, `area_name_en`, `area_sort_key`, `area_type`, `timezone`, `area_admin_email`, `resolution`, `default_duration`, `default_duration_all_day`, `morningstarts`, `morningstarts_minutes`, `eveningends`, `eveningends_minutes`, `private_enabled`, `private_default`, `private_mandatory`, `private_override`, `min_create_ahead_enabled`, `min_create_ahead_secs`, `max_create_ahead_enabled`, `max_create_ahead_secs`, `min_delete_ahead_enabled`, `min_delete_ahead_secs`, `max_delete_ahead_enabled`, `max_delete_ahead_secs`, `max_per_day_enabled`, `max_per_day`, `max_per_week_enabled`, `max_per_week`, `max_hours_per_day_enabled`, `max_hours_per_day`, `max_hours_per_week_enabled`, `max_hours_per_week`, `max_hours_per_month_enabled`, `max_hours_per_month`, `max_hours_per_year_enabled`, `max_hours_per_year`, `max_hours_per_future_enabled`, `max_hours_per_future`, `max_per_month_enabled`, `max_per_month`, `max_per_year_enabled`, `max_per_year`, `max_per_future_enabled`, `max_per_future`, `max_global_per_day`, `max_global_per_day_enabled`, `max_global_per_week`, `max_global_per_week_enabled`, `max_global_per_month`, `max_global_per_month_enabled`, `max_global_per_year`, `max_global_per_year_enabled`, `max_global_per_future`, `max_global_per_future_enabled`, `max_duration_enabled`, `max_duration_secs`, `max_duration_periods`, `custom_html`, `custom_html_en`, `extra_info`, `extra_info_en`, `approval_enabled`, `reminders_enabled`, `enable_periods`, `confirmation_enabled`, `confirmed_default`, `default_view`, `times_along_top`, `hide_links`, `extended_booking_form`, `reminder_email_enabled`, `area_map`, `area_map_image`) VALUES
-(1, 0, 'Boka handledning', 'Book consultation', 1, 6, 'Europe/Stockholm', 'tholind@kth.se', 3600, 3600, 0, 9, 0, 16, 0, 0, 0, 0, 'none', 0, 0, 0, 604800, 0, 0, 0, 604800, 1, 1, 0, 5, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 50, 0, 100, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 7200, 2, 'Svenska\r\nLorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum ', 'English\r\nLorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum ', NULL, NULL, 0, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 'grupprum.jpg'),
-(2, 0, 'Talboksintroduktion', 'Introduction to talking books', 5, 5, 'Europe/Stockholm', '', 3600, 3600, 0, 9, 0, 16, 0, 0, 0, 0, 'none', 0, 0, 0, 604800, 0, 0, 0, 604800, 0, 1, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 50, 0, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7200, 2, '<p style="color:red">Custom svenska html</p>', '<p style="color:red">Custom english html</p>\r\n', NULL, NULL, 0, 1, 0, 0, 1, 1, 0, 1, 1, 0, 0, ''),
-(3, 0, 'Huvudbiblioteket - Grupprum', 'Main Library - Group study rooms', 1, 1, 'Europe/Stockholm', '', 3600, 7200, 0, 8, 0, 20, 0, 0, 0, 0, 'none', 0, 0, 1, 604800, 0, 0, 0, 604800, 1, 1, 1, 2, 1, 2, 1, 4, 0, 0, 0, 0, 0, 0, 0, 10, 0, 50, 0, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 7200, 1, '<h2>Bokningsregler/Information</h2>\r\n<ul>\r\n<li>Boka med ditt KTH-Konto <p></p></li>\r\n<li>Boka själv via schemat tidigast en vecka i förväg.<p></p></li>\r\n<li>Bokningen <b>måste</b> kvitteras i tid annars förfaller den.<p></p></li>\r\n<li>Kvittering av bokat pass görs tidigast 15 minuter före och senast 15 minuter efter bokningstidens start.<p></p></li>\r\n<li>Avboka alltid en tid du inte kommer att använda. Ej avbokad tid räknas som en bokning. <p></p></li>\r\n<li>Ett pass som bokas sedan det börjat kvitteras automatiskt.<p></p></li>\r\n<li>Du kan boka ett rum per dag och max två rum per vecka.<p></p></li>\r\n<li>Du kan boka max två timmar per bokning.</li><p></p>\r\n<li>Grupprummen är avsedda för grupper på upp till 8 personer och minst 2 personer.<p></p></li>\r\n<li>Alla grupprum har en whiteboard och rum 4. Leopold har en skärm<p></p></li>\r\n<li>Du får inte ta med mat och dryck i grupprummen.<p></p></li>\r\n</ul>', '<h2>Booking rules/Information</h2>\r\n<ul>\r\n<li>Book an available time with your KTH account.<p></p></li>\r\n<li>A booking can be made a week ahead, you can do it yourself.<p></p></li>\r\n<li>You <b>must </b>confirm your time slot. This is done from 15 minutes before to 15 minutes after the start time.<p></p></li>\r\n<li>Always cancel your booking if you do not need the room. If you don''t cancel it will count as a booking.<p></p></li>\r\n<li>If you book a room after the start time it will be confirmed automatically.<p></p></li>\r\n<li>You may book up to one room/day and two/week.<p></p></li>\r\n<li>You may book maximum two hours per booking</li><p></p>\r\n<li>Group study rooms are intended for a group of people, i.e. for at least two persons.<p></p></li>\r\n<li>All group study rooms have a whiteboard and room 4. Leopold has a screen<p></p></li>\r\n<li>Food and drink may not be brought into the group study rooms.<p></p></li>\r\n</ul>', NULL, NULL, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 1, 'grupprum.jpg'),
-(4, 0, 'Huvudbiblioteket - Lässtudio', NULL, 0, 0, 'Europe/Stockholm', NULL, 1800, 3600, 0, 7, 0, 18, 30, 0, 0, 0, 'none', 0, 0, 0, 604800, 0, 0, 0, 604800, 0, 1, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 50, 0, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7200, 2, NULL, NULL, NULL, NULL, 0, 1, 0, 1, 1, 0, 0, 1, 0, 0, 0, NULL),
-(5, 0, 'Kista - Lässtudio', NULL, 0, 0, 'Europe/Stockholm', NULL, 1800, 3600, 0, 7, 0, 18, 30, 0, 0, 0, 'none', 0, 0, 0, 604800, 0, 0, 0, 604800, 0, 1, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 50, 0, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7200, 2, NULL, NULL, NULL, NULL, 0, 1, 0, 1, 1, 0, 0, 1, 0, 0, 0, NULL),
-(6, 0, 'Flemingsberg - Lässtudio', NULL, 0, 0, 'Europe/Stockholm', NULL, 1800, 3600, 0, 7, 0, 18, 30, 0, 0, 0, 'none', 0, 0, 0, 604800, 0, 0, 0, 604800, 0, 1, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 50, 0, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7200, 2, NULL, NULL, NULL, NULL, 0, 1, 0, 1, 1, 0, 0, 1, 0, 0, 0, NULL);
+INSERT INTO `mrbs_area` (`disabled`, `area_name`, `area_name_en`, `area_sort_key`, `area_type`, `timezone`, `area_admin_email`, `resolution`, `default_duration`, `default_duration_all_day`, `morningstarts`, `morningstarts_minutes`, `eveningends`, `eveningends_minutes`, `private_enabled`, `private_default`, `private_mandatory`, `private_override`, `min_create_ahead_enabled`, `min_create_ahead_secs`, `max_create_ahead_enabled`, `max_create_ahead_secs`, `min_delete_ahead_enabled`, `min_delete_ahead_secs`, `max_delete_ahead_enabled`, `max_delete_ahead_secs`, `max_per_day_enabled`, `max_per_day`, `max_per_week_enabled`, `max_per_week`, `max_hours_per_day_enabled`, `max_hours_per_day`, `max_hours_per_week_enabled`, `max_hours_per_week`, `max_hours_per_month_enabled`, `max_hours_per_month`, `max_hours_per_year_enabled`, `max_hours_per_year`, `max_hours_per_future_enabled`, `max_hours_per_future`, `max_per_month_enabled`, `max_per_month`, `max_per_year_enabled`, `max_per_year`, `max_per_future_enabled`, `max_per_future`, `max_global_per_day`, `max_global_per_day_enabled`, `max_global_per_week`, `max_global_per_week_enabled`, `max_global_per_month`, `max_global_per_month_enabled`, `max_global_per_year`, `max_global_per_year_enabled`, `max_global_per_future`, `max_global_per_future_enabled`, `max_duration_enabled`, `max_duration_secs`, `max_duration_periods`, `custom_html`, `custom_html_en`, `extra_info`, `extra_info_en`, `approval_enabled`, `reminders_enabled`, `enable_periods`, `confirmation_enabled`, `confirmed_default`, `default_view`, `times_along_top`, `hide_links`, `extended_booking_form`, `reminder_email_enabled`, `area_map`, `area_map_image`) VALUES
+(0, 'Boka handledning', 'Book consultation', 1, 6, 'Europe/Stockholm', 'tholind@kth.se', 3600, 3600, 0, 9, 0, 16, 0, 0, 0, 0, 'none', 0, 0, 0, 604800, 0, 0, 0, 604800, 1, 1, 0, 5, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 50, 0, 100, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 7200, 2, 'Svenska\r\nLorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum ', 'English\r\nLorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum ', NULL, NULL, 0, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 'grupprum.jpg'),
+(0, 'Talboksintroduktion', 'Introduction to talking books', 5, 5, 'Europe/Stockholm', '', 3600, 3600, 0, 9, 0, 16, 0, 0, 0, 0, 'none', 0, 0, 0, 604800, 0, 0, 0, 604800, 0, 1, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 50, 0, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7200, 2, '<p style="color:red">Custom svenska html</p>', '<p style="color:red">Custom english html</p>\r\n', NULL, NULL, 0, 1, 0, 0, 1, 1, 0, 1, 1, 0, 0, ''),
+(0, 'Huvudbiblioteket - Grupprum', 'Main Library - Group study rooms', 1, 1, 'Europe/Stockholm', '', 3600, 7200, 0, 8, 0, 20, 0, 0, 0, 0, 'none', 0, 0, 1, 604800, 0, 0, 0, 604800, 1, 1, 1, 2, 1, 2, 1, 4, 0, 0, 0, 0, 0, 0, 0, 10, 0, 50, 0, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 7200, 1, '<h2>Bokningsregler/Information</h2>\r\n<ul>\r\n<li>Boka med ditt KTH-Konto <p></p></li>\r\n<li>Boka själv via schemat tidigast en vecka i förväg.<p></p></li>\r\n<li>Bokningen <b>måste</b> kvitteras i tid annars förfaller den.<p></p></li>\r\n<li>Kvittering av bokat pass görs tidigast 15 minuter före och senast 15 minuter efter bokningstidens start.<p></p></li>\r\n<li>Avboka alltid en tid du inte kommer att använda. Ej avbokad tid räknas som en bokning. <p></p></li>\r\n<li>Ett pass som bokas sedan det börjat kvitteras automatiskt.<p></p></li>\r\n<li>Du kan boka ett rum per dag och max två rum per vecka.<p></p></li>\r\n<li>Du kan boka max två timmar per bokning.</li><p></p>\r\n<li>Grupprummen är avsedda för grupper på upp till 8 personer och minst 2 personer.<p></p></li>\r\n<li>Alla grupprum har en whiteboard och rum 4. Leopold har en skärm<p></p></li>\r\n<li>Du får inte ta med mat och dryck i grupprummen.<p></p></li>\r\n</ul>', '<h2>Booking rules/Information</h2>\r\n<ul>\r\n<li>Book an available time with your KTH account.<p></p></li>\r\n<li>A booking can be made a week ahead, you can do it yourself.<p></p></li>\r\n<li>You <b>must </b>confirm your time slot. This is done from 15 minutes before to 15 minutes after the start time.<p></p></li>\r\n<li>Always cancel your booking if you do not need the room. If you don''t cancel it will count as a booking.<p></p></li>\r\n<li>If you book a room after the start time it will be confirmed automatically.<p></p></li>\r\n<li>You may book up to one room/day and two/week.<p></p></li>\r\n<li>You may book maximum two hours per booking</li><p></p>\r\n<li>Group study rooms are intended for a group of people, i.e. for at least two persons.<p></p></li>\r\n<li>All group study rooms have a whiteboard and room 4. Leopold has a screen<p></p></li>\r\n<li>Food and drink may not be brought into the group study rooms.<p></p></li>\r\n</ul>', NULL, NULL, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 1, 'grupprum.jpg'),
+(0, 'Huvudbiblioteket - Lässtudio', NULL, 0, 0, 'Europe/Stockholm', NULL, 1800, 3600, 0, 7, 0, 18, 30, 0, 0, 0, 'none', 0, 0, 0, 604800, 0, 0, 0, 604800, 0, 1, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 50, 0, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7200, 2, NULL, NULL, NULL, NULL, 0, 1, 0, 1, 1, 0, 0, 1, 0, 0, 0, NULL),
+(0, 'Kista - Lässtudio', NULL, 0, 0, 'Europe/Stockholm', NULL, 1800, 3600, 0, 7, 0, 18, 30, 0, 0, 0, 'none', 0, 0, 0, 604800, 0, 0, 0, 604800, 0, 1, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 50, 0, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7200, 2, NULL, NULL, NULL, NULL, 0, 1, 0, 1, 1, 0, 0, 1, 0, 0, 0, NULL),
+(0, 'Flemingsberg - Lässtudio', NULL, 0, 0, 'Europe/Stockholm', NULL, 1800, 3600, 0, 7, 0, 18, 30, 0, 0, 0, 'none', 0, 0, 0, 604800, 0, 0, 0, 604800, 0, 1, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 50, 0, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7200, 2, NULL, NULL, NULL, NULL, 0, 1, 0, 1, 1, 0, 0, 1, 0, 0, 0, NULL);
 */
 -- --------------------------------------------------------
 
@@ -359,7 +361,7 @@ CREATE TABLE IF NOT EXISTS `mrbs_entry` (
   `ical_uid` varchar(255) NOT NULL DEFAULT '',
   `ical_sequence` smallint(6) NOT NULL DEFAULT '0',
   `ical_recur_id` varchar(16) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=1213 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumpning av Data i tabell `mrbs_entry`
@@ -506,7 +508,7 @@ CREATE TABLE IF NOT EXISTS `mrbs_repeat` (
   `other_info` varchar(500) DEFAULT NULL,
   `ical_uid` varchar(255) NOT NULL DEFAULT '',
   `ical_sequence` smallint(6) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumpning av Data i tabell `mrbs_repeat`
@@ -538,34 +540,37 @@ CREATE TABLE IF NOT EXISTS `mrbs_room` (
   `screen` tinyint(4) NOT NULL DEFAULT '0',
   `mailtext` text,
   `mailtext_en` text
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumpning av Data i tabell `mrbs_room`
 --
 /*
-INSERT INTO `mrbs_room` (`id`, `disabled`, `area_id`, `room_name`, `room_name_english`, `sort_key`, `exchange_email`, `description`, `capacity`, `room_admin_email`, `custom_html`, `room_number`, `screen`, `mailtext`, `mailtext_en`) VALUES
-(1, 0, 1, 'Handledning', 'Handledning', 'Handledning', '', '', 8, '', '', '', 0, 'Du har bokat tid för handledning på KTH Biblioteket', 'You have booked consultation at the KTH Library.'),
-(2, 0, 2, 'Huvudbiblioteket', 'Main Library', '1', '', '', 0, '', 'Bla bla bla blaBla bla bla blaBla bla bla bla', '', 0, '', ''),
-(3, 0, 2, 'Kista', 'Kista', '2', '', '', 0, '', '', '', 0, '', ''),
-(4, 0, 2, 'Södertälje', 'Södertälje', '3', '', '', 0, '', '', '', 0, '', ''),
-(5, 0, 2, 'Flemingsberg', 'Flemingsberg', '4', '', '', 1, '', '', '', 0, '', ''),
-(6, 0, 3, 'Al-Khwarizmi', 'Al-Khwarizmi', '00', NULL, 'Grupprum', 8, '', 'Aktiverade nätverksuttag är markerade med "grön plupp". Kabel kan lånas och återlämnas i Låneexpeditionen, Informationen eller Receptionen.', '0', 0, NULL, NULL),
-(7, 0, 3, 'Leibniz', 'Leibniz', '01', NULL, 'Grupprum', 6, '', '', '1', 0, NULL, NULL),
-(8, 0, 3, 'Galvani', 'Galvani', '08', NULL, '', 6, '', '', '8', 0, NULL, NULL),
-(9, 0, 3, 'Watt', 'Watt', '09', NULL, '', 6, '', '', '9', 0, NULL, NULL),
-(10, 0, 3, 'Santorio', 'Santorio', '10', NULL, '', 6, '', '', '10', 0, NULL, NULL),
-(11, 0, 3, 'Kovalevsky', 'Kovalevsky', '11', NULL, '', 6, '', '', '11', 0, NULL, NULL),
-(12, 1, 3, 'Ekeblad', 'Ekeblad', '12', NULL, '', 6, '', '', '12', 0, '', ''),
-(13, 1, 3, 'Sundström', 'Sundström', '13', NULL, '', 5, '', '', '13', 0, '', ''),
-(14, 0, 3, 'Scheele', 'Scheele', '03', NULL, '', 6, '', '', '3', 0, NULL, NULL),
-(15, 0, 3, 'Pascal', 'Pascal', '02', NULL, '', 4, '', '', '2', 0, NULL, NULL),
-(16, 0, 3, 'Leopold', 'Leopold', '04', NULL, 'Whiteboard och skärm', 6, '', '', '4', 1, NULL, NULL),
-(17, 0, 3, 'Agricola', 'Agricola', '05', NULL, ' ', 6, '', '', '5', 0, NULL, NULL),
-(18, 0, 3, 'Bernoulli', 'Bernoulli', '06', NULL, '', 6, '', '', '6', 0, NULL, NULL),
-(19, 0, 3, 'Dürer', 'Dürer', '07', NULL, '', 6, '', '', '7', 0, NULL, NULL),
-(20, 0, 4, 'Vitruvius', 'Vitruvius', '01', NULL, '', 4, '', '', '', 0, NULL, NULL),
-(21, 0, 5, 'Kista', 'Kista', '01', NULL, '', 0, '', '', '', 0, NULL, NULL);
+INSERT INTO `mrbs_room` (`disabled`, `area_id`, `room_name`, `room_name_english`, `sort_key`, `exchange_email`, `description`, `capacity`, `room_admin_email`, `custom_html`, `room_number`, `screen`, `mailtext`, `mailtext_en`) VALUES
+(0, 1, 'Handledning', 'Handledning', 'Handledning', '', '', 8, '', '', '', 0, 'Du har bokat tid för handledning på KTH Biblioteket', 'You have booked consultation at the KTH Library.'),
+
+(0, 1, 'Huvudbiblioteket', 'Main Library', '1', '', '', 0, '', 'Bla bla bla blaBla bla bla blaBla bla bla bla', '', 0, '', ''),
+(0, 1, 'Kista', 'Kista', '2', '', '', 0, '', '', '', 0, '', ''),
+(0, 1, 'Södertälje', 'Södertälje', '3', '', '', 0, '', '', '', 0, '', ''),
+(0, 1, 'Flemingsberg', 'Flemingsberg', '4', '', '', 1, '', '', '', 0, '', ''),
+
+(0, 1, 'Al-Khwarizmi', 'Al-Khwarizmi', '00', NULL, 'Grupprum', 8, '', 'Aktiverade nätverksuttag är markerade med "grön plupp". Kabel kan lånas och återlämnas i Låneexpeditionen, Informationen eller Receptionen.', '0', 0, NULL, NULL),
+(0, 1, 'Leibniz', 'Leibniz', '01', NULL, 'Grupprum', 6, '', '', '1', 0, NULL, NULL),
+(0, 1, 'Galvani', 'Galvani', '08', NULL, '', 6, '', '', '8', 0, NULL, NULL),
+(0, 1, 'Watt', 'Watt', '09', NULL, '', 6, '', '', '9', 0, NULL, NULL),
+(0, 1, 'Santorio', 'Santorio', '10', NULL, '', 6, '', '', '10', 0, NULL, NULL),
+(0, 1, 'Kovalevsky', 'Kovalevsky', '11', NULL, '', 6, '', '', '11', 0, NULL, NULL),
+(1, 1, 'Ekeblad', 'Ekeblad', '12', NULL, '', 6, '', '', '12', 0, '', ''),
+(1, 1, 'Sundström', 'Sundström', '13', NULL, '', 5, '', '', '13', 0, '', ''),
+(0, 1, 'Scheele', 'Scheele', '03', NULL, '', 6, '', '', '3', 0, NULL, NULL),
+(0, 1, 'Pascal', 'Pascal', '02', NULL, '', 4, '', '', '2', 0, NULL, NULL),
+(0, 1, 'Leopold', 'Leopold', '04', NULL, 'Whiteboard och skärm', 6, '', '', '4', 1, NULL, NULL),
+(0, 1, 'Agricola', 'Agricola', '05', NULL, ' ', 6, '', '', '5', 0, NULL, NULL),
+(0, 1, 'Bernoulli', 'Bernoulli', '06', NULL, '', 6, '', '', '6', 0, NULL, NULL),
+(0, 1, 'Dürer', 'Dürer', '07', NULL, '', 6, '', '', '7', 0, NULL, NULL),
+(0, 2, 'Vitruvius', 'Vitruvius', '01', NULL, '', 4, '', '', '', 0, NULL, NULL),
+(0, 3, 'Kista', 'Kista', '01', NULL, '', 0, '', '', '', 0, NULL, NULL);
+(0, 4, 'Flemingsberg', 'Flemingsberg', '01', NULL, '', 0, '', '', '', 0, NULL, NULL);
 */
 
 -- --------------------------------------------------------
@@ -581,7 +586,7 @@ CREATE TABLE IF NOT EXISTS `mrbs_users` (
   `name` varchar(30) DEFAULT NULL,
   `password_hash` varchar(255) DEFAULT NULL,
   `email` varchar(75) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumpning av Data i tabell `mrbs_users`
@@ -601,7 +606,7 @@ CREATE TABLE IF NOT EXISTS `mrbs_variables` (
   `id` int(11) NOT NULL,
   `variable_name` varchar(80) DEFAULT NULL,
   `variable_content` text
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumpning av Data i tabell `mrbs_variables`
@@ -624,7 +629,7 @@ CREATE TABLE IF NOT EXISTS `mrbs_zoneinfo` (
   `outlook_compatible` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `vtimezone` text,
   `last_updated` int(11) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumpning av Data i tabell `mrbs_zoneinfo`
@@ -757,22 +762,22 @@ ALTER TABLE `mrbs_zoneinfo`
 -- AUTO_INCREMENT för tabell `kth_areatype`
 --
 ALTER TABLE `kth_areatype`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT för tabell `kth_area_instructors`
 --
 ALTER TABLE `kth_area_instructors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT för tabell `kth_area_places`
 --
 ALTER TABLE `kth_area_places`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT för tabell `kth_entry_custom_fields`
 --
 ALTER TABLE `kth_entry_custom_fields`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT för tabell `kth_exchange_events`
 --
@@ -782,27 +787,27 @@ ALTER TABLE `kth_exchange_events`
 -- AUTO_INCREMENT för tabell `kth_instructors`
 --
 ALTER TABLE `kth_instructors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT för tabell `kth_periods`
 --
 ALTER TABLE `kth_periods`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT för tabell `kth_places`
 --
 ALTER TABLE `kth_places`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT för tabell `mrbs_area`
 --
 ALTER TABLE `mrbs_area`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT för tabell `mrbs_entry`
 --
 ALTER TABLE `mrbs_entry`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1213;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT för tabell `mrbs_entry_no_show`
 --
@@ -812,27 +817,27 @@ ALTER TABLE `mrbs_entry_no_show`
 -- AUTO_INCREMENT för tabell `mrbs_repeat`
 --
 ALTER TABLE `mrbs_repeat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT för tabell `mrbs_room`
 --
 ALTER TABLE `mrbs_room`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT för tabell `mrbs_users`
 --
 ALTER TABLE `mrbs_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT för tabell `mrbs_variables`
 --
 ALTER TABLE `mrbs_variables`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT för tabell `mrbs_zoneinfo`
 --
 ALTER TABLE `mrbs_zoneinfo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- Restriktioner för dumpade tabeller
 --
