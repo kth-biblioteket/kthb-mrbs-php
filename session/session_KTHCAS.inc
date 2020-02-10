@@ -30,7 +30,7 @@ $returl = get_form_var('returl', 'string');
 $area = get_form_var('area', 'string');
 
 //191003
-$token = get_form_var('token', 'string');
+$CSRFToken = get_form_var('CSRFToken', 'string');
 $auth["method"]="kthcas";
 
 //KTH logga ut vid timeout
@@ -69,10 +69,10 @@ if (FALSE === session_start()) {
 	fatal_error(TRUE, "MRBS: server configuration error.", FALSE);
 }
 
-if (!isset($_SESSION['token']))
+if (!isset($_SESSION['CSRFToken']))
 {
-	$_SESSION['token'] = md5(uniqid(rand(), TRUE));
-  $_SESSION['token_time'] = time();
+	$_SESSION['CSRFToken'] = md5(uniqid(rand(), TRUE));
+  $_SESSION['CSRFToken_time'] = time();
 }
 
 // Check to see if we've been inactive for longer than allowed and if so logout
@@ -97,8 +97,8 @@ if (!empty($auth["session_php"]["inactivity_expire_time"]))
       //KTH Inloggning via LDAP(kthid)
       unset($_SESSION["kth_id"]);
       unset($_SESSION["alma_id"]);
-      unset($_SESSION['token']);
-      unset($_SESSION['token_time']);
+      unset($_SESSION['CSRFToken']);
+      unset($_SESSION['CSRFToken_time']);
     }
   }
   // Ajax requests don't count as activity, unless it's the special Ajax request used
@@ -272,7 +272,7 @@ function printLoginForm($TargetURL)
     }
     echo "<input type=\"hidden\" name=\"returl\" value=\"" . htmlspecialchars($returl) . "\">\n";
     ?>
-    <input type="hidden" name="token" value="<?php echo $_SESSION['token']; ?>" />
+    <input type="hidden" name="CSRFToken" value="<?php echo $_SESSION['CSRFToken']; ?>" />
     <input type="hidden" name="TargetURL" value="<?php echo htmlspecialchars($TargetURL) ?>">
     <input type="hidden" name="Action" value="SetName">
 	<?php //KTH ?>

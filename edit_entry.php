@@ -1764,6 +1764,7 @@ if (($edit_type == "series") && $repeats_allowed)
     <input type="hidden" name="create_by" value="<?php echo htmlspecialchars($create_by)?>">
     <input type="hidden" name="rep_id" value="<?php echo $rep_id?>">
     <input type="hidden" name="edit_type" value="<?php echo $edit_type?>">
+    <input type="hidden" name="CSRFToken" value="<?php echo $_SESSION['CSRFToken']; ?>" />
     <?php
     // The original_room_id will only be set if this was an existing booking.
     // If it is an existing booking then edit_entry_handler needs to know the

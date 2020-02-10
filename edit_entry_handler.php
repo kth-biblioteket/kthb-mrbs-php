@@ -25,6 +25,13 @@ if ($ajax && !checkAuthorised(TRUE))
 {
   exit;
 }
+$CSRFToken = get_form_var('CSRFToken', 'string');
+if ($CSRFToken != $_SESSION['CSRFToken']) {
+  print_header(0, 0, 0, 0, "");
+  echo "<p>session CSRFToken not validated</p>\n";
+  printLoginForm($TargetURL);
+  exit();
+}
 
 // (1) Check the user is authorised for this page
 //  ---------------------------------------------
