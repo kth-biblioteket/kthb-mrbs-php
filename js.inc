@@ -228,9 +228,6 @@ if (in_array($page, array('day', 'week', 'month')))
 
 //KTH Countdown för en inloggad user
 <?php
-
-
-
 if (isset($_SERVER['HTTPS'])) {
 	if ($_SERVER['HTTPS'] == "on") {
 		$ajaxurl  = "https://" . $_SERVER['HTTP_HOST'] . "/" . "mrbs/";
@@ -248,7 +245,6 @@ $(window).on('load', function() {
               room: '<?php echo $room?>',
               page: '<?php echo $page?>'};
   <?php
-  // We need $timetohighlight for the day and week pages
   $timetohighlight = get_form_var('timetohighlight', 'int');
   if (isset($timetohighlight))
   {
@@ -267,7 +263,7 @@ $(window).on('load', function() {
 		$('#myModal').show();
 		$('#myModalmap').show();
 	});
-	/** Klick stänger modal**/
+
 	$("#myModal").click(function(e){
     e.preventDefault();
     $('#myModal').hide();
@@ -276,7 +272,7 @@ $(window).on('load', function() {
   });
 });
 
-<?php // KTH Kiosk. Om inloggad
+<?php
 if ($user!="" && $is_kiosk) {
 ?>
 	$( document ).ready(function() {
@@ -285,7 +281,6 @@ if ($user!="" && $is_kiosk) {
 			$(this).html(event.strftime('%S'));
 		})
 		.on('finish.countdown', function(event) {
-      //window.location.href = "day.php?logout=true";
       window.location.href = "logout.php?authmethod=<?php echo $auth["method"]?>";
 		});
 		$('#sessionlabel').show();

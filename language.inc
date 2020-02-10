@@ -4,6 +4,23 @@
 
 require_once "functions.inc";
 
+//KTH byta språk via urlparameter
+//TODO Flytta härifrån använd session istället?
+$cookie_name = "mrbslang";
+if (isset($_GET["lang"])) {
+	$cookie_value = $_GET["lang"];
+	$mrbslang = $_GET["lang"];
+	setcookie($cookie_name, "", time()-3600, "/");
+} else {
+	if(isset($_COOKIE["mrbslang"])) {
+		$mrbslang = $_COOKIE["mrbslang"];
+		$cookie_value = $_COOKIE["mrbslang"];
+	} else {
+		$mrbslang = "en";
+		$cookie_value = "en";
+	}
+}
+setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/");
 
 // A map of browser locale aliases, maps to "our" preferred representation.
 // We downcase the key before using this map, so the keys need to be all

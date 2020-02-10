@@ -86,14 +86,16 @@ $mail_settings['admin_backend'] =
 $smtp_settings['host'] =
 
 $mail_settings['from'] =
-$mail_settings['fromname_default'] = (språk)
-$mail_settings['fromname_kthb'] = (språk)
-$mail_settings['fromname_cas'] = (språk)
+
+$vocab_override['sv']['mail_from_address_default'] =
+$vocab_override['en']['mail_from_address_default'] =
+$vocab_override['sv']['mail_from_address_kthb'] =
+$vocab_override['en']['mail_from_address_kthb'] =
+$vocab_override['sv']['mail_from_address_cas'] =
+$vocab_override['en']['mail_from_address_cas'] =
 
 $kth_www =
 $cas_server =
-$mrbs_company_url = (språk)
-$mrbs_company_more_info = (språk)
 ```
 
 ### Xxxxxxxx xxx xxx

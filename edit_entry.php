@@ -1893,21 +1893,18 @@ if (($edit_type == "series") && $repeats_allowed)
     // Buttons
     echo "<fieldset class=\"submit_buttons\">\n";
 	
-	
-    echo "<legend></legend>\n";
-    // The Back button
-    echo "<div id=\"edit_entry_submit_back\">\n";
-    //echo "<input class=\"submit\" type=\"submit\" name=\"back_button\" value=\"" . get_vocab("back") . "\" formnovalidate>\n";
-    //191003 bootstrapknappar
-    echo "<button class=\"btn btn-secondary submit\" type=\"submit\" name=\"back_button\" value=\"" . get_vocab("back") . "\" formnovalidate>" . get_vocab("back") . "</button>\n";
-    echo "</div>\n";
-    
-    // The Submit button
-    echo "<div id=\"edit_entry_submit_save\">\n";
-    //echo "<input class=\"submit default_action\" type=\"submit\" name=\"save_button\" value=\"" . get_vocab("save") . "\">\n";
-    //191003 bootstrapknappar
-    echo "<button class=\"btn btn-success submit default_action\" type=\"submit\" name=\"save_button\" value=\"" . get_vocab("save") . "\">" . get_vocab("save") . "</button>\n";
-    echo "</div>\n";
+      echo "<legend></legend>\n";
+      // The Back button
+      echo "<div id=\"edit_entry_submit_back\">\n";
+        //191003 bootstrapknappar
+        echo "<button onclick=\"javascript:location.href='" . htmlspecialchars($returl) . "'; return false;\" class=\"btn btn-secondary submit\" type=\"button\" name=\"back_button\" value=\"" . get_vocab("back") . "\" formnovalidate>" . get_vocab("back") . "</button>\n";
+      echo "</div>\n";
+      
+      // The Submit button
+      echo "<div id=\"edit_entry_submit_save\">\n";
+        //191003 bootstrapknappar
+        echo "<button class=\"btn btn-success submit default_action\" type=\"submit\" name=\"save_button\" value=\"" . get_vocab("save") . "\">" . get_vocab("save") . "</button>\n";
+      echo "</div>\n";
     
     echo "</fieldset>";
     

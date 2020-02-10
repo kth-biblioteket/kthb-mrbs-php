@@ -588,6 +588,8 @@ function cell_html($cell, $query_strings, $is_invalid = FALSE, $ajaxuser = NULL)
   global $area, $year, $month, $timetohighlight;
   global $enable_periods, $times_along_top, $show_plus_link;
   global $approval_enabled, $confirmation_enabled;
+
+  global $is_kiosk;
   //KTH
   //echo "cell_html is_invalid " . $is_invalid . "<br>";
   if ($ajaxuser != NULL) {
@@ -877,31 +879,39 @@ function cell_html($cell, $query_strings, $is_invalid = FALSE, $ajaxuser = NULL)
         $html .= "<div data-id=\"$id\" class=\"celldiv slots" .
                  (($times_along_top) ? "1" : $slots) .
                  "\">\n";
-		//KTH Visa bara länk till edit_entry om bokningen är valid och om användaren är behörig eller om användaren är admin
-    //191003 Visa även länk på alla B (bookable)
-    //191003
+    
     //Visa inte namnet på den som bokat för andra än admin (och bokaren)
-    if ((getWritable($cell[0]['create_by'], $user, $cell[0]['room_id']) 
-        && $is_invalid==FALSE) || ($color == "B" && $is_invalid==FALSE) || $is_admin ) {
-			$html .= "<a href=\"edit_entry.php?id=$id&amp;". $query_strings['booking'] . "\" title=\"$descr\">";
+    $bookingdesc = "";
+    if ((getWritable($cell[0]['create_by'], $user, $cell[0]['room_id']) && $is_invalid==FALSE) 
+        || $is_admin ) {
+          $bookingdesc = $descr;
+    } else {
+      if ($color != "B"){ 
+        $bookingdesc = "Booked/Bokad\n";
+      } else {
+        $bookingdesc = "Available/Ledig\n";
+      }
+    }
+    //KTH Visa bara länk till edit_entry om bokningen är valid och om användaren är behörig 
+    //eller om användaren är admin
+    //eller om det är en kioskdator
+    //191003 Visa även länk på alla B (bookable)
+    
+    if ((getWritable($cell[0]['create_by'], $user, $cell[0]['room_id']) && $is_invalid==FALSE) 
+        || ($color == "B" && $is_invalid==FALSE) 
+        || $is_admin 
+        || $is_kiosk) {
+			$html .= "<a href=\"edit_entry.php?id=$id&amp;". $query_strings['booking'] . "\" title=\"$bookingdesc\">";
 			//$html .= "<img class=\"\" src=\"images/edit.png\" width=\"10\" height=\"10\"></br>";
 			$html .= ($is_repeat) ? "<img class=\"repeat_symbol $c\" src=\"images/repeat.png\" alt=\"" . get_vocab("series") . "\" title=\"" . get_vocab("series") . "\" width=\"10\" height=\"10\">" : '';
-			$html .= "$descr</a>\n";
-			
-			
-			
+			$html .= "$bookingdesc</a>\n";
 		} else {
-			//annars visa länk till view_entry?
+      //om det inte är en "stängtbokning"
 			if ($color != "C"){ 
 				$html .= ($is_repeat) ? "<img class=\"repeat_symbol $c\" src=\"images/repeat.png\" alt=\"" . get_vocab("series") . "\" title=\"" . get_vocab("series") . "\" width=\"10\" height=\"10\">" : '';
-        //191003
-        //$html .= "$descr\n";
-        if ($color != "B"){ 
-          $html .= "Booked/Bokad\n";
-        } else {
-          $html .= "Available/ledig\n";
-        }
-			} else { //en Closed adminbokning
+        //191003 TODO bort med hårdkodning
+        $html .= "$bookingdesc\n";
+			} else {
 				$html .= "\n";
 			}
 		}
