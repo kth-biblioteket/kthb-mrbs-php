@@ -184,8 +184,11 @@ if ($display_calendar_bottom)
   //Visa inte kalendrar
   //minicals($year, $month, $day, $area, $room, 'day');
 }
-//visa inte standardsidfoten
-//output_trailer();
+echo "</div>\n"; // Slut contents
+echo "</div>\n"; //Slut contentwrapper
+// Print footer
+print_footer(FALSE);
+
 //KTH Hämta språk
 if(isset($_COOKIE["mrbslang"])) {
 	if(isset($mrbslang)) {

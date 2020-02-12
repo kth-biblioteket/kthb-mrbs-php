@@ -176,7 +176,16 @@ if ($display_calendar_bottom)
   //KTH Visa inte kalendrar
   //minicals($year, $month, $day, $area, $room, 'week');
 }
-//KTH Visa inte standardsidfot
-//output_trailer(); 
+echo "</div>\n"; // Slut contents
+echo "</div>\n"; //Slut contentwrapper
+// Print footer
+print_footer(FALSE);
 
-
+//KTH Hämta språk
+if(isset($_COOKIE["mrbslang"])) {
+	if(isset($mrbslang)) {
+		$lang = $mrbslang;
+	} else {
+		$lang = $_COOKIE["mrbslang"];
+	}
+} 

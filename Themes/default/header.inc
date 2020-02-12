@@ -18,7 +18,7 @@ function print_theme_header($day, $month, $year, $area, $room) {
 	//KTH
 	global $mrbslang;
 	//191003
-	global $session_name, $app_name, $kth_www, $is_kiosk;
+	global $session_name, $app_name, $kth_www, $is_kiosk, $environment;
   
 	$page = basename($PHP_SELF, ".php");
 	$user = getUserName();
@@ -101,7 +101,13 @@ function print_theme_header($day, $month, $year, $area, $room) {
 	<?php
 	// Put the filename in as a class to aid styling.   
 	// (Use a class rather than id to avoid specificity problems)
-	echo "<body class=\"non_js ".htmlspecialchars($page)."\">\n";
+	if ($environment != "production") {
+		echo "<body style=\"border: 1px solid red\" class=\"non_js ".htmlspecialchars($page)."\">\n";
+		echo "<div style=\"color:red;font-size:10px;text-align:center;\">!!! " . strtoupper($environment) . " !!!</div>";
+	}
+	else {
+		echo "<body class=\"non_js ".htmlspecialchars($page)."\">\n";
+	}
     // Add a class of "js" so that we know if we're using JavaScript or not
     // and remove the non_js class (it's sometimes useful to know that we're
     // not running JavaScript)
@@ -111,26 +117,13 @@ function print_theme_header($day, $month, $year, $area, $room) {
 		$('body').addClass('js').removeClass('non_js');
 		//]]>
     </script>
-	<!--KTH Sandbox 191003 -->
-    <div style="border: 1px solid red" class="screenonly">
-
 <?php
 	if (!empty($locale_warning)) {
 		echo "[Warning: ".$locale_warning."]";
 	}
 ?>
 <?php //KTH?>
-	<div style="color:red;font-size:10px;text-align:center;">!!! SANDBOX !!!</div>
 	<!-- 191003 -->
-	<?php //KTH KTHCAS 191003
-	/*
-        echo "<div style=\"float:right;text-align: right;width: 100%\" >";
-        if ($userlevel > 2) {
-          echo "<a style=\"float:right;text-align: right;width:unset\" href=\"admin.php\">" . get_vocab("settings") . "</a>\n";
-          echo "<span style=\"float:right;text-align: right;padding-top: 0.3em;padding-bottom: 0.3em;\"> | </span>";
-		}
-		*/
-    ?>
 	<header>
     <div class="container-fluid">
     	<div class="container">      

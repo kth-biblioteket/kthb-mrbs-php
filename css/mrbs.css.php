@@ -29,7 +29,6 @@ body {
   color:            <?php echo $standard_font_color ?>;
   font-family:      <?php echo $standard_font_family ?>;
   background-color: <?php echo $body_background_color ?>;
-  background-color: #e3e5e3; /*KTH*/
   line-height: normal !important;
 }
 

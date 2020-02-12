@@ -374,6 +374,29 @@ CREATE TABLE IF NOT EXISTS `mrbs_entry` (
 INSERT INTO `mrbs_entry` (`id`, `start_time`, `end_time`, `entry_type`, `repeat_id`, `room_id`, `timestamp`, `instructor`, `create_by`, `modified_by`, `name`, `type`, `description`, `status`, `reminded`, `lang`, `confirmation_code`, `info_time`, `info_user`, `info_text`, `email`, `phone`, `user_group`, `program`, `study_info`, `previously`, `subject_keywords`, `campus`, `preferred_language`, `other_info`, `ical_uid`, `ical_sequence`, `ical_recur_id`) VALUES
 (1, 1580288400, 1580292000, 0, NULL, 1, '2020-01-28 15:45:55', 'tholind@kth.se', 'testtl@kth.se', 'testtl@kth.se', 'Thomas Lind(testkonto)', 'I', NULL, 0, NULL, 'en', NULL, NULL, NULL, NULL, 'tholind@kth.se', '888888888', 'KTH Student', '', '', '', '', 2, '', NULL, 'MRBS-5e304d7721b88-ead86773@apps.lib.kth.se', 7, '');
 */
+/*
+/*
+INSERT INTO mrbs_grupprum.mrbs_entry (`id`, `start_time`, `end_time`, `entry_type`, `repeat_id`, `room_id`, `timestamp`, `instructor`, `create_by`, `modified_by`, `name`, `type`, `description`, `status`, `reminded`, `lang`, `confirmation_code`, `info_time`, `info_user`, `info_text`, `email`, `phone`, `user_group`, `program`, `study_info`, `previously`, `subject_keywords`, `campus`, `preferred_language`, `other_info`, `ical_uid`, `ical_sequence`, `ical_recur_id`) VALUES 
+*/ 
+/*
+SELECT `id`, `start_time`, `end_time`, `entry_type`, `repeat_id`, `room_id`, `timestamp`, null, `create_by`, `modified_by`, `name`, `type`, `description`, `status`, `reminded`, `lang`, `confirmation_code`, `info_time`, `info_user`, `info_text`, null, null, null, null, null, null, null, null, null, null, `ical_uid`, `ical_sequence`, `ical_recur_id` FROM mrbs.mrbs_entry WHERE id >156500 AND id <156510
+*/
+
+/*
+SELECT 
+mrbs.mrbs_entry.id, `start_time`, `end_time`, `entry_type`, `repeat_id`, `room_id`, `timestamp`, null, 
+`create_by`, `modified_by`, `name`, `type`, mrbs.mrbs_entry.description, `status`, `reminded`, `lang`, 
+`confirmation_code`, `info_time`, `info_user`, `info_text`, 
+null, null, null, null, null, null, null, null, null, null, `ical_uid`, `ical_sequence`, `ical_recur_id`,
+mrbs.mrbs_entry.room_id, mrbs_grupprum.mrbs_room.room_name, mrbs.mrbs_room.room_name, mrbs.mrbs_room.id, mrbs_grupprum.mrbs_room.id, mrbs.mrbs_entry.name
+FROM mrbs.mrbs_entry
+INNER JOIN mrbs.mrbs_room
+ON mrbs.mrbs_room.id = mrbs.mrbs_entry.room_id
+INNER JOIN mrbs_grupprum.mrbs_room
+ON mrbs_grupprum.mrbs_room.room_name = mrbs.mrbs_room.room_name
+AND mrbs.mrbs_room.area_id=2
+ORDER BY mrbs.mrbs_entry.id
+*/
 --
 -- Trigger `mrbs_entry`
 --
@@ -550,6 +573,11 @@ CREATE TABLE IF NOT EXISTS `mrbs_room` (
 -- Dumpning av Data i tabell `mrbs_room`
 --
 /*
+INSERT INTO mrbs_grupprum.mrbs_room (`disabled`, `area_id`, `room_name`, `room_name_english`, `sort_key`, `exchange_email`, `description`, `capacity`, `room_admin_email`, `custom_html`, `room_number`, `screen`, `mailtext`, `mailtext_en`) 
+SELECT `disabled`, `area_id`, `room_name`, `room_name_english`, `sort_key`, null, `description`, `capacity`, `room_admin_email`, `custom_html`, `room_number`, `screen`, `mailtext`, `mailtext_en` 
+FROM mrbs.mrbs_room
+WHERE mrbs.mrbs_room.area_id=2
+
 INSERT INTO `mrbs_room` (`disabled`, `area_id`, `room_name`, `room_name_english`, `sort_key`, `exchange_email`, `description`, `capacity`, `room_admin_email`, `custom_html`, `room_number`, `screen`, `mailtext`, `mailtext_en`) VALUES
 (0, 1, 'Handledning', 'Handledning', 'Handledning', '', '', 8, '', '', '', 0, 'Du har bokat tid för handledning på KTH Biblioteket', 'You have booked consultation at the KTH Library.');
 

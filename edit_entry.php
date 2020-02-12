@@ -1929,5 +1929,5 @@ if (($edit_type == "series") && $repeats_allowed)
 </form>
 
 <?php 
-//output_trailer();
-
+// Print footer
+print_footer(FALSE);
