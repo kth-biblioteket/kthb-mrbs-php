@@ -1,5 +1,5 @@
 <?php
-global $area;
+global $area, $tbl_entry;
 $custom_fields_toshow = array();
 $sql = "SELECT entry_field_name,type
         FROM kth_entry_custom_fields
@@ -118,7 +118,7 @@ $html_body['content'] .= '';
                 {
 $html_body['content'] .=
                 '<tr>
-                    <td>' . $row['entry_field_name'] . ': </td>
+                    <td>' . get_loc_field_name($tbl_entry, $row['entry_field_name']) . ': </td>
                     <td>' . $data[$row['entry_field_name']] . '</td>
                 </tr>';                    
                 }
