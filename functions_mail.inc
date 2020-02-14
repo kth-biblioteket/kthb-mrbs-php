@@ -895,12 +895,11 @@ function notifyInstructorOnBooking($data, $mail_previous, $new_entry, $series, $
 
   // Set up the addresses (from, to and cc)
   
-  $addresses['from'] = get_mail_vocab("mail_from_address_kthb");
+  $addresses['from'] = get_mail_vocab("mail_from_address_default");
   
   $user = getUserName();
   //Bokningens handläggare/instruktör
   $addresses['to'] = $data['instructor'];
-  //$addresses['to']   = 'tholind@kth.se';
   if ($addresses === FALSE)
   {
     mail_debug('Email abandoned: no addresses.');
@@ -934,13 +933,12 @@ function notifyInstructorOnBooking($data, $mail_previous, $new_entry, $series, $
       default:
         if ($new_entry)
         {
-          //KTH 2018 subject beroende på areatyp(ny parameter på area)
-          //191003 Hämta subject från config.php.inc?
+          //191003 Hämta subject från config.php.inc
           $subject = get_mail_vocab("mail_subject_new_entry");
         }
         else
         {
-          //191003 Hämta subject från config.php.inc?
+          //191003 Hämta subject från config.php.inc
           $subject = get_mail_vocab("mail_subject_changed_entry");
         }
         break;
@@ -956,43 +954,8 @@ function notifyInstructorOnBooking($data, $mail_previous, $new_entry, $series, $
   $html_body = array();
   if ($mail_settings['html'])
   {
-    //setlocale(LC_ALL, $currentLocale);
-    // språk beroende på bokarens valda språk
-    // $mail_settings['admin_lang'] = $mrbslang; i config.inc.php
-    //TODO göra mer dynamiskt, väldigt mycket hårdkodning.
-    //KTH 2018 mailinnehåll beroende på areatyp(ny parameter på area)
-    // Handledning
     //191003 Hämta html-mail från mallar/config
-        $html_body['content'] = '<div>Bokning</div>
-                              </br>
-                              <div>Handledning bokad av ' . getFullName() . 'från ' . date("H:i",$data['start_time']) . ' till ' . date("H:i",$data['end_time']) . ', ' . utf8_encode(strftime("%A %d %B",$data['start_time'])) . '. </div>
-                              </br>
-                              <div>Denna länk leder till din bokning, där du kan avboka eller ändra den vid behov.</div>
-                              </br>
-                              <div>
-                                <table border="0" cellspacing="0" cellpadding="0">
-                                  <tbody>
-                                    <tr>
-                                      <td align="center" style="border-radius: 30px;" bgcolor="#B0C92B">
-                                        <a style="padding: 15px 25px; border-radius: 30px; border: 1px solid #B0C92B; border-image: none; color: rgb(255, 255, 255); font-family: Arial, Helvetica, sans-serif; font-size: 16px; font-weight: bold;text-decoration: none; display: inline-block;" href="https://' . dirname($_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']) . '/edit_entry.php?id=' . $data["id"] . '&lang=sv">' . 'Gå till din bokning' . '</a>
-                                      </td>
-                                    </tr>
-                                  </tbody>
-                                </table>
-                              </div>
-                              <!--div><a href="https://' . dirname($_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']) . '/edit_entry.php?id=' . $data["id"] . '&lang=sv">' . 'Gå till din bokning' . '</a></div-->
-                              </br>';
-                              if($data['area_map']) {
-    $html_body['content'] .=   '</div> <div><img src="https://' . dirname($_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']) . '/' . 'images' .'/' . $data['area_map_image'] .'"></img></div>
-                                </br>';
-                              }
-    $html_body['content'] .= '<div>Välkommen!</div>
-                              </br>
-                              <div>Vänliga hälsningar</div>
-                              </br>
-                              <div>KTH Centrum för akademiskt skrivande</div>
-                              <div>www.kth.se/cas</div>
-                              ';
+    require_once "config\mail\instructor_mail_booking.inc";
     $html_body['cid'] = generate_global_uid("html");
   }
   
@@ -1033,25 +996,7 @@ function notifyBookerOnBooking($data, $mail_previous, $new_entry, $series, $star
   
   mail_debug('Preparing email for new or changed booking ...');
 
-  // Set up the addresses (from, to and cc)
-  //KTH 2018 mailutskick
-  switch ($data['area_type']){
-    case 1: // Grupprum
-      $addresses['from'] = get_mail_vocab("mail_from_address_kthb");
-      break;
-    case 2: // Lässtudio
-      $addresses['from'] = get_mail_vocab("mail_from_address_kthb");
-      break;
-    case 3: // Handledning
-      $addresses['from'] = get_mail_vocab("mail_from_address_cas");
-      break;
-    case 5: // Talboksintroduktion
-      $addresses['from'] = get_mail_vocab("mail_from_address_talkingbooks");
-      break;
-    case 4: // Öppettider
-    default: 
-      $addresses['from'] = get_mail_vocab("mail_from_address_kthb");
-  }
+  $addresses['from'] = get_mail_vocab("mail_from_address_default");
   
   $user = getUserName();
   $addresses['to']   = $user;
@@ -1089,45 +1034,11 @@ function notifyBookerOnBooking($data, $mail_previous, $new_entry, $series, $star
       default:
         if ($new_entry)
         {
-          //KTH 2018 subject beroende på areatyp(ny parameter på area)
-          switch ($data['area_type']){
-            case 1: // Grupprum
-              $subject = get_mail_vocab("mail_subject_new_entry");
-              break;
-            case 2: // Lässtudio
-              $subject = get_mail_vocab("mail_subject_new_entry_readingstudio");
-              break;
-            case 3: // Handledning
-              $subject = get_mail_vocab("mail_subject_new_entry_supervision");
-              break;
-            case 5: // Talbok
-              $subject = get_mail_vocab("mail_subject_new_entry_talkingbooks");
-              break;
-            case 4: // Öppettider
-            default: 
-              $subject = get_mail_vocab("mail_subject_new_entry");
-          }
+          $subject = get_mail_vocab("mail_subject_new_entry");
         }
         else
         {
-          //KTH 2018 subject beroende på areatyp(ny parameter på area)
-          switch ($data['area_type']){
-            case 1: // Grupprum
-              $subject = get_mail_vocab("mail_subject_changed_entry");
-              break;
-            case 2: // Lässtudio
-              $subject = get_mail_vocab("mail_subject_changed_entry_readingstudio");
-              break;
-            case 3: // Handledning
-              $subject = get_mail_vocab("mail_subject_changed_entry_supervision");
-              break;
-            case 5: // Talbok
-              $subject = get_mail_vocab("mail_subject_changed_entry_talkingbooks");
-              break;
-            case 4: // Öppettider
-            default: 
-              $subject = get_mail_vocab("mail_subject_changed_entry");
-          }
+          $subject = get_mail_vocab("mail_subject_changed_entry");
         }
         break;
     }
@@ -1195,7 +1106,9 @@ function notifyBookerOnBooking($data, $mail_previous, $new_entry, $series, $star
 function notifyAdminOnBooking($data, $mail_previous, $new_entry, $series, $start_times, $action="book", $note='')
 {
   global $mail_settings, $enable_periods;
-  
+
+  global $tbl_entry;
+
   mail_debug('Preparing email for new or changed booking ...');
 
   // Add some values to the $data array before we go and create the addresses
@@ -1240,45 +1153,31 @@ function notifyAdminOnBooking($data, $mail_previous, $new_entry, $series, $start
       default:
         if ($new_entry)
         {
-          //KTH 2018 Special för CAS, gör en funktion som hämtar areatyp(ny parameter på area)
-          switch ($data['area_type']){
-            case "1": // Grupprum
-              $subject = get_mail_vocab("mail_subject_new_entry");
-              break;
-            case "2": // Lässtudio
-            case "3": // Handledning
-              $this_room_description = get_room_description($data['room_id']);
-              $subject = "Bokning CAS, " . $this_room_description . " - " . date("Y-m-d H:i",$data['start_time']) . " - " . $data['name'] . " - " . getUserName();
-              break;
-            case "5": // Talbok
-              $this_room_description = get_room_description($data['room_id']);
-              $subject = "Bokning Talboksintroduktion, " . $this_room_description . " - " . date("Y-m-d H:i",$data['start_time']) . " - " . $data['name'] . " - " . getUserName();
-              break;
-            case "4": // Öppettider
-            default: 
-              $subject = get_mail_vocab("mail_subject_new_entry");
-          }
+          $subject = get_mail_vocab("mail_subject_new_entry");
+          //CAS
+          /*
+            $this_room_description = get_room_description($data['room_id']);
+            $subject = "Bokning CAS, " . $this_room_description . " - " . date("Y-m-d H:i",$data['start_time']) . " - " . $data['name'] . " - " . getUserName();
+          */
+          // Talbok
+          /*
+            $this_room_description = get_room_description($data['room_id']);
+            $subject = "Bokning Talboksintroduktion, " . $this_room_description . " - " . date("Y-m-d H:i",$data['start_time']) . " - " . $data['name'] . " - " . getUserName();
+          */
         }
         else
         {
-          //KTH 2018 Special för CAS, gör en funktion som hämtar areatyp(ny parameter på area)
-          switch ($data['area_type']){
-            case "1": // Grupprum
-              $subject = get_mail_vocab("mail_subject_changed_entry");
-              break;
-            case "2": // Lässtudio
-            case "3": // Handledning
-              $this_room_description = get_room_description($data['room_id']);
-              $subject = "Ändrad bokning CAS, " . $this_room_description . " - " . date("Y-m-d H:i",$data['start_time']) . " - " . $data['name'] . " - " . getUserName();
-              break;
-            case "5": // Talbok
-              $this_room_description = get_room_description($data['room_id']);
-              $subject = "Ändrad bokning talboksintroduktion, " . $this_room_description . " - " . date("Y-m-d H:i",$data['start_time']) . " - " . $data['name'] . " - " . getUserName();
-              break;
-            case "4": // Öppettider
-            default: 
-              $subject = get_mail_vocab("mail_subject_changed_entry");
-          }
+          $subject = get_mail_vocab("mail_subject_changed_entry");
+          // CAS
+          /*    
+          $this_room_description = get_room_description($data['room_id']);
+          $subject = "Ändrad bokning CAS, " . $this_room_description . " - " . date("Y-m-d H:i",$data['start_time']) . " - " . $data['name'] . " - " . getUserName();
+          */
+          // Talbok
+          /*
+          $this_room_description = get_room_description($data['room_id']);
+          $subject = "Ändrad bokning talboksintroduktion, " . $this_room_description . " - " . date("Y-m-d H:i",$data['start_time']) . " - " . $data['name'] . " - " . getUserName();
+          */
         }
         break;
     }
@@ -1286,8 +1185,10 @@ function notifyAdminOnBooking($data, $mail_previous, $new_entry, $series, $start
 
   // Create the text body
   $compare = !$new_entry;
+  /*
   $text_body = array();
   $text_body['content'] = create_body($data, $mail_previous, $compare, $series, $action, FALSE, $note, $start_times);
+  */
   
   // Create the HTML body
   $html_body = array();
@@ -1309,7 +1210,7 @@ function notifyAdminOnBooking($data, $mail_previous, $new_entry, $series, $start
     $attachment['name']     = $mail_settings['ics_filename'] . ".ics";
   }
 
-  $addresses['from'] = get_mail_vocab("mail_from_address_kthb");
+  $addresses['from'] = get_mail_vocab("mail_from_address_default");
 
   $result = sendMail($addresses,
                      $subject,
@@ -1415,7 +1316,7 @@ function notifyAdminOnDelete($data, $series=FALSE, $start_times, $action="delete
     $attachment['name']     = $mail_settings['ics_filename'] . ".ics";
   }
 
-  $addresses['from'] = get_mail_vocab("mail_from_address_kthb");
+  $addresses['from'] = get_mail_vocab("mail_from_address_default");
   
   $result = sendMail($addresses,
                      $subject,
