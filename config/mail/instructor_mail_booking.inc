@@ -24,7 +24,7 @@ $html_body['content'] = '
     <title></title>
     <style type="text/css">
         body#mrbs {
-            background-color: #e7ebee;
+            background-color: #ffffff;
             color: #0B263B;
             font-family: "Arial, Verdana, sans-serif";
             margin: 0;

@@ -2619,8 +2619,8 @@ function mrbsMakeBookings($bookings, $id=NULL, $just_check=FALSE, $skip=FALSE, $
         }
         //KTH generellt mailutskick 2018, mail till bokaren om arean har reminder_email_enabled = 1 
 		    if ($mail_settings['booker'] && $booking['reminder_email_enabled'] && $booking['type']!= "C") {
-          //skicka INTE för bokningar som är: kvitterade OCH ändrade OCH med confirm default = 0
-          if ($booking['status'] == 0 && isset($id) && $booking['confirmed_default'] == 0) {
+          //skicka INTE för bokningar som är: kvitterade OCH ändrade OCH med confirm default = 0 OCH det inte var en "B"(bokningsbar) tidigare
+          if ($booking['status'] == 0 && isset($id) && $booking['confirmed_default'] == 0 && $mail_previous['type'] != "B") {
             //do nothing
           } else {
             //returnerar true/false
