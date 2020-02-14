@@ -7,7 +7,6 @@ $sql = "SELECT entry_field_name,type
         AND visible = 1
         AND type = 'custom'
         ORDER BY sort_order";
-echo $sql;
 $res = sql_query($sql);
 $custom_fields_map = array();
 if ($res === FALSE)
@@ -79,7 +78,7 @@ $html_body['content'] = '
 
 <body id="mrbs">
     <div id="contents">
-        <h1>New booking</h1>
+        <h1>Ny bokning</h1>
         <div>
             <table border="0" cellspacing="0" cellpadding="0">
                 <tbody>
@@ -94,11 +93,11 @@ $html_body['content'] = '
         <table>
             <tbody>
                 <tr>
-                    <td>Name: </td>
+                    <td>Namn: </td>
                     <td>' . $data['name'] . '</td>
                 </tr>
                 <tr>
-                    <td>Resource: </td>
+                    <td>Område: </td>
                     <td>' . get_vocab("mrbs") . '</td>
                 </tr>
                 <tr>
@@ -106,11 +105,11 @@ $html_body['content'] = '
                     <td>' . date("H:i",$data['start_time']) . ' till ' . date("H:i",$data['end_time']) . ', ' . date("l d F",$data['start_time']) . '</td>
                 </tr>
                 <tr>
-                    <td>Type: </td>
+                    <td>Typ: </td>
                     <td>' . get_type_vocab($data['type']) . '</td>
                 </tr>
                 <tr>
-                    <td>Created by: </td>
+                    <td>Bokad av: </td>
                     <td>' . $data['create_by'] . '</td>
                 </tr>';
 $html_body['content'] .= '';

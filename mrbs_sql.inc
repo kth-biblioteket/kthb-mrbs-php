@@ -1726,17 +1726,17 @@ function get_area_name($id, $all=FALSE)
 
   //KTH engelska 
   if(isset($_COOKIE["mrbslang"])) {
-	if(isset($mrbslang)) {
-		$lang = $mrbslang;
-	} else {
-		$lang = $_COOKIE["mrbslang"];
-	}
+    if(isset($mrbslang)) {
+      $lang = $mrbslang;
+    } else {
+      $lang = $_COOKIE["mrbslang"];
+    }
   }
   
   if($lang=="sv") {
-	$area_name_field = "area_name";
+	  $area_name_field = "area_name";
   } else {
-	$area_name_field = "area_name_en";
+	  $area_name_field = "area_name_en";
   }
 
   $sql = "SELECT $area_name_field
@@ -1975,7 +1975,7 @@ function get_campus($id)
   
   if($lang=="sv") {
     $places_field = "name";
-    } else {
+  } else {
     $places_field = "name_en";
   }
     
@@ -2013,17 +2013,17 @@ function get_areas($all=FALSE)
   
   //KTH engelska 
   if(isset($_COOKIE["mrbslang"])) {
-	if(isset($mrbslang)) {
-		$lang = $mrbslang;
-	} else {
-		$lang = $_COOKIE["mrbslang"];
-	}
+    if(isset($mrbslang)) {
+      $lang = $mrbslang;
+    } else {
+      $lang = $_COOKIE["mrbslang"];
+    }
   }
   
   if($lang=="sv") {
-	$area_name_field = "area_name";
+  	$area_name_field = "area_name";
   } else {
-	$area_name_field = "area_name_en";
+	  $area_name_field = "area_name_en";
   }
   
   $sql = "SELECT id, $area_name_field FROM $tbl_area";

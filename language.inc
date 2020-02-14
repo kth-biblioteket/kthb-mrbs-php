@@ -5,7 +5,6 @@
 require_once "functions.inc";
 
 //KTH byta språk via urlparameter
-//TODO Flytta härifrån använd session istället?
 $cookie_name = "mrbslang";
 if (isset($_GET["lang"])) {
 	$cookie_value = $_GET["lang"];
