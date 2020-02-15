@@ -122,7 +122,8 @@ INSERT INTO `kth_entry_custom_fields` (`id`, `area_id`, `entry_field_name`, `typ
 (1, 'preferred_language', 'custom', 120, 1, 1),
 (1, 'start_time', 'standard', 100, 1, 1),
 (1, 'end_time', 'standard', 101, 1, 1),
-(1, 'name', 'standard', 140, 1, 1),
+(1, 'name', 'standard', 140, 1, 1);
+
 INSERT INTO `kth_entry_custom_fields` (`area_id`, `entry_field_name`, `type`, `sort_order`, `visible`, `enabled`) VALUES
 (1, 'email', 'custom', 200, 1, 1),
 (1, 'phone', 'custom', 300, 1, 1),
@@ -132,12 +133,36 @@ INSERT INTO `kth_entry_custom_fields` (`area_id`, `entry_field_name`, `type`, `s
 (1, 'start_time', 'standard', 100, 1, 1),
 (1, 'end_time', 'standard', 101, 1, 1),
 (1, 'name', 'standard', 140, 1, 1),
-(1, 'other_info', 'custom', 900, 1, 1)
+(1, 'other_info', 'custom', 900, 1, 1);
+
 INSERT INTO `kth_entry_custom_fields` (`area_id`, `entry_field_name`, `type`, `sort_order`, `visible`, `enabled`) VALUES
 (1, 'name', 'standard', 100, 1, 1),
 (1, 'start_time', 'standard', 110, 1, 1),
 (1, 'end_time', 'standard', 120, 1, 1),
 (1, 'confirmation_status', 'standard', 130, 1, 1);
+
+INSERT INTO `kth_entry_custom_fields` (`area_id`, `entry_field_name`, `type`, `sort_order`, `visible`, `enabled`) VALUES
+(1, 'start_time', 'standard', 100, 1, 1),
+(1, 'end_time', 'standard', 101, 1, 1),
+(1, 'name', 'standard', 105, 1, 1),
+(1, 'writing_help_get_started', 'custom', 108, 1, 1),
+(1, 'writing_help_overall_structure', 'custom', 110, 1, 1),
+(1, 'writing_help_paragraph_structure', 'custom', 120, 1, 1),
+(1, 'writing_help_sentence_construction', 'custom', 130, 1, 1),
+(1, 'writing_help_coherence_cohesion', 'custom', 140, 1, 1),
+(1, 'writing_help_style_formality', 'custom', 150, 1, 1),
+(1, 'writing_help_conventions', 'custom', 160, 1, 1),
+(1, 'writing_help_citation', 'custom', 170, 1, 1),
+(1, 'writing_help_references', 'custom', 180, 1, 1),
+(1, 'writing_help_otherformal', 'custom', 190, 1, 1),
+(1, 'oral_help_nervousness', 'custom', 200, 1, 1),
+(1, 'oral_help_overall_structure', 'custom', 210, 1, 1),
+(1, 'oral_help_act_interact', 'custom', 220, 1, 1),
+(1, 'oral_help_interact_computer', 'custom', 230, 1, 1),
+(1, 'oral_help_bodylanguage', 'custom', 240, 1, 1),
+(1, 'oral_help_images', 'custom', 250, 1, 1),
+(1, 'oral_help_keeptime', 'custom', 260, 1, 1),
+(1, 'help_other', 'custom', 270, 1, 1);
 */
 
 -- --------------------------------------------------------
@@ -319,10 +344,52 @@ INSERT INTO `mrbs_area` (`disabled`, `area_name`, `area_name_en`, `area_sort_key
 (0, 'Talboksintroduktion', 'Introduction to talking books', 5, 5, 'Europe/Stockholm', '', 3600, 3600, 0, 9, 0, 16, 0, 0, 0, 0, 'none', 0, 0, 0, 604800, 0, 0, 0, 604800, 0, 1, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 50, 0, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7200, 2, '<p style="color:red">Custom svenska html</p>', '<p style="color:red">Custom english html</p>\r\n', NULL, NULL, 0, 1, 0, 0, 1, 1, 0, 1, 1, 0, 0, '');
 
 INSERT INTO `mrbs_area` (`disabled`, `area_name`, `area_name_en`, `area_sort_key`, `area_type`, `timezone`, `area_admin_email`, `resolution`, `default_duration`, `default_duration_all_day`, `morningstarts`, `morningstarts_minutes`, `eveningends`, `eveningends_minutes`, `private_enabled`, `private_default`, `private_mandatory`, `private_override`, `min_create_ahead_enabled`, `min_create_ahead_secs`, `max_create_ahead_enabled`, `max_create_ahead_secs`, `min_delete_ahead_enabled`, `min_delete_ahead_secs`, `max_delete_ahead_enabled`, `max_delete_ahead_secs`, `max_per_day_enabled`, `max_per_day`, `max_per_week_enabled`, `max_per_week`, `max_hours_per_day_enabled`, `max_hours_per_day`, `max_hours_per_week_enabled`, `max_hours_per_week`, `max_hours_per_month_enabled`, `max_hours_per_month`, `max_hours_per_year_enabled`, `max_hours_per_year`, `max_hours_per_future_enabled`, `max_hours_per_future`, `max_per_month_enabled`, `max_per_month`, `max_per_year_enabled`, `max_per_year`, `max_per_future_enabled`, `max_per_future`, `max_global_per_day`, `max_global_per_day_enabled`, `max_global_per_week`, `max_global_per_week_enabled`, `max_global_per_month`, `max_global_per_month_enabled`, `max_global_per_year`, `max_global_per_year_enabled`, `max_global_per_future`, `max_global_per_future_enabled`, `max_duration_enabled`, `max_duration_secs`, `max_duration_periods`, `custom_html`, `custom_html_en`, `extra_info`, `extra_info_en`, `approval_enabled`, `reminders_enabled`, `enable_periods`, `confirmation_enabled`, `confirmed_default`, `default_view`, `times_along_top`, `hide_links`, `extended_booking_form`, `reminder_email_enabled`, `area_map`, `area_map_image`) VALUES
-(0, 'Huvudbiblioteket - Grupprum', 'Main Library - Group study rooms', 1, 1, 'Europe/Stockholm', '', 3600, 7200, 0, 8, 0, 20, 0, 0, 0, 0, 'none', 0, 0, 1, 604800, 0, 0, 0, 604800, 1, 1, 1, 2, 1, 2, 1, 4, 0, 0, 0, 0, 0, 0, 0, 10, 0, 50, 0, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 7200, 1, '<h2>Bokningsregler/Information</h2>\r\n<ul>\r\n<li>Boka med ditt KTH-Konto <p></p></li>\r\n<li>Boka själv via schemat tidigast en vecka i förväg.<p></p></li>\r\n<li>Bokningen <b>måste</b> kvitteras i tid annars förfaller den.<p></p></li>\r\n<li>Kvittering av bokat pass görs tidigast 15 minuter före och senast 15 minuter efter bokningstidens start.<p></p></li>\r\n<li>Avboka alltid en tid du inte kommer att använda. Ej avbokad tid räknas som en bokning. <p></p></li>\r\n<li>Ett pass som bokas sedan det börjat kvitteras automatiskt.<p></p></li>\r\n<li>Du kan boka ett rum per dag och max två rum per vecka.<p></p></li>\r\n<li>Du kan boka max två timmar per bokning.</li><p></p>\r\n<li>Grupprummen är avsedda för grupper på upp till 8 personer och minst 2 personer.<p></p></li>\r\n<li>Alla grupprum har en whiteboard och rum 4. Leopold har en skärm<p></p></li>\r\n<li>Du får inte ta med mat och dryck i grupprummen.<p></p></li>\r\n</ul>', '<h2>Booking rules/Information</h2>\r\n<ul>\r\n<li>Book an available time with your KTH account.<p></p></li>\r\n<li>A booking can be made a week ahead, you can do it yourself.<p></p></li>\r\n<li>You <b>must </b>confirm your time slot. This is done from 15 minutes before to 15 minutes after the start time.<p></p></li>\r\n<li>Always cancel your booking if you do not need the room. If you don''t cancel it will count as a booking.<p></p></li>\r\n<li>If you book a room after the start time it will be confirmed automatically.<p></p></li>\r\n<li>You may book up to one room/day and two/week.<p></p></li>\r\n<li>You may book maximum two hours per booking</li><p></p>\r\n<li>Group study rooms are intended for a group of people, i.e. for at least two persons.<p></p></li>\r\n<li>All group study rooms have a whiteboard and room 4. Leopold has a screen<p></p></li>\r\n<li>Food and drink may not be brought into the group study rooms.<p></p></li>\r\n</ul>', NULL, NULL, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 1, 'grupprum.jpg'),
-(0, 'Huvudbiblioteket - Lässtudio', NULL, 0, 0, 'Europe/Stockholm', NULL, 1800, 3600, 0, 7, 0, 18, 30, 0, 0, 0, 'none', 0, 0, 0, 604800, 0, 0, 0, 604800, 0, 1, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 50, 0, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7200, 2, NULL, NULL, NULL, NULL, 0, 1, 0, 1, 1, 0, 0, 1, 0, 0, 0, NULL),
-(0, 'Kista - Lässtudio', NULL, 0, 0, 'Europe/Stockholm', NULL, 1800, 3600, 0, 7, 0, 18, 30, 0, 0, 0, 'none', 0, 0, 0, 604800, 0, 0, 0, 604800, 0, 1, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 50, 0, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7200, 2, NULL, NULL, NULL, NULL, 0, 1, 0, 1, 1, 0, 0, 1, 0, 0, 0, NULL),
-(0, 'Flemingsberg - Lässtudio', NULL, 0, 0, 'Europe/Stockholm', NULL, 1800, 3600, 0, 7, 0, 18, 30, 0, 0, 0, 'none', 0, 0, 0, 604800, 0, 0, 0, 604800, 0, 1, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 50, 0, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7200, 2, NULL, NULL, NULL, NULL, 0, 1, 0, 1, 1, 0, 0, 1, 0, 0, 0, NULL);
+(0, 'Huvudbiblioteket - Grupprum', 'Main Library - Group study rooms', 1, 1, 'Europe/Stockholm', '', 3600, 7200, 0, 8, 0, 20, 0, 0, 0, 0, 'none', 0, 0, 1, 604800, 0, 0, 0, 604800, 1, 1, 1, 2, 1, 2, 1, 4, 0, 0, 0, 0, 0, 0, 0, 10, 0, 50, 0, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 7200, 1, '<h2>Bokningsregler/Information</h2>\r\n<ul>\r\n<li>Boka med ditt KTH-Konto <p></p></li>\r\n<li>Boka själv via schemat tidigast en vecka i förväg.<p></p></li>\r\n<li>Bokningen <b>måste</b> kvitteras i tid annars förfaller den.<p></p></li>\r\n<li>Kvittering av bokat pass görs tidigast 15 minuter före och senast 15 minuter efter bokningstidens start.<p></p></li>\r\n<li>Avboka alltid en tid du inte kommer att använda. Ej avbokad tid räknas som en bokning. <p></p></li>\r\n<li>Ett pass som bokas sedan det börjat kvitteras automatiskt.<p></p></li>\r\n<li>Du kan boka ett rum per dag och max två rum per vecka.<p></p></li>\r\n<li>Du kan boka max två timmar per bokning.</li><p></p>\r\n<li>Grupprummen är avsedda för grupper på upp till 8 personer och minst 2 personer.<p></p></li>\r\n<li>Alla grupprum har en whiteboard och rum 4. Leopold har en skärm<p></p></li>\r\n<li>Du får inte ta med mat och dryck i grupprummen.<p></p></li>\r\n</ul>', '<h2>Booking rules/Information</h2>\r\n<ul>\r\n<li>Book an available time with your KTH account.<p></p></li>\r\n<li>A booking can be made a week ahead, you can do it yourself.<p></p></li>\r\n<li>You <b>must </b>confirm your time slot. This is done from 15 minutes before to 15 minutes after the start time.<p></p></li>\r\n<li>Always cancel your booking if you do not need the room. If you don''t cancel it will count as a booking.<p></p></li>\r\n<li>If you book a room after the start time it will be confirmed automatically.<p></p></li>\r\n<li>You may book up to one room/day and two/week.<p></p></li>\r\n<li>You may book maximum two hours per booking</li><p></p>\r\n<li>Group study rooms are intended for a group of people, i.e. for at least two persons.<p></p></li>\r\n<li>All group study rooms have a whiteboard and room 4. Leopold has a screen<p></p></li>\r\n<li>Food and drink may not be brought into the group study rooms.<p></p></li>\r\n</ul>', NULL, NULL, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 1, 'grupprum.jpg');
+
+INSERT INTO `mrbs_area` (`disabled`, `area_name`, `area_name_en`, `area_sort_key`, `area_type`, `timezone`, `area_admin_email`, `resolution`, `default_duration`, `default_duration_all_day`, `morningstarts`, `morningstarts_minutes`, `eveningends`, `eveningends_minutes`, `private_enabled`, `private_default`, `private_mandatory`, `private_override`, `min_create_ahead_enabled`, `min_create_ahead_secs`, `max_create_ahead_enabled`, `max_create_ahead_secs`, `min_delete_ahead_enabled`, `min_delete_ahead_secs`, `max_delete_ahead_enabled`, `max_delete_ahead_secs`, `max_per_day_enabled`, `max_per_day`, `max_per_week_enabled`, `max_per_week`, `max_hours_per_day_enabled`, `max_hours_per_day`, `max_hours_per_week_enabled`, `max_hours_per_week`, `max_hours_per_month_enabled`, `max_hours_per_month`, `max_hours_per_year_enabled`, `max_hours_per_year`, `max_hours_per_future_enabled`, `max_hours_per_future`, `max_per_month_enabled`, `max_per_month`, `max_per_year_enabled`, `max_per_year`, `max_per_future_enabled`, `max_per_future`, `max_global_per_day`, `max_global_per_day_enabled`, `max_global_per_week`, `max_global_per_week_enabled`, `max_global_per_month`, `max_global_per_month_enabled`, `max_global_per_year`, `max_global_per_year_enabled`, `max_global_per_future`, `max_global_per_future_enabled`, `max_duration_enabled`, `max_duration_secs`, `max_duration_periods`, `custom_html`, `custom_html_en`, `extra_info`, `extra_info_en`, `approval_enabled`, `reminders_enabled`, `enable_periods`, `confirmation_enabled`, `confirmed_default`, `default_view`, `times_along_top`, `hide_links`, `extended_booking_form`, `reminder_email_enabled`, `area_map`, `area_map_image`) VALUES
+(0, 'Lässtudio', 'Reading studio', 1, 1, 'Europe/Stockholm', '', 3600, 7200, 0, 8, 0, 20, 0, 0, 0, 0, 'none', 0, 0, 1, 604800, 0, 0, 0, 604800, 1, 1, 1, 2, 1, 2, 1, 4, 0, 0, 0, 0, 0, 0, 0, 10, 0, 50, 0, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 7200, 1, '<h2>Bokningsregler/Information</h2>\r\n<ul>\r\n<li>Boka med ditt KTH-Konto <p></p></li>\r\n<li>Boka själv via schemat tidigast en vecka i förväg.<p></p></li>\r\n<li>Bokningen <b>måste</b> kvitteras i tid annars förfaller den.<p></p></li>\r\n<li>Kvittering av bokat pass görs tidigast 15 minuter före och senast 15 minuter efter bokningstidens start.<p></p></li>\r\n<li>Avboka alltid en tid du inte kommer att använda. Ej avbokad tid räknas som en bokning. <p></p></li>\r\n<li>Ett pass som bokas sedan det börjat kvitteras automatiskt.<p></p></li>\r\n<li>Du kan boka ett rum per dag och max två rum per vecka.<p></p></li>\r\n<li>Du kan boka max två timmar per bokning.</li><p></p>\r\n<li>Grupprummen är avsedda för grupper på upp till 8 personer och minst 2 personer.<p></p></li>\r\n<li>Alla grupprum har en whiteboard och rum 4. Leopold har en skärm<p></p></li>\r\n<li>Du får inte ta med mat och dryck i grupprummen.<p></p></li>\r\n</ul>', '<h2>Booking rules/Information</h2>\r\n<ul>\r\n<li>Book an available time with your KTH account.<p></p></li>\r\n<li>A booking can be made a week ahead, you can do it yourself.<p></p></li>\r\n<li>You <b>must </b>confirm your time slot. This is done from 15 minutes before to 15 minutes after the start time.<p></p></li>\r\n<li>Always cancel your booking if you do not need the room. If you don''t cancel it will count as a booking.<p></p></li>\r\n<li>If you book a room after the start time it will be confirmed automatically.<p></p></li>\r\n<li>You may book up to one room/day and two/week.<p></p></li>\r\n<li>You may book maximum two hours per booking</li><p></p>\r\n<li>Group study rooms are intended for a group of people, i.e. for at least two persons.<p></p></li>\r\n<li>All group study rooms have a whiteboard and room 4. Leopold has a screen<p></p></li>\r\n<li>Food and drink may not be brought into the group study rooms.<p></p></li>\r\n</ul>', NULL, NULL, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 1, 'grupprum.jpg');
+
+INSERT INTO `mrbs_area` (`disabled`, `area_name`, `area_name_en`, `area_sort_key`, `area_type`, `timezone`, `area_admin_email`, `resolution`, `default_duration`, `default_duration_all_day`, `morningstarts`, `morningstarts_minutes`, `eveningends`, `eveningends_minutes`, `private_enabled`, `private_default`, `private_mandatory`, `private_override`, `min_create_ahead_enabled`, `min_create_ahead_secs`, `max_create_ahead_enabled`, `max_create_ahead_secs`, `min_delete_ahead_enabled`, `min_delete_ahead_secs`, `max_delete_ahead_enabled`, `max_delete_ahead_secs`, `max_per_day_enabled`, `max_per_day`, `max_per_week_enabled`, `max_per_week`, `max_hours_per_day_enabled`, `max_hours_per_day`, `max_hours_per_week_enabled`, `max_hours_per_week`, `max_hours_per_month_enabled`, `max_hours_per_month`, `max_hours_per_year_enabled`, `max_hours_per_year`, `max_hours_per_future_enabled`, `max_hours_per_future`, `max_per_month_enabled`, `max_per_month`, `max_per_year_enabled`, `max_per_year`, `max_per_future_enabled`, `max_per_future`, `max_global_per_day`, `max_global_per_day_enabled`, `max_global_per_week`, `max_global_per_week_enabled`, `max_global_per_month`, `max_global_per_month_enabled`, `max_global_per_year`, `max_global_per_year_enabled`, `max_global_per_future`, `max_global_per_future_enabled`, `max_duration_enabled`, `max_duration_secs`, `max_duration_periods`, `custom_html`, `custom_html_en`, `extra_info`, `extra_info_en`, `approval_enabled`, `reminders_enabled`, `enable_periods`, `confirmation_enabled`, `confirmed_default`, `default_view`, `times_along_top`, `hide_links`, `extended_booking_form`, `reminder_email_enabled`, `area_map`, `area_map_image`) VALUES
+(0, 'Centrum för akademiskt skrivande', 'Centre for Academic Writing', 1, 1, 'Europe/Stockholm', '', 3600, 7200, 0, 8, 0, 20, 0, 0, 0, 0, 'none', 0, 0, 1, 604800, 0, 0, 0, 604800, 1, 1, 1, 2, 1, 2, 1, 4, 0, 0, 0, 0, 0, 0, 0, 10, 0, 50, 0, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 7200, 1, 
+'<p>Följande gäller:</p>
+<ul>
+<li>Efter bokning kontaktas du av en CAS-handledare som ger dig detaljerad information om mötet. Ni träffas på KTH:s bibliotek (KTHB) eller på KTH Språk och kommunikation, Teknikringen 14. Läs mejlet från din handledare för att veta exakt var ni ska träffas.</li>
+<p>
+</p>
+<li>Avboka alltid din tid om du får förhinder. Avbokning görs genom att logga in i samma bokningssystem som vid bokning.</li>
+<p>
+</p>
+<li><strong>Du kan endast boka ett tillfälle för en text/presentation via hemsidan</strong> (45 min per möte). Ett andra tillfälle kan bokas vid behov och görs gemensamt med din CAS-handledare. Du erbjuds max. två handledningstillfällen per text/presentation.</li>
+<p>
+</p><li>Mejla din text/presentation och dina frågor <strong>senast 24 timmar i förväg till <a href="mailto:cas-handledning@kth.se">cas-handledning@kth.se</a></strong></li>
+<p>
+</p><li>Har du frågor om din bokning är du välkommen att höra av dig <a href="mailto:cas-handledning@kth.se">cas-handledning@kth.se</a></li><p></p>
+</ul>
+
+<!-- Nedan kan styling för respektive area definieras. En kopia även på "english"-->
+
+<style>#1dwm_rooms ul{position:relative;} #1dwm_rooms li{width:100%;float:none} #1dwm_rooms li:nth-of-type(3){position: absolute;top: -5px;left: 250px;}#1dwm_rooms li:nth-of-type(4){position: absolute;top: 29px;left: 250px;} @media (max-width: 500px) and (min-width: 200px) {#1dwm_rooms li:nth-of-type(3),#1dwm_rooms li:nth-of-type(4){position:static}}</style>',
+'<p>The following applies:</p>
+<ul>
+<li>When you have booked an appointment, a CAW tutor will contact you with detailed information about the meeting. Please note that you will meet in the KTH Library <i>or</i> at KTH Language and Communication, Teknikringen 14. Make sure you know where to go.</li>
+<p>
+</p>
+<li>If you are unable to attend, please cancel your appointment by logging on to the same booking system.</li>
+<p>
+</p>
+  <li>You can make only <strong>one appointment per text/presentation on the booking site</strong> (45 minutes per session). The second appointment, if needed, will be booked together with your CAW tutor. We offer a maximum of two sessions per text/presentation..</li>
+  <p> 
+  </p><li>Please email your text/presentation and questions <strong>at least 24 hours in advance to <a href="mailto:cas-handledning@kth.se">cas-handledning@kth.se</a></strong></li>
+  <p>
+  </p><li>Questions about your booking? Email us at <a href="mailto:cas-handledning@kth.se">cas-handledning@kth.se</a></li><p></p>
+</ul>
+
+
+<!-- Nedan kan styling för respektive area definieras. En kopia även på "english"-->
+
+<style>#1dwm_rooms ul{position:relative;} #1dwm_rooms li{width:100%;float:none} #1dwm_rooms li:nth-of-type(3){position: absolute;top: -5px;left: 250px;}#1dwm_rooms li:nth-of-type(4){position: absolute;top: 29px;left: 250px;} @media (max-width: 500px) and (min-width: 200px) {#1dwm_rooms li:nth-of-type(3),#1dwm_rooms li:nth-of-type(4){position:static}}</style>', 
+NULL, NULL, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 1, 'grupprum.jpg');
+
 */
 -- --------------------------------------------------------
 
@@ -362,6 +429,24 @@ CREATE TABLE IF NOT EXISTS `mrbs_entry` (
   `campus` int(11) DEFAULT NULL,
   `preferred_language` varchar(10) DEFAULT NULL,
   `other_info` varchar(500) DEFAULT NULL,
+  `writing_help_get_started` smallint(6) DEFAULT NULL,
+  `writing_help_overall_structure` smallint(6) DEFAULT NULL,
+  `writing_help_paragraph_structure` smallint(6) DEFAULT NULL,
+  `writing_help_sentence_construction` smallint(6) DEFAULT NULL,
+  `writing_help_coherence_cohesion` smallint(6) DEFAULT NULL,
+  `writing_help_style_formality` smallint(6) DEFAULT NULL,
+  `writing_help_conventions` smallint(6) DEFAULT NULL,
+  `writing_help_citation` smallint(6) DEFAULT NULL,
+  `writing_help_references` smallint(6) DEFAULT NULL,
+  `writing_help_otherformal` smallint(6) DEFAULT NULL,
+  `oral_help_nervousness` smallint(6) DEFAULT NULL,
+  `oral_help_overall_structure` smallint(6) DEFAULT NULL,
+  `oral_help_act_interact` smallint(6) DEFAULT NULL,
+  `oral_help_interact_computer` smallint(6) DEFAULT NULL,
+  `oral_help_bodylanguage` smallint(6) DEFAULT NULL,
+  `oral_help_images` smallint(6) DEFAULT NULL,
+  `oral_help_keeptime` smallint(6) DEFAULT NULL,
+  `help_other` text DEFAULT NULL,
   `ical_uid` varchar(255) NOT NULL DEFAULT '',
   `ical_sequence` smallint(6) NOT NULL DEFAULT '0',
   `ical_recur_id` varchar(16) DEFAULT NULL
@@ -371,17 +456,8 @@ CREATE TABLE IF NOT EXISTS `mrbs_entry` (
 -- Dumpning av Data i tabell `mrbs_entry`
 --
 /*
-INSERT INTO `mrbs_entry` (`id`, `start_time`, `end_time`, `entry_type`, `repeat_id`, `room_id`, `timestamp`, `instructor`, `create_by`, `modified_by`, `name`, `type`, `description`, `status`, `reminded`, `lang`, `confirmation_code`, `info_time`, `info_user`, `info_text`, `email`, `phone`, `user_group`, `program`, `study_info`, `previously`, `subject_keywords`, `campus`, `preferred_language`, `other_info`, `ical_uid`, `ical_sequence`, `ical_recur_id`) VALUES
-(1, 1580288400, 1580292000, 0, NULL, 1, '2020-01-28 15:45:55', 'tholind@kth.se', 'testtl@kth.se', 'testtl@kth.se', 'Thomas Lind(testkonto)', 'I', NULL, 0, NULL, 'en', NULL, NULL, NULL, NULL, 'tholind@kth.se', '888888888', 'KTH Student', '', '', '', '', 2, '', NULL, 'MRBS-5e304d7721b88-ead86773@apps.lib.kth.se', 7, '');
-*/
-/*
-/*
 INSERT INTO mrbs_grupprum.mrbs_entry (`id`, `start_time`, `end_time`, `entry_type`, `repeat_id`, `room_id`, `timestamp`, `instructor`, `create_by`, `modified_by`, `name`, `type`, `description`, `status`, `reminded`, `lang`, `confirmation_code`, `info_time`, `info_user`, `info_text`, `email`, `phone`, `user_group`, `program`, `study_info`, `previously`, `subject_keywords`, `campus`, `preferred_language`, `other_info`, `ical_uid`, `ical_sequence`, `ical_recur_id`) VALUES 
 */ 
-/*
-SELECT `id`, `start_time`, `end_time`, `entry_type`, `repeat_id`, `room_id`, `timestamp`, null, `create_by`, `modified_by`, `name`, `type`, `description`, `status`, `reminded`, `lang`, `confirmation_code`, `info_time`, `info_user`, `info_text`, null, null, null, null, null, null, null, null, null, null, `ical_uid`, `ical_sequence`, `ical_recur_id` FROM mrbs.mrbs_entry WHERE id >156500 AND id <156510
-*/
-
 /*
 SELECT 
 mrbs.mrbs_entry.id, `start_time`, `end_time`, `entry_type`, `repeat_id`, `room_id`, `timestamp`, null, 
@@ -446,6 +522,24 @@ CREATE TABLE IF NOT EXISTS `mrbs_entry_delete` (
   `campus` int(11) NOT NULL DEFAULT '0',
   `preferred_language` int(10) NOT NULL,
   `other_info` varchar(500) NOT NULL,
+  `writing_help_get_started` smallint(6) DEFAULT NULL,
+  `writing_help_overall_structure` smallint(6) DEFAULT NULL,
+  `writing_help_paragraph_structure` smallint(6) DEFAULT NULL,
+  `writing_help_sentence_construction` smallint(6) DEFAULT NULL,
+  `writing_help_coherence_cohesion` smallint(6) DEFAULT NULL,
+  `writing_help_style_formality` smallint(6) DEFAULT NULL,
+  `writing_help_conventions` smallint(6) DEFAULT NULL,
+  `writing_help_citation` smallint(6) DEFAULT NULL,
+  `writing_help_references` smallint(6) DEFAULT NULL,
+  `writing_help_otherformal` smallint(6) DEFAULT NULL,
+  `oral_help_nervousness` smallint(6) DEFAULT NULL,
+  `oral_help_overall_structure` smallint(6) DEFAULT NULL,
+  `oral_help_act_interact` smallint(6) DEFAULT NULL,
+  `oral_help_interact_computer` smallint(6) DEFAULT NULL,
+  `oral_help_bodylanguage` smallint(6) DEFAULT NULL,
+  `oral_help_images` smallint(6) DEFAULT NULL,
+  `oral_help_keeptime` smallint(6) DEFAULT NULL,
+  `help_other` text DEFAULT NULL,
   `ical_uid` varchar(255) NOT NULL DEFAULT '',
   `ical_sequence` smallint(6) NOT NULL DEFAULT '0',
   `ical_recur_id` varchar(16) DEFAULT NULL
@@ -533,6 +627,24 @@ CREATE TABLE IF NOT EXISTS `mrbs_repeat` (
   `campus` varchar(50) DEFAULT NULL,
   `preferred_language` int(10) DEFAULT NULL,
   `other_info` varchar(500) DEFAULT NULL,
+  `writing_help_get_started` smallint(6) DEFAULT NULL,
+  `writing_help_overall_structure` smallint(6) DEFAULT NULL,
+  `writing_help_paragraph_structure` smallint(6) DEFAULT NULL,
+  `writing_help_sentence_construction` smallint(6) DEFAULT NULL,
+  `writing_help_coherence_cohesion` smallint(6) DEFAULT NULL,
+  `writing_help_style_formality` smallint(6) DEFAULT NULL,
+  `writing_help_conventions` smallint(6) DEFAULT NULL,
+  `writing_help_citation` smallint(6) DEFAULT NULL,
+  `writing_help_references` smallint(6) DEFAULT NULL,
+  `writing_help_otherformal` smallint(6) DEFAULT NULL,
+  `oral_help_nervousness` smallint(6) DEFAULT NULL,
+  `oral_help_overall_structure` smallint(6) DEFAULT NULL,
+  `oral_help_act_interact` smallint(6) DEFAULT NULL,
+  `oral_help_interact_computer` smallint(6) DEFAULT NULL,
+  `oral_help_bodylanguage` smallint(6) DEFAULT NULL,
+  `oral_help_images` smallint(6) DEFAULT NULL,
+  `oral_help_keeptime` smallint(6) DEFAULT NULL,
+  `help_other` text DEFAULT NULL,
   `ical_uid` varchar(255) NOT NULL DEFAULT '',
   `ical_sequence` smallint(6) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -602,9 +714,12 @@ INSERT INTO `mrbs_room` (`disabled`, `area_id`, `room_name`, `room_name_english`
 (0, 1, 'Agricola', 'Agricola', '05', NULL, ' ', 6, '', '', '5', 0, NULL, NULL),
 (0, 1, 'Bernoulli', 'Bernoulli', '06', NULL, '', 6, '', '', '6', 0, NULL, NULL),
 (0, 1, 'Dürer', 'Dürer', '07', NULL, '', 6, '', '', '7', 0, NULL, NULL),
-(0, 2, 'Vitruvius', 'Vitruvius', '01', NULL, '', 4, '', '', '', 0, NULL, NULL),
-(0, 3, 'Kista', 'Kista', '01', NULL, '', 0, '', '', '', 0, NULL, NULL),
-(0, 4, 'Flemingsberg', 'Flemingsberg', '01', NULL, '', 0, '', '', '', 0, NULL, NULL);
+(0, 1, 'Hammarström', 'Hammarström', '14', NULL, '', 4, '', '', '', 0, NULL, NULL);
+
+INSERT INTO `mrbs_room` (`disabled`, `area_id`, `room_name`, `room_name_english`, `sort_key`, `exchange_email`, `description`, `capacity`, `room_admin_email`, `custom_html`, `room_number`, `screen`, `mailtext`, `mailtext_en`) VALUES
+(0, 1, 'Skriftliga arbeten och/eller muntliga presentationer på svenska  <img src="images/sv_SE.png">', 'Written assignments and/or oral presentations in Swedish <img src="images/sv_SE.png">', '100', '', '', 8, '', '', '', 0, 'Du har bokat tid för handledning på KTH Biblioteket', 'You have booked consultation at the KTH Library.'),
+(0, 1, 'Skriftliga arbeten och/eller muntliga presentationer på engelska <img src="images/en_UK.png">', 'Written assignments and/or oral presentations in English <img src="images/en_UK.png">', '110', '', '', 8, '', '', '', 0, 'Du har bokat tid för handledning på KTH Biblioteket', 'You have booked consultation at the KTH Library.');
+
 */
 
 -- --------------------------------------------------------

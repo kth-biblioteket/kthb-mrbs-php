@@ -889,7 +889,7 @@ function mrbsDelEntry($user, $id, $series, $all, $truedelete)
  */
 function mrbsCreateEntry($table, $data)
 { //KTH mailutskick 2018, Ny kolumn "lang" i mrbs_entry och i mrbs_repeat för att veta vilket språk som ska kommuniceras till användaren vid påminnelsemail som görs från KTHB TASKS
-  global $standard_fields, $db_tbl_prefix, $mrbslang;
+  global $standard_fields, $db_tbl_prefix, $mrbslang, $environment;
   
   $sql_col = array();
   $sql_val = array();
@@ -1013,6 +1013,9 @@ function mrbsCreateEntry($table, $data)
   
   $sql_col = array_map('sql_quote', $sql_col);
   $sql = "INSERT INTO $table (" . implode(', ', $sql_col) . ") VALUES (" . implode(', ',$sql_val) . ")";
+  if($environment == 'development') {
+    error_log($sql);
+  }
   if (sql_command($sql) < 0)
   {
     // probably because the table hasn't been created properly
