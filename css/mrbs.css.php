@@ -1821,7 +1821,7 @@ div.date_now a, div.date_before a ,div.date_after a   {
 }
 
 /* 191003 */
-dwm_rooms .current {
+.current {
   color: #fff; 
   /*background-color: #e3e5e3*/
 } 
