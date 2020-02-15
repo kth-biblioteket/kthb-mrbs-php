@@ -1,5 +1,4 @@
 <?php
-//Grupprum
 global $mrbslang;
 if ($mrbslang == 'sv') {
   $html_body['content'] =   

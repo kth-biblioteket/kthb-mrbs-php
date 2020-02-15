@@ -2644,7 +2644,9 @@ function make_room_select_html ($link, $area, $current, $year, $month, $day, $la
       {//KTH skriv inte ut länk för aktuellt rum??(rubrik istället)
 		//if ($row['id'] != $current) {
 			//if ($first == TRUE) {$first = FALSE; $separator = "";} else {$separator = "|&nbsp&nbsp";}
-			$out_html .= "<li" . (($row['id'] == $current) ? ' class="current"' : '') . ">$separator<span style=\"backSground: transparent url(images/gray-arrow.svg) 0px 5px no-repeat;spadding-right:7px\"></span><a" . (($row['id'] == $current) ? ' class="btn btn-default"' : ' class="btn btn-light"') . " href=\"$link?year=$year&amp;month=$month&amp;day=$day&amp;area=$area&amp;room=".$row['id']."\" title=\"". htmlspecialchars($row['description'])."\">";
+      $out_html .= "<li" . (($row['id'] == $current) ? ' class="current"' : '') . ">
+                    $separator<span style=\"backSground: transparent url(images/gray-arrow.svg) 0px 5px no-repeat;spadding-right:7px\"></span>
+                    <a" . (($row['id'] == $current) ? ' class="btn btn-primary"' : ' class="btn btn-light"') . " href=\"$link?year=$year&amp;month=$month&amp;day=$day&amp;area=$area&amp;room=".$row['id']."\" title=\"". htmlspecialchars($row['description'])."\">";
 			$out_html .= "<span" . (($row['id'] == $current) ? ' class="current"' : '') . ">";
 			if ($lang == "sv") {
 				if ($row['room_number']!="") {
