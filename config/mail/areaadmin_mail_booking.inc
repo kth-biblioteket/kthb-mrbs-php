@@ -64,7 +64,7 @@ $html_body['content'] = '
                 </tr>
                 <tr>
                     <td>Bokning: </td>
-                    <td>' . date("H:i",$data['start_time']) . ' till ' . date("H:i",$data['end_time']) . ', ' . utf8_encode(strftime("%A %d %B",$row['start_time'])) . '</td>
+                    <td>' . date("H:i",$data['start_time']) . ' till ' . date("H:i",$data['end_time']) . ', ' . utf8_encode(strftime("%A %d %B",$data['start_time'])) . '</td>
                 </tr>
                 <tr>
                     <td>Typ: </td>

@@ -23,7 +23,7 @@ if ($mrbslang == 'sv') {
   $html_body['content'] .=    
   '</br>
   <div>' .
-    'Din bokning är från ' . date("H:i",$data['start_time']) . ' till ' . date("H:i",$data['end_time']) . ', ' . utf8_encode(strftime("%A %d %B",$row['start_time'])) .
+    'Din bokning är från ' . date("H:i",$data['start_time']) . ' till ' . date("H:i",$data['end_time']) . ', ' . utf8_encode(strftime("%A %d %B",$data['start_time'])) .
   '</div>
   </br>
   <div>Denna länk leder till din bokning, där du kan avboka eller ändra den vid behov.</div>
