@@ -931,15 +931,13 @@ function notifyInstructorOnBooking($data, $mail_previous, $new_entry, $series, $
         $subject = get_mail_vocab("mail_subject_reminder");
         break;
       default:
-        if ($new_entry)
+        if ($new_entry && $mail_previous['type'] == 'B')
         {
-          //191003 Hämta subject från config.php.inc
-          $subject = get_mail_vocab("mail_subject_new_entry");
+          $subject = get_mail_vocab("mail_subject_new_entry") . ", " . $this_room_description . " - " . date("Y-m-d H:i",$data['start_time']) . " - " . $data['name'] . " - " . getUserName();
         }
         else
         {
-          //191003 Hämta subject från config.php.inc
-          $subject = get_mail_vocab("mail_subject_changed_entry");
+          $subject = get_mail_vocab("mail_subject_changed_entry") . ", " . $this_room_description . " - " . date("Y-m-d H:i",$data['start_time']) . " - " . $data['name'] . " - " . getUserName();
         }
         break;
     }
@@ -1150,7 +1148,7 @@ function notifyAdminOnBooking($data, $mail_previous, $new_entry, $series, $start
         $subject = get_mail_vocab("mail_subject_reminder");
         break;
       default:
-        if ($new_entry)
+        if ($new_entry && $mail_previous['type'] == 'B')
         {
           $subject = get_mail_vocab("mail_subject_new_entry") . ", " . $this_room_description . " - " . date("Y-m-d H:i",$data['start_time']) . " - " . $data['name'] . " - " . getUserName();
         }
