@@ -1150,9 +1150,7 @@ function notifyAdminOnBooking($data, $mail_previous, $new_entry, $series, $start
       default:
         if (($new_entry || $mail_previous['type'] == 'B'))
         {
-          if($data['type'] != 'B') {
-            $subject = get_mail_vocab("mail_subject_new_entry") . ", " . $this_room_description . " - " . date("Y-m-d H:i",$data['start_time']) . " - " . $data['name'] . " - " . getUserName();
-          }
+          $subject = get_mail_vocab("mail_subject_new_entry") . ", " . $this_room_description . " - " . date("Y-m-d H:i",$data['start_time']) . " - " . $data['name'] . " - " . getUserName();
         }
         else
         {
