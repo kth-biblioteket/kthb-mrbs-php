@@ -45,7 +45,7 @@ $html_body['content'] = '
                 <tbody>
                     <tr>
                     <td align="center" style="border-radius: 30px;" bgcolor="#B0C92B">
-                        <a style="padding: 15px 25px; border-radius: 30px; border: 1px solid #B0C92B; border-image: none; color: rgb(255, 255, 255); font-family: Arial, Helvetica, sans-serif; font-weight: bold;font-size: 16px; text-decoration: none; display: inline-block;" href="https://' . dirname($_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']) . '/edit_entry.php?id=' . $data["id"] . '&lang=sv">' . 'To booking' . '</a>
+                        <a style="padding: 15px 25px; border-radius: 30px; border: 1px solid #B0C92B; border-image: none; color: rgb(255, 255, 255); font-family: Arial, Helvetica, sans-serif; font-weight: bold;font-size: 16px; text-decoration: none; display: inline-block;" href="https://' . dirname($_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']) . '/edit_entry.php?id=' . $data["id"] . '&lang=sv">' . 'Till bokning' . '</a>
                     </td>
                     </tr>
                 </tbody>
@@ -78,7 +78,7 @@ $html_body['content'] = '
 $html_body['content'] .=
                 '<tr>
                     <td>' . get_loc_field_name($tbl_entry, $row['entry_field_name']) . ': </td>
-                    <td>' . $data[$row['entry_field_name']] . '</td>
+                    <td>' . get_vocab($data[$row['entry_field_name']]) . '</td>
                 </tr>';  
                 }                  
 $html_body['content'] .= 

@@ -1023,22 +1023,22 @@ function notifyBookerOnBooking($data, $mail_previous, $new_entry, $series, $star
     switch ($action)
     {
       case "approve":
-        $subject = get_mail_vocab("mail_subject_approved");
+        $subject = get_vocab("mail_subject_approved");
         break;
       case "more_info":
-        $subject = get_mail_vocab("mail_subject_more_info");
+        $subject = get_vocab("mail_subject_more_info");
         break;
       case "remind":
-        $subject = get_mail_vocab("mail_subject_reminder");
+        $subject = get_vocab("mail_subject_reminder");
         break;
       default:
         if ($new_entry)
         {
-          $subject = get_mail_vocab("mail_subject_new_entry");
+          $subject = get_vocab("mail_subject_new_entry");
         }
         else
         {
-          $subject = get_mail_vocab("mail_subject_changed_entry");
+          $subject = get_vocab("mail_subject_changed_entry");
         }
         break;
     }
@@ -1055,7 +1055,6 @@ function notifyBookerOnBooking($data, $mail_previous, $new_entry, $series, $star
   {
   //setlocale(LC_ALL, $currentLocale);
   // språk beroende på bokarens valda språk
-  // $mail_settings['admin_lang'] = $mrbslang; i config.inc.php
   //TODO göra mer dynamiskt, väldigt mycket hårdkodning.
   //191003
     require_once "config\mail\booker_mail_booking.inc";
