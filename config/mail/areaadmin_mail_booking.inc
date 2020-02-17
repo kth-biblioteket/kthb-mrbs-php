@@ -27,16 +27,18 @@ $html_body['content'] = '
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <!--[if !mso]>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:600,800" rel="stylesheet" />
+    <![endif]-->
     <title></title>
-    <style type="text/css">
-    @import url(http://fonts.googleapis.com/css?family=Roboto);'
+    <style type="text/css">'
         . $css .
     '</style>
 </head>
 <body id="mrbs">
     <!--[if mso]>
         <style type="text/css">
-            body, table, td, h1, div {font-family: Roboto, Arial, Helvetica, sans-serif !important;}
+            body, table, td, h1, div {font-family: Arial, Helvetica, sans-serif !important;}
         </style>
     <![endif]-->
     <div id="contents">
