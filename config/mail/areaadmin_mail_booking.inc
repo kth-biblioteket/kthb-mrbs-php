@@ -68,6 +68,7 @@ $html_body['content'] = '
                     <td>Bokad av: </td>
                     <td>' . $data['create_by'] . '</td>
                 </tr>';
+                /*
                 for ($i = 0; ($row = sql_row_keyed($res, $i)); $i++)
                 {
 $html_body['content'] .=
@@ -75,7 +76,7 @@ $html_body['content'] .=
                     <td>' . get_loc_field_name($tbl_entry, $row['entry_field_name']) . ': </td>
                     <td>' . $data[$row['entry_field_name']] . '</td>
                 </tr>';                    
-                }
+                }*/
 $html_body['content'] .= 
             '</tbody>
         </table>';
