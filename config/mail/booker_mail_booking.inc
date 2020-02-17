@@ -1,6 +1,6 @@
 <?php
 global $mrbslang;
-setlocale(LC_TIME,'sv_SE');
+setlocale(LC_ALL, NULL);
 if ($mrbslang == 'sv') {
   $html_body['content'] =   
   '<div>Hej!</div>
@@ -104,4 +104,3 @@ $html_body['content'] .=
   <div>08 - 790 70 88</div>
   <div>www.kth.se/en/biblioteket</div>';
 }
-setlocale(LC_TIME,NULL);
