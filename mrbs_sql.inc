@@ -817,9 +817,9 @@ function mrbsDelEntry($user, $id, $series, $all, $truedelete)
           fatal_error(FALSE, get_vocab("fatal_db_error"));
       }
       $sql_custom_fields_to_reset = '';
-      for ($i = 0; ($row = sql_row_keyed($res, $i)); $i++) {
+      for ($i = 0; ($custom_row = sql_row_keyed($res, $i)); $i++) {
         $sql_custom_fields_to_reset .= ($i!=0 ? "," : "");
-        $sql_custom_fields_to_reset .= $row['entry_field_name'] . '=NULL';
+        $sql_custom_fields_to_reset .= $custom_row['entry_field_name'] . '=NULL';
       }
       $sql = "UPDATE $tbl_entry 
               SET type = 'B', 
@@ -827,7 +827,6 @@ function mrbsDelEntry($user, $id, $series, $all, $truedelete)
                 name = \"" . get_vocab("bookable_entry_text") . "\", 
                 $sql_custom_fields_to_reset 
               WHERE id=" . $row['id'];
-      echo $sql;exit();              
       sql_command($sql);
       $sql = "SELECT * FROM kth_exchange_events WHERE entry_id = " . $row['id'] . " LIMIT 1";
       $res = sql_query($sql);
