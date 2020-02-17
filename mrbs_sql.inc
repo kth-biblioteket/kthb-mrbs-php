@@ -827,6 +827,7 @@ function mrbsDelEntry($user, $id, $series, $all, $truedelete)
                 name = \"" . get_vocab("bookable_entry_text") . "\", 
                 $sql_custom_fields_to_reset 
               WHERE id=" . $row['id'];
+      echo $sql;exit();              
       sql_command($sql);
       $sql = "SELECT * FROM kth_exchange_events WHERE entry_id = " . $row['id'] . " LIMIT 1";
       $res = sql_query($sql);
