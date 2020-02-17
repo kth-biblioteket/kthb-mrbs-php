@@ -1,9 +1,13 @@
-body#mrbs, table, td {
+body#mrbs {
     background-color: #e7ebee; 
     color: #0B263B;
     font-family: 'Open Sans',Arial,'Helvetica Neue',helvetica,sans-serif;
     margin: 0; 
     padding: 0
+}
+
+table, td {
+    font-family: 'Open Sans',Arial,'Helvetica Neue',helvetica,sans-serif;
 }
 
 div#header {
