@@ -2614,7 +2614,7 @@ function mrbsMakeBookings($bookings, $id=NULL, $just_check=FALSE, $skip=FALSE, $
         // Send the email
         //inga utskick på stängningsbokningar
         //Adminmail går endast till de areor som har email för områdesansvarig definierad via admingränssnittet(idag endast CAS)
-        if ($booking['reminder_email_enabled'] && $booking['type']!= "C") {
+        if ($booking['reminder_email_enabled'] && $booking['type']!= "C" && $booking['type']!= "B" ) {
           notifyAdminOnBooking($booking, $mail_previous, !isset($id), $is_repeat_table, $result['start_times']);
         }
         //191003 skicka mail till handläggare när någon bokar/ändrar en bokningsbar tid
