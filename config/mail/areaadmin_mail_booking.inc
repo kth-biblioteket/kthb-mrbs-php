@@ -27,7 +27,6 @@ $html_body['content'] = '
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
     <title></title>
     <style type="text/css">'
         . $css .
