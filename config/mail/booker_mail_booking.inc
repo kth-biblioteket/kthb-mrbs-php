@@ -1,8 +1,25 @@
 <?php
 global $mrbslang;
+$html_body['content'] = '
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title></title>
+  <style type="text/css">'
+      . $css .
+  '</style>
+</head>
+<body id="mrbs">
+  <!--[if mso]>
+      <style type="text/css">
+          body, table, td, h1, div {font-family: Arial, Helvetica, sans-serif !important;}
+      </style>
+  <![endif]-->';
+
 if ($mrbslang == 'sv') {
   setlocale(LC_ALL,"swedish");
-  $html_body['content'] =   
+  $html_body['content'] .=   
   '<div>Hej!</div>
   </br>
   <div>' .
@@ -40,12 +57,12 @@ if ($mrbslang == 'sv') {
     </table>
   </div>
   </br>';
-if($data['area_map']) {
-$html_body['content'] .= 
+  if($data['area_map']) {
+  $html_body['content'] .= 
   '<div><img src="https://' . dirname($_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']) . '/' . 'images' .'/' . $data['area_map_image'] .'"></img></div>
   </br>';
-}
-$html_body['content'] .=     
+  }
+  $html_body['content'] .=     
   '<div>Vänliga hälsningar</div>
   </br>
   <div>KTH Biblioteket</div>
@@ -53,25 +70,25 @@ $html_body['content'] .=
   <div>www.kth.se/biblioteket</div>';
 } else {
   setlocale(LC_ALL,"eng");
-  $html_body['content'] =   '
+  $html_body['content'] .=   '
   <div>Hi!</div>
     </br>
   <div>' .
     get_vocab("mail_text") .
   '</div>
   </br>';
-if ($data['campus'] > 0) {
-$html_body['content'] .=      
+  if ($data['campus'] > 0) {
+  $html_body['content'] .=      
   '<div>
     Location: '. get_campus($data['campus']) .
   '</div>';
-} else {
-$html_body['content'] .=      
+  } else {
+  $html_body['content'] .=      
   '<div>
     Location: '. $data['room_name'] .
   '</div>';
   }
-$html_body['content'] .=    
+  $html_body['content'] .=    
   '</br>
   <div>' .
     'Your booking is from ' . date("H:i",$data['start_time']) . ' to ' . date("H:i",$data['end_time']) . ', ' . utf8_encode(strftime("%A %d %B",$data['start_time'])) .
@@ -91,17 +108,22 @@ $html_body['content'] .=
     </table>
   </div>
   </br>';
-if($data['area_map']) {
-$html_body['content'] .= 
+  if($data['area_map']) {
+  $html_body['content'] .= 
   '<div>
     <img src="https://' . dirname($_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']) . '/' . 'images' .'/' . $data['area_map_image'] .'"></img>
   </div>
   </br>';
-}
-$html_body['content'] .=   
+  }
+  $html_body['content'] .=   
   '<div>Kind regards</div>
   </br>
   <div>KTH Library</div>
   <div>08 - 790 70 88</div>
   <div>www.kth.se/en/biblioteket</div>';
 }
+$html_body['content'] .= '
+</body>
+</html>
+'
+;
