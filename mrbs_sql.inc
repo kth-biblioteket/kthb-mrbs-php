@@ -794,23 +794,6 @@ function mrbsDelEntry($user, $id, $series, $all, $truedelete)
     }
    
     //191003
-    //TODO vilka custom_fields ska återställas(inte hårdkodat som nedan)
-    $sql = "SELECT entry_field_name,type
-        FROM kth_entry_custom_fields
-        WHERE area_id = $area
-        AND visible = 1
-        AND type = 'custom'
-        ORDER BY sort_order";
-    $res = sql_query($sql);
-    if ($res === FALSE) {
-        trigger_error(sql_error(), E_USER_WARNING);
-        fatal_error(FALSE, get_vocab("fatal_db_error"));
-    }
-    $sql_custom_fields_to_reset = '';
-    for ($i = 0; ($row = sql_row_keyed($res, $i)); $i++) {
-      $sql_custom_fields_to_reset .= ($i!=0 ? "," : "");
-      $sql_custom_fields_to_reset .= $row['entry_field_name'] . '=NULL';
-    }
     //Ta inte bort en bokning när en användare gör en true delete(när default_bookings_open == FALSE )
       //(vid "save" sker också en delete men med en ny bokning skapad)
     //Ta inte bort om admin gör en true delete om bokningen har typ !="B" (dvs den är bokad av användare och när default_bookings_open == FALSE )
@@ -820,6 +803,24 @@ function mrbsDelEntry($user, $id, $series, $all, $truedelete)
     $end_date = getdate($row['end_time']);
     $enddate = new datetime($end_date['year'].'-'.$end_date['mon'].'-'.$end_date['mday'].' '.$end_date['hours'].':'.$end_date['minutes']);
     if($row['type'] != 'B' && $truedelete && !$default_bookings_open) {
+      //TODO vilka custom_fields ska återställas(inte hårdkodat som nedan)
+      $area = mrbsGetRoomArea($row['room_id']);
+      $sql = "SELECT entry_field_name,type
+          FROM kth_entry_custom_fields
+          WHERE area_id = $area
+          AND visible = 1
+          AND type = 'custom'
+          ORDER BY sort_order";
+      $res = sql_query($sql);
+      if ($res === FALSE) {
+          trigger_error(sql_error(), E_USER_WARNING);
+          fatal_error(FALSE, get_vocab("fatal_db_error"));
+      }
+      $sql_custom_fields_to_reset = '';
+      for ($i = 0; ($row = sql_row_keyed($res, $i)); $i++) {
+        $sql_custom_fields_to_reset .= ($i!=0 ? "," : "");
+        $sql_custom_fields_to_reset .= $row['entry_field_name'] . '=NULL';
+      }
       $sql = "UPDATE $tbl_entry 
               SET type = 'B', 
                 create_by = 'admin', 
