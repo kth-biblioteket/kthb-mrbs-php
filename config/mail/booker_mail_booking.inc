@@ -1,5 +1,6 @@
 <?php
 global $mrbslang;
+setlocale(LC_TIME,'sv_SE');
 if ($mrbslang == 'sv') {
   $html_body['content'] =   
   '<div>Hej!</div>
@@ -22,7 +23,7 @@ if ($mrbslang == 'sv') {
   $html_body['content'] .=    
   '</br>
   <div>' .
-    'Din bokning är från ' . date("H:i",$data['start_time']) . ' till ' . date("H:i",$data['end_time']) . ', ' . date("l d F",$data['start_time']) .
+    'Din bokning är från ' . date("H:i",$data['start_time']) . ' till ' . date("H:i",$data['end_time']) . ', ' . utf8_encode(strftime("%A %d %B",$row['start_time'])) .
   '</div>
   </br>
   <div>Denna länk leder till din bokning, där du kan avboka eller ändra den vid behov.</div>
@@ -103,3 +104,4 @@ $html_body['content'] .=
   <div>08 - 790 70 88</div>
   <div>www.kth.se/en/biblioteket</div>';
 }
+setlocale(LC_TIME,NULL);
