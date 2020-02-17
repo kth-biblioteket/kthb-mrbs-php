@@ -9,7 +9,6 @@ $sql = "SELECT entry_field_name,type
         AND type = 'custom'
         ORDER BY sort_order";
 $res = sql_query($sql);
-$custom_fields_map = array();
 if ($res === FALSE)
 {
     trigger_error(sql_error(), E_USER_WARNING);
