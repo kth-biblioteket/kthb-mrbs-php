@@ -795,8 +795,9 @@ function mrbsDelEntry($user, $id, $series, $all, $truedelete)
    
     //191003
     //TODO vilka custom_fields ska återställas(inte hårdkodat som nedan)
-    //Ta inte bort en bokning när en användare gör en true delete. (vid "save" sker också en delete men med en ny bokning skapad)
-    //Ta inte bort om admin gör en true delete om bokningen har typ !="B" (dvs den är bokad av användare)
+    //Ta inte bort en bokning när en användare gör en true delete(när default_bookings_open == FALSE )
+      //(vid "save" sker också en delete men med en ny bokning skapad)
+    //Ta inte bort om admin gör en true delete om bokningen har typ !="B" (dvs den är bokad av användare och när default_bookings_open == FALSE )
     $is_admin = (authGetUserLevel($user) >= 2);
     $start_date = getdate($row['start_time']);
     $startdate = new datetime($start_date['year'].'-'.$start_date['mon'].'-'.$start_date['mday'].' '.$start_date['hours'].':'.$start_date['minutes']);
@@ -833,8 +834,8 @@ function mrbsDelEntry($user, $id, $series, $all, $truedelete)
           //TODO Felhantering?
           return FALSE;
         }
-        
       }
+      $start_times[] = $row['start_time'];
     } else {
       if (sql_command("DELETE FROM $tbl_entry WHERE id=" . $row['id']) > 0) {
         //ta bort exchange event om admin tar bort en bokad tid
