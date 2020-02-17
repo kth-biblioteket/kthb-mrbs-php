@@ -59,7 +59,7 @@ $html_body['content'] = '
                 </tr>
                 <tr>
                     <td>Område: </td>
-                    <td>' . get_vocab("mrbs") . '</td>
+                    <td>' . get_mail_vocab("mrbs") . '</td>
                 </tr>
                 <tr>
                     <td>Bokning: </td>
@@ -78,7 +78,7 @@ $html_body['content'] = '
 $html_body['content'] .=
                 '<tr>
                     <td>' . get_loc_field_name($tbl_entry, $row['entry_field_name']) . ': </td>
-                    <td>' . get_vocab($data[$row['entry_field_name']]) . '</td>
+                    <td>' . get_mail_vocab($data[$row['entry_field_name']]) . '</td>
                 </tr>';                    
                 }
 $html_body['content'] .= 
