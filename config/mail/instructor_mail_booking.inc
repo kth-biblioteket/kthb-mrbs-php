@@ -33,6 +33,11 @@ $html_body['content'] = '
     '</style>
 </head>
 <body id="mrbs">
+    <!--[if mso]>
+        <style type="text/css">
+            body, table, td, h1, div {font-family: Arial, Helvetica, sans-serif !important;}
+        </style>
+    <![endif]-->
     <div id="contents">
         <h1>Ny bokning</h1>
         <div>
