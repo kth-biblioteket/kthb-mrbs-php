@@ -79,8 +79,18 @@ $html_body['content'] .=
                 }
 $html_body['content'] .= 
             '</tbody>
-        </table>
-    </div>
+        </table>';
+$html_body['content'] .= '';
+        for ($i = 0; ($row = sql_row_keyed($res, $i)); $i++)
+        {
+$html_body['content'] .=
+        '<div>
+            <span>' . get_loc_field_name($tbl_entry, $row['entry_field_name']) . ': </span>
+            <span>' . $data[$row['entry_field_name']] . '</span>
+        </div>';                    
+        }
+$html_body['content'] .=
+    '</div>
 </body>
 </html>
 '
