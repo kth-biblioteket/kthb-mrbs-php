@@ -1,7 +1,6 @@
 <?php
 global $area, $tbl_entry;
 setlocale(LC_ALL,"swedish");
-$custom_fields_toshow = array();
 $sql = "SELECT entry_field_name,type
         FROM kth_entry_custom_fields
         WHERE area_id = $area
