@@ -77,7 +77,7 @@ $html_body['content'] = '
                 {
 $html_body['content'] .=
                 '<tr>
-                    <td>' . get_mail_vocab(get_loc_field_name($tbl_entry, $row['entry_field_name'])) . ': </td>
+                    <td>' . get_mail_vocab('entry.' . $row['entry_field_name']) . ': </td>
                     <td>' . $data[$row['entry_field_name']] . '</td>
                 </tr>';                    
                 }
