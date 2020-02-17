@@ -68,7 +68,6 @@ $html_body['content'] = '
                     <td>Bokad av: </td>
                     <td>' . $data['create_by'] . '</td>
                 </tr>';
-$html_body['content'] .= '';
                 for ($i = 0; ($row = sql_row_keyed($res, $i)); $i++)
                 {
 $html_body['content'] .=
@@ -80,7 +79,6 @@ $html_body['content'] .=
 $html_body['content'] .= 
             '</tbody>
         </table>';
-$html_body['content'] .= '';
         for ($i = 0; ($row = sql_row_keyed($res, $i)); $i++)
         {
 $html_body['content'] .=
