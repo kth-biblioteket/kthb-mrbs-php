@@ -1152,31 +1152,11 @@ function notifyAdminOnBooking($data, $mail_previous, $new_entry, $series, $start
       default:
         if ($new_entry)
         {
-          $subject = get_mail_vocab("mail_subject_new_entry");
-          //CAS
-          /*
-            $this_room_description = get_room_description($data['room_id']);
-            $subject = "Bokning CAS, " . $this_room_description . " - " . date("Y-m-d H:i",$data['start_time']) . " - " . $data['name'] . " - " . getUserName();
-          */
-          // Talbok
-          /*
-            $this_room_description = get_room_description($data['room_id']);
-            $subject = "Bokning Talboksintroduktion, " . $this_room_description . " - " . date("Y-m-d H:i",$data['start_time']) . " - " . $data['name'] . " - " . getUserName();
-          */
+          $subject = get_mail_vocab("mail_subject_new_entry") . ", " . $this_room_description . " - " . date("Y-m-d H:i",$data['start_time']) . " - " . $data['name'] . " - " . getUserName();
         }
         else
         {
-          $subject = get_mail_vocab("mail_subject_changed_entry");
-          // CAS
-          /*    
-          $this_room_description = get_room_description($data['room_id']);
-          $subject = "Ändrad bokning CAS, " . $this_room_description . " - " . date("Y-m-d H:i",$data['start_time']) . " - " . $data['name'] . " - " . getUserName();
-          */
-          // Talbok
-          /*
-          $this_room_description = get_room_description($data['room_id']);
-          $subject = "Ändrad bokning talboksintroduktion, " . $this_room_description . " - " . date("Y-m-d H:i",$data['start_time']) . " - " . $data['name'] . " - " . getUserName();
-          */
+          $subject = get_mail_vocab("mail_subject_changed_entry") . ", " . $this_room_description . " - " . date("Y-m-d H:i",$data['start_time']) . " - " . $data['name'] . " - " . getUserName();
         }
         break;
     }
@@ -1270,26 +1250,9 @@ function notifyAdminOnDelete($data, $series=FALSE, $start_times, $action="delete
     $subject = get_mail_vocab("mail_subject_rejected");
   }
   else
-  {
-    $subject = get_mail_vocab("mail_subject_delete");
-    //KTH 2018 Special för CAS, gör en funktion som hämtar areatyp(ny parameter på area)
-    switch ($data['area_type']){
-      case "1": // Grupprum
-        $subject = get_mail_vocab("mail_subject_delete");
-        break;
-      case "2": // Lässtudio
-      case "3": // Handledning
-        $this_room_description = get_room_description($data['room_id']);
-        $subject = "Avbokning CAS, " . $this_room_description . " - " . date("Y-m-d H:i",$data['start_time']) . " - " . $data['name'] . " - " . getUserName();
-        break;
-      case "5": // Talbok
-        $this_room_description = get_room_description($data['room_id']);
-        $subject = "Avbokning Talboksintroduktion, " . $this_room_description . " - " . date("Y-m-d H:i",$data['start_time']) . " - " . $data['name'] . " - " . getUserName();
-        break;
-      case "4": // Öppettider
-      default: 
-        $subject = get_mail_vocab("mail_subject_delete");
-    }
+  {    
+    $this_room_description = get_room_description($data['room_id']);
+    $subject = get_mail_vocab("mail_subject_delete") . ", " . $this_room_description . " - " . date("Y-m-d H:i",$data['start_time']) . " - " . $data['name'] . " - " . getUserName();
   }
   
   // Create the text body
