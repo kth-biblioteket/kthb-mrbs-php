@@ -27,6 +27,7 @@ $html_body['content'] = '
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
     <title></title>
     <style type="text/css">'
         . $css .
@@ -68,28 +69,18 @@ $html_body['content'] = '
                     <td>Bokad av: </td>
                     <td>' . $data['create_by'] . '</td>
                 </tr>';
-                /*
                 for ($i = 0; ($row = sql_row_keyed($res, $i)); $i++)
                 {
 $html_body['content'] .=
                 '<tr>
                     <td>' . get_loc_field_name($tbl_entry, $row['entry_field_name']) . ': </td>
                     <td>' . $data[$row['entry_field_name']] . '</td>
-                </tr>';                    
-                }*/
+                </tr>';  
+                }                  
 $html_body['content'] .= 
             '</tbody>
-        </table>';
-        for ($i = 0; ($row = sql_row_keyed($res, $i)); $i++)
-        {
-$html_body['content'] .=
-        '<div>
-            <span>' . get_loc_field_name($tbl_entry, $row['entry_field_name']) . ': </span>
-            <span>' . $data[$row['entry_field_name']] . '</span>
-        </div>';                    
-        }
-$html_body['content'] .=
-    '</div>
+        </table>
+    </div>
 </body>
 </html>
 '
