@@ -10,13 +10,13 @@ if ($mrbslang == 'sv') {
   </br>';
   if ($data['campus'] > 0) {
   $html_body['content'] .=      
-  '<div>
-    Plats: '. get_campus($data['campus']) .
+  '<div>'
+    . get_campus($data['campus']) .
   '</div>';
   } else {
   $html_body['content'] .=      
-  '<div>
-    Plats: '. $data['room_name'] .
+  '<div>'
+    . $data['room_name'] .
   '</div>';
   }
   $html_body['content'] .=    

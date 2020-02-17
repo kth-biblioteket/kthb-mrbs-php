@@ -388,7 +388,7 @@ INSERT INTO `mrbs_area` (`disabled`, `area_name`, `area_name_en`, `area_sort_key
 <!-- Nedan kan styling för respektive area definieras. En kopia även på "english"-->
 
 <style>#1dwm_rooms ul{position:relative;} #1dwm_rooms li{width:100%;float:none} #1dwm_rooms li:nth-of-type(3){position: absolute;top: -5px;left: 250px;}#1dwm_rooms li:nth-of-type(4){position: absolute;top: 29px;left: 250px;} @media (max-width: 500px) and (min-width: 200px) {#1dwm_rooms li:nth-of-type(3),#1dwm_rooms li:nth-of-type(4){position:static}}</style>', 
-NULL, NULL, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1, 1, 'grupprum.jpg');
+NULL, NULL, 0, 1, 0, 1, 0, 0, 0, 1, 1, 1, 0, '');
 
 */
 -- --------------------------------------------------------

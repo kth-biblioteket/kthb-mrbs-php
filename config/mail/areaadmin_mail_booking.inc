@@ -14,68 +14,25 @@ if ($res === FALSE)
     trigger_error(sql_error(), E_USER_WARNING);
     fatal_error(FALSE, get_vocab("fatal_db_error"));
 }
+$css = '';
+$css_file = 'css/mrbs-mail.css';
+if (file_exists($css_file))
+{
+    $fh = fopen($css_file, 'r');
+    $css = fread($fh, filesize($css_file));
+}
 
 $html_body['content'] = '
 <!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
     <title></title>
-    <style type="text/css">
-        body#mrbs {
-            background-color: #ffffff;
-            color: #0B263B;
-            font-family: "Arial, Verdana, sans-serif";
-            margin: 0;
-            padding: 0
-        }
-
-        div#header {
-            width: 100%;
-            background-color: #4b667b;
-            color: #ffffff;
-            margin: 0;
-            padding: 10px
-        }
-
-        div#contents {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 1em
-        }
-
-        #mrbs a:link {
-            color: #0B263B;
-            text-decoration: none;
-            font-weight: bold
-        }
-
-        #mrbs a:visited {
-            color: #0B263B;
-            text-decoration: none;
-            font-weight: bold
-        }
-
-        #mrbs a:hover {
-            color: #ff0066;
-            text-decoration: underline;
-            font-weight: bold
-        }
-
-        #mrbs tr {
-            padding: 0;
-            margin: 0
-        }
-
-        #mrbs th,
-        #mrbs td {
-            text-align: left;
-            padding: 1px 1em;
-            margin 0
-        }
-    </style>
+    <style type="text/css">'
+        . $css .
+    '</style>
 </head>
-
 <body id="mrbs">
     <div id="contents">
         <h1>Ny bokning</h1>
