@@ -39,7 +39,7 @@ $html_body['content'] = '
         </style>
     <![endif]-->
     <div id="contents">
-        <h1>Ny bokning</h1>
+        <h1>Bokning</h1>
         <div>
             <table border="0" cellspacing="0" cellpadding="0">
                 <tbody>
@@ -84,10 +84,6 @@ $html_body['content'] .=
 $html_body['content'] .= 
             '</tbody>
         </table>
-        <div>
-            <span>test</span>
-            <span>test2</span>
-        </div>
     </div>
 </body>
 </html>
