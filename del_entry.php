@@ -128,13 +128,13 @@ if(!empty($noshow)){
 				if (isset($action) && ($action == "reject"))
 				//inga utskick på stängningsbokningar
 				{
-					if ($mail_previous['type']!= "C") {
+					if ($mail_previous['type']!= "C" && $mail_previous['type']!= "B") {
 						$result = notifyAdminOnDelete($mail_previous, $series, $start_times, $action, $note);
 					}
 				}
 				else
 				{
-					if ($mail_previous['type']!= "C") {
+					if ($mail_previous['type']!= "C" && $mail_previous['type']!= "B") {
 						$result = notifyAdminOnDelete($mail_previous, $series, $start_times);
 					}
 				}
