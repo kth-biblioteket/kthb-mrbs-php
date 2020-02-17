@@ -1254,14 +1254,16 @@ function notifyAdminOnDelete($data, $series=FALSE, $start_times, $action="delete
   }
   
   // Create the text body
+  /*
   $text_body = array();
   $text_body['content'] = create_body($data, NULL, FALSE, $series, $action, FALSE, $note, $start_times);
-  
+  */
   // Create the HTML body
   $html_body = array();
   if ($mail_settings['html'])
   {
-    $html_body['content'] = create_body($data, NULL, FALSE, $series, $action, TRUE, $note, $start_times);
+    require_once "config\mail\areaadmin_mail_delete.inc";
+    //$html_body['content'] = create_body($data, NULL, FALSE, $series, $action, TRUE, $note, $start_times);
     $html_body['cid'] = generate_global_uid("html");
   }
   
