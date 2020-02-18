@@ -747,6 +747,7 @@ function mrbsDelEntry($user, $id, $series, $all, $truedelete)
   //191003 Lägg till exchangeparametrar (EWS)
   global $ews_host, $ews_user, $ews_password;
   global $default_bookings_open;
+  global $environment;
   
   $start_times = array();
 
