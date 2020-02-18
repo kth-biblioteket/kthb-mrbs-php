@@ -1699,6 +1699,10 @@ div.date_now a, div.date_before a ,div.date_after a   {
 	color: #fff;
 }
 
+.btn {
+  white-space: initial;
+}
+
 /* 191003 */
 .greenbutton  {
     background-color: #B0C92B !important;
