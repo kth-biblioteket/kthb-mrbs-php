@@ -869,6 +869,10 @@ function mrbsDelEntry($user, $id, $series, $all, $truedelete)
                   WHERE entry_id = " . $row['id'] . " LIMIT 1";
           $res = sql_query($sql);
           $kth_exchange_events = sql_row_keyed($res, 0);
+          if($environment == 'development') {
+            error_log("mrbsDelEntry - kth_exchange_events - count");
+            error_log(sql_count($res));
+          }
           if(sql_count($res) > 0) {
             try {
               $outlook_result = cancelappointment(get_exchange_email($room_id), $kth_exchange_events['event_id'], $kth_exchange_events['change_key'], $startdate, $enddate, $ews_host, $ews_user, $ews_password);
