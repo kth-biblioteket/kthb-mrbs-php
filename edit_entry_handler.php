@@ -706,6 +706,10 @@ $this_id = (isset($id)) ? $id : NULL;
 $result = mrbsMakeBookings($bookings, $this_id, $just_check, $skip, $original_room_id, $need_to_send_mail, $edit_type, $is_admin);
 // If we weren't just checking and this was a succesful booking and
 // we were editing an existing booking, then delete the old booking
+if($environment == 'development') {
+  error_log("edit_entry_handler - valid booking");
+  error_log($result['valid_booking']);
+}
 if (!$just_check && $result['valid_booking'] && isset($id))
 {
   mrbsDelEntry($user, $id, ($edit_type == "series"), 1, false);
