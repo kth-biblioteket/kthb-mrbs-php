@@ -863,7 +863,7 @@ function mrbsDelEntry($user, $id, $series, $all, $truedelete)
           error_log("DELETE FROM $tbl_entry WHERE id=" . $row['id']);
         }
         //ta bort exchange event om admin tar bort en bokad tid
-        if($is_admin) {
+        if($is_admin && get_exchange_email($row['room_id']) != "") {
           $sql = "SELECT * 
                   FROM kth_exchange_events 
                   WHERE entry_id = " . $row['id'] . " LIMIT 1";
