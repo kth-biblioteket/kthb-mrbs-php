@@ -770,7 +770,10 @@ function mrbsDelEntry($user, $id, $series, $all, $truedelete)
   {
     $sql .= "id=$id";
   }
-
+  if($environment == 'development') {
+    error_log("mrbsDelEntry");
+    error_log($sql);
+  }
   $res = sql_query($sql);
 
   for ($i = 0; ($row = sql_row_keyed($res, $i)); $i++)
@@ -794,16 +797,15 @@ function mrbsDelEntry($user, $id, $series, $all, $truedelete)
     }
    
     //191003
-    //Ta inte bort en bokning när en användare gör en true delete(när default_bookings_open == FALSE )
+    //när default_bookings_open == FALSE, ta inte bort vid true delete(cancel booking) om bokningen har typ != "B"(dvs den är bokad av användare)
       //(vid "save" sker också en delete men med en ny bokning skapad)
-    //Ta inte bort om admin gör en true delete om bokningen har typ !="B" (dvs den är bokad av användare och när default_bookings_open == FALSE )
     $is_admin = (authGetUserLevel($user) >= 2);
     $start_date = getdate($row['start_time']);
     $startdate = new datetime($start_date['year'].'-'.$start_date['mon'].'-'.$start_date['mday'].' '.$start_date['hours'].':'.$start_date['minutes']);
     $end_date = getdate($row['end_time']);
     $enddate = new datetime($end_date['year'].'-'.$end_date['mon'].'-'.$end_date['mday'].' '.$end_date['hours'].':'.$end_date['minutes']);
     if($row['type'] != 'B' && $truedelete && !$default_bookings_open) {
-      //TODO vilka custom_fields ska återställas(inte hårdkodat som nedan)
+
       $area = mrbsGetRoomArea($row['room_id']);
       $sql = "SELECT entry_field_name,type
           FROM kth_entry_custom_fields
@@ -821,6 +823,7 @@ function mrbsDelEntry($user, $id, $series, $all, $truedelete)
         $sql_custom_fields_to_reset .= ($i!=0 ? "," : "");
         $sql_custom_fields_to_reset .= $custom_row['entry_field_name'] . '=NULL';
       }
+
       $sql = "UPDATE $tbl_entry 
               SET type = 'B', 
                 create_by = 'admin', 
@@ -828,6 +831,7 @@ function mrbsDelEntry($user, $id, $series, $all, $truedelete)
                 $sql_custom_fields_to_reset 
               WHERE id=" . $row['id'];
       sql_command($sql);
+      
       $sql = "SELECT * FROM kth_exchange_events WHERE entry_id = " . $row['id'] . " LIMIT 1";
       $res = sql_query($sql);
       $kth_exchange_events = sql_row_keyed($res, 0);
@@ -849,6 +853,10 @@ function mrbsDelEntry($user, $id, $series, $all, $truedelete)
       $start_times[] = $row['start_time'];
     } else {
       if (sql_command("DELETE FROM $tbl_entry WHERE id=" . $row['id']) > 0) {
+        if($environment == 'development') {
+          error_log("mrbsDelEntry");
+          error_log("DELETE FROM $tbl_entry WHERE id=" . $row['id']);
+        }
         //ta bort exchange event om admin tar bort en bokad tid
         if($is_admin) {
           $sql = "SELECT * 
