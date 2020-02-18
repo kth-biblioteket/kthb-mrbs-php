@@ -779,6 +779,10 @@ function mrbsDelEntry($user, $id, $series, $all, $truedelete)
 
   for ($i = 0; ($row = sql_row_keyed($res, $i)); $i++)
   {
+    if($environment == 'development') {
+      error_log("mrbsDelEntry");
+      error_log("DELETE FROM $tbl_entry WHERE id=" . $row['id']);
+    }
     //191003 Bokningsbara tider ska gå att boka av alla användare.
     if(!getWritable($row['create_by'], $user, $room_id) && $row['type'] != 'B')
     {
