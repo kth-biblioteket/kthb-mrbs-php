@@ -771,18 +771,10 @@ function mrbsDelEntry($user, $id, $series, $all, $truedelete)
   {
     $sql .= "id=$id";
   }
-  if($environment == 'development') {
-    error_log("mrbsDelEntry");
-    error_log($sql);
-  }
   $res = sql_query($sql);
 
   for ($i = 0; ($row = sql_row_keyed($res, $i)); $i++)
   {
-    if($environment == 'development') {
-      error_log("mrbsDelEntry");
-      error_log("DELETE FROM $tbl_entry WHERE id=" . $row['id']);
-    }
     //191003 Bokningsbara tider ska gå att boka av alla användare.
     if(!getWritable($row['create_by'], $user, $room_id) && $row['type'] != 'B')
     {
@@ -837,31 +829,33 @@ function mrbsDelEntry($user, $id, $series, $all, $truedelete)
               WHERE id=" . $row['id'];
       sql_command($sql);
       
-      $sql = "SELECT * FROM kth_exchange_events WHERE entry_id = " . $row['id'] . " LIMIT 1";
-      $res = sql_query($sql);
-      $kth_exchange_events = sql_row_keyed($res, 0);
-      if(sql_count($res) > 0) {
-        //uppdatera exchangekalendern
-        try {
-          $outlook_result = updateappointment($kth_exchange_events['event_id'], get_vocab("bookable_entry_text"), $startdate, $enddate, $ews_host, $ews_user, $ews_password);
-        }
-        catch (exception $e) {
-          $outlook_result['status'] = 'Error';
-          $outlook_result['message'] = $e;
-        }
-        if ($outlook_result['status'] == 'OK' ) {
-        } else {
-          //TODO Felhantering?
-          return FALSE;
+      if(get_exchange_email($row['room_id']) != "") {
+        $sql = "SELECT * FROM kth_exchange_events WHERE entry_id = " . $row['id'] . " LIMIT 1";
+        $res = sql_query($sql);
+        $kth_exchange_events = sql_row_keyed($res, 0);
+        if(sql_count($res) == 1) {
+          //uppdatera exchangekalendern
+          try {
+            $outlook_result = updateappointment($kth_exchange_events['event_id'], get_vocab("bookable_entry_text"), $startdate, $enddate, $ews_host, $ews_user, $ews_password);
+          }
+          catch (exception $e) {
+            $outlook_result['status'] = 'Error';
+            $outlook_result['message'] = $e;
+          }
+          if ($outlook_result['status'] == 'OK' ) {
+          } else {
+            //TODO Felhantering?
+            return FALSE;
+          }
         }
       }
       $start_times[] = $row['start_time'];
     } else {
+      if($environment == 'development') {
+        error_log("mrbsDelEntry");
+        error_log("DELETE FROM $tbl_entry WHERE id=" . $row['id']);
+      }
       if (sql_command("DELETE FROM $tbl_entry WHERE id=" . $row['id']) > 0) {
-        if($environment == 'development') {
-          error_log("mrbsDelEntry");
-          error_log("DELETE FROM $tbl_entry WHERE id=" . $row['id']);
-        }
         //ta bort exchange event om admin tar bort en bokad tid
         if($is_admin && get_exchange_email($row['room_id']) != "") {
           $sql = "SELECT * 
@@ -869,11 +863,7 @@ function mrbsDelEntry($user, $id, $series, $all, $truedelete)
                   WHERE entry_id = " . $row['id'] . " LIMIT 1";
           $res = sql_query($sql);
           $kth_exchange_events = sql_row_keyed($res, 0);
-          if($environment == 'development') {
-            error_log("mrbsDelEntry - kth_exchange_events - count");
-            error_log(sql_count($res));
-          }
-          if(sql_count($res) > 0) {
+          if(sql_count($res) == 1) {
             try {
               $outlook_result = cancelappointment(get_exchange_email($room_id), $kth_exchange_events['event_id'], $kth_exchange_events['change_key'], $startdate, $enddate, $ews_host, $ews_user, $ews_password);
             }
@@ -2465,7 +2455,7 @@ function mrbsMakeBookings($bookings, $id=NULL, $just_check=FALSE, $skip=FALSE, $
           $sql = "SELECT * FROM kth_exchange_events WHERE entry_id = " . $id . " LIMIT 1";
           $res = sql_query($sql);
           $row = sql_row_keyed($res, 0);
-          if(sql_count($res) > 0) {  
+          if(sql_count($res) == 1) {  
             try {
               $outlook_result = updateappointment($row['event_id'], $booking['name'], $startdate, $enddate, $ews_host, $ews_user, $ews_password);
             }
@@ -2478,7 +2468,6 @@ function mrbsMakeBookings($bookings, $id=NULL, $just_check=FALSE, $skip=FALSE, $
               //TODO Felhantering
               $valid_booking = FALSE;
             }
-            
           }
         }
       }
