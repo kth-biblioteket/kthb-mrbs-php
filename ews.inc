@@ -190,7 +190,7 @@ function updateappointment($id, $subject, $start, $end, $host, $username, $passw
             'id' => $id,
             'start' => $start,
             'end' => $end,
-            'subject' => 'Handledning ' . $subject,
+            'subject' => $subject,
         )
     );
     $request = new UpdateItemType();
@@ -248,7 +248,7 @@ function updateappointment($id, $subject, $start, $end, $host, $username, $passw
     return $result;  
 }
 
-function createappointment($email_calendar, $email_calendar_name, $email_booker, $email_booker_name, $start, $end, $host, $username, $password) {
+function createappointment($email_calendar, $email_calendar_name, $subject, $email_booker, $email_booker_name, $start, $end, $host, $username, $password) {
     
     $version = Client::VERSION_2013;
     $client = new Client($host, $username, $password, $version);
@@ -271,7 +271,7 @@ function createappointment($email_calendar, $email_calendar_name, $email_booker,
         $event->RequiredAttendees = new NonEmptyArrayOfAttendeesType();
         $event->Start = $start->format('c');
         $event->End = $end->format('c');
-        $event->Subject = 'Handledning ledig';
+        $event->Subject = $subject;
         $event->Location = $email_room_name;
 
         $event->Body = new BodyType();
