@@ -179,7 +179,7 @@ function cancelappointment($email_calendar, $event_id, $change_key, $start_date,
     return $result;    
 }
 
-function updateappointment($id, $subject, $start, $end, $host, $username, $password) {
+function updateappointment($id, $subject, $location, $start, $end, $host, $username, $password) {
     
     $version = Client::VERSION_2013;
     $client = new Client($host, $username, $password, $version);
@@ -191,6 +191,7 @@ function updateappointment($id, $subject, $start, $end, $host, $username, $passw
             'start' => $start,
             'end' => $end,
             'subject' => $subject,
+            'location' => $location
         )
     );
     $request = new UpdateItemType();
@@ -222,6 +223,13 @@ function updateappointment($id, $subject, $start, $end, $host, $username, $passw
         $field->FieldURI->FieldURI = UnindexedFieldURIType::ITEM_SUBJECT;
         $field->CalendarItem = new CalendarItemType();
         $field->CalendarItem->Subject = $update['subject'];
+        $change->Updates->SetItemField[] = $field;
+
+        $field = new SetItemFieldType();
+        $field->FieldURI = new PathToUnindexedFieldType();
+        $field->FieldURI->FieldURI = UnindexedFieldURIType::CALENDAR_LOCATION;
+        $field->CalendarItem = new CalendarItemType();
+        $field->CalendarItem->Location = $update['location'];
         $change->Updates->SetItemField[] = $field;
 
         $request->ItemChanges[] = $change;

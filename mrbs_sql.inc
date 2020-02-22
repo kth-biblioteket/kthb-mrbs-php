@@ -836,7 +836,7 @@ function mrbsDelEntry($user, $id, $series, $all, $truedelete)
         if(sql_count($res) == 1) {
           //uppdatera exchangekalendern
           try {
-            $outlook_result = updateappointment($kth_exchange_events['event_id'], get_vocab("calendar_subject") . "-" . get_vocab("bookable_entry_text"), $startdate, $enddate, $ews_host, $ews_user, $ews_password);
+            $outlook_result = updateappointment($kth_exchange_events['event_id'], get_vocab("calendar_subject") . "-" . get_vocab("bookable_entry_text"), '', $startdate, $enddate, $ews_host, $ews_user, $ews_password);
           }
           catch (exception $e) {
             $outlook_result['status'] = 'Error';
@@ -2455,9 +2455,16 @@ function mrbsMakeBookings($bookings, $id=NULL, $just_check=FALSE, $skip=FALSE, $
           $sql = "SELECT * FROM kth_exchange_events WHERE entry_id = " . $id . " LIMIT 1";
           $res = sql_query($sql);
           $row = sql_row_keyed($res, 0);
+          //get location (campus/room)
+          $bookinglocation = '';
+          if ($booking['campus'] > 0) {
+            $bookinglocation = get_campus($booking['campus']);
+          } else {
+            $bookinglocation = $booking['room_name'];
+          }
           if(sql_count($res) == 1) {  
             try {
-              $outlook_result = updateappointment($row['event_id'], get_vocab("calendar_subject") . "-" . $booking['name'], $startdate, $enddate, $ews_host, $ews_user, $ews_password);
+              $outlook_result = updateappointment($row['event_id'], get_vocab("calendar_subject") . "-" . $booking['name'], $bookinglocation, $startdate, $enddate, $ews_host, $ews_user, $ews_password);
             }
             catch (exception $e) {
               $outlook_result['status'] = 'Error';
