@@ -1,10 +1,5 @@
 <?php
 //191003
-//error_reporting(E_ALL);
-//ini_set('display_errors', 'on');
-
-//inkluderar hjälpklass för mailfunktioner
-//require_once($_SERVER['DOCUMENT_ROOT'] . '/PHPMailer/PHPMailerAutoload.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . '/ews/vendor/autoload.php');
 
 use \jamesiarmes\PhpEws\Client;
@@ -329,73 +324,4 @@ function createappointment($email_calendar, $email_calendar_name, $subject, $ema
         $result['message'] = 'Room not available';
         return $result;
     }
-
-
-    /*
-    $mail = new PHPMailer;
-    $mail->isSMTP();
-    $mail->Host ='smtp.kth.se';
-    $mail->SMTPAuth   = FALSE;
-    $mail->SMTPSecure = "tls";
-    $mail->CharSet = 'UTF-8';
-
-    // event params
-    $event_id = 1234;
-    $sequence = 0;
-    $status = 'TENTATIVE';
-
-    $summary = 'Summary';
-    $venue = 'KTHB ';
-    $start = '20191008';
-    $start_time = '170000';
-    $end = '20191008';
-    $end_time = '180000';
-
-    //PHPMailer
-    $mail->IsHTML(false);
-    $mail->setFrom('tholind@kth.se', 'Thomas Lind');
-    $mail->addReplyTo('tholind@kth.se', 'Thomas Lind');
-    $mail->addAddress('tholind@kth.se','T L');
-    $mail->ContentType = 'text/calendar';
-
-    $mail->Subject = "Outlooked Event";
-    $mail->addCustomHeader('MIME-version',"1.0");
-    $mail->addCustomHeader('Content-type',"text/calendar; method=REQUEST; charset=UTF-8");
-    $mail->addCustomHeader('Content-Transfer-Encoding',"7bit");
-    $mail->addCustomHeader('X-Mailer',"Microsoft Office Outlook 12.0");
-    $mail->addCustomHeader("Content-class: urn:content-classes:calendarmessage");
-
-    $ical = "BEGIN:VCALENDAR\r\n";
-    $ical .= "VERSION:2.0\r\n";
-    $ical .= "PRODID:-KTHB\r\n";
-    $ical .= "METHOD:REQUEST\r\n";
-    $ical .= "BEGIN:VEVENT\r\n";
-    $ical .= "ORGANIZER;SENT-BY=\"MAILTO:tholind@kth.se\":MAILTO:tholind@kth.se\r\n";
-    $ical .= "ATTENDEE;CN=tholind@kth.se;ROLE=REQ-PARTICIPANT;PARTSTAT=ACCEPTED;RSVP=TRUE:mailto:tholind@kth.se\r\n";
-    $ical .= "ATTENDEE;CN=uf_kthb_geisendorf@ug.kth.se;ROLE=REQ-PARTICIPANT;PARTSTAT=ACCEPTED;RSVP=TRUE:uf_kthb_geisendorf@ug.kth.se\r\n";
-    $ical .= "UID:".strtoupper(md5($event_id))."-lib.kth.se\r\n";
-    $ical .= "SEQUENCE:".$sequence."\r\n";
-    $ical .= "STATUS:".$status."\r\n";
-    $ical .= "DTSTAMPTZID=Europe/Stockholm:".date('Ymd').'T'.date('His')."\r\n";
-    $ical .= "DTSTART:".$start."T".$start_time."\r\n";
-    $ical .= "DTEND:".$end."T".$end_time."\r\n";
-    $ical .= "LOCATION:".$venue."\r\n";
-    $ical .= "SUMMARY:".$summary."\r\n";
-    $ical .= "DESCRIPTION:"."TEST!"."\r\n";
-    $ical .= "BEGIN:VALARM\r\n";
-    $ical .= "TRIGGER:-PT15M\r\n";
-    $ical .= "ACTION:DISPLAY\r\n";
-    $ical .= "DESCRIPTION:Reminder\r\n";
-    $ical .= "END:VALARM\r\n";
-    $ical .= "END:VEVENT\r\n";
-    $ical .= "END:VCALENDAR\r\n";
-
-    $mail->Body = $ical;
-
-    if($mail->Send()){
-        echo 'Success';
-    }else{
-        echo $mail->ErrorInfo;
-    }
-    */
 }
