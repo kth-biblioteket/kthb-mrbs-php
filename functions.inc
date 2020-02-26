@@ -580,9 +580,34 @@ function day_past_midnight()
   return ($end_last_slot <= $start_first_slot);
 }
 
+function get_room_availabilityhours($room_id, $weekday) {
+  if (isset($room_id))
+  {
+    $res = sql_query("SELECT morningstarts, morningstarts_minutes,
+                              eveningends, eveningends_minutes
+                          FROM kth_room_availabilityhours
+                         WHERE room_id = $room_id
+                           AND weekday = $weekday
+                         LIMIT 1");
+    
+    if ($res === FALSE)
+    {
+      trigger_error(sql_error(), E_USER_WARNING);
+      return FALSE;
+    }
+    if (sql_count($res) == 0)
+    {
+      return NULL;
+    }
+    return $res;
+  } else 
+  {
+    echo "Error";exit;
+  }
+}
 
 // Gets the UNIX timestamp for the start of the first slot on the given day
-function get_start_first_slot($month, $day, $year)
+function get_start_first_slot($month, $day, $year, $room_id = NULL)
 {
   global $morningstarts, $morningstarts_minutes, $enable_periods;
   
@@ -590,6 +615,20 @@ function get_start_first_slot($month, $day, $year)
   {
     return mrbs_mktime(12, 0, 0, $month, $day, $year);
   }
+
+  //TODO hämta värden för aktuell veckodags availabilityhours för aktuellt rum
+  //default = areans settings
+  /*
+  $availabilityhours = get_room_availabilityhours(1, date('w', strtotime($year .'-' . $month .'-' . $day )));
+  if (isset($availabilityhours)) {
+    for ($i = 0; ($row = sql_row_keyed($availabilityhours, $i)); $i++) {
+      $morningstarts = $row['morningstarts'];
+      $morningstarts_minutes = $row['morningstarts_minutes'];
+      $eveningends = $row['eveningends'];
+      $eveningends_minutes = $row['eveningends_minutes'];
+    }
+  }
+  */
   
   $t = mrbs_mktime($morningstarts, $morningstarts_minutes, 0,
                    $month, $day, $year);
@@ -598,7 +637,7 @@ function get_start_first_slot($month, $day, $year)
 
 
 // Gets the UNIX timestamp for the start of the last slot on the given day
-function get_start_last_slot($month, $day, $year)
+function get_start_last_slot($month, $day, $year, $room_id = NULL)
 {
   global $morningstarts, $morningstarts_minutes, $eveningends, $eveningends_minutes, $enable_periods, $periods;
   
@@ -606,7 +645,20 @@ function get_start_last_slot($month, $day, $year)
   {
     return mrbs_mktime(12, count($periods) -1, 0, $month, $day, $year);
   }
-  
+
+  //TODO hämta värden för aktuell veckodags availabilityhours för aktuellt rum
+  //default = areans settings
+  /*
+  $availabilityhours = get_room_availabilityhours(1, date('w', strtotime($year .'-' . $month .'-' . $day )));
+  if (isset($availabilityhours)) {
+    for ($i = 0; ($row = sql_row_keyed($availabilityhours, $i)); $i++) {
+      $morningstarts = $row['morningstarts'];
+      $morningstarts_minutes = $row['morningstarts_minutes'];
+      $eveningends = $row['eveningends'];
+      $eveningends_minutes = $row['eveningends_minutes'];
+    }
+  }
+  */
   // Work out if $evening_ends is really on the next day
   if (hm_before(array('hours' => $eveningends, 'minutes' => $eveningends_minutes),
                 array('hours' => $morningstarts, 'minutes' => $morningstarts_minutes)))

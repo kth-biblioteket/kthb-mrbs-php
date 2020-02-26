@@ -1100,7 +1100,7 @@ function day_table_innerhtml($day, $month, $year, $room, $area, $timetohighlight
   global $resolution, $morningstarts, $morningstarts_minutes, $eveningends, $eveningends_minutes;
   global $first_last_width;
   global $mrbslang, $lang;
-  
+
   //KTH kolla om bokningar ska tas bort (när tiden har gått ut och de inte konfirmerats)
   deletetentativebookings();
 
@@ -1143,6 +1143,7 @@ function day_table_innerhtml($day, $month, $year, $room, $area, $timetohighlight
     $eveningends_minutes = count($periods) - 1;
   }
 
+  //TODO vilka tider på olika veckodagar som ska vara tillgängliga. (slippa "stänga")
   $am7 = get_start_first_slot($month, $day, $year);
   $pm7 = get_start_last_slot($month, $day, $year);
   
