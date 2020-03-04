@@ -171,11 +171,11 @@ function checkifslotenabled($area, $room_id, $month, $day, $year, $s) {
 	global $min_create_ahead_enabled, $min_create_ahead_secs;
   global $max_create_ahead_enabled, $max_create_ahead_secs;
   //191003
+  global $resolution;
   global $default_bookings_open;
 	$weekday = date('w', strtotime($year .'-' . $month .'-' . $day ));
 	$slotdate = date('Y-m-d',strtotime($year .'-' . $month .'-' . $day ));
 	$disabled = FALSE;
-	
 
 	//kolla om slotens tid ligger mer än en timme före aktuellt datum o tid, stäng den i så fall
 	//om det är period så kan starttiden hämtas genom att kontrollera slotens sekunder över 12.
@@ -201,6 +201,44 @@ function checkifslotenabled($area, $room_id, $month, $day, $year, $s) {
 	//tillbaks till vanlig slot om det varit periods
 	$slotinseconds = strtotime(date($slotdate . " " . gmdate("H:i:s", $s)));//gör om starttiden till hh:mm:ss
   
+  //191003
+  //Kolla om sloten ligger inom intervallet för morningstarts/eveningends för rum och dag.
+  $res_room_morning_starts = get_room_morningstarts_day($room_id, date('w', strtotime($year .'-' . $month .'-' . $day)));
+  if ($res_room_morning_starts === FALSE) {
+    trigger_error(sql_error(), E_USER_WARNING);
+  }
+  if (sql_count($res_room_morning_starts) == 0) {
+    $room_morning_starts_seconds = strtotime(date($slotdate . " " . gmdate("H:i:s", (00 * 60 + 00) * 60)));
+  } else {
+    for ($i = 0; ($row = sql_row_keyed($res_room_morning_starts, $i)); $i++) {
+      $room_morning_starts_seconds = strtotime(date($slotdate . " " . gmdate("H:i:s", ($row['morningstarts'] * 60 + $row['morningstarts_minutes']) * 60)));;
+    }
+  }
+
+  $res_room_evening_ends = get_room_eveningends_day($room_id, date('w', strtotime($year .'-' . $month .'-' . $day)));
+  if ($res_room_evening_ends === FALSE) {
+    trigger_error(sql_error(), E_USER_WARNING);
+  }
+  if (sql_count($res_room_evening_ends) == 0){
+    $room_evening_ends_seconds = strtotime(date($slotdate . " " . gmdate("H:i:s", (23 * 60 + 59) * 60)));
+  } else {
+    for ($i = 0; ($row = sql_row_keyed($res_room_evening_ends, $i)); $i++) {
+      $room_evening_ends_seconds = strtotime(date($slotdate . " " . gmdate("H:i:s", ($row['eveningends'] * 60 + $row['eveningends_minutes']) * 60)));
+    }
+  }
+  if ($disabled == FALSE) {  
+    if (isset($slotinseconds)){ // om inställning är på perioder så kan slotinseconds bli NULL. Hur sätta/kontrollera perioders tillgänglighet?
+      if ($slotinseconds !="") {
+        if ($room_morning_starts_seconds > $slotinseconds) {
+          $disabled = TRUE;
+        }
+        if ($room_evening_ends_seconds + $resolution <= $slotinseconds) {
+          $disabled = TRUE;
+        }
+      }
+    }
+  }
+
 	//kolla om sloten är tillgänglig för veckodagen, dvs om det är gjort en type C(closed) adminbokning så är tiden stängd
 	if ($disabled == FALSE) {
 		if (isset($slotinseconds)){ // om inställning är på perioder så kan slotinseconds bli NULL. Hur sätta/kontrollera perioders tillgänglighet?
@@ -741,8 +779,8 @@ function cell_html($cell, $query_strings, $is_invalid = FALSE, $ajaxuser = NULL)
   
   else
   {  
-  //KTH 
-  //if($is_invalid) {} else {echo "VALID";};
+    //KTH 
+    //if($is_invalid) {} else {echo "VALID";};
     if(isset($cell[0]["id"]))
     {  
       //print_r ($cell);     
@@ -767,12 +805,13 @@ function cell_html($cell, $query_strings, $is_invalid = FALSE, $ajaxuser = NULL)
     // it is booked (determined by the type).
     // We tell if its booked by $id having something in it
     //KTH admin ska alltid kunna klicka på en tid(inte bli invalid)
-	if ($is_admin){
-		$is_invalid = FALSE;
-	}
-	if (isset($id))
+    //191003 flyttat villkor till skapandet av länk
+    if ($is_admin){
+      //$is_invalid = FALSE;
+    }
+    if (isset($id))
     {
-		//KTH
+      //KTH
       if ($is_invalid==TRUE && $is_admin == FALSE){
         if ($color == "C") { //stängd adminbokning
           $c = "C invalid"; //visa som grå
@@ -788,8 +827,8 @@ function cell_html($cell, $query_strings, $is_invalid = FALSE, $ajaxuser = NULL)
       } else {
         $c = $color;
       }
-	  
-	  if ($status == 0)
+    
+      if ($status == 0)
       {
         //191003 B ska alltid vara writable
         if ($color == "B") { 
@@ -810,15 +849,15 @@ function cell_html($cell, $query_strings, $is_invalid = FALSE, $ajaxuser = NULL)
       if ($confirmation_enabled && ($status & STATUS_TENTATIVE))
       {
         $c .= " tentative";
-		//KTH
-		$confirminterval = 0;
-		//sätt som confirmable om tiden just nu är inom intervallet (15 min före o efter bokningens starttid)
-		$confirmable = checkifconfirmable($id);
-		if ( $confirmable == TRUE ) {
-			$confirminterval = 1;
-			$c .= " tentativeconfirmable";
-		}
-		//Slut KTH
+        //KTH
+        $confirminterval = 0;
+        //sätt som confirmable om tiden just nu är inom intervallet (15 min före o efter bokningens starttid)
+        $confirmable = checkifconfirmable($id);
+        if ( $confirmable == TRUE ) {
+          $confirminterval = 1;
+          $c .= " tentativeconfirmable";
+        }
+        //Slut KTH
       }
       if ($is_multiday_start)
       {
@@ -843,7 +882,7 @@ function cell_html($cell, $query_strings, $is_invalid = FALSE, $ajaxuser = NULL)
     {
       $c = ($is_invalid) ? "invalid" : "new";
     }
-    
+      
     // Don't put in a <td> cell if the slot is booked and there's no description.
     // This would mean that it's the second or subsequent slot of a booking and so the
     // <td> for the first slot would have had a rowspan that extended the cell down for
@@ -851,19 +890,19 @@ function cell_html($cell, $query_strings, $is_invalid = FALSE, $ajaxuser = NULL)
 
     if (!isset($id) || isset($descr))
     {
-	  $html .= tdcell($c, $slots);
-	  
+      $html .= tdcell($c, $slots);
+    
 
       // If the room isn't booked then allow it to be booked
       if (!isset($id))
       {
         // Don't provide a link if the slot doesn't really exist
-        if (!$is_invalid)
+        if (!$is_invalid || $is_admin)
         {
           $html .= "<div class=\"celldiv slots1\">\n";  // a bookable slot is only one unit high
           $html .= "<a href=\"edit_entry.php?" . 
-                   (($enable_periods) ? $query_strings['new_periods'] : $query_strings['new_times']) . 
-                   "\">\n"; //KTH
+                  (($enable_periods) ? $query_strings['new_periods'] : $query_strings['new_times']) . 
+                  "\">\n"; //KTH
           if ($show_plus_link)
           {
             $html .= "<img src=\"images/new.gif\" alt=\"New\" width=\"10\" height=\"10\">\n";
@@ -871,56 +910,54 @@ function cell_html($cell, $query_strings, $is_invalid = FALSE, $ajaxuser = NULL)
           $html .= "</a>\n";
           $html .= "</div>\n";
         } else {//KTH 
-			$html .= "<div class=\"celldiv slots1\"></div>\n";
-		}
+          $html .= "<div class=\"celldiv slots1\"></div>\n";
+        } 
       }
       else  // if it is booked then show the booking
       {
         $html .= "<div data-id=\"$id\" class=\"celldiv slots" .
-                 (($times_along_top) ? "1" : $slots) .
-                 "\">\n";
+                (($times_along_top) ? "1" : $slots) .
+                "\">\n";
     
-    //Visa inte namnet på den som bokat för andra än admin (och bokaren)
-    $bookingdesc = "";
-    if ((getWritable($cell[0]['create_by'], $user, $cell[0]['room_id']) && $is_invalid==FALSE) 
-        || $is_admin ) {
-          $bookingdesc = $descr;
-    } else {
-      if ($color != "B"){ 
-        $bookingdesc = "Booked/Bokad\n";
-      } else {
-        $bookingdesc = "Available/Ledig\n";
-      }
-    }
-    //KTH Visa bara länk till edit_entry om bokningen är valid och om användaren är behörig 
-    //eller om användaren är admin
-    //eller om det är en kioskdator
-    //191003 Visa även länk på alla B (bookable)
-    
-    if ((getWritable($cell[0]['create_by'], $user, $cell[0]['room_id']) && $is_invalid==FALSE) 
-        || ($color == "B" && $is_invalid==FALSE) 
-        || $is_admin 
-        || $is_kiosk) {
-			$html .= "<a href=\"edit_entry.php?id=$id&amp;". $query_strings['booking'] . "\" title=\"$bookingdesc\">";
-			//$html .= "<img class=\"\" src=\"images/edit.png\" width=\"10\" height=\"10\"></br>";
-			$html .= ($is_repeat) ? "<img class=\"repeat_symbol $c\" src=\"images/repeat.png\" alt=\"" . get_vocab("series") . "\" title=\"" . get_vocab("series") . "\" width=\"10\" height=\"10\">" : '';
-			$html .= "$bookingdesc</a>\n";
-		} else {
-      //om det inte är en "stängtbokning"
-			if ($color != "C"){ 
-				$html .= ($is_repeat) ? "<img class=\"repeat_symbol $c\" src=\"images/repeat.png\" alt=\"" . get_vocab("series") . "\" title=\"" . get_vocab("series") . "\" width=\"10\" height=\"10\">" : '';
-        //191003 TODO bort med hårdkodning
-        $html .= "$bookingdesc\n";
-			} else {
-				$html .= "\n";
-			}
-		}
+        //Visa inte namnet på den som bokat för andra än admin (och bokaren)
+        $bookingdesc = "";
+        if ((getWritable($cell[0]['create_by'], $user, $cell[0]['room_id']) && $is_invalid==FALSE) 
+            || $is_admin ) {
+              $bookingdesc = $descr;
+        } else {
+          if ($color != "B"){ 
+            $bookingdesc = get_vocab("booked_entry_text") ."\n";
+          } else {
+            $bookingdesc = get_vocab("bookable_entry_text") ."\n";
+          }
+        }
+        //KTH Visa bara länk till edit_entry om bokningen är valid och om användaren är behörig 
+        //eller om användaren är admin
+        //eller om det är en kioskdator
+        //191003 Visa även länk på alla B (bookable)
+        
+        if ((getWritable($cell[0]['create_by'], $user, $cell[0]['room_id']) && $is_invalid==FALSE) 
+            || ($color == "B" && $is_invalid==FALSE) 
+            || $is_admin 
+            || $is_kiosk) {
+          $html .= "<a href=\"edit_entry.php?id=$id&amp;". $query_strings['booking'] . "\" title=\"$bookingdesc\">";
+          //$html .= "<img class=\"\" src=\"images/edit.png\" width=\"10\" height=\"10\"></br>";
+          $html .= ($is_repeat) ? "<img class=\"repeat_symbol $c\" src=\"images/repeat.png\" alt=\"" . get_vocab("series") . "\" title=\"" . get_vocab("series") . "\" width=\"10\" height=\"10\">" : '';
+          $html .= "$bookingdesc</a>\n";
+        } else {
+          //om det inte är en "stängtbokning"
+          if ($color != "C"){ 
+            $html .= ($is_repeat) ? "<img class=\"repeat_symbol $c\" src=\"images/repeat.png\" alt=\"" . get_vocab("series") . "\" title=\"" . get_vocab("series") . "\" width=\"10\" height=\"10\">" : '';
+            $html .= "$bookingdesc\n";
+          } else {
+            $html .= "\n";
+          }
+        }
         $html .= "</div>\n";
       }
       $html .= "</td>\n";
     }
   }
-  
   return $html;
 }  // end function draw_cell
 
@@ -1143,9 +1180,8 @@ function day_table_innerhtml($day, $month, $year, $room, $area, $timetohighlight
     $eveningends_minutes = count($periods) - 1;
   }
 
-  //TODO vilka tider på olika veckodagar som ska vara tillgängliga. (slippa "stänga")
-  $am7 = get_start_first_slot($month, $day, $year);
-  $pm7 = get_start_last_slot($month, $day, $year);
+  $am7 = get_start_first_slot($month, $day, $year, $room, $area);
+  $pm7 = get_start_last_slot($month, $day, $year, $room, $area);
   
   // Work out whether there's a possibility that a time slot is invalid,
   // in other words whether the booking day includes a transition into DST.
@@ -1415,9 +1451,9 @@ if($lang=="en") {
         $query_strings = get_query_strings($area, $room_id, $month, $day, $year, $s);
         
         // and then draw the cell
-		//KTH kontrollera slotens tillgänglighet
-    $slotdisabled = checkifslotenabled($area, $room_id, $month, $day, $year, $s);
-		$is_invalid = $slotdisabled;
+        //KTH kontrollera slotens tillgänglighet
+        $slotdisabled = checkifslotenabled($area, $room_id, $month, $day, $year, $s);
+        $is_invalid = $slotdisabled;
         if (!isset($today[$room_id][$day][$s]))
         {
           $today[$room_id][$day][$s] = array();  // to avoid an undefined index NOTICE error
@@ -1515,8 +1551,8 @@ function week_table_innerhtml($day, $month, $year, $room, $area, $timetohighligh
   // affected by daylight saving...
   for ($j = 0; $j<=($num_of_days-1); $j++)
   {
-    $am7[$j] = get_start_first_slot($month, $day_start_week+$j, $year);
-    $pm7[$j] = get_start_last_slot($month, $day_start_week+$j, $year);
+    $am7[$j] = get_start_first_slot($month, $day_start_week+$j, $year, $room, $area);
+    $pm7[$j] = get_start_last_slot($month, $day_start_week+$j, $year, $room, $area);
     // Work out whether there's a possibility that a time slot is invalid,
     // in other words whether the booking day includes a transition into DST.
     // If we know that there's a transition into DST then some of the slots are
@@ -1578,6 +1614,7 @@ function week_table_innerhtml($day, $month, $year, $room, $area, $timetohighligh
   
   // START DISPLAYING THE MAIN TABLE
   $n_time_slots = get_n_time_slots();
+  
   $morning_slot_seconds = (($morningstarts * 60) + $morningstarts_minutes) * 60;
   $evening_slot_seconds = $morning_slot_seconds + (($n_time_slots - 1) * $resolution);
 

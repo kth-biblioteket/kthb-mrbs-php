@@ -678,7 +678,35 @@ CREATE TABLE IF NOT EXISTS `mrbs_room` (
   `room_number` varchar(4) NOT NULL DEFAULT '',
   `screen` tinyint(4) NOT NULL DEFAULT '0',
   `mailtext` text,
-  `mailtext_en` text
+  `mailtext_en` text,
+  `morningstarts_monday` int(11) DEFAULT '8',
+  `morningstarts_minutes_monday` int(11) DEFAULT '0',
+  `eveningends_monday` int(11) DEFAULT '20',
+  `eveningends_minutes_monday` int(11) DEFAULT '0',
+  `morningstarts_tuesday` int(11) DEFAULT '8',
+  `morningstarts_minutes_tuesday` int(11) DEFAULT '0',
+  `eveningends_tuesday` int(11) DEFAULT '20',
+  `eveningends_minutes_tuesday` int(11) DEFAULT '0',
+  `morningstarts_wednesday` int(11) DEFAULT '8',
+  `morningstarts_minutes_wednesday` int(11) DEFAULT '0',
+  `eveningends_wednesday` int(11) DEFAULT '20',
+  `eveningends_minutes_wednesday` int(11) DEFAULT '0',
+  `morningstarts_thursday` int(11) DEFAULT '8',
+  `morningstarts_minutes_thursday` int(11) DEFAULT '0',
+  `eveningends_thursday` int(11) DEFAULT '20',
+  `eveningends_minutes_thursday` int(11) DEFAULT '0',
+  `morningstarts_friday` int(11) DEFAULT '8',
+  `morningstarts_minutes_friday` int(11) DEFAULT '0',
+  `eveningends_friday` int(11) DEFAULT '18',
+  `eveningends_minutes_friday` int(11) DEFAULT '0',
+  `morningstarts_saturday` int(11) DEFAULT '10',
+  `morningstarts_minutes_saturday` int(11) DEFAULT '0',
+  `eveningends_saturday` int(11) DEFAULT '15',
+  `eveningends_minutes_saturday` int(11) DEFAULT '0',
+  `morningstarts_sunday` int(11) DEFAULT NULL,
+  `morningstarts_minutes_sunday` int(11) DEFAULT NULL,
+  `eveningends_sunday` int(11) DEFAULT NULL,
+  `eveningends_minutes_sunday` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -714,7 +742,7 @@ INSERT INTO `mrbs_room` (`disabled`, `area_id`, `room_name`, `room_name_english`
 (0, 1, 'Agricola', 'Agricola', '05', NULL, ' ', 6, '', '', '5', 0, NULL, NULL),
 (0, 1, 'Bernoulli', 'Bernoulli', '06', NULL, '', 6, '', '', '6', 0, NULL, NULL),
 (0, 1, 'Dürer', 'Dürer', '07', NULL, '', 6, '', '', '7', 0, NULL, NULL),
-(0, 1, 'Hammarström', 'Hammarström', '14', NULL, '', 4, '', '', '', 0, NULL, NULL);
+(1, 1, 'Hammarström', 'Hammarström', '14', NULL, '', 4, '', '', '', 0, NULL, NULL);
 
 INSERT INTO `mrbs_room` (`disabled`, `area_id`, `room_name`, `room_name_english`, `sort_key`, `exchange_email`, `description`, `capacity`, `room_admin_email`, `custom_html`, `room_number`, `screen`, `mailtext`, `mailtext_en`) VALUES
 (0, 1, 'Skriftliga arbeten och/eller muntliga presentationer på svenska  <img src="images/sv_SE.png">', 'Written assignments and/or oral presentations in Swedish <img src="images/sv_SE.png">', '100', '', '', 8, '', '', '', 0, 'Du har bokat tid för handledning på KTH Biblioteket', 'You have booked consultation at the KTH Library.'),

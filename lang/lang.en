@@ -65,7 +65,8 @@ $vocab["ppreview"]           = "Print Preview";
 //KTH
 $vocab["remembertoconfirm"]  = "Please don't forget that you must confirm this tentative booking before you start using the room! This can only be done from 15 minutes before to 15 minutes after the start time.";
 //191003
-$vocab["bookable_entry_text"]			= "Available/Ledig";
+$vocab["bookable_entry_text"]			= "Available";
+$vocab["booked_entry_text"]			= "Booked";
 $vocab_override['en']["entry.instructor"]  = "Instructor";
 $vocab_override['en']["entry.campus"]  = "Location";
 $vocab_override['en']["entry.preferred_language"]  = "Language";

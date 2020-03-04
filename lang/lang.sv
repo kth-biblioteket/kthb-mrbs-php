@@ -65,7 +65,8 @@ $vocab["ppreview"]           = "Förhandsgranska";
 //KTH
 $vocab["remembertoconfirm"]  = "Kom ihåg att du måste kvittera den här preliminära bokningen innan du börjar använda rummet! Det kan du endast göra från 15 minuter före till 15 minuter efter starttiden. ";
 //191003
-$vocab["bookable_entry_text"]			= "Available/Ledig";
+$vocab["bookable_entry_text"]			= "Ledig";
+$vocab["booked_entry_text"]			= "Bokad";
 $vocab_override['sv']["entry.instructor"]  = "Handledare";
 $vocab_override['sv']["entry.campus"]  = "Plats";
 $vocab_override['sv']["entry.preferred_language"]  = "Språk";

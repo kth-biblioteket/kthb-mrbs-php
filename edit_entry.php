@@ -1249,7 +1249,7 @@ else
   $edit_type     = "series";
   //191003 sätt bokningsnamn till definierat defaultvärde för admins (ex "Available/Ledig" eller "Closed")
   if ($is_admin && !$default_bookings_open) {
-    $name          = $vocab["bookable_entry_text"];
+    $name          = get_vocab("bookable_entry_text");
   } else {
     $name          = "";
   }
