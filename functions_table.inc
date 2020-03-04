@@ -173,6 +173,7 @@ function checkifslotenabled($area, $room_id, $month, $day, $year, $s) {
   //191003
   global $resolution;
   global $default_bookings_open;
+  global $user;
 
   $is_admin = (authGetUserLevel($user) >= 2);
 
@@ -639,7 +640,7 @@ function cell_html($cell, $query_strings, $is_invalid = FALSE, $ajaxuser = NULL)
   if ($ajaxuser != NULL) {
 	$user = $ajaxuser;
   } else {
-	$user = getUserName();
+	  $user = getUserName();
   }
   $is_admin = (authGetUserLevel($user) >= 2);
   
