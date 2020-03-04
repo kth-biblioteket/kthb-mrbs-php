@@ -766,88 +766,84 @@ switch (get_area_type($area))
 switch ($key)
     {//TODO hårdkodning bort.
       case 'campus':
-        if (get_area_type($area) == 6) { //6 = Handledning - KTH Biblioteket:
-          echo "<div id=\"div_campus\">\n";
-          
-          $params = array('label' => get_loc_field_name($tbl_entry, $key) . ":",
-                    'name'        => VAR_PREFIX . 'campus',
-                    'disabled'    => $disabled,
-                    'options'     => array(),
-                    'force_assoc' => TRUE,  // in case the type keys happen to be digits
-                    'value'       => isset($custom_fields[$key]) ? $custom_fields[$key] : 1);
+        echo "<div id=\"div_campus\">\n";
+        
+        $params = array('label' => get_loc_field_name($tbl_entry, $key) . ":",
+                  'name'        => VAR_PREFIX . 'campus',
+                  'disabled'    => $disabled,
+                  'options'     => array(),
+                  'force_assoc' => TRUE,  // in case the type keys happen to be digits
+                  'value'       => isset($custom_fields[$key]) ? $custom_fields[$key] : 1);
 
-          //Hämta värden från db?
-          $places = array();
-          $sql = "SELECT kth_places.id, kth_places.name, kth_places.name_en
-                  FROM kth_places
-                  JOIN kth_area_places
-                  ON kth_places.id = kth_area_places.places_id
-                  WHERE area_id = $area
-                  ORDER BY kth_places.name";
+        //Hämta värden från db?
+        $places = array();
+        $sql = "SELECT kth_places.id, kth_places.name, kth_places.name_en
+                FROM kth_places
+                JOIN kth_area_places
+                ON kth_places.id = kth_area_places.places_id
+                WHERE area_id = $area
+                ORDER BY kth_places.name";
 
-          $res = sql_query($sql);
-          if ($res === FALSE)
-          {
-            trigger_error(sql_error(), E_USER_WARNING);
-            fatal_error(FALSE, get_vocab("fatal_db_error"));
-          }
-          for ($i = 0; ($row = sql_row_keyed($res, $i)); $i++)
-          {
-            $places[] = $row['id'];
-            $params['options'][$row['id']] = $row['name'];
-          }
-          generate_select($params);
-
-          echo "</div>\n";
+        $res = sql_query($sql);
+        if ($res === FALSE)
+        {
+          trigger_error(sql_error(), E_USER_WARNING);
+          fatal_error(FALSE, get_vocab("fatal_db_error"));
         }
+        for ($i = 0; ($row = sql_row_keyed($res, $i)); $i++)
+        {
+          $places[] = $row['id'];
+          $params['options'][$row['id']] = $row['name'];
+        }
+        generate_select($params);
+
+        echo "</div>\n";
         break;
       
       case 'instructor':
-        if (get_area_type($area) == 6) { //6 = Handledning - KTH Biblioteket:
-          echo "<div id=\"div_instructor\">\n";
-          if (!$is_admin) {
-              $disabled = true;
-          }
-          
-          //om aktuell inloggad user = instructor sätt instructor som value
-          $params = array('label' => get_loc_field_name($tbl_entry, $key) . ":",
-                    'name'        => VAR_PREFIX . 'instructor',
-                    'disabled'    => $disabled,
-                    'options'     => array(),
-                    'force_assoc' => TRUE,  // in case the type keys happen to be digits
-                    'value'       => "");
-
-          //Hämta värden från db?
-          $instructors = array();
-          $sql = "SELECT full_name, email
-                  FROM kth_instructors
-                  JOIN kth_area_instructors
-                  ON kth_instructors.id = kth_area_instructors.instructor_id
-                  WHERE area_id = $area
-                  ORDER BY kth_instructors.full_name";
-
-          $res = sql_query($sql);
-          if ($res === FALSE)
-          {
-            trigger_error(sql_error(), E_USER_WARNING);
-            fatal_error(FALSE, get_vocab("fatal_db_error"));
-          }
-          for ($i = 0; ($row = sql_row_keyed($res, $i)); $i++)
-          {
-            $instructors[] = $row['email'];
-            $params['options'][$row['email']] = $row['full_name'];
-          }
-          //Sätt inloggad användare som instructor som default(om användaren är instructor)
-          if (isset($custom_fields[$key])) {
-            $fieldkey = $custom_fields[$key];
-          } else {
-            $fieldkey = array_search($user, $instructors) ? $user : $instructors[0];
-          }
-          $params['value'] = $fieldkey;
-          generate_select($params);
-
-          echo "</div>\n";
+        echo "<div id=\"div_instructor\">\n";
+        if (!$is_admin) {
+            $disabled = true;
         }
+        
+        //om aktuell inloggad user = instructor sätt instructor som value
+        $params = array('label' => get_loc_field_name($tbl_entry, $key) . ":",
+                  'name'        => VAR_PREFIX . 'instructor',
+                  'disabled'    => $disabled,
+                  'options'     => array(),
+                  'force_assoc' => TRUE,  // in case the type keys happen to be digits
+                  'value'       => "");
+
+        //Hämta värden från db?
+        $instructors = array();
+        $sql = "SELECT full_name, email
+                FROM kth_instructors
+                JOIN kth_area_instructors
+                ON kth_instructors.id = kth_area_instructors.instructor_id
+                WHERE area_id = $area
+                ORDER BY kth_instructors.full_name";
+
+        $res = sql_query($sql);
+        if ($res === FALSE)
+        {
+          trigger_error(sql_error(), E_USER_WARNING);
+          fatal_error(FALSE, get_vocab("fatal_db_error"));
+        }
+        for ($i = 0; ($row = sql_row_keyed($res, $i)); $i++)
+        {
+          $instructors[] = $row['email'];
+          $params['options'][$row['email']] = $row['full_name'];
+        }
+        //Sätt inloggad användare som instructor som default(om användaren är instructor)
+        if (isset($custom_fields[$key])) {
+          $fieldkey = $custom_fields[$key];
+        } else {
+          $fieldkey = array_search($user, $instructors) ? $user : $instructors[0];
+        }
+        $params['value'] = $fieldkey;
+        generate_select($params);
+
+        echo "</div>\n";
         break;
 
       default:

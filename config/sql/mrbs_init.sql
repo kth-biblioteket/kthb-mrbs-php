@@ -132,7 +132,7 @@ INSERT INTO `kth_entry_custom_fields` (`area_id`, `entry_field_name`, `type`, `s
 (1, 'phone', 'custom', 300, 1, 1),
 (1, 'user_group', 'custom', 150, 1, 0),
 (1, 'preferred_language', 'custom', 800, 1, 1),
-(1, 'instructor', 'custom', 110, 0, 0),
+(1, 'instructor', 'custom', 110, 1, 1),
 (1, 'start_time', 'standard', 100, 1, 1),
 (1, 'end_time', 'standard', 101, 1, 1),
 (1, 'name', 'standard', 140, 1, 1),
