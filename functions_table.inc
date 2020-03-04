@@ -173,6 +173,9 @@ function checkifslotenabled($area, $room_id, $month, $day, $year, $s) {
   //191003
   global $resolution;
   global $default_bookings_open;
+
+  $is_admin = (authGetUserLevel($user) >= 2);
+
 	$weekday = date('w', strtotime($year .'-' . $month .'-' . $day ));
 	$slotdate = date('Y-m-d',strtotime($year .'-' . $month .'-' . $day ));
 	$disabled = FALSE;
@@ -261,7 +264,8 @@ function checkifslotenabled($area, $room_id, $month, $day, $year, $s) {
   //NY! 191003
   //om det inte finns en bokning type == "B" så ska tiden vara disabled om det inte är en type == "I"
   //Genomför bara om settings för bokningar är att de ska vara stängda som default($default_bookings_open = false)
-  if (!$default_bookings_open) {
+  //Admin alltid enabled
+  if (!$default_bookings_open && !$is_admin) {
     if ($disabled == FALSE) {
       if (isset($slotinseconds)){ // om inställning är på perioder så kan slotinseconds bli NULL. Hur sätta/kontrollera perioders tillgänglighet?
         if ($slotinseconds !="") {
@@ -273,6 +277,7 @@ function checkifslotenabled($area, $room_id, $month, $day, $year, $s) {
           $res = sql_query($sql);
           if (isset($res)) {
             if (sql_count($res)>0) {
+              //Bokning "B" finns => slot enabled
             } else {
               $sql = "SELECT * FROM mrbs_entry
               WHERE room_id = $room_id
@@ -282,6 +287,7 @@ function checkifslotenabled($area, $room_id, $month, $day, $year, $s) {
               $res = sql_query($sql);
               if (isset($res)) {
                 if (sql_count($res)==0) {
+                  //Ingen "I" bokning finns => slot disabled
                   $disabled = TRUE;
                 }
               }
@@ -897,6 +903,7 @@ function cell_html($cell, $query_strings, $is_invalid = FALSE, $ajaxuser = NULL)
       if (!isset($id))
       {
         // Don't provide a link if the slot doesn't really exist
+        //191003 skapa länk även för invalid om admin
         if (!$is_invalid || $is_admin)
         {
           $html .= "<div class=\"celldiv slots1\">\n";  // a bookable slot is only one unit high
@@ -939,7 +946,7 @@ function cell_html($cell, $query_strings, $is_invalid = FALSE, $ajaxuser = NULL)
         if ((getWritable($cell[0]['create_by'], $user, $cell[0]['room_id']) && $is_invalid==FALSE) 
             || ($color == "B" && $is_invalid==FALSE) 
             || $is_admin 
-            || $is_kiosk) {
+            || $is_kiosk && $is_invalid==FALSE) {
           $html .= "<a href=\"edit_entry.php?id=$id&amp;". $query_strings['booking'] . "\" title=\"$bookingdesc\">";
           //$html .= "<img class=\"\" src=\"images/edit.png\" width=\"10\" height=\"10\"></br>";
           $html .= ($is_repeat) ? "<img class=\"repeat_symbol $c\" src=\"images/repeat.png\" alt=\"" . get_vocab("series") . "\" title=\"" . get_vocab("series") . "\" width=\"10\" height=\"10\">" : '';
@@ -1785,9 +1792,9 @@ function week_table_innerhtml($day, $month, $year, $room, $area, $timetohighligh
           $query_strings = get_query_strings($area, $room, $wmonth, $wday, $wyear, $s);
 
           // and then draw the cell
-		  //KTH kontrollera slotens tillgänglighet
-		  $slotdisabled = checkifslotenabled($area, $room, $wmonth, $wday, $wyear, $s);
-		  $is_invalid = $slotdisabled;
+          //KTH kontrollera slotens tillgänglighet
+          $slotdisabled = checkifslotenabled($area, $room, $wmonth, $wday, $wyear, $s);
+          $is_invalid = $slotdisabled;
           if (!isset($week_map[$room][$thisday][$s]))
           {
             $week_map[$room][$thisday][$s] = array();  // to avoid an undefined index NOTICE error
@@ -1847,9 +1854,9 @@ function week_table_innerhtml($day, $month, $year, $room, $area, $timetohighligh
           $query_strings = get_query_strings($area, $room, $wmonth, $wday, $wyear, $s);
      
           // and then draw the cell
-		  //KTH kontrollera slotens tillgänglighet
-		  $slotdisabled = checkifslotenabled($area, $room, $wmonth, $wday, $wyear, $s);
-		  $is_invalid = $slotdisabled;
+          //KTH kontrollera slotens tillgänglighet
+          $slotdisabled = checkifslotenabled($area, $room, $wmonth, $wday, $wyear, $s);
+          $is_invalid = $slotdisabled;
           if (!isset($week_map[$room][$thisday][$s]))
           {
             $week_map[$room][$thisday][$s] = array();  // to avoid an undefined index NOTICE error

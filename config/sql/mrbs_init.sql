@@ -109,7 +109,8 @@ CREATE TABLE IF NOT EXISTS `kth_entry_custom_fields` (
 -- Dumpning av Data i tabell `kth_entry_custom_fields`
 --
 /*
-INSERT INTO `kth_entry_custom_fields` (`id`, `area_id`, `entry_field_name`, `type`, `sort_order`, `visible`, `enabled`) VALUES
+Handledning
+INSERT INTO `kth_entry_custom_fields` (`area_id`, `entry_field_name`, `type`, `sort_order`, `visible`, `enabled`) VALUES
 (1, 'email', 'custom', 200, 1, 1),
 (1, 'phone', 'custom', 300, 1, 1),
 (1, 'user_group', 'custom', 150, 1, 0),
@@ -124,6 +125,7 @@ INSERT INTO `kth_entry_custom_fields` (`id`, `area_id`, `entry_field_name`, `typ
 (1, 'end_time', 'standard', 101, 1, 1),
 (1, 'name', 'standard', 140, 1, 1);
 
+Talbok
 INSERT INTO `kth_entry_custom_fields` (`area_id`, `entry_field_name`, `type`, `sort_order`, `visible`, `enabled`) VALUES
 (1, 'email', 'custom', 200, 1, 1),
 (1, 'phone', 'custom', 300, 1, 1),
@@ -135,12 +137,14 @@ INSERT INTO `kth_entry_custom_fields` (`area_id`, `entry_field_name`, `type`, `s
 (1, 'name', 'standard', 140, 1, 1),
 (1, 'other_info', 'custom', 900, 1, 1);
 
+Grupprum/lässtudio
 INSERT INTO `kth_entry_custom_fields` (`area_id`, `entry_field_name`, `type`, `sort_order`, `visible`, `enabled`) VALUES
 (1, 'name', 'standard', 100, 1, 1),
 (1, 'start_time', 'standard', 110, 1, 1),
 (1, 'end_time', 'standard', 120, 1, 1),
 (1, 'confirmation_status', 'standard', 130, 1, 1);
 
+CAS
 INSERT INTO `kth_entry_custom_fields` (`area_id`, `entry_field_name`, `type`, `sort_order`, `visible`, `enabled`) VALUES
 (1, 'start_time', 'standard', 100, 1, 1),
 (1, 'end_time', 'standard', 101, 1, 1),
@@ -718,15 +722,25 @@ SELECT `disabled`, `area_id`, `room_name`, `room_name_english`, `sort_key`, null
 FROM mrbs.mrbs_room
 WHERE mrbs.mrbs_room.area_id=2
 
+Handledning
 INSERT INTO `mrbs_room` (`disabled`, `area_id`, `room_name`, `room_name_english`, `sort_key`, `exchange_email`, `description`, `capacity`, `room_admin_email`, `custom_html`, `room_number`, `screen`, `mailtext`, `mailtext_en`) VALUES
 (0, 1, 'Handledning', 'Handledning', 'Handledning', '', '', 8, '', '', '', 0, 'Du har bokat tid för handledning på KTH Biblioteket', 'You have booked consultation at the KTH Library.');
 
+Talbok
 INSERT INTO `mrbs_room` (`disabled`, `area_id`, `room_name`, `room_name_english`, `sort_key`, `exchange_email`, `description`, `capacity`, `room_admin_email`, `custom_html`, `room_number`, `screen`, `mailtext`, `mailtext_en`) VALUES
 (0, 1, 'Huvudbiblioteket', 'Main Library', '1', '', '', 0, '', 'Bla bla bla blaBla bla bla blaBla bla bla bla', '', 0, '', ''),
 (0, 1, 'Kista', 'Kista', '2', '', '', 0, '', '', '', 0, '', ''),
 (0, 1, 'Södertälje', 'Södertälje', '3', '', '', 0, '', '', '', 0, '', ''),
 (0, 1, 'Flemingsberg', 'Flemingsberg', '4', '', '', 1, '', '', '', 0, '', '');
 
+Readingstudios
+INSERT INTO `mrbs_room` (`disabled`, `area_id`, `room_name`, `room_name_english`, `sort_key`, `exchange_email`, `description`, `capacity`, `room_admin_email`, `custom_html`, `room_number`, `screen`, `mailtext`, `mailtext_en`) VALUES
+(0, 1, 'Huvudbiblioteket', 'Main Library', '1', '', '', 0, '', 'Bla bla bla blaBla bla bla blaBla bla bla bla', '', 0, '', ''),
+(0, 1, 'Kista', 'Kista', '2', '', '', 0, '', '', '', 0, '', ''),
+(0, 1, 'Södertälje', 'Södertälje', '3', '', '', 0, '', '', '', 0, '', ''),
+(0, 1, 'Flemingsberg', 'Flemingsberg', '4', '', '', 1, '', '', '', 0, '', '');
+
+Grupprum
 INSERT INTO `mrbs_room` (`disabled`, `area_id`, `room_name`, `room_name_english`, `sort_key`, `exchange_email`, `description`, `capacity`, `room_admin_email`, `custom_html`, `room_number`, `screen`, `mailtext`, `mailtext_en`) VALUES
 (0, 1, 'Al-Khwarizmi', 'Al-Khwarizmi', '00', NULL, 'Grupprum', 8, '', 'Aktiverade nätverksuttag är markerade med "grön plupp". Kabel kan lånas och återlämnas i Låneexpeditionen, Informationen eller Receptionen.', '0', 0, NULL, NULL),
 (0, 1, 'Leibniz', 'Leibniz', '01', NULL, 'Grupprum', 6, '', '', '1', 0, NULL, NULL),
@@ -744,6 +758,7 @@ INSERT INTO `mrbs_room` (`disabled`, `area_id`, `room_name`, `room_name_english`
 (0, 1, 'Dürer', 'Dürer', '07', NULL, '', 6, '', '', '7', 0, NULL, NULL),
 (1, 1, 'Hammarström', 'Hammarström', '14', NULL, '', 4, '', '', '', 0, NULL, NULL);
 
+CAS
 INSERT INTO `mrbs_room` (`disabled`, `area_id`, `room_name`, `room_name_english`, `sort_key`, `exchange_email`, `description`, `capacity`, `room_admin_email`, `custom_html`, `room_number`, `screen`, `mailtext`, `mailtext_en`) VALUES
 (0, 1, 'Skriftliga arbeten och/eller muntliga presentationer på svenska  <img src="images/sv_SE.png">', 'Written assignments and/or oral presentations in Swedish <img src="images/sv_SE.png">', '100', '', '', 8, '', '', '', 0, 'Du har bokat tid för handledning på KTH Biblioteket', 'You have booked consultation at the KTH Library.'),
 (0, 1, 'Skriftliga arbeten och/eller muntliga presentationer på engelska <img src="images/en_UK.png">', 'Written assignments and/or oral presentations in English <img src="images/en_UK.png">', '110', '', '', 8, '', '', '', 0, 'Du har bokat tid för handledning på KTH Biblioteket', 'You have booked consultation at the KTH Library.');

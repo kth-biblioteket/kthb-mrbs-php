@@ -947,8 +947,7 @@ checkAuthorised();
 
 // You're only allowed to make repeat bookings if you're an admin
 // or else if $auth['only_admin_can_book_repeat'] is not set
-//191003 Inga repeatbokningar för någon
-//TODO anpassa till $default_bookings_open
+//191003
 //$repeats_allowed = $is_admin || empty($auth['only_admin_can_book_repeat']);
 $repeats_allowed = $is_admin && $default_bookings_open;
 // Similarly for multi-day
