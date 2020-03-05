@@ -1906,14 +1906,9 @@ div.date_now a, div.date_before a ,div.date_after a   {
 }
 
 #extrainfo {
-	padding: 10px; 
-	border-color: #E4363E;
-	border-style: solid;
-	border-width: 2px;
-	float: left;
-	display: inline;
-	width: 50%;
-	position: relative;
+	padding: 10px 0px 10px 0px;
+  position: relative;
+  font-size: 1.375rem;
 }
 
 #logon #NewUserName {

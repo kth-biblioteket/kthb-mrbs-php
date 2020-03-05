@@ -188,12 +188,12 @@ echo "</div>";  // area_form
 // Now the custom HTML
 echo "<div id=\"custom_html\">\n";
 // no htmlspecialchars() because we want the HTML!
-echo (!empty($custom_html)) ? "$custom_html\n" : "";
+//echo (!empty($custom_html)) ? "$custom_html\n" : "";
 echo "</div>\n";
 
 echo "<div id=\"custom_html\">\n";
 // no htmlspecialchars() because we want the HTML!
-echo (!empty($custom_html_en)) ? "$custom_html_en\n" : "";
+//echo (!empty($custom_html_en)) ? "$custom_html_en\n" : "";
 echo "</div>\n";
 
 

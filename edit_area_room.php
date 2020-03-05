@@ -465,6 +465,8 @@ $area_map = get_form_var('area_map', 'string');
 $area_map_image = get_form_var('area_map_image', 'string');
 //191003
 $area_sort_key = get_form_var('area_sort_key', 'int');
+$extra_info = get_form_var('extra_info', 'string');
+$extra_info_en = get_form_var('extra_info_en', 'string');
 
 $change_done = get_form_var('change_done', 'string');
 $change_room = get_form_var('change_room', 'string');
@@ -646,6 +648,12 @@ if ($phase == 2)
                 break;
 			        case 'custom_html_en': //KTH
                 $assign_array[] = "custom_html_en='" . sql_escape($custom_html_en) . "'";
+                break;
+              case 'extra_info':
+                $assign_array[] = "extra_info='" . sql_escape($extra_info) . "'";
+                break;
+			        case 'extra_info_en': //KTH
+                $assign_array[] = "extra_info_en='" . sql_escape($extra_info_en) . "'";
                 break;
               // then look at any user defined fields
               default:
@@ -857,6 +865,8 @@ if ($phase == 2)
     $assign_array[] = "area_map_image='" . sql_escape($area_map_image) . "'";
     //191003
     $assign_array[] = "area_sort_key='" . sql_escape($area_sort_key) . "'";
+    $assign_array[] = "extra_info='" . sql_escape($extra_info) . "'";
+    $assign_array[] = "extra_info_en='" . sql_escape($extra_info_en) . "'";
     
       if (!$area_enable_periods)
       {
@@ -1142,6 +1152,33 @@ if (isset($change_room) && !empty($room))
         generate_textarea($params);
         echo "</div>\n";
       }
+
+      // Custom HTML
+      if ($is_admin)
+      {
+        // Only show the raw HTML to admins.  Non-admins will see the rendered HTML
+        echo "<div>\n";
+        $params = array('label'         => get_vocab("extra_info") . ":",
+                        'label_title'   => get_vocab("extra_info_note"),
+                        'name'          => 'extra_info',
+                        'value'         => $row['extra_info'],
+                        'attributes'    => array('rows="4"', 'cols="40"'),
+                        'disabled'      => $disabled,
+                        'create_hidden' => FALSE);
+        generate_textarea($params);
+        echo "</div>\n";
+		 // KTH english
+        echo "<div>\n";
+        $params = array('label'         => get_vocab("extra_info_en") . ":",
+                        'label_title'   => get_vocab("extra_info_note"),
+                        'name'          => 'extra_info_en',
+                        'value'         => $row['extra_info_en'],
+                        'attributes'    => array('rows="4"', 'cols="40"'),
+                        'disabled'      => $disabled,
+                        'create_hidden' => FALSE);
+        generate_textarea($params);
+        echo "</div>\n";
+      }
     
       // then look at any user defined fields  
       foreach ($fields as $field)
@@ -1207,6 +1244,16 @@ if (isset($change_room) && !empty($room))
   echo "<div id=\"custom_html_en\">\n";
   // no htmlspecialchars() because we want the HTML!
   echo (!empty($row['custom_html_en'])) ? $row['custom_html_en'] . "\n" : "";
+  echo "</div>\n";
+  // 191003
+  echo "<div id=\"extra_info\">\n";
+  // no htmlspecialchars() because we want the HTML!
+  echo (!empty($row['extra_info'])) ? $row['extra_info'] . "\n" : "";
+  echo "</div>\n";
+  //KTH english
+  echo "<div id=\"extra_info_en\">\n";
+  // no htmlspecialchars() because we want the HTML!
+  echo (!empty($row['extra_info_en'])) ? $row['extra_info_en'] . "\n" : "";
   echo "</div>\n";
 }
 
@@ -1344,6 +1391,26 @@ if (isset($change_area) &&!empty($area))
                   'label_title' => get_vocab("custom_html_note"),
                   'name'        => 'custom_html_en',
                   'value'       => $row['custom_html_en'],
+                  'attributes'  => array('rows="4"', 'cols="40"'));
+  generate_textarea($params);
+  echo "</div>\n";
+
+  //191003
+  echo "<div>\n";
+  $params = array('label'       => get_vocab("extra_info") . ":",
+                  'label_title' => get_vocab("extra_info_note"),
+                  'name'        => 'extra_info',
+                  'value'       => $row['extra_info'],
+                  'attributes'  => array('rows="4"', 'cols="40"'));
+  generate_textarea($params);
+  echo "</div>\n";
+  
+  //KTH english
+  echo "<div>\n";
+  $params = array('label'       => get_vocab("extra_info_en") . ":",
+                  'label_title' => get_vocab("extra_info_note"),
+                  'name'        => 'extra_info_en',
+                  'value'       => $row['extra_info_en'],
                   'attributes'  => array('rows="4"', 'cols="40"'));
   generate_textarea($params);
   echo "</div>\n";
