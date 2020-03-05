@@ -1913,6 +1913,7 @@ div.date_now a, div.date_before a ,div.date_after a   {
 
 .alert {
   padding: 1.2rem 2.2rem 1rem 5.4rem;
+  color: #000000;
 }
 
 #logon #NewUserName {
