@@ -2460,7 +2460,7 @@ function mrbsMakeBookings($bookings, $id=NULL, $just_check=FALSE, $skip=FALSE, $
           if ($booking['campus'] > 0) {
             $bookinglocation = get_campus($booking['campus']);
           } else {
-            $bookinglocation = get_room_name($booking['room_id'],$lang);
+            $bookinglocation = get_room_name($booking['room_id'],'sv');
           }
           if(sql_count($res) == 1) {  
             try {
