@@ -72,9 +72,16 @@ $html_body['content'] = '
                     <td>' . get_mail_vocab("type." . $data['type']) . '</td>
                 </tr>
                 <tr>
-                    <td>Plats: </td>
-                    <td>' . '' . '</td>
-                </tr>
+                    <td>Plats: </td>';
+                if ($data['campus'] > 0) {
+$html_body['content'] .=      
+                    '<td>'. get_campus($data['campus'], 'sv') . '</td>';
+                    } else {
+$html_body['content'] .=      
+                    '<td>'. $data['room_name'] . '</td>';
+                }
+$html_body['content'] .=
+                '</tr>
                 <tr>
                     <td>Handledare: </td>
                     <td>' . get_instructor($data['instructor']) . '</td>
