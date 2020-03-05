@@ -1299,6 +1299,7 @@ if (isset($change_area) &&!empty($area))
   echo "</div>\n";
 
   //KTH 2018 areatype, typer definierade i tabell kth_areatype
+  //TODO hårkodning, hämta från DB
   echo "<div id=\"extended_booking_form\">\n";
   $options = array('1' => 'Grupprum',
                   '2' => 'Lässtudio',
