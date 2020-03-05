@@ -1916,6 +1916,11 @@ div.date_now a, div.date_before a ,div.date_after a   {
   color: #000000;
 }
 
+.alert-info {
+    background-color: #fcf8e3;
+    border: 1px solid #faebcc;
+}
+
 #logon #NewUserName {
 	background-image: url("https://<?php echo $_SERVER['HTTP_HOST']?>/forms/bestall/kth-se.png");
 	background-repeat: no-repeat;
