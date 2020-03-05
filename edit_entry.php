@@ -1578,12 +1578,14 @@ foreach ($edit_entry_field_order as $key)
 }
 
 //KTH Extra info(röd ruta om speciell info... bokningsregler eller dylikt)
+//191003
+/*
 $extra_info = "";
 $extra_info = get_area_extra_info($area,$lang);
 if ($extra_info != "") {
 	echo "<div id=\"extrainfo\" style=\"\">" . $extra_info ."</div>";
 }
-
+*/
 
 
 // Show the repeat fields if (a) it's a new booking and repeats are allowed,
