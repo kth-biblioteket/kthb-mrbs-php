@@ -2012,6 +2012,36 @@ function get_campus($id, $lang)
   return $row[0];
 }
 
+//KTH ny funktion.
+//191003
+//Hämta campus
+function get_instructor($email)
+{
+
+  $email = (int)$email;
+    
+  $sql = "SELECT full_name
+          FROM kth_instructors
+          WHERE email = $email";
+
+  $sql .= " LIMIT 1";
+  $res = sql_query($sql);
+  
+  if ($res === FALSE)
+  {
+    trigger_error(sql_error(), E_USER_WARNING);
+    return FALSE;
+  }
+  
+  if (sql_count($res) == 0)
+  {
+    return NULL;
+  }
+  
+  $row = sql_row($res, 0);
+  return $row[0];
+}
+
 
 // Gets an array of area names indexed by area id.
 // If $all=TRUE then all areas are returned, otherwise just the ones that

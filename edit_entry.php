@@ -775,7 +775,6 @@ switch ($key)
                   'force_assoc' => TRUE,  // in case the type keys happen to be digits
                   'value'       => isset($custom_fields[$key]) ? $custom_fields[$key] : 1);
 
-        //Hämta värden från db?
         $places = array();
         $sql = "SELECT kth_places.id, kth_places.name, kth_places.name_en
                 FROM kth_places

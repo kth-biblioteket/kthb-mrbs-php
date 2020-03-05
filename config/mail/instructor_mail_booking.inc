@@ -15,6 +15,7 @@ if ($res === FALSE)
     trigger_error(sql_error(), E_USER_WARNING);
     fatal_error(FALSE, get_vocab("fatal_db_error"));
 }
+
 $css = '';
 $css_file = 'css/mrbs-mail.css';
 if (file_exists($css_file))
@@ -68,19 +69,25 @@ $html_body['content'] = '
                 </tr>
                 <tr>
                     <td>Typ: </td>
-                    <td>' . get_type_vocab($data['type']) . '</td>
+                    <td>' . get_mail_vocab("type." . $data['type']) . '</td>
                 </tr>
                 <tr>
-                    <td>Bokad av: </td>
-                    <td>' . $data['create_by'] . '</td>
+                    <td>Plats: </td>
+                    <td>' . '' . '</td>
+                </tr>
+                <tr>
+                    <td>Handledare: </td>
+                    <td>' . get_instructor($data['instructor']) . '</td>
                 </tr>';
                 for ($i = 0; ($row = sql_row_keyed($res, $i)); $i++)
                 {
+                    if($row['entry_field_name'] != 'campus' && $row['entry_field_name'] != 'instructor'){
 $html_body['content'] .=
                 '<tr>
                     <td>' . get_mail_vocab('entry.' . $row['entry_field_name']) . ': </td>
                     <td>' . $data[$row['entry_field_name']] . '</td>
-                </tr>';                    
+                </tr>'; 
+                    }                   
                 }
 $html_body['content'] .= 
             '</tbody>
