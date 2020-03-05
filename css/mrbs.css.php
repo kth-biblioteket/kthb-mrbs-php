@@ -248,9 +248,9 @@ $column_month = number_format($column_month, 1, '.', '');  // (%) tidy the numbe
 
 ?>
 /*KTH få plats med extrainfo*/
-div#dwm_header {width: 70%; float: left; margin-top: 1.0em; margin-bottom: 0.5em}
+div#dwm_header {width: 70%; float: none; margin-top: 1.0em; margin-bottom: 0.5em}
 /* 191003 */
-div#dwm_header.screenonly {width: 100%; float: left; 
+div#dwm_header.screenonly {width: 100%; float: none; 
 margin-top: 0em; 
 margin-bottom: 0em}
 div#dwm_areas, div#dwm_rooms  {float: left; margin-right: 2.0em}
@@ -264,6 +264,7 @@ div#dwm_areas a, div#dwm_rooms a, div#more_info a {color: #24a0d8; font-weight: 
   padding-left: 0; 
   margin-left: 0; 
   margin-right: 10px;
+  margin-bottom: 10px;
   float:left;
   font-family: <?php echo $standard_font_family ?>
 }
