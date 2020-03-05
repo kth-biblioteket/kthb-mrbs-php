@@ -1911,6 +1911,10 @@ div.date_now a, div.date_before a ,div.date_after a   {
   font-size: 1.375rem;
 }
 
+.alert {
+  padding: 1.2rem 2.2rem 1rem 5.4rem;
+}
+
 #logon #NewUserName {
 	background-image: url("https://<?php echo $_SERVER['HTTP_HOST']?>/forms/bestall/kth-se.png");
 	background-repeat: no-repeat;
