@@ -1979,19 +1979,8 @@ function get_exchange_email($id, $all=FALSE)
 //KTH ny funktion.
 //191003
 //Hämta campus
-function get_campus($id)
+function get_campus($id, $lang)
 {
-
-  global $mrbslang;
-
-  //KTH engelska 
-  if(isset($_COOKIE["mrbslang"])) {
-    if(isset($mrbslang)) {
-      $lang = $mrbslang;
-    } else {
-      $lang = $_COOKIE["mrbslang"];
-    }
-  }
 
   $id = (int)$id;
   
@@ -2458,7 +2447,7 @@ function mrbsMakeBookings($bookings, $id=NULL, $just_check=FALSE, $skip=FALSE, $
           //get location (campus/room)
           $bookinglocation = '';
           if ($booking['campus'] > 0) {
-            $bookinglocation = get_campus($booking['campus']);
+            $bookinglocation = get_campus($booking['campus'], 'sv');
           } else {
             $bookinglocation = get_room_name($booking['room_id'],'sv');
           }

@@ -29,7 +29,7 @@ if ($mrbslang == 'sv') {
   if ($data['campus'] > 0) {
   $html_body['content'] .=      
   '<div>'
-    . get_campus($data['campus']) .
+    . get_campus($data['campus'], $mrbslang) .
   '</div>';
   } else {
   $html_body['content'] .=      
@@ -80,7 +80,7 @@ if ($mrbslang == 'sv') {
   if ($data['campus'] > 0) {
   $html_body['content'] .=      
   '<div>
-    Location: '. get_campus($data['campus']) .
+    Location: '. get_campus($data['campus'], $mrbslang) .
   '</div>';
   } else {
   $html_body['content'] .=      
