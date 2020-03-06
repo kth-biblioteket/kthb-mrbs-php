@@ -27,16 +27,16 @@ if ($mrbslang == 'sv') {
   '</div>
   </br>';
   if ($data['campus'] > 0) {
-  $html_body['content'] .=      
-  '<div>'
-    . get_campus($data['campus'], $mrbslang) .
-  '</div>';
-  } else {
-  $html_body['content'] .=      
-  '<div>'
-    . $data['room_name'] .
-  '</div>';
-  }
+    $html_body['content'] .=      
+    '<div>
+      Plats: '. get_campus($data['campus'], $mrbslang) .
+    '</div>';
+    } else {
+    $html_body['content'] .=      
+    '<div>
+      Plats: '. ($data['room_number'] != "" ? $data['room_number'] . ". " : "") . $data['room_name'] .
+    '</div>';
+    }
   $html_body['content'] .=    
   '</br>
   <div>' .
