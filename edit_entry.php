@@ -1146,7 +1146,6 @@ if (isset($id))
         break;
     }
   }
-
   //191003 Sätt name = user full name om det är en bokningsbar tid
   if ($type == "B" && !$is_admin) {
     $name = getFullName();
@@ -1236,6 +1235,24 @@ if (isset($id))
       }
     }
   }
+  //191003
+  $res_room_morning_starts = get_room_morningstarts_day($room, date('w', $start_time));
+  if ($res_room_morning_starts === FALSE) {
+    trigger_error(sql_error(), E_USER_WARNING);
+  }
+  for ($i = 0; ($row = sql_row_keyed($res_room_morning_starts, $i)); $i++) {
+    $room_morningstarts = $row['morningstarts'];
+    $morningstarts_minutes = $row['morningstarts_minutes'];
+  }
+
+  $res_room_evening_ends = get_room_eveningends_day($room, date('w', $start_time));
+  if ($res_room_evening_ends === FALSE) {
+    trigger_error(sql_error(), E_USER_WARNING);
+  }
+  for ($i = 0; ($row = sql_row_keyed($res_room_evening_ends, $i)); $i++) {
+    $room_eveningends = $row['eveningends'];
+    $eveningends_minutes = $row['eveningends_minutes'];
+  }
 }
 else
 {
@@ -1286,6 +1303,25 @@ else
 
   $start_time = mktime($hour, $minute, 0, $month, $day, $year);
 
+  //191003
+  $res_room_morning_starts = get_room_morningstarts_day($room, date('w', $start_time));
+  if ($res_room_morning_starts === FALSE) {
+    trigger_error(sql_error(), E_USER_WARNING);
+  }
+  for ($i = 0; ($row = sql_row_keyed($res_room_morning_starts, $i)); $i++) {
+    $room_morningstarts = $row['morningstarts'];
+    $morningstarts_minutes = $row['morningstarts_minutes'];
+  }
+
+  $res_room_evening_ends = get_room_eveningends_day($room, date('w', $start_time));
+  if ($res_room_evening_ends === FALSE) {
+    trigger_error(sql_error(), E_USER_WARNING);
+  }
+  for ($i = 0; ($row = sql_row_keyed($res_room_evening_ends, $i)); $i++) {
+    $room_eveningends = $row['eveningends'];
+    $eveningends_minutes = $row['eveningends_minutes'];
+  }
+
   if (isset($end_seconds))
   {
     $end_minutes = intval($end_seconds/60);
@@ -1303,7 +1339,9 @@ else
     $duration    = ($enable_periods ? 60 : $default_duration);
     $end_time = $start_time + $duration;
     // The end time can't be past the end of the booking day
-    $pm7 = get_start_last_slot($month, $day, $year);
+    //191003 rummets eveningends
+    $pm7 = mrbs_mktime($room_eveningends, $room_eveningends_minutes, 0, $month, $day, $year);
+    //$pm7 = get_start_last_slot($month, $day, $year);
     $end_time = min($end_time, $pm7 + $resolution);
   }
   
@@ -1418,8 +1456,13 @@ if ($res)
     }
     else
     {
-      $first = (($row['morningstarts'] * 60) + $row['morningstarts_minutes']) * 60;
-      $last = ((($row['eveningends'] * 60) + $row['eveningends_minutes']) * 60) + $row['resolution'];
+      //TODO kolla mot rummets morningstarts/ends istället!
+      $first = (($room_morningstarts * 60) + $morningstarts_minutes) * 60;
+      $last = ((($room_eveningends * 60) + $eveningends_minutes) * 60) + $row['resolution'];
+      
+      //$first = (($row['morningstarts'] * 60) + $row['morningstarts_minutes']) * 60;
+      //$last = ((($row['eveningends'] * 60) + $row['eveningends_minutes']) * 60) + $row['resolution'];
+
       // If the end of the day is the same as or before the start time, then it's really on the next day
       if ($first >= $last)
       {

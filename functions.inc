@@ -161,7 +161,7 @@ echo "<div>
                 <div id=\"modalhtml\">" . get_area_custom_html($area,$lang) . "</div>
               </div>
               <div class=\"modal-footer\">
-                <button class=\"btn btn-primary\" type=\"button\">Ok</button>
+                <button class=\"btn btn-primary\" type=\"button\">OK</button>
               </div>
             </div>";
 if ($area_map) {
@@ -174,7 +174,7 @@ echo        "<div id=\"myModalmap\" class=\"modal-content\">
                 <div id=\"modalhtml\"><img src=\"images/$area_map_image\"></img></div>
               </div>
               <div class=\"modal-footer\">
-                <button class=\"btn btn-primary\" type=\"button\">Ok</button>
+                <button class=\"btn btn-primary\" type=\"button\">OK/button>
               </div>
             </div>";
 }
