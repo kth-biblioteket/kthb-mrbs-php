@@ -85,7 +85,7 @@ if ($mrbslang == 'sv') {
   } else {
   $html_body['content'] .=      
   '<div>
-    Location: '. $data['room_name'] .
+    Location: '. ($data['room_number'] != "" ? $data['room_number'] . ". " : "" . $data['room_name'] .
   '</div>';
   }
   $html_body['content'] .=    
