@@ -2456,7 +2456,7 @@ function mrbsMakeBookings($bookings, $id=NULL, $just_check=FALSE, $skip=FALSE, $
     if (get_exchange_email($booking['room_id']) != "" ) { 
       if($is_admin && !isset($id)) {
         try {
-          $outlook_result = createappointment(get_exchange_email($booking['room_id']), 'KTH Biblioteket', get_vocab("calendar_subject") . "-" . get_vocab("bookable_entry_text") ,$booking['instructor'], $booking['instructor'], $startdate, $enddate, $ews_host, $ews_user, $ews_password);   
+          $outlook_result = createappointment(get_exchange_email($booking['room_id']), 'KTH Biblioteket', get_mail_vocab("calendar_subject") . "-" . get_mail_vocab("bookable_entry_text") ,$booking['instructor'], $booking['instructor'], $startdate, $enddate, $ews_host, $ews_user, $ews_password);   
         }
         catch (exception $e) {
           $outlook_result['status'] = 'Error';
