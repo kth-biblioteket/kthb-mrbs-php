@@ -645,7 +645,7 @@ td.K,.I.tentativeconfirmable {
 
 td.D.invalid {
     1background: linear-gradient(rgba(249, 58, 58, 0.701961), rgba(230, 86, 86, 0.901961)) !important; /*röd*/
-    background-color: #CC6666
+    background-color: #CC6666;
 }
 
 td.C.invalid {
