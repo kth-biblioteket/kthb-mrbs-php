@@ -85,7 +85,7 @@ $multiple_control_color         = "#ffff22";        // background colour for the
 // displays in the day, week and month views
 $color_types = array(
     'A' => "#ffff99",
-    'B' => "#ffffff", //KTH Bokningsbara tider... vit?
+    'B' => "#ffffff", //KTH 191003 Bokningsbara tider... vit?
     'C' => "#7eddfc", //KTH original gul = #ffffcd (#7eddfc = ljusblå)
     'D' => "#A9A9A9", //KTH original = #cde6e6,  A9A9A9 = grå
     'E' => "#6dd9c4",
@@ -94,7 +94,9 @@ $color_types = array(
     'H' => "#d9d982",
     'I' => "#CC6666", // KTH original: green = "#99cc66" (red = "#CC6666")
     'J' => "#e6ffe6",
-	'K' => "#ffffcd"); //KTH för bokningen som ska konfirmeras (gul)
+    'S' => "#B0C949", //191003 special KTH-grön
+    'K' => "#ffffcd"); //KTH för bokningen som ska konfirmeras (gul)
+    
 
 // colours used for pending.php and bookings awaiting approval
 $outstanding_color         = "#FFF36C"; // font colour for the outstanding reservations message in the header
