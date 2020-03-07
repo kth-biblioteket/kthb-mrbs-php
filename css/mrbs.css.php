@@ -593,66 +593,37 @@ div.div_select.outside {
 
 /* booking confirmation status */
 /* KTH */
-.ixnvalid, .dwm_main td.ixnvalid {background: linear-gradient(rgba(212, 212, 212, 0.701961), rgba(193, 193, 193, 0.901961)) !important;}
-/*
 .invalid, .dwm_main td.invalid {
-	background: linear-gradient(-47deg, #555 25%, transparent 25%, transparent), linear-gradient(-45deg, #555 25%, transparent 25%, transparent), linear-gradient(45deg, transparent 75%, #555 75%), linear-gradient(-45deg, transparent 75%, #555 75%) !important;;
-	-webkit-background-size: 10px 10px !important;;
-	-moz-background-size: 10px 10px !important;
-	background-size: 10px 10px !important;
-}
-*/
-.invalid, .dwm_main td.invalid {
-background-color: #CACACA !important;
-/*
-background-image: repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(255,255,255,.5) 2px, rgba(255,255,255,.5) 4px) !important;
-*/
-background-color: rgba(249, 58, 58, 0.701961)
-/* Grårandigt */
+  background-color: #CACACA; /* GRÅ */
 }
 <?php //191003 ?>
 
 td.K,
 .1B {
   opacity: 1;
-  backgrdound: linear-gradient( rgba(243, 179, 27, 0.85), rgba(222, 147, 18, 0.9)) !important;
-  1border: 1px solid #C9910A  !important;
   background-color: #ffffff !important
-  /*background-color: rgba(58, 214, 55, 0.85) !important*/
 } /*vit*/
-td.K,.I.tentativeconfirmable {
+
+td.K,
+.I.tentativeconfirmable {
   opacity: 1;
-  backgrdound: linear-gradient(rgba(243, 179, 27, 0.85), rgba(222, 147, 18, 0.9)) !important;
-  1border: 1px solid #C9910A  !important;
   background-color: rgba(243, 179, 27, 0.85) !important
 } /*orange*/
-/*.I.tentative {opacity: 1;backgrdound: linear-gradient(rgba(243, 179, 27, 0.85), rgba(222, 147, 18, 0.9)) !important; 1border: 1px solid #C9910A  !important;background-color: rgba(243, 179, 27, 0.85)}*/ /*orange*/
+
 .1I.confirmed {
   opacity: 1;
-  basckground: linear-gradient(rgba(249, 58, 58, 0.701961), rgba(230, 86, 86, 0.901961)) !important;
-  1border: 1px solid #A54637 !important;
   background-color: rgba(249, 58, 58, 0.701961)
 } /*röd*/
+
 .I.tentative {
-  1border: 1px solid #A3A537 !important;
-  bacsdkground: linear-gradient(rgba(249, 243, 58, 0.701961), rgba(230, 226, 86, 0.901961)) !important;
   background-color: rgba(249, 243, 58, 0.701961)
 } /*gul*/
-/*td.K,.I.tentativeconfirmable {1border: 1px solid #A3A537 !important;bacsdkground: linear-gradient(rgba(249, 243, 58, 0.701961), rgba(230, 226, 86, 0.901961)) !important;background-color: rgba(249, 243, 58, 0.701961)}*/ /*gul*/
-
 
 .D {background-color: #a9a9a9}
 
 td.D.invalid.confirmed {
-    1background: linear-gradient(rgba(249, 58, 58, 0.701961), rgba(230, 86, 86, 0.901961)) !important; /*röd*/
     background-color: #CC6666 !important;;
-}
-
-td.C.invalid {
-	1background: linear-gradient(rgba(249, 58, 58, 0.701961), rgba(230, 86, 86, 0.901961)) !important;
-}
-/*.tentative a {font-weight: normal}*/
-
+} /*röd*/
 
 /* ------------ DEL.PHP -----------------------------*/
 div#del_room_confirm {padding-bottom: 3em}
