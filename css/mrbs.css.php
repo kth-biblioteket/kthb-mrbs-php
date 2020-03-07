@@ -619,7 +619,13 @@ td.K,
   background-color: rgba(249, 243, 58, 0.701961)
 } /*gul*/
 
-.D {background-color: #a9a9a9}
+.D {
+  background-color: #a9a9a9
+}
+
+.S {
+  background-color: #B0C949 !important
+} /* KTH-Grön */
 
 td.D.invalid.confirmed {
     background-color: #CC6666 !important;;
