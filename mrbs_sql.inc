@@ -1033,14 +1033,16 @@ function mrbsCreateEntry($table, $data)
   
   $sql_col = array_map('sql_quote', $sql_col);
   $sql = "INSERT INTO $table (" . implode(', ', $sql_col) . ") VALUES (" . implode(', ',$sql_val) . ")";
-  if($environment == 'development') {
-    error_log($sql);
-  }
+  
   if (sql_command($sql) < 0)
   {
     // probably because the table hasn't been created properly
     trigger_error(sql_error(), E_USER_WARNING);
     fatal_error(TRUE, get_vocab("fatal_db_error"));
+  }
+
+  if($environment == 'development') {
+    error_log($sql);
   }
 
   return sql_insert_id($table, "id");
@@ -2310,6 +2312,9 @@ function mrbsMakeBookings($bookings, $id=NULL, $just_check=FALSE, $skip=FALSE, $
     $ignore_id = 0;
     $repeat_id = NULL;
   }
+  if($environment == 'development') {
+    error_log("Before sql_mutex_lock entry table");
+  }
 
   // Acquire mutex to lock out others trying to book the same slot(s).
   if (!sql_mutex_lock("$tbl_entry"))
@@ -2656,6 +2661,9 @@ function mrbsMakeBookings($bookings, $id=NULL, $just_check=FALSE, $skip=FALSE, $
           $mail_previous = array();
         }
         // Send the email
+        if($environment == 'development') {
+          error_log("Before mail");
+        }
         //inga utskick på stängningsbokningar
         //Adminmail går endast till de areor som har email för områdesansvarig definierad via admingränssnittet(idag endast CAS)
         if ($booking['reminder_email_enabled'] && $booking['type']!= "C" && $booking['type']!= "B" ) {
@@ -2675,12 +2683,18 @@ function mrbsMakeBookings($bookings, $id=NULL, $just_check=FALSE, $skip=FALSE, $
             $notifymailresult = notifyBookerOnBooking($booking, $mail_previous, !isset($id), $is_repeat_table, $result['start_times']);
             //error_log('Notify mail: ' . $notifymailresult);
           }
-		    }
+        }
+        if($environment == 'development') {
+          error_log("After mail");
+        }
       }
     }   
   } // end foreach $bookings
 
   sql_mutex_unlock("$tbl_entry");
+  if($environment == 'development') {
+    error_log("After sql_mutex_lock entry table");
+  }
 
   //191003
   if ($valid_booking){
