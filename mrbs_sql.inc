@@ -2665,9 +2665,9 @@ function mrbsMakeBookings($bookings, $id=NULL, $just_check=FALSE, $skip=FALSE, $
         if($environment == 'development') {
           error_log("Before mail");
         }
-        //inga utskick på stängningsbokningar
+        //inga utskick på stängningsbokningar "C" eller specialbokninar "S"
         //Adminmail går endast till de areor som har email för områdesansvarig definierad via admingränssnittet(idag endast CAS)
-        if ($booking['reminder_email_enabled'] && $booking['type']!= "C" && $booking['type']!= "B" ) {
+        if ($booking['reminder_email_enabled'] && $booking['type']!= "C" && $booking['type']!= "B" && $booking['type']!= "S" ) {
           notifyAdminOnBooking($booking, $mail_previous, !isset($id), $is_repeat_table, $result['start_times']);
         }
         //191003 skicka mail till handläggare när någon bokar/ändrar en bokningsbar tid
@@ -2675,7 +2675,7 @@ function mrbsMakeBookings($bookings, $id=NULL, $just_check=FALSE, $skip=FALSE, $
           $notifymailresult = notifyInstructorOnBooking($booking, $mail_previous, !isset($id), $is_repeat_table, $result['start_times']);
         }
         //KTH generellt mailutskick 2018, mail till bokaren om arean har reminder_email_enabled = 1 
-		    if ($mail_settings['booker'] && $booking['reminder_email_enabled'] && $booking['type']!= "C") {
+		    if ($mail_settings['booker'] && $booking['reminder_email_enabled'] && $booking['type']!= "C" && $booking['type']!= "S") {
           //skicka INTE för bokningar som är: kvitterade OCH ändrade OCH med confirm default = 0 OCH det inte var en "B"(bokningsbar) tidigare
           if (($booking['status'] == 0 && isset($id) && $booking['confirmed_default'] == 0 && $mail_previous['type'] != "B") || $booking['type'] == "B") {
             //do nothing
