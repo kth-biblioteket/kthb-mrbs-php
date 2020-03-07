@@ -927,10 +927,12 @@ function cell_html($cell, $query_strings, $is_invalid = FALSE, $ajaxuser = NULL)
                 (($times_along_top) ? "1" : $slots) .
                 "\">\n";
     
-        //Visa inte namnet på den som bokat för andra än admin (och bokaren)
+        //Visa inte namnet på den som bokat
+        //för bokningar som är default type "I"
+        //Visa för admin och bokaren och för specialbokningar "S"
         $bookingdesc = "";
         if ((getWritable($cell[0]['create_by'], $user, $cell[0]['room_id']) && $is_invalid==FALSE) 
-            || $is_admin ) {
+            || $is_admin || $color == "S") {
               $bookingdesc = $descr;
         } else {
           if ($color != "B"){ 

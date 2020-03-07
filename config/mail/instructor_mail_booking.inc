@@ -72,7 +72,7 @@ $html_body['content'] = '
                     <td>' . get_mail_vocab("type." . $data['type']) . '</td>
                 </tr>
                 <tr>
-                    <td>Plats: </td>';
+                    <td></td>';
                 if ($data['campus'] > 0) {
 $html_body['content'] .=      
                     '<td>'. get_campus($data['campus'], 'sv') . '</td>';

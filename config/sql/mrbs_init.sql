@@ -7,9 +7,6 @@
 -- Serverversion: 5.6.24-log
 -- PHP-version: 5.6.0
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
-
 --
 -- Databas: `mrbs_APPNAME`
 -- Ta bort s från sDROP och sCREATE och se till att sätta rätt databasnamn!
@@ -455,21 +452,58 @@ CREATE TABLE IF NOT EXISTS `mrbs_entry` (
 -- Dumpning av Data i tabell `mrbs_entry`
 --
 /*
-INSERT INTO mrbs_grupprum.mrbs_entry (`id`, `start_time`, `end_time`, `entry_type`, `repeat_id`, `room_id`, `timestamp`, `instructor`, `create_by`, `modified_by`, `name`, `type`, `description`, `status`, `reminded`, `lang`, `confirmation_code`, `info_time`, `info_user`, `info_text`, `email`, `phone`, `user_group`, `program`, `study_info`, `previously`, `subject_keywords`, `campus`, `preferred_language`, `other_info`, `ical_uid`, `ical_sequence`, `ical_recur_id`) VALUES 
+INSERT INTO mrbs_grupprum.mrbs_entry (`start_time`, `end_time`, `entry_type`, `repeat_id`, `room_id`, `timestamp`, `instructor`, `create_by`, `modified_by`, `name`, `type`, `description`, `status`, `reminded`, `lang`, `confirmation_code`, `info_time`, `info_user`, `info_text`, `email`, `phone`, `user_group`, `program`, `study_info`, `previously`, `subject_keywords`, `campus`, `preferred_language`, `other_info`, `ical_uid`, `ical_sequence`, `ical_recur_id`) 
 */ 
 /*
+
+GRUPPRUM
 SELECT 
-mrbs.mrbs_entry.id, `start_time`, `end_time`, `entry_type`, `repeat_id`, `room_id`, `timestamp`, null, 
+-- mrbs.mrbs_entry.id,
+`start_time`, `end_time`, `entry_type`, `repeat_id`,
+-- `room_id`, 
+mrbs_grupprum.mrbs_room.id as room_id,
+`timestamp`, null, 
 `create_by`, `modified_by`, `name`, `type`, mrbs.mrbs_entry.description, `status`, `reminded`, `lang`, 
 `confirmation_code`, `info_time`, `info_user`, `info_text`, 
-null, null, null, null, null, null, null, null, null, null, `ical_uid`, `ical_sequence`, `ical_recur_id`,
-mrbs.mrbs_entry.room_id, mrbs_grupprum.mrbs_room.room_name, mrbs.mrbs_room.room_name, mrbs.mrbs_room.id, mrbs_grupprum.mrbs_room.id, mrbs.mrbs_entry.name
+null, null, null, null, null, null, null, null, null, null, `ical_uid`, `ical_sequence`, `ical_recur_id`
+-- mrbs.mrbs_entry.room_id, 
+-- mrbs_grupprum.mrbs_room.room_name, 
+-- mrbs.mrbs_room.room_name, 
+-- mrbs.mrbs_room.id as mrbs_room_id,  
+-- mrbs.mrbs_entry.name
 FROM mrbs.mrbs_entry
 INNER JOIN mrbs.mrbs_room
 ON mrbs.mrbs_room.id = mrbs.mrbs_entry.room_id
 INNER JOIN mrbs_grupprum.mrbs_room
 ON mrbs_grupprum.mrbs_room.room_name = mrbs.mrbs_room.room_name
 AND mrbs.mrbs_room.area_id=2
+WHERE mrbs.mrbs_entry.start_time > UNIX_TIMESTAMP('2020-03-01')
+AND mrbs.mrbs_entry.type != 'C'
+ORDER BY mrbs.mrbs_entry.id
+
+CAS
+SELECT 
+-- mrbs.mrbs_entry.id,
+`start_time`, `end_time`, `entry_type`, `repeat_id`,
+-- `room_id`, 
+mrbs_cas.mrbs_room.id as room_id,
+`timestamp`, null, 
+`create_by`, `modified_by`, `name`, `type`, mrbs.mrbs_entry.description, `status`, `reminded`, `lang`, 
+`confirmation_code`, `info_time`, `info_user`, `info_text`, 
+null, null, null, null, null, null, null, null, null, null, `ical_uid`, `ical_sequence`, `ical_recur_id`
+-- mrbs.mrbs_entry.room_id, 
+-- mrbs_grupprum.mrbs_room.room_name, 
+-- mrbs.mrbs_room.room_name, 
+-- mrbs.mrbs_room.id as mrbs_room_id,  
+-- mrbs.mrbs_entry.name
+FROM mrbs.mrbs_entry
+INNER JOIN mrbs.mrbs_room
+ON mrbs.mrbs_room.id = mrbs.mrbs_entry.room_id
+INNER JOIN mrbs_cas.mrbs_room
+ON mrbs_cas.mrbs_room.room_name = mrbs.mrbs_room.room_name
+AND mrbs.mrbs_room.area_id=5
+WHERE mrbs.mrbs_entry.start_time > UNIX_TIMESTAMP('2020-03-01')
+AND mrbs.mrbs_entry.type != 'C'
 ORDER BY mrbs.mrbs_entry.id
 */
 --
