@@ -2248,6 +2248,7 @@ function mrbsMakeBookings($bookings, $id=NULL, $just_check=FALSE, $skip=FALSE, $
   global $tbl_entry, $tbl_room, $tbl_area;
   //191003
   global $ews_host, $ews_user, $ews_password;
+  global $environment;
 
   //KTH engelska 
   if(isset($_COOKIE["mrbslang"])) {
