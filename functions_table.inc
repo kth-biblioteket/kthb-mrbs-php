@@ -827,8 +827,11 @@ function cell_html($cell, $query_strings, $is_invalid = FALSE, $ajaxuser = NULL)
           if ($color == "B") {
             $c = "B";
           } else {
-            //echo "test";
-            $c = "D invalid"; //Stängd pga att tiden gått ut men gammal bokning finns, visa som röd
+            if ($color == "S") {
+              $c = "S invalid";
+            } else {
+              $c = "D invalid"; //Stängd pga att tiden gått ut men gammal bokning finns, visa som röd
+            }
           }
         }
       } else {

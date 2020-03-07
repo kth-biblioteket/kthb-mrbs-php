@@ -84,7 +84,8 @@ $color_types = array(
     'G' => "#FF6666",
     'H' => "#66FFFF",
     'I' => "#DDFFDD",
-    'J' => "#CCCCCC");
+    'J' => "#CCCCCC",
+    'S' => "#B0C949");
      
 // colours used for pending.php and bookings awaiting approval
 $outstanding_color         = "#FF4444"; // font colour for the outstanding reservations message in the header
