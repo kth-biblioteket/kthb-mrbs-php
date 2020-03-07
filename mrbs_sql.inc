@@ -2514,7 +2514,10 @@ function mrbsMakeBookings($bookings, $id=NULL, $just_check=FALSE, $skip=FALSE, $
   // booking, then stop here and return the results
   if ($just_check || !$valid_booking)
   {
-	  sql_mutex_unlock("$tbl_entry");
+    sql_mutex_unlock("$tbl_entry");
+    if($environment == 'development') {
+      error_log("After sql_mutex_unlocklock entry table");
+    }
     return $result;
   }
   
@@ -2694,7 +2697,7 @@ function mrbsMakeBookings($bookings, $id=NULL, $just_check=FALSE, $skip=FALSE, $
 
   sql_mutex_unlock("$tbl_entry");
   if($environment == 'development') {
-    error_log("After sql_mutex_lock entry table");
+    error_log("After sql_mutex_unlocklock entry table");
   }
 
   //191003
