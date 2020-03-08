@@ -230,9 +230,6 @@ echo "@media only screen and (max-width: 600px) {";
 	#myModalrules ul {
 		width: 85%;
 	}
-	#extrainfo {
-		width: 85%;
-	}
 	/* 191003 */
 	#banner {
 		padding-top: 5px;
