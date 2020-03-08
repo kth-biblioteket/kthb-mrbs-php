@@ -980,6 +980,7 @@ table#colour_key {
 #colour_key .I.confirmed {border: 1px solid #A54637 !important;}
 #colour_key .K {border: 1px solid #C9910A !important;}
 #colour_key .B {border: 1px solid #CCCCCC !important;}
+#colour_key .S {border: 1px solid #83982d !important;}
 
 #colour_key .confirmed {
 	font-weight: normal;

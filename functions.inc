@@ -2442,6 +2442,12 @@ function show_colour_key_KTH()
 		"title=\"" . get_vocab("colour_key_confirmed") . "\">\n";        // but put the name in the title so you can still read it all if you hover over it
 		echo get_vocab("colour_key_confirmed") . "</div></td>\n";
     
+    //Event = KTH-gröna
+		echo "<td class=\"S\">\n";
+		echo "<div class=\"celldiv slots1\" " .  // put the description inside a div which will give clipping in case of long names
+		"title=\"" . get_vocab("colour_key_special") . "\">\n";        // but put the name in the title so you can still read it all if you hover over it
+    echo get_vocab("colour_key_special") . "</div></td>\n";
+    
     //Otillgängliga = gråa
 		echo "<td class=\"invalid\">\n";
 		echo "<div class=\"celldiv slots1\" " .  // put the description inside a div which will give clipping in case of long names

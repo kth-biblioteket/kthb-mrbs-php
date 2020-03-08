@@ -53,6 +53,7 @@ $vocab["colour_key_bookable"]			= "Available";
 $vocab["colour_key_to_be_confirmed"]	= "Booked -  to be confirmed";
 $vocab["colour_key_confirmed"]			= "Booked confirmed";
 $vocab["colour_key_invalid"]			= "Not available";
+$vocab["colour_key_special"]			= "Event";
 
 // Used in trailer.inc
 $vocab["viewday"]            = "View Day";

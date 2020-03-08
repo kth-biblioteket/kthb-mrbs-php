@@ -53,6 +53,7 @@ $vocab["colour_key_bookable"]			= "Ledig";
 $vocab["colour_key_to_be_confirmed"]	= "Bokad - Kvitteras";
 $vocab["colour_key_confirmed"]			= "Kvitterad bokning";
 $vocab["colour_key_invalid"]			= "Ej tillgänglig";
+$vocab["colour_key_special"]			= "Event";
 
 // Used in trailer.inc
 $vocab["viewday"]            = "Visa dag";
