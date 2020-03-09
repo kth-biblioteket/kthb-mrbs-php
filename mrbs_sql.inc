@@ -2459,8 +2459,8 @@ function mrbsMakeBookings($bookings, $id=NULL, $just_check=FALSE, $skip=FALSE, $
     $startdate = new datetime($start_date['year'].'-'.$start_date['mon'].'-'.$start_date['mday'].' '.$start_date['hours'].':'.$start_date['minutes']);
     $end_date = getdate($booking['end_time']);
     $enddate = new datetime($end_date['year'].'-'.$end_date['mon'].'-'.$end_date['mday'].' '.$end_date['hours'].':'.$end_date['minutes']);
-    //Om rummet har en exchangekalender definierad så boka tid i den.
-    if (get_exchange_email($booking['room_id']) != "" ) { 
+    //Om rummet har en exchangekalender definierad så boka tid i den. Ej stängt/special
+    if (get_exchange_email($booking['room_id']) != "" && $booking['type']!= "C" && $booking['type']!= "S" ) { 
       if($is_admin && !isset($id)) {
         try {
           $outlook_result = createappointment(get_exchange_email($booking['room_id']), 'KTH Biblioteket', get_mail_vocab("calendar_subject") . "-" . get_mail_vocab("bookable_entry_text") ,$booking['instructor'], $booking['instructor'], $startdate, $enddate, $ews_host, $ews_user, $ews_password);   
@@ -2703,7 +2703,7 @@ function mrbsMakeBookings($bookings, $id=NULL, $just_check=FALSE, $skip=FALSE, $
   //191003
   if ($valid_booking){
     //spara event_id etc för outlookbokningen
-    //Om rummet har en exchangekalender definierad så boka tid i den.
+    //Om rummet har en exchangekalender definierad.
     if (get_exchange_email($booking['room_id']) != "" ) {
       if (isset($id)) {
         sql_command("UPDATE kth_exchange_events SET entry_id = " . $booking['id'] . " WHERE entry_id = $id");
