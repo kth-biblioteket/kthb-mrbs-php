@@ -140,22 +140,17 @@ $td = date("d",$i);
 // Show Go to week before and after links
 //KTH
 //200309 visa länk till nästa lediga bokning om bokningar är stängda som default
+$nextavailable = "";
 if (!$default_bookings_open) {
   $next_start_time = get_next_available_start_time($room,$year.$month.$day);
   if ($next_start_time) {
-    echo "
-    <div class=\"before_after_links\">
-      <div class=\"date_nav\">
-        <div class=\"date_now\">
+    $nextavailable = "
           <a href=\"week.php?year=" . date("Y",$next_start_time). 
             "&amp;month=". date("Y",$next_start_time) . 
             "&amp;day=" .date("Y",$next_start_time) . 
             "&amp;area=$area&amp;room=$room\">
               <img src=\"images/arrow-left-white-bold.png\" alt=\"Föregående dag\"> ".get_vocab("weekbefore")."
-          </a>
-        </div>
-      </div>
-    </div>\n";
+          </a>\n";
   }
 }
 $before_after_links_html = "
@@ -170,6 +165,7 @@ $before_after_links_html = "
       <a href=\"week.php?area=$area&amp;room=$room\">
           ".get_vocab("gotothisweek")."
       </a>
+      $nextavailable
     </div>
     <div class=\"date_after\">
       <a href=\"week.php?year=$ty&amp;month=$tm&amp;day=$td&amp;area=$area&amp;room=$room\">
