@@ -1427,7 +1427,7 @@ img {
 }
 
 td.C, img.C {
-    background-color: #7eddfc !important; /* alltid blå på stängd bokning som admin ser den*/
+    background-color: #CACACA !important; /*191003 GRÅ #CACACA alltid blå(#7eddfc) på stängd bokning*/
 }
 
 table.dwm_main {
