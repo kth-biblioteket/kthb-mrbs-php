@@ -143,7 +143,7 @@ $td = date("d",$i);
 $nextavailable = "";
 if (!$default_bookings_open) {
   echo $year.$month.$day;
-  $next_start_time = get_next_available_start_time($room,$year.$month.$day);
+  $next_start_time = get_next_available_start_time($room,date('Y-m-d'));
   if ($next_start_time) {
     $nextavailable = "&nbsp;-&nbsp;<a href=\"week.php?year=" . date("Y",$next_start_time). 
             "&amp;month=". date("m",$next_start_time) . 
