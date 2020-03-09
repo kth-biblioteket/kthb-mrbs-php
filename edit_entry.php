@@ -71,7 +71,7 @@ $entry_fields = array('name', 'description', 'start_date', 'end_date', 'areas',
     
 //191003
 //Hämta vilka custom fields som finns och ska visas från DB-tabell
-//200309 mandatory
+//200309 mandatory, ej för admins
 $custom_fields_toshow = array();
 $sql = "SELECT entry_field_name,type,mandatory
           FROM kth_entry_custom_fields
@@ -93,7 +93,7 @@ for ($i = 0; ($row = sql_row_keyed($res, $i)); $i++)
   if($row['type'] == 'custom'){
     $fields_key = array_search($row['entry_field_name'], array_column($fields, 'name'));
     $custom_fields_map[$row['entry_field_name']] = $fields[$fields_key];
-    if ($row['mandatory']){
+    if ($row['mandatory'] && $is_admin){
       $is_mandatory_field['entry.'. $row['entry_field_name']] = true;
     }
   }
