@@ -1262,7 +1262,10 @@ else
   if ($is_admin && !$default_bookings_open) {
     $name          = get_vocab("bookable_entry_text");
   } else {
-    $name          = "";
+    //200309 Sätt namn till inloggad användares
+    if (!$is_admin) {
+      $name = getFullName();
+    }
   }
   $create_by     = $user;
   $description   = $default_description;
@@ -1541,12 +1544,18 @@ foreach ($edit_entry_field_order as $key)
   switch( $key )
   {
   case 'name':
-  //191003 bara admin får ändra namn...
+  //191003 bara admin får ändra namn... Annars ska namnet vara lika med den inloggade bokarens full name.
   //bara om settings för bokningar är att de ska vara stängda som default i config.inc.php($default_bookings_open = false)
+  //ändrat så att ingen får ändra sitt namn
+  //TODO går att ändra på sidan för den som bokar, Se till att istället endast spara informationen från getfullname
     if (!$is_admin && !$default_bookings_open) {
       create_field_entry_name(TRUE);
     } else {
-      create_field_entry_name(FALSE);
+      if ($is_admin) {
+        create_field_entry_name(FALSE);
+      } else {
+        create_field_entry_name(TRUE);
+      }
     }
     break;
 
