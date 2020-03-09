@@ -164,8 +164,7 @@ $before_after_links_html = "
     <div class=\"date_now\">
       <a href=\"week.php?area=$area&amp;room=$room\">
           ".get_vocab("gotothisweek")."
-      </a>
-      $nextavailable
+      </a>$nextavailable
     </div>
     <div class=\"date_after\">
       <a href=\"week.php?year=$ty&amp;month=$tm&amp;day=$td&amp;area=$area&amp;room=$room\">
