@@ -142,7 +142,9 @@ $td = date("d",$i);
 //200309 visa länk till nästa lediga bokning om bokningar är stängda som default
 if (!$default_bookings_open) {
   $next_Start_time = get_next_available_start_time($room,$year.$month.$day);
-  echo date("Y",$next_Start_time);
+  if ($next_Start_time) {
+    echo date("Y",$next_Start_time);
+  }
 }
 $before_after_links_html = "
 <div class=\"before_after_links\">
