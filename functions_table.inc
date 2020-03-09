@@ -934,15 +934,18 @@ function cell_html($cell, $query_strings, $is_invalid = FALSE, $ajaxuser = NULL)
         //för bokningar som är default type "I"
         //Visa för admin och bokaren och för specialbokningar "S"
         $bookingdesc = "";
+        $longbookingdesc = "";
         if ((getWritable($cell[0]['create_by'], $user, $cell[0]['room_id']) && $is_invalid==FALSE) 
             || $is_admin || $color == "S") {
               $bookingdesc = $descr;
+              $longbookingdesc = $long_descr;
         } else {
           if ($color != "B"){ 
             $bookingdesc = get_vocab("booked_entry_text") ."\n";
           } else {
             $bookingdesc = get_vocab("bookable_entry_text") ."\n";
           }
+          $longbookingdesc = $bookingdesc;
         }
         //KTH Visa bara länk till edit_entry om bokningen är valid och om användaren är behörig 
         //eller om användaren är admin
@@ -953,7 +956,7 @@ function cell_html($cell, $query_strings, $is_invalid = FALSE, $ajaxuser = NULL)
             || ($color == "B" && $is_invalid==FALSE) 
             || $is_admin 
             || $is_kiosk && $is_invalid==FALSE) {
-          $html .= "<a href=\"edit_entry.php?id=$id&amp;". $query_strings['booking'] . "\" title=\"$bookingdesc\">";
+          $html .= "<a href=\"edit_entry.php?id=$id&amp;". $query_strings['booking'] . "\" title=\"$longbookingdesc\">";
           //$html .= "<img class=\"\" src=\"images/edit.png\" width=\"10\" height=\"10\"></br>";
           $html .= ($is_repeat) ? "<img class=\"repeat_symbol $c\" src=\"images/repeat.png\" alt=\"" . get_vocab("series") . "\" title=\"" . get_vocab("series") . "\" width=\"10\" height=\"10\">" : '';
           $html .= "$bookingdesc</a>\n";

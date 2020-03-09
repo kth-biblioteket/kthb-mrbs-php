@@ -1552,7 +1552,7 @@ foreach ($edit_entry_field_order as $key)
 
   case 'description':
     //KTH
-	//create_field_entry_description();
+	  create_field_entry_description();
     break;
 
   case 'start_date':

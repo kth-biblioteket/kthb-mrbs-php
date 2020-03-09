@@ -207,6 +207,7 @@ if (in_array($page, array('day', 'week')))
   <script type="text/javascript" src="js/refresh.js.php?<?php echo $standard_query_string ?>"></script>
   <?php
   //191003 Använd bara drag/resize för admins
+  //200309 Använd inte alls.
   if ($is_admin ) { ?>
     <!--script type="text/javascript" src="js/resizable.js.php?<?php echo $standard_query_string ?>"></script-->
   <?php }?>
