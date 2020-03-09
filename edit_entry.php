@@ -93,7 +93,7 @@ for ($i = 0; ($row = sql_row_keyed($res, $i)); $i++)
   if($row['type'] == 'custom'){
     $fields_key = array_search($row['entry_field_name'], array_column($fields, 'name'));
     $custom_fields_map[$row['entry_field_name']] = $fields[$fields_key];
-    if ($row['mandatory'] && $is_admin){
+    if ($row['mandatory'] && !$is_admin){
       $is_mandatory_field['entry.'. $row['entry_field_name']] = true;
     }
   }
