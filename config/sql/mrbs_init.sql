@@ -94,7 +94,8 @@ CREATE TABLE IF NOT EXISTS `kth_entry_custom_fields` (
   `type` varchar(50) NOT NULL,
   `sort_order` int(11) NOT NULL,
   `visible` int(11) NOT NULL,
-  `enabled` int(11) NOT NULL
+  `enabled` int(11) NOT NULL,
+  `mandatory` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --

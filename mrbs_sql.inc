@@ -2045,6 +2045,39 @@ function get_instructor($email)
   return $row[0];
 }
 
+//KTH ny funktion.
+//191003
+//Nästa bokningsbara tid
+function get_next_available_start_time($room_id, $date)
+{
+
+  $room_id = (int)$room_id;
+    
+  $sql = "SELECT start_time
+          FROM mrbs_entry 
+          WHERE type = \"B\" 
+          AND start_time > UNIX_TIMESTAMP(\"". $date ."\")
+          AND room_id = $room_id
+          ORDER BY start_time asc";
+
+  $sql .= " LIMIT 1";
+  $res = sql_query($sql);
+  
+  if ($res === FALSE)
+  {
+    trigger_error(sql_error(), E_USER_WARNING);
+    return FALSE;
+  }
+  
+  if (sql_count($res) == 0)
+  {
+    return NULL;
+  }
+  
+  $row = sql_row($res, 0);
+  return $row[0];
+}
+
 
 // Gets an array of area names indexed by area id.
 // If $all=TRUE then all areas are returned, otherwise just the ones that
