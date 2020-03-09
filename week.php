@@ -144,8 +144,7 @@ $nextavailable = "";
 if (!$default_bookings_open) {
   $next_start_time = get_next_available_start_time($room,$year.$month.$day);
   if ($next_start_time) {
-    $nextavailable = "
-            &nbsp;-&nbsp;<a href=\"week.php?year=" . date("Y",$next_start_time). 
+    $nextavailable = "&nbsp;-&nbsp;<a href=\"week.php?year=" . date("Y",$next_start_time). 
             "&amp;month=". date("Y",$next_start_time) . 
             "&amp;day=" .date("Y",$next_start_time) . 
             "&amp;area=$area&amp;room=$room\">"
