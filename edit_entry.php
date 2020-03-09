@@ -71,8 +71,9 @@ $entry_fields = array('name', 'description', 'start_date', 'end_date', 'areas',
     
 //191003
 //Hämta vilka custom fields som finns och ska visas från DB-tabell
+//200309 mandatory
 $custom_fields_toshow = array();
-$sql = "SELECT entry_field_name,type
+$sql = "SELECT entry_field_name,type,mandatory
           FROM kth_entry_custom_fields
           WHERE area_id = $area
           AND visible = 1
@@ -92,6 +93,9 @@ for ($i = 0; ($row = sql_row_keyed($res, $i)); $i++)
   if($row['type'] == 'custom'){
     $fields_key = array_search($row['entry_field_name'], array_column($fields, 'name'));
     $custom_fields_map[$row['entry_field_name']] = $fields[$fields_key];
+    if ($row['mandatory']){
+      $is_mandatory_field['entry.'. $row['entry_field_name']] = true;
+    }
   }
   if($row['entry_field_name'] == 'start_time'){
     $edit_entry_field_order[] = 'start_date';
@@ -105,7 +109,6 @@ for ($i = 0; ($row = sql_row_keyed($res, $i)); $i++)
 $edit_entry_field_order[] = 'areas';
 $edit_entry_field_order[] = 'rooms';
 $edit_entry_field_order[] = 'type';
-
 // Returns the booking date for a given time.   If the booking day spans midnight and
 // $t is in the interval between midnight and the end of the day then the booking date
 // is really the day before.
@@ -747,23 +750,7 @@ function create_field_entry_custom_field($field, $key, $is_admin, $user, $disabl
   global $is_mandatory_field, $text_input_max, $maxlength;
   //191003
   //ta bara med de fält som respektive area ska ha
-switch (get_area_type($area))
-  {
-    case "1": //1,2 = grupprum/lästudio
-      break;
-    case "2": 
-      break;
-    case "3": //3 = handledning CAS
-      break;
-    case "4": //3 = Opening hours
-      break;
-    case "5": //5 = Talking books
-      break;
-    case "6": //6 = Handledning - KTH Biblioteket
-      break;
-    default:
-  }
-switch ($key)
+  switch ($key)
     {//TODO hårdkodning bort.
       case 'campus':
         echo "<div id=\"div_campus\">\n";
@@ -846,7 +833,6 @@ switch ($key)
         break;
 
       default:
-
         echo "<div>\n";
         $fieldvalue = NULL;
         //191003
@@ -869,6 +855,9 @@ switch ($key)
             $disabled = true;
           }
         }
+
+        //TODO hämta om custom fields är mandatory
+
         $params = array('label'      => get_loc_field_name($tbl_entry, $key) . "", //KTH
                         //KTH 
                         'label_after'=> TRUE,                  
