@@ -148,9 +148,9 @@ if (!$default_bookings_open) {
           <a href=\"week.php?year=" . date("Y",$next_start_time). 
             "&amp;month=". date("Y",$next_start_time) . 
             "&amp;day=" .date("Y",$next_start_time) . 
-            "&amp;area=$area&amp;room=$room\">
-              <img src=\"images/arrow-left-white-bold.png\" alt=\"Föregående dag\"> ".get_vocab("weekbefore")."
-          </a>\n";
+            "&amp;area=$area&amp;room=$room\">"
+            .get_vocab("nextavailable").
+          "</a>\n";
   }
 }
 $before_after_links_html = "
