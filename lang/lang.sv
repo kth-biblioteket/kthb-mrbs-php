@@ -38,7 +38,7 @@ $vocab["areas"]              = "Välj område";
 $vocab["daybefore"]          = "Föregående";
 $vocab["dayafter"]           = "Nästa";
 $vocab["gototoday"]          = "Visa idag";
-$vocab["nextavailable"]      = "Gå till första lediga tid";
+$vocab["nextavailable"]      = "Nästa lediga tid";
 $vocab["goto"]               = "Gå till";
 $vocab["highlight_line"]     = "Markera denna rad";
 $vocab["click_to_reserve"]   = "Klicka på cellen för att göra en bokning.";
@@ -434,7 +434,7 @@ $vocab["delete_entries_failed"] = "Posterna kunde inte tas bort";
 // Used in week.php
 $vocab["weekbefore"]         = "Föregående";
 $vocab["weekafter"]          = "Nästa";
-$vocab["gotothisweek"]       = "Visa denna vecka";
+$vocab["gotothisweek"]       = "Visa nuvarande vecka";
 $vocab["week"]       		 = "Vecka";
 
 // Used in month.php

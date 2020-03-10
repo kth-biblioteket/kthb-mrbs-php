@@ -38,7 +38,7 @@ $vocab["areas"]              = "Pick area";
 $vocab["daybefore"]          = "Previous";
 $vocab["dayafter"]           = "Next";
 $vocab["gototoday"]          = "Show today";
-$vocab["nextavailable"]      = "Go to first available time";
+$vocab["nextavailable"]      = "Show next available time";
 $vocab["goto"]               = "goto";
 $vocab["highlight_line"]     = "Highlight this line";
 $vocab["click_to_reserve"]   = "Click on the cell to make a reservation.";
@@ -440,7 +440,7 @@ $vocab["delete_entries_failed"] = "The entries could not be deleted.";
 // Used in week.php
 $vocab["weekbefore"]         = "Previous";
 $vocab["weekafter"]          = "Next";
-$vocab["gotothisweek"]       = "Show this week";
+$vocab["gotothisweek"]       = "Show current week";
 $vocab["week"]       		 = "Week";
 
 // Used in month.php
