@@ -39,6 +39,7 @@ $vocab["daybefore"]          = "Previous";
 $vocab["dayafter"]           = "Next";
 $vocab["gototoday"]          = "Show today";
 $vocab["nextavailable"]      = "Show next available time";
+$vocab["noavailable"]         = "No more available times";
 $vocab["goto"]               = "goto";
 $vocab["highlight_line"]     = "Highlight this line";
 $vocab["click_to_reserve"]   = "Click on the cell to make a reservation.";

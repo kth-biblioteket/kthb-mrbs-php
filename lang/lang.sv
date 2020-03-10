@@ -39,6 +39,7 @@ $vocab["daybefore"]          = "Föregående";
 $vocab["dayafter"]           = "Nästa";
 $vocab["gototoday"]          = "Visa idag";
 $vocab["nextavailable"]      = "Nästa lediga tid";
+$vocab["noavailable"]        = "Inga fler lediga tider";
 $vocab["goto"]               = "Gå till";
 $vocab["highlight_line"]     = "Markera denna rad";
 $vocab["click_to_reserve"]   = "Klicka på cellen för att göra en bokning.";

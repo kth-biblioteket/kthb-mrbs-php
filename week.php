@@ -116,6 +116,13 @@ if (!$default_bookings_open) {
             .get_vocab("nextavailable").
           "</a>
     </div>\n";
+  } else {
+    $nextavailable = "
+    <div style=\"text-align:right\">
+      <button class=\"btn btn-info\" satyle=\"background-color: #d85497; color: #fff; border-color: #d85497\">"
+            .get_vocab("nextavailable").
+      "</button>
+    </div>\n";
   }
 }
 echo $nextavailable;
