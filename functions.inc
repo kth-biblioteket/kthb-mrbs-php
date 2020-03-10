@@ -147,6 +147,7 @@ function print_simple_header()
 // 191003
 function print_modal($area,$lang,$area_map,$area_map_image)
 {
+  global $default_bookings_open;
   //KTH Modal box
 //191003
 echo "<div>
