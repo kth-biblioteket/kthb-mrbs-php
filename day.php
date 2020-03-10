@@ -86,7 +86,7 @@ if (!$default_bookings_open) {
   if ($next_start_time) {
     $nextavailable = "
     <div style=\"text-align:right\">
-      <a class=\"btn btn-primary\" style=\"background-color: #d85497; color: #fff; border-color: #d85497\" href=\"week.php?year=" . date("Y",$next_start_time). 
+      <a class=\"btn btn-primary\" style=\"background-color: #d85497; color: #fff; border-color: #d85497\" href=\"day.php?year=" . date("Y",$next_start_time). 
             "&amp;month=". date("m",$next_start_time) . 
             "&amp;day=" .date("d",$next_start_time) . 
             "&amp;area=$area&amp;room=$room\">"
