@@ -85,7 +85,7 @@ if ($extra_info != "") {
 //191003
 
 get_area_settings($area);
-echo "<div>";
+echo "<div style=\"padding-bottom:10px\">";
 print_modal($area,$lang,$area_map,$area_map_image);
 //200309 visa länk till nästa lediga bokning om bokningar är stängda som default
 $nextavailable = "";
