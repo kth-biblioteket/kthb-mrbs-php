@@ -74,38 +74,6 @@ if ($extra_info != "") {
 	echo "<div id=\"extrainfo\" style=\"\">" . $extra_info ."</div>";
 }
 
-//KTH Modal box
-//191003
-get_area_settings($area);
-echo "<div style=\"padding-bottom:10px;overflow:auto\">";
-print_modal($area,$lang,$area_map,$area_map_image);
-//200309 visa länk till nästa lediga bokning om bokningar är stängda som default
-//TODO hämta aktuell veckas sista slot och kolla om det finns lediga tider efter den
-$nextavailable = "";
-if (!$default_bookings_open) {
-  //$next_start_time = get_next_available_start_time_area($room,$ty.$tm.$td);
-  $next_start_time = get_next_available_start_time_area($area,$year ."-". $month ."-". $day);
-  if ($next_start_time) {
-    $nextavailable = "
-    <div style=\"text-align:right\">
-      <a class=\"btn btn-primary\" style=\"background-color: #d85497; color: #fff; border-color: #d85497\" href=\"day.php?year=" . date("Y",$next_start_time). 
-            "&amp;month=". date("m",$next_start_time) . 
-            "&amp;day=" .date("d",$next_start_time) . 
-            "&amp;area=$area\">"
-            .get_vocab("nextavailable").
-          "</a>
-    </div>\n";
-  } else {
-    $nextavailable = "
-    <div style=\"text-align:right\">
-      <button class=\"btn btn-info\" satyle=\"background-color: #d85497; color: #fff; border-color: #d85497\">"
-            .get_vocab("noavailable").
-      "</button>
-    </div>\n";
-  }
-}
-echo $nextavailable;
-echo "</div>";
 //y? are year, month and day of yesterday
 //t? are year, month and day of tomorrow
 
@@ -133,7 +101,38 @@ $ty = date("Y",$i);
 $tm = date("m",$i);
 $td = date("d",$i);
 
-
+//KTH Modal box
+//191003
+get_area_settings($area);
+echo "<div style=\"padding-bottom:10px;overflow:auto\">";
+print_modal($area,$lang,$area_map,$area_map_image);
+//200309 visa länk till nästa lediga bokning om bokningar är stängda som default
+//TODO hämta aktuell veckas sista slot och kolla om det finns lediga tider efter den
+$nextavailable = "";
+if (!$default_bookings_open) {
+  $next_start_time = get_next_available_start_time_area($area,$ty.$tm.$td);
+  //$next_start_time = get_next_available_start_time_area($area,$year ."-". $month ."-". $day);
+  if ($next_start_time) {
+    $nextavailable = "
+    <div style=\"text-align:right\">
+      <a class=\"btn btn-primary\" style=\"background-color: #d85497; color: #fff; border-color: #d85497\" href=\"day.php?year=" . date("Y",$next_start_time). 
+            "&amp;month=". date("m",$next_start_time) . 
+            "&amp;day=" .date("d",$next_start_time) . 
+            "&amp;area=$area\">"
+            .get_vocab("nextavailable").
+          "</a>
+    </div>\n";
+  } else {
+    $nextavailable = "
+    <div style=\"text-align:right\">
+      <button class=\"btn btn-info\" satyle=\"background-color: #d85497; color: #fff; border-color: #d85497\">"
+            .get_vocab("noavailable").
+      "</button>
+    </div>\n";
+  }
+}
+echo $nextavailable;
+echo "</div>";
 
 // Show current date and timezone
 echo "<div id=\"dwm\">\n";
