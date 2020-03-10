@@ -120,7 +120,7 @@ if (!$default_bookings_open) {
     $nextavailable = "
     <div style=\"text-align:right\">
       <button class=\"btn btn-info\" satyle=\"background-color: #d85497; color: #fff; border-color: #d85497\">"
-            .get_vocab("nextavailable").
+            .get_vocab("noavailable").
       "</button>
     </div>\n";
   }
