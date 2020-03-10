@@ -12,7 +12,6 @@ $timetohighlight = get_form_var('timetohighlight', 'int');
 $ajax = get_form_var('ajax', 'int');
 $ajaxuser = get_form_var('user', 'string');
 
-
 //$times_along_top = get_times_along_top($area); //KTH
 $times_along_top = FALSE; //alltid tider till vänster på veckovyn
 unset($periods);
@@ -142,15 +141,17 @@ $td = date("d",$i);
 //200309 visa länk till nästa lediga bokning om bokningar är stängda som default
 $nextavailable = "";
 if (!$default_bookings_open) {
-
   $next_start_time = get_next_available_start_time($room,date('Y-m-d'));
   if ($next_start_time) {
-    $nextavailable = "&nbsp;-&nbsp;<a href=\"week.php?year=" . date("Y",$next_start_time). 
+    $nextavailable = "
+    <div>
+      <a class=\"btn btn-primary\" href=\"week.php?year=" . date("Y",$next_start_time). 
             "&amp;month=". date("m",$next_start_time) . 
             "&amp;day=" .date("d",$next_start_time) . 
             "&amp;area=$area&amp;room=$room\">"
             .get_vocab("nextavailable").
-          "</a>\n";
+          "</a>
+    </div>\n";
   }
 }
 $before_after_links_html = "
@@ -162,7 +163,9 @@ $before_after_links_html = "
       </a>
     </div>
     <div class=\"date_now\">
-      <a href=\"week.php?area=$area&amp;room=$room\">".get_vocab("gotothisweek")."</a>$nextavailable
+      <a href=\"week.php?area=$area&amp;room=$room\">"
+        .get_vocab("gotothisweek").
+      "</a>
     </div>
     <div class=\"date_after\">
       <a href=\"week.php?year=$ty&amp;month=$tm&amp;day=$td&amp;area=$area&amp;room=$room\">
@@ -171,7 +174,7 @@ $before_after_links_html = "
     </div>
   </div>
 </div>\n";
-
+echo $nextavailable;
 echo $before_after_links_html;
 
 echo "<table class=\"dwm_main\" id=\"week_main\" data-resolution=\"$resolution\">";
