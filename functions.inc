@@ -147,7 +147,6 @@ function print_simple_header()
 // 191003
 function print_modal($area,$lang,$area_map,$area_map_image)
 {
-  global $default_bookings_open;
   //KTH Modal box
 //191003
 echo "<div>
@@ -184,28 +183,11 @@ echo      "</div>
         </div>
       </div>";
       //Länkar
-echo  "<div style=\"width: 100%;float: left;display:flex\">\n";
+echo  "<div style=\"\">\n";
 echo    "<h2 id=\"ruleslink\" class=\"expandable-header\">". get_vocab('bookingrules') . "<span class=\"expandable\"></span></h2>\n";
 if ($area_map) {
 echo    "<h2 id=\"maplink\" class=\"expandable-header\">". get_vocab('map') . "<span class=\"expandable\"></span></h2>\n";
 }
-//200309 visa länk till nästa lediga bokning om bokningar är stängda som default
-$nextavailable = "";
-if (!$default_bookings_open) {
-  $next_start_time = get_next_available_start_time($room,date('Y-m-d'));
-  if ($next_start_time) {
-    $nextavailable = "
-    <div style=\"text-align:right\">
-      <a class=\"btn btn-primary\" style=\"background-color: #d85497; color: #fff\" href=\"week.php?year=" . date("Y",$next_start_time). 
-            "&amp;month=". date("m",$next_start_time) . 
-            "&amp;day=" .date("d",$next_start_time) . 
-            "&amp;area=$area&amp;room=$room\">"
-            .get_vocab("nextavailable").
-          "</a>
-    </div>\n";
-  }
-}
-echo $nextavailable;
 echo  "</div>\n";
 }
 
