@@ -180,7 +180,7 @@ $before_after_links_html = "
     </div>
     <div class=\"date_after\">
       <a href=\"week.php?year=$ty&amp;month=$tm&amp;day=$td&amp;area=$area&amp;room=$room\">
-          ".get_vocab("weekafter"). " <img src=\"images/arrow-right-white-bold.png\" alt=\"Föregående dag\">
+          ".get_vocab("weekafter"). " <img src=\"images/arrow-right-white-bold.png\" alt=\"Nästa dag\">
       </a>
     </div>
   </div>

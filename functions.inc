@@ -174,7 +174,7 @@ echo        "<div id=\"myModalmap\" class=\"modal-content\">
                 <div id=\"modalhtml\"><img src=\"images/$area_map_image\"></img></div>
               </div>
               <div class=\"modal-footer\">
-                <button class=\"btn btn-primary\" type=\"button\">OK/button>
+                <button class=\"btn btn-primary\" type=\"button\">OK</button>
               </div>
             </div>";
 }
