@@ -77,7 +77,7 @@ if ($extra_info != "") {
 //KTH Modal box
 //191003
 get_area_settings($area);
-echo "<div style=\"padding-bottom:10px;overflow:auto\">$room";
+echo "<div style=\"padding-bottom:10px;overflow:auto\">";
 print_modal($area,$lang,$area_map,$area_map_image);
 echo "</div>";
 //y? are year, month and day of yesterday
