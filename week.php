@@ -92,7 +92,7 @@ print_modal($area,$lang,$area_map,$area_map_image);
 $nextavailable = "";
 if (!$default_bookings_open) {
   //$next_start_time = get_next_available_start_time($room,date('Y-m-d'));
-  $next_start_time = get_next_available_start_time($room,$year . $month . $day);
+  $next_start_time = get_next_available_start_time($room,$year ."-". $month ."-". $day);
   if ($next_start_time) {
     $nextavailable = "
     <div style=\"text-align:right\">
