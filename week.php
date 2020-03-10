@@ -81,6 +81,19 @@ if ($extra_info != "") {
 	echo "<div id=\"extrainfo\" style=\"\">" . $extra_info ."</div>";
 }
 
+//y? are year, month and day of the previous week.
+//t? are year, month and day of the next week.
+
+$i= mktime(12,0,0,$month,$day-7,$year);
+$yy = date("Y",$i);
+$ym = date("m",$i);
+$yd = date("d",$i);
+
+$i= mktime(12,0,0,$month,$day+7,$year);
+$ty = date("Y",$i);
+$tm = date("m",$i);
+$td = date("d",$i);
+
 //KTH Modal box
 //191003
 
@@ -91,8 +104,8 @@ print_modal($area,$lang,$area_map,$area_map_image);
 //TODO hämta aktuell veckas sista slot och kolla om det finns lediga tider efter den
 $nextavailable = "";
 if (!$default_bookings_open) {
-  //$next_start_time = get_next_available_start_time($room,date('Y-m-d'));
-  $next_start_time = get_next_available_start_time($room,$year ."-". $month ."-". $day);
+  $next_start_time = get_next_available_start_time($room,$ty.$tm.$td);
+  //$next_start_time = get_next_available_start_time($room,$year ."-". $month ."-". $day);
   if ($next_start_time) {
     $nextavailable = "
     <div style=\"text-align:right\">
@@ -142,19 +155,6 @@ $skipback = (date("w", $ctime) - $weekstarts + 7) % 7;
 $ctime = mktime(0, 0, 0, $month, $day + 7 * 0 - $skipback, $year);
 //echo "<h5>" . get_vocab("week") ." " . date("W", $ctime) . "(" . date("Y-m-d", $ctime) . " -- " . date("Y-m-d",strtotime( date("Y-m-d", $ctime). " +5 days")) . ")</h5>";
 //echo "</div>\n";
-
-//y? are year, month and day of the previous week.
-//t? are year, month and day of the next week.
-
-$i= mktime(12,0,0,$month,$day-7,$year);
-$yy = date("Y",$i);
-$ym = date("m",$i);
-$yd = date("d",$i);
-
-$i= mktime(12,0,0,$month,$day+7,$year);
-$ty = date("Y",$i);
-$tm = date("m",$i);
-$td = date("d",$i);
 
 // Show Go to week before and after links
 //KTH
