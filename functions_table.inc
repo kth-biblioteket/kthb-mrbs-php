@@ -892,8 +892,9 @@ function cell_html($cell, $query_strings, $is_invalid = FALSE, $ajaxuser = NULL)
     {
       //200311
       //TODO Visa obokad som annar färg för admins när $default_bookings_open = TRUE...
-      echo($default_bookings_open);
-      echo($is_admin);
+      echo("default_bookings_open: " . $default_bookings_open);
+      echo "<br>";
+      echo("is_admin: " . $is_admin);
       echo "<br>";
       if ($default_bookings_open && $is_admin ) {
         $c = "";
