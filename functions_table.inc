@@ -266,6 +266,8 @@ function checkifslotenabled($area, $room_id, $month, $day, $year, $s) {
   //om det inte finns en bokning type == "B" så ska tiden vara disabled om det inte är en type == "I"
   //Genomför bara om settings för bokningar är att de ska vara stängda som default($default_bookings_open = false)
   //Admin alltid enabled
+  echo("default_bookings_open: " . $default_bookings_open);
+  echo "<br>";
   if (!$default_bookings_open && !$is_admin) {
     if ($disabled == FALSE) {
       if (isset($slotinseconds)){ // om inställning är på perioder så kan slotinseconds bli NULL. Hur sätta/kontrollera perioders tillgänglighet?
@@ -892,10 +894,12 @@ function cell_html($cell, $query_strings, $is_invalid = FALSE, $ajaxuser = NULL)
     {
       //200311
       //TODO Visa obokad som annar färg för admins när $default_bookings_open = TRUE...
+      /*
       echo("default_bookings_open: " . $default_bookings_open);
       echo "<br>";
       echo("is_admin: " . $is_admin);
       echo "<br>";
+      */
       if ($default_bookings_open && $is_admin ) {
         $c = "";
       } else {
