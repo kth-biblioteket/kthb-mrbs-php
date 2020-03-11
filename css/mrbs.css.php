@@ -597,6 +597,9 @@ div.div_select.outside {
   background-color: #CACACA; /* GRÅ */
 }
 <?php //191003 ?>
+td.unset {
+    background-color: #fcf8e3;
+}
 
 td.K,
 .1B {
