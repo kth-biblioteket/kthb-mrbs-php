@@ -817,8 +817,12 @@ function mrbsDelEntry($user, $id, $series, $all, $truedelete)
       }
       $sql_custom_fields_to_reset = '';
       for ($i = 0; ($custom_row = sql_row_keyed($res, $i)); $i++) {
-        $sql_custom_fields_to_reset .= ($i!=0 ? "," : "");
-        $sql_custom_fields_to_reset .= $custom_row['entry_field_name'] . '=NULL';
+        //instructor ska sparas
+        //TODO bort hårdkodning
+        if($custom_row['entry_field_name'] != "instructor") {
+          $sql_custom_fields_to_reset .= ($i!=0 ? "," : "");
+          $sql_custom_fields_to_reset .= $custom_row['entry_field_name'] . '=NULL';
+        }
       }
 
       $sql = "UPDATE $tbl_entry 
@@ -2549,6 +2553,7 @@ function mrbsMakeBookings($bookings, $id=NULL, $just_check=FALSE, $skip=FALSE, $
           $res = sql_query($sql);
           $row = sql_row_keyed($res, 0);
           //get location (campus/room)
+          //TODO ska rum bara synas om det finns fler rum än ett(dvs olika locations)
           $bookinglocation = get_room_name($booking['room_id'],'sv');;
           if ($booking['campus'] > 0) {
             $bookinglocation .= ", " . get_campus($booking['campus'], 'sv');
