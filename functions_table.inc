@@ -153,6 +153,33 @@ function deletetentativebookings() {
 
 //KTH
 /**************************************
+Funktion som tar bort bokningsbara "B"-bokningar där 
+tiden gått ut och ingen bokning gjorts
+
+**************************************/
+function deletebookablebookings() {
+	global $area, $enable_periods;
+	
+	//om det är perioder så måste starttime hämtas från periodtabellen
+	$today = date("Y-m-d H:i:s");
+	$todayinseconds = strtotime(date($today));
+	$confirm_seconds = CONFIRM_MINUTES * 60;
+	//Status:
+	//Tentative = 4
+	//Confirmed = 0
+	$sql = "DELETE mrbs_entry FROM mrbs_entry
+				INNER JOIN mrbs_room ON mrbs_entry.room_id = mrbs_room.id
+				INNER JOIN mrbs_area ON mrbs_room.area_id = mrbs_area.id
+				WHERE type = 'B'
+				AND mrbs_area.id = $area
+				AND start_time + $confirm_seconds < $todayinseconds";
+	$res = sql_query($sql);
+	if (isset($res)) {
+	}
+}
+
+//KTH
+/**************************************
 Funktion som kontrollerar om 
 sloten är tillgänglig
 
@@ -835,17 +862,17 @@ function cell_html($cell, $query_strings, $is_invalid = FALSE, $ajaxuser = NULL)
           }
         }
       } else {
-        $c = $color;
-      }
-    
-      if ($status == 0)
-      {
         //191003 B ska alltid vara writable
         if ($color == "B") { 
-          $c .= " writable bookable";
+          $c .= "B writable bookable";
         } else {
-          $c .= " confirmed";
+          $c = $color;
         }
+      }
+      // 0 = confirmed
+      if ($status == 0)
+      {
+        $c .= " confirmed";
       }
 
       if ($status & STATUS_PRIVATE)
@@ -1512,6 +1539,7 @@ function week_table_innerhtml($day, $month, $year, $room, $area, $timetohighligh
 
   //KTH kolla om bokningar ska tas bort
   deletetentativebookings();
+  //TODO ta bort "B" bokningar om sluttiden passerats
   
   // Check that we've got a valid, enabled room
   $sql = "SELECT COUNT(*)
