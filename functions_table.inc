@@ -172,7 +172,7 @@ function deletebookablebookings() {
 				INNER JOIN mrbs_area ON mrbs_room.area_id = mrbs_area.id
 				WHERE type = 'B'
 				AND mrbs_area.id = $area
-				AND start_time + $confirm_seconds < $todayinseconds";
+				AND start_time < $todayinseconds";
 	$res = sql_query($sql);
 	if (isset($res)) {
 	}
@@ -1189,6 +1189,7 @@ function day_table_innerhtml($day, $month, $year, $room, $area, $timetohighlight
 
   //KTH kolla om bokningar ska tas bort (när tiden har gått ut och de inte konfirmerats)
   deletetentativebookings();
+  deletebookablebookings();
 
   $sql = "SELECT COUNT(*)
             FROM $tbl_room R, $tbl_area A
@@ -1540,7 +1541,7 @@ function week_table_innerhtml($day, $month, $year, $room, $area, $timetohighligh
   //KTH kolla om bokningar ska tas bort
   deletetentativebookings();
   //TODO ta bort "B" bokningar om sluttiden passerats
-  
+  deletebookablebookings();
   // Check that we've got a valid, enabled room
   $sql = "SELECT COUNT(*)
             FROM $tbl_room R, $tbl_area A
