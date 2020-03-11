@@ -891,9 +891,9 @@ function cell_html($cell, $query_strings, $is_invalid = FALSE, $ajaxuser = NULL)
     else
     {
       //200311
-      //TODO Visa obokad som annar färg för admins när $default_bookings_open = FALSE...
+      //TODO Visa obokad som annan färg för admins när $default_bookings_open = FALSE...
       if (!$default_bookings_open && $is_admin ) {
-        $c = "";
+        $c = "invalid";
       } else {
         $c = ($is_invalid) ? "invalid" : "new";
       }
