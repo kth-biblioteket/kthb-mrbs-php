@@ -634,7 +634,7 @@ function cell_html($cell, $query_strings, $is_invalid = FALSE, $ajaxuser = NULL)
   global $enable_periods, $times_along_top, $show_plus_link;
   global $approval_enabled, $confirmation_enabled;
 
-  global $is_kiosk;
+  global $is_kiosk, $default_bookings_open;
   //KTH
   //echo "cell_html is_invalid " . $is_invalid . "<br>";
   if ($ajaxuser != NULL) {
@@ -890,7 +890,13 @@ function cell_html($cell, $query_strings, $is_invalid = FALSE, $ajaxuser = NULL)
     }
     else
     {
-      $c = ($is_invalid) ? "invalid" : "new";
+      //200311
+      //TODO Visa obokad som annar färg för admins när $default_bookings_open = TRUE...
+      if ($default_bookings_open && $is_admin ) {
+        $c = "";
+      } else {
+        $c = ($is_invalid) ? "invalid" : "new";
+      }
     }
       
     // Don't put in a <td> cell if the slot is booked and there's no description.
