@@ -2551,9 +2551,9 @@ function mrbsMakeBookings($bookings, $id=NULL, $just_check=FALSE, $skip=FALSE, $
           //get location (campus/room)
           $bookinglocation = get_room_name($booking['room_id'],'sv');;
           if ($booking['campus'] > 0) {
-            $bookinglocation .= get_campus($booking['campus'], 'sv');
+            $bookinglocation .= ", " . get_campus($booking['campus'], 'sv');
           }
-          
+
           if(sql_count($res) == 1) {  
             try {
               $outlook_result = updateappointment($row['event_id'], get_mail_vocab("calendar_subject") . "-" . $booking['name'], $bookinglocation, $startdate, $enddate, $ews_host, $ews_user, $ews_password);
