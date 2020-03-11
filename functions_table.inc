@@ -825,7 +825,7 @@ function cell_html($cell, $query_strings, $is_invalid = FALSE, $ajaxuser = NULL)
         } else {
           //191003
           if ($color == "B") {
-            $c = "B";
+            $c = "B invalid";
           } else {
             if ($color == "S") {
               $c = "S invalid";
