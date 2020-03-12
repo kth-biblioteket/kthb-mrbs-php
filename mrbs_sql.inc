@@ -740,7 +740,7 @@ function mrbsCheckPolicy(&$booking, $ignore, $repignore, $delete=FALSE)
  *
  */
 //191003 lagt till "truedelete" för att avgöra om det är en bokning som ska tas bort helt
-//eller om det är en bokning som ska göras om till bokningsbar(dvs en användare avbokar sin tid)
+//eller om det är en bokning som ska göras om till bokningsbar(dvs en användare(eller admin) avbokar en tid)
 function mrbsDelEntry($user, $id, $series, $all, $truedelete)
 {
   global $tbl_entry, $tbl_repeat;
@@ -794,8 +794,11 @@ function mrbsDelEntry($user, $id, $series, $all, $truedelete)
     }
    
     //191003
-    //när default_bookings_open == FALSE, ta inte bort vid true delete(cancel booking) om bokningen har typ == "I", dvs en vanlig bokning(bokad av användare)
-      //(vid "save" sker också en delete men med en ny bokning skapad)
+    //när default_bookings_open == FALSE, 
+    //ta inte bort vid true delete(cancel booking) om bokningen har typ == "I", 
+    //dvs en vanlig bokning(bokad av användare)
+    //(vid "save" sker också en delete men med en ny bokning skapad)
+    //TODO om admin avbokar en bokningbar tid, skicka mail till den om bokat.
     $is_admin = (authGetUserLevel($user) >= 2);
     $start_date = getdate($row['start_time']);
     $startdate = new datetime($start_date['year'].'-'.$start_date['mon'].'-'.$start_date['mday'].' '.$start_date['hours'].':'.$start_date['minutes']);
@@ -854,6 +857,10 @@ function mrbsDelEntry($user, $id, $series, $all, $truedelete)
           }
         }
       }
+      //skicka avbokningsmail till bokare om admin har avbokat en tid
+      if ($is_admin){
+        $notifymailresult = notifyBookerOnCancel($row);
+      }
       $start_times[] = $row['start_time'];
     } else {
       if($environment == 'development') {
@@ -861,7 +868,7 @@ function mrbsDelEntry($user, $id, $series, $all, $truedelete)
         error_log("DELETE FROM $tbl_entry WHERE id=" . $row['id']);
       }
       if (sql_command("DELETE FROM $tbl_entry WHERE id=" . $row['id']) > 0) {
-        //ta bort exchange event om admin tar bort en bokad tid
+        //ta bort exchange event om admin tar bort en bokningsbar tid
         if($is_admin && get_exchange_email($row['room_id']) != "") {
           $sql = "SELECT * 
                   FROM kth_exchange_events 

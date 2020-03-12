@@ -158,12 +158,10 @@ tiden gått ut och ingen bokning gjorts
 
 **************************************/
 function deletebookablebookings() {
-	global $area, $enable_periods;
+	global $area;
 	
-	//om det är perioder så måste starttime hämtas från periodtabellen
-	$today = date("Y-m-d H:i:s");
-	$todayinseconds = strtotime(date($today));
-	$confirm_seconds = CONFIRM_MINUTES * 60;
+	$currenttime = date("Y-m-d H:i:s");
+	$currenttimeinseconds = strtotime(date($currenttime));
 	//Status:
 	//Tentative = 4
 	//Confirmed = 0
@@ -172,9 +170,11 @@ function deletebookablebookings() {
 				INNER JOIN mrbs_area ON mrbs_room.area_id = mrbs_area.id
 				WHERE type = 'B'
 				AND mrbs_area.id = $area
-				AND start_time < $todayinseconds";
+				AND start_time < $currenttimeinseconds";
 	$res = sql_query($sql);
 	if (isset($res)) {
+      //TODO ta bort bokningen i exchange
+      
 	}
 }
 

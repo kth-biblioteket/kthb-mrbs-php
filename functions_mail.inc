@@ -1084,6 +1084,109 @@ function notifyBookerOnBooking($data, $mail_previous, $new_entry, $series, $star
   return $result;  
 }
 
+//KTH mailutskick 2018
+/***************************
+
+Funktion som skickar mail till den som bokat(om det är aktiverat i config.inc.php)
+när en admin avbokar en bokad tid.
+
+***************************/
+function notifyBookerOnCancel($data)
+{
+  global $mail_settings, $enable_periods;
+  
+  mail_debug('Preparing email for canceled booking ...');
+
+  $addresses['from'] = get_mail_vocab("mail_from_address_default");
+  
+  $user = $data['create_by'];
+  $addresses['to']   = $user;
+  //$addresses['to']   = 'tholind@kth.se';
+  if ($addresses === FALSE)
+  {
+    mail_debug('Email abandoned: no addresses.');
+    return;
+  }
+  
+  // Set up the subject
+  //
+  // If we're sending iCalendar notifications, then it seems that some calendar
+  // applications use the email subject as the booking title instead of the iCal
+  // SUMMARY field.   As far as I can see this is wrong, but as a circumvention
+  // we'll put the booking title in the email subject line.   (See also
+  // SF Tracker id 3297799)
+  if ($mail_settings['icalendar'] && !$enable_periods)
+  {
+    $subject = $data['name'];
+  }
+  else
+  {
+    switch ($action)
+    {
+      case "approve":
+        $subject = get_vocab("mail_subject_approved");
+        break;
+      case "more_info":
+        $subject = get_vocab("mail_subject_more_info");
+        break;
+      case "remind":
+        $subject = get_vocab("mail_subject_reminder");
+        break;
+      default:
+        if ($new_entry || $mail_previous['type'] == 'B')
+        {
+          $subject = get_vocab("mail_subject_delete");
+        }
+        else
+        {
+          $subject = get_vocab("mail_subject_delete");
+        }
+        break;
+    }
+  }
+
+  // Create the text body
+  $compare = !$new_entry;
+  $text_body = array();
+  $text_body['content'] = '';
+  
+  // Create the HTML body
+  $html_body = array();
+  if ($mail_settings['html'])
+  {
+  //setlocale(LC_ALL, $currentLocale);
+  // språk beroende på bokarens valda språk
+  //TODO göra mer dynamiskt, väldigt mycket hårdkodning.
+  //191003
+    require_once "config\mail\booker_mail_delete.inc";
+    $html_body['cid'] = generate_global_uid("html");
+  }
+  
+  // Create the iCalendar if required
+  $attachment = array();
+  if ($mail_settings['icalendar'] && !$enable_periods)
+  {
+    $attachment['method']   = "REQUEST";
+    $ical_components = array();
+    $ical_components[] = create_ical_event($attachment['method'], $data, $addresses, $series);
+    $attachment['content']  = create_icalendar($attachment['method'], $ical_components);
+    $attachment['name']     = $mail_settings['ics_filename'] . ".ics";
+  }
+
+  $result = sendMail($addresses,
+                     $subject,
+                     $text_body,
+                     $html_body,
+                     $attachment,
+                     get_mail_charset()); 
+  error_log("MRBS, mailresult: " . $result); 
+  if ($result == 1) {
+    error_log("MRBS, cancelmail skickat till: " . $addresses['to']); 
+  }
+
+  return $result;  
+}
+
 
 // }}}
 // {{{ notifyAdminOnBooking()
