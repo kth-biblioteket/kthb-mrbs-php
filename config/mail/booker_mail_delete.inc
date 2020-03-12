@@ -26,20 +26,8 @@ if ($mrbslang == 'sv') {
     get_vocab("mail_text_cancel") .
   '</div>
   </br>';
-  if ($data['campus'] > 0) {
-    $html_body['content'] .=      
-    '<div>'
-      . get_campus($data['campus'], $mrbslang) .
-    '</div>';
-    } else {
-    $html_body['content'] .=      
-    '<div>'
-      . ($data['room_number'] != "" ? $data['room_number'] . ". " : "") . $data['room_name'] .
-    '</div>';
-    }
   $html_body['content'] .=    
-  '</br>
-  <div>' .
+  '<div>' .
     'Din bokning var från ' . date("H:i",$data['start_time']) . ' till ' . date("H:i",$data['end_time']) . ', ' . utf8_encode(strftime("%A %d %B",$data['start_time'])) .
   '</div>
   </br>';
@@ -58,20 +46,8 @@ if ($mrbslang == 'sv') {
     get_vocab("mail_text_cancel") .
   '</div>
   </br>';
-  if ($data['campus'] > 0) {
-  $html_body['content'] .=      
-  '<div>'
-    . get_campus($data['campus'], $mrbslang) .
-  '</div>';
-  } else {
-  $html_body['content'] .=      
-  '<div>'
-    . ($data['room_number'] != "" ? $data['room_number'] . ". " : "") . $data['room_name'] .
-  '</div>';
-  }
   $html_body['content'] .=    
-  '</br>
-  <div>' .
+  '<div>' .
     'Your booking was from ' . date("H:i",$data['start_time']) . ' to ' . date("H:i",$data['end_time']) . ', ' . utf8_encode(strftime("%A %d %B",$data['start_time'])) .
   '</div>
   </br>';
