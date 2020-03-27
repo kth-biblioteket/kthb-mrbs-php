@@ -762,7 +762,7 @@ function create_field_entry_custom_field($field, $key, $is_admin, $user, $disabl
                   'disabled'    => $disabled,
                   'options'     => array(),
                   'force_assoc' => TRUE,  // in case the type keys happen to be digits
-                  'value'       => isset($custom_fields[$key]) ? $custom_fields[$key] : 1);
+                  'value'       => isset($custom_fields[$key]) ? $custom_fields[$key] : 0);
 
         $places = array();
         $sql = "SELECT kth_places.id, kth_places.name, kth_places.name_en
