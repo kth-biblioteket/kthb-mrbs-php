@@ -1364,7 +1364,7 @@ function generate_select($params)
     $html .= "<option value=\"" . htmlspecialchars($value) . "\"";
     //Sätt ett option som inte är valbart.
     //<option disabled="disabled" selected="selected">Select an option.</option>
-    if ($value == 2) {
+    if ($value == 'disabled') {
       $disabledoption = "disabled";
     } else {
       $disabledoption = "";
