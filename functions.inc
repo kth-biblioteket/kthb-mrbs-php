@@ -1362,8 +1362,13 @@ function generate_select($params)
       $value = $text;
     }
     $html .= "<option value=\"" . htmlspecialchars($value) . "\"";
+    //Sätt ett option som inte är valbart.
+    //<option disabled="disabled" selected="selected">Select an option.</option>
+    if ($value == 0) {
+      $disabledoption = "disabled";
+    }
     $html .= (in_array($value, $params['value'])) ? " selected=\"selected\"" : '';
-    $html .= ">".htmlspecialchars($text)."</option>\n";
+    $html .= $disabledoption . " >".htmlspecialchars($text)."</option>\n";
   }
 
   $html .= "</select>\n";
