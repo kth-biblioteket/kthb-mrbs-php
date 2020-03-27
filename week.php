@@ -103,10 +103,7 @@ print_modal($area,$lang,$area_map,$area_map_image);
 //200309 visa länk till nästa lediga bokning om bokningar är stängda som default
 //TODO hämta aktuell veckas sista slot och kolla om det finns lediga tider efter den
 $currentviewdate = mktime(0, 0, 0, $month, $day, $year);
-//$custom_date = strtotime( date('d-m-Y', strtotime('31-07-2012')) )
 $week_end = date('Y-m-d', strtotime('this week next sunday', $currentviewdate));
-echo $week_end;
-//$date->modify('this week +6 days');
 $nextavailable = "";
 if (!$default_bookings_open) {
   //$next_start_time = get_next_available_start_time_room($room,$ty.$tm.$td);

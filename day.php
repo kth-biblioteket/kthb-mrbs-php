@@ -110,7 +110,6 @@ print_modal($area,$lang,$area_map,$area_map_image);
 //TODO hämta aktuell veckas sista slot och kolla om det finns lediga tider efter den
 $nextavailable = "";
 if (!$default_bookings_open) {
-  echo ($ty.$tm.$td);
   $next_start_time = get_next_available_start_time_area($area,$ty.$tm.$td);
   //$next_start_time = get_next_available_start_time_area($area,$year ."-". $month ."-". $day);
   if ($next_start_time) {
