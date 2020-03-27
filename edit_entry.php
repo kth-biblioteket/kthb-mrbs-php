@@ -856,8 +856,6 @@ function create_field_entry_custom_field($field, $key, $is_admin, $user, $disabl
           }
         }
 
-        //TODO hämta om custom fields är mandatory
-
         $params = array('label'      => get_loc_field_name($tbl_entry, $key) . "", //KTH
                         //KTH 
                         'label_after'=> TRUE,                  

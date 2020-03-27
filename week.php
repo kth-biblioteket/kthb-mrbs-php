@@ -102,9 +102,15 @@ echo "<div style=\"padding-bottom:10px;overflow:auto\">";
 print_modal($area,$lang,$area_map,$area_map_image);
 //200309 visa länk till nästa lediga bokning om bokningar är stängda som default
 //TODO hämta aktuell veckas sista slot och kolla om det finns lediga tider efter den
+$currentviewdate = mktime(0, 0, 0, $month, $day, $year);
+//$custom_date = strtotime( date('d-m-Y', strtotime('31-07-2012')) )
+$week_end = date('Y-m-d', strtotime('this week next sunday', $currentviewdate));
+echo $week_end;
+//$date->modify('this week +6 days');
 $nextavailable = "";
 if (!$default_bookings_open) {
-  $next_start_time = get_next_available_start_time_room($room,$ty.$tm.$td);
+  //$next_start_time = get_next_available_start_time_room($room,$ty.$tm.$td);
+  $next_start_time = get_next_available_start_time_room($room,$week_end);
   //$next_start_time = get_next_available_start_time($room,$year ."-". $month ."-". $day);
   if ($next_start_time) {
     $nextavailable = "
@@ -170,7 +176,7 @@ $before_after_links_html = "
   <div class=\"date_nav\">
     <div class=\"date_before\">
       <a href=\"week.php?year=$yy&amp;month=$ym&amp;day=$yd&amp;area=$area&amp;room=$room\">
-          <img src=\"images/arrow-left-white-bold.png\" alt=\"Föregående dag\"> ".get_vocab("weekbefore")."
+          <img src=\"images/arrow-left-white-bold.png\" alt=\"Föregående vecka\"> ".get_vocab("weekbefore")."
       </a>
     </div>
     <div class=\"date_now\">
@@ -180,7 +186,7 @@ $before_after_links_html = "
     </div>
     <div class=\"date_after\">
       <a href=\"week.php?year=$ty&amp;month=$tm&amp;day=$td&amp;area=$area&amp;room=$room\">
-          ".get_vocab("weekafter"). " <img src=\"images/arrow-right-white-bold.png\" alt=\"Nästa dag\">
+          ".get_vocab("weekafter"). " <img src=\"images/arrow-right-white-bold.png\" alt=\"Nästa vecka\">
       </a>
     </div>
   </div>
