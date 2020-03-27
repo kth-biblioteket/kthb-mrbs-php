@@ -783,7 +783,7 @@ function create_field_entry_custom_field($field, $key, $is_admin, $user, $disabl
         for ($i = 0; ($row = sql_row_keyed($res, $i)); $i++)
         {
           $places[] = $row['id'];
-          if ($row['name'] == 'none') {
+          if ($row['name'] == '1none') {
             $params['options']['none'] = 'Select an option';
           } else {
             $params['options'][$row['id']] = $row['name'];
