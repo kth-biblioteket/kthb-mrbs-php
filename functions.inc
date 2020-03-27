@@ -1355,9 +1355,11 @@ function generate_select($params)
   $html .= ">\n";
 
   //ett option för inget valt(mandatory fields)
-  if ($params['mandatory']){
+  /*
+  if ($params['mandatory']) {
     $html .= '<option value="">None</option>';
   }
+  */
   foreach ($params['options'] as $value => $text)
   { 
     
@@ -1366,9 +1368,13 @@ function generate_select($params)
     {
       $value = $text;
     }
-    $html .= "<option value=\"" . htmlspecialchars($value) . "\"";
-    $html .= (in_array($value, $params['value'])) ? " selected=\"selected\"" : '';
-    $html .= $disabledoption . " >".htmlspecialchars($text)."</option>\n";
+    if($value == 'none') {
+      $html .= '<option value="">None</option>\n';
+    } else {
+      $html .= "<option value=\"" . htmlspecialchars($value) . "\"";
+      $html .= (in_array($value, $params['value'])) ? " selected=\"selected\"" : '';
+      $html .= $disabledoption . " >".htmlspecialchars($text)."</option>\n";
+    }
   }
 
   $html .= "</select>\n";
