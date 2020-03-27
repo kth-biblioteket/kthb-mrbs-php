@@ -779,8 +779,7 @@ function create_field_entry_custom_field($field, $key, $is_admin, $user, $disabl
           trigger_error(sql_error(), E_USER_WARNING);
           fatal_error(FALSE, get_vocab("fatal_db_error"));
         }
-        //<option disabled="disabled" selected="selected">Select an option.</option>
-        //$params['options'][0] = 'Select an option';
+
         for ($i = 0; ($row = sql_row_keyed($res, $i)); $i++)
         {
           $places[] = $row['id'];
