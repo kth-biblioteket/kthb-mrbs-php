@@ -1353,6 +1353,9 @@ function generate_select($params)
   $html .= ($params['multiple']) ? " multiple" : "";
   $html .= (isset($params['attributes'])) ? " " . $params['attributes'] : "";
   $html .= ">\n";
+
+  //ett option för mandatory
+  $html .= '<option value="">None</option>';
   foreach ($params['options'] as $value => $text)
   { 
     
