@@ -1366,6 +1366,8 @@ function generate_select($params)
     //<option disabled="disabled" selected="selected">Select an option.</option>
     if ($value == 0) {
       $disabledoption = "disabled";
+    } else {
+      $disabledoption = "";
     }
     $html .= (in_array($value, $params['value'])) ? " selected=\"selected\"" : '';
     $html .= $disabledoption . " >".htmlspecialchars($text)."</option>\n";
