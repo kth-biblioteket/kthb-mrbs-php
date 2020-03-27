@@ -66,6 +66,7 @@ $vocab["ppreview"]           = "Förhandsgranska";
 // Used in edit_entry.php
 
 //KTH
+$vocab["select_an_option"]			= "Välj ett alternativ";
 $vocab["remembertoconfirm"]  = "Kom ihåg att du måste kvittera den här preliminära bokningen innan du börjar använda rummet! Det kan du endast göra från 15 minuter före till 15 minuter efter starttiden. ";
 //191003
 $vocab["bookable_entry_text"]			= "Ledig";

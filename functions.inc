@@ -1354,12 +1354,6 @@ function generate_select($params)
   $html .= (isset($params['attributes'])) ? " " . $params['attributes'] : "";
   $html .= ">\n";
 
-  //ett option för inget valt(mandatory fields)
-  /*
-  if ($params['mandatory']) {
-    $html .= '<option value="">None</option>';
-  }
-  */
   foreach ($params['options'] as $value => $text)
   { 
     
@@ -1368,8 +1362,9 @@ function generate_select($params)
     {
       $value = $text;
     }
+    //ett option för inget valt
     if($value == 'none') {
-      $html .= '<option value="">None</option>\n';
+      $html .= '<option value="">' . get_vocab("select_an_option") . '</option>\n';
     } else {
       $html .= "<option value=\"" . htmlspecialchars($value) . "\"";
       $html .= (in_array($value, $params['value'])) ? " selected=\"selected\"" : '';
