@@ -186,7 +186,8 @@ när någon bokar en tid
 
 **************************************/
 function deleteotherbookablebookingssameday($inserted_entryid) {
-	$sql = "SELECT room_id, instructor, concat(date(from_unixtime(start_time)) as dayofbooking FROM mrbs_entry
+	$sql = "SELECT room_id, instructor, concat(date(from_unixtime(start_time)) as dayofbooking 
+          FROM mrbs_entry
 				  WHERE id = $inserted_entryid";
   $res = sql_query($sql);
   if (isset($res)) {
