@@ -197,14 +197,14 @@ function deleteotherbookablebookingssameday($inserted_entryid) {
       $startofdday = $row["dayofbooking"] . ' 00:00:00';
       $endofdday = $row["dayofbooking"] . ' 23:59:59';
     }
-    $sql = "SELECT * FROM mrbs_entry
+    $sql = "DELETE FROM mrbs_entry
 				    WHERE from_unixtime(start_time) > '$startofdday'
             and from_unixtime(start_time) < '$endofdday'
             and instructor = '$instructor'
             and id != $inserted_entryid
             and type = 'B'";
     error_log("MRBS, deleteothertbookablebookingssameday: $sql");
-    //$res = sql_query($sql);
+    $res = sql_query($sql);
     if (isset($res)) {
         //TODO ta bort bokningen i exchange  
     }
