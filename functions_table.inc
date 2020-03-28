@@ -185,7 +185,7 @@ för samma dag och samma instructor
 när någon bokar en tid
 
 **************************************/
-function deleteotherbookablebookingssameday($inserted_entryid) {
+function deleteotherbookablebookingssameday($inserted_entryid, $old_id) {
 	$sql = "SELECT room_id, instructor, date(from_unixtime(start_time)) as dayofbooking 
           FROM mrbs_entry
 				  WHERE id = $inserted_entryid";
@@ -199,10 +199,11 @@ function deleteotherbookablebookingssameday($inserted_entryid) {
     }
     $sql = "DELETE FROM mrbs_entry
 				    WHERE from_unixtime(start_time) > '$startofdday'
-            and from_unixtime(start_time) < '$endofdday'
-            and instructor = '$instructor'
-            and id != $inserted_entryid
-            and type = 'B'";
+            AND from_unixtime(start_time) < '$endofdday'
+            AND instructor = '$instructor'
+            AND id != $inserted_entryid
+            AND id != $old_id
+            AND type = 'B'";
     error_log("MRBS, deleteothertbookablebookingssameday: $sql");
     $res = sql_query($sql);
     if (isset($res)) {

@@ -2687,7 +2687,7 @@ function mrbsMakeBookings($bookings, $id=NULL, $just_check=FALSE, $skip=FALSE, $
     // ta bort alla andra okningar för samma instructor och dag
     // om det är aktiverat (config)
     if($delete_other_bookings_same_day){
-      deleteotherbookablebookingssameday($new_id);
+      deleteotherbookablebookingssameday($new_id, $id);
     }
     
     // Send an email if neccessary, provided that the entry creation was successful
