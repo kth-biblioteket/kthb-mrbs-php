@@ -180,6 +180,42 @@ function deletebookablebookings() {
 
 //KTH
 /**************************************
+Funktion som tar bort bokningsbara "B"-bokningar
+för samma dag och samma instructor
+när någon bokar en tid
+
+**************************************/
+function deleteotherbookablebookingssameday($inserted_entryid) {
+	global $area;
+	
+	$currenttime = date("Y-m-d H:i:s");
+	$currenttimeinseconds = strtotime(date($currenttime));
+	$sql = "SELECT room_id, instructor, concat(date(from_unixtime(start_time)) as dayofbooking FROM mrbs_entry
+				  WHERE id = $inserted_entryid";
+  $res = sql_query($sql);
+  if (isset($res)) {
+		for ($i = 0; ($row = sql_row_keyed($res, $i)); $i++) {
+      $room_id = $row["room_id"];
+      $instructor = $row["instructor"];
+      $startofdday = $row["dayofbooking"] . ' 00:00:00';
+      $endofdday = $row["dayofbooking"] . ' 23:59:59';
+    }
+    $sql = "SELECT * FROM mrbs_entry
+				    WHERE from_unixtime(start_time) > $startofdday
+            and from_unixtime(start_time) < '$endofdday
+            and instructor = $instructor
+            and id != $inserted_entryid
+            and type = 'B'";
+    error_log("MRBS, deleteothertbookablebookingssameday: $sql");
+    $res = sql_query($sql);
+    if (isset($res)) {
+        //TODO ta bort bokningen i exchange  
+    }
+	}
+}
+
+//KTH
+/**************************************
 Funktion som kontrollerar om 
 sloten är tillgänglig
 

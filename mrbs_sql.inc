@@ -2327,6 +2327,7 @@ function mrbsMakeBookings($bookings, $id=NULL, $just_check=FALSE, $skip=FALSE, $
   //191003
   global $ews_host, $ews_user, $ews_password;
   global $environment;
+  global $delete_other_bookings_same_day;
 
   //KTH engelska 
   if(isset($_COOKIE["mrbslang"])) {
@@ -2537,7 +2538,7 @@ function mrbsMakeBookings($bookings, $id=NULL, $just_check=FALSE, $skip=FALSE, $
     $startdate = new datetime($start_date['year'].'-'.$start_date['mon'].'-'.$start_date['mday'].' '.$start_date['hours'].':'.$start_date['minutes']);
     $end_date = getdate($booking['end_time']);
     $enddate = new datetime($end_date['year'].'-'.$end_date['mon'].'-'.$end_date['mday'].' '.$end_date['hours'].':'.$end_date['minutes']);
-    //Om rummet har en exchangekalender definierad så boka tid i den. Ej stängt/special
+    //Om rummet har en exchangekalender definierad så boka tid i den. Ej för typ stängt/special
     if (get_exchange_email($booking['room_id']) != "" && $booking['type']!= "C" && $booking['type']!= "S" ) { 
       if($is_admin && !isset($id)) {
         try {
@@ -2682,6 +2683,12 @@ function mrbsMakeBookings($bookings, $id=NULL, $just_check=FALSE, $skip=FALSE, $
     }
     $new_details[] = array('id' => $new_id, 'room_id' => $booking['room_id']);
     $booking['id'] = $new_id;  // Add in the id now we know it
+    
+    // ta bort alla andra okningar för samma instructor och dag
+    // om det är aktiverat (config)
+    if($delete_other_bookings_same_day){
+      deleteotherbookablebookingssameday($new_id);
+    }
     
     // Send an email if neccessary, provided that the entry creation was successful
     if ($send_mail && !empty($new_id))
