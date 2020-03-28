@@ -198,9 +198,9 @@ function deleteotherbookablebookingssameday($inserted_entryid) {
       $endofdday = $row["dayofbooking"] . ' 23:59:59';
     }
     $sql = "SELECT * FROM mrbs_entry
-				    WHERE from_unixtime(start_time) > $startofdday
-            and from_unixtime(start_time) < '$endofdday
-            and instructor = $instructor
+				    WHERE from_unixtime(start_time) > '$startofdday'
+            and from_unixtime(start_time) < '$endofdday'
+            and instructor = '$instructor'
             and id != $inserted_entryid
             and type = 'B'";
     error_log("MRBS, deleteothertbookablebookingssameday: $sql");
