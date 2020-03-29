@@ -5,6 +5,7 @@ require "defaultincludes.inc";
 require_once "mrbs_sql.inc";
 
 // Get non-standard form variables
+$phase = get_form_var('phase', 'int');
 $new_area = get_form_var('new_area', 'int');
 $old_area = get_form_var('old_area', 'int');
 $instructor = get_form_var('instructor', 'string');
