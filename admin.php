@@ -644,7 +644,7 @@ if ($is_admin || ($n_displayable_areas > 0))
         
         <div>
           <label for="email"><?php echo get_vocab("instructoremail") ?>:</label>
-          <input type="text" id="email" name="email" maxlength="<?php echo $maxlength['room.email'] ?>">
+          <input type="text" id="email" name="email" maxlength="<?php echo $maxlength['instructor.email'] ?>">
         </div>
        
         <div>

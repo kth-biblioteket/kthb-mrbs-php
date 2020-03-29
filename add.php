@@ -9,6 +9,7 @@ require_once "mrbs_sql.inc";
 $name = get_form_var('name', 'string');
 $description = get_form_var('description', 'string');
 $capacity = get_form_var('capacity', 'int');
+$email = get_form_var('email', 'int');
 $type = get_form_var('type', 'string');
 
 // Check the user is authorised for this page
@@ -34,6 +35,11 @@ elseif ($type == "area")
 elseif ($type == "room")
 {
   $room = mrbsAddRoom($name, $area, $error, $description, $capacity);
+}
+
+elseif ($type == "instructor")
+{
+  $room = mrbsAddInstructor($name, $area, $error, $email);
 }
 
 $returl = "admin.php?area=$area" . (!empty($error) ? "&error=$error" : "");

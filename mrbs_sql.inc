@@ -2315,6 +2315,52 @@ function mrbsAddRoom($name, $area, &$error, $description='', $capacity='')
   return $room;
 }
 
+// Adds a room, returning the new id, or FALSE on failure with the
+// error in $error
+function mrbsAddInstructor($name, $area, &$error, $email='')
+{
+  global $maxlength;
+  
+  // First of all check that we've got a name
+  if (!isset($name) || ($name === ''))
+  {
+    $error = "empty_name";
+    return FALSE;
+  }
+  
+  // Truncate the name and description fields to the maximum length as a precaution.
+  $name = utf8_substr($name, 0, $maxlength['instructor.full_name']);
+  $email = utf8_substr($email, 0, $maxlength['instructor.email']);
+  // Add SQL escaping
+  $full_name_q = sql_escape($name);
+  $email_q = sql_escape($email);
+
+  // Acquire a mutex to lock out others who might be editing rooms
+  if (!sql_mutex_lock("kth_instructors"))
+  {
+    fatal_error(TRUE, get_vocab("failed_to_acquire"));
+  }
+  // Check that the instructor name is unique within the area
+  if (sql_query1("SELECT COUNT(*) FROM kth_instructors WHERE full_name='$full_name_q' AND area_id=$area LIMIT 1") > 0)
+  {
+    sql_mutex_unlock("kth_instructors");
+    $error = "invalid_instructor_name";
+    return FALSE;
+  }
+  // If so, insert the instructor into the database
+  $sql = "INSERT INTO kth_instructors (full_name, sort_key, area_id, email)
+          VALUES ('$full_name_q', '$full_name_q', $area, '$email_q')";
+  if (sql_command($sql) < 0)
+  {
+    trigger_error(sql_error(), E_USER_WARNING);
+    fatal_error(TRUE, get_vocab("fatal_db_error"));
+  }
+  $instructor = sql_insert_id('kth_instructors', 'id');
+  // Release the mutex
+  sql_mutex_unlock("kth_instructors");
+  return $instructor;
+}
+
 
 // Makes bookings
 //    $bookings     an array of bookings
