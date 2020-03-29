@@ -97,7 +97,7 @@ if ($type == "instructor")
   }
   else
   {
-    print_header($day, $month, $year, $area, isset($instructor) ? $instructor : "");
+    print_header($day, $month, $year, $area, isset($room) ? $room : "");
    
     // We tell them how bad what they're about to do is
     // Find out how many appointments would be deleted
