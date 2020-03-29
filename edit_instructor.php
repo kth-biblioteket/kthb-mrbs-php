@@ -5,6 +5,7 @@ require "defaultincludes.inc";
 require_once "mrbs_sql.inc";
 
 // Get non-standard form variables
+$instructor = get_form_var('instructor', 'string');
 $full_name = get_form_var('full_name', 'string');
 $instructor_disabled = get_form_var('instructor_disabled', 'string');
 $sort_key = get_form_var('sort_key', 'string');
