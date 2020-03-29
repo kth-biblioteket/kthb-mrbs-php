@@ -812,10 +812,8 @@ function create_field_entry_custom_field($field, $key, $is_admin, $user, $disabl
         $instructors = array();
         $sql = "SELECT full_name, email
                 FROM kth_instructors
-                JOIN kth_area_instructors
-                ON kth_instructors.id = kth_area_instructors.instructor_id
                 WHERE area_id = $area
-                ORDER BY kth_instructors.full_name";
+                ORDER BY sort_key";
 
         $res = sql_query($sql);
         if ($res === FALSE)

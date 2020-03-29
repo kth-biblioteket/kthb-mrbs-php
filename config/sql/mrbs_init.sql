@@ -42,27 +42,6 @@ INSERT INTO `kth_areatype` (`id`, `areatype`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur `kth_area_instructors`
---
-
-DROP TABLE IF EXISTS `kth_area_instructors`;
-CREATE TABLE IF NOT EXISTS `kth_area_instructors` (
-  `id` int(11) NOT NULL,
-  `area_id` int(11) NOT NULL,
-  `instructor_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumpning av Data i tabell `kth_area_instructors`
---
-/*
-INSERT INTO `kth_area_instructors` (`id`, `area_id`, `instructor_id`) VALUES
-(1, 1, 1);
-*/
-
--- --------------------------------------------------------
-
---
 -- Tabellstruktur `kth_area_places`
 --
 
@@ -186,16 +165,23 @@ CREATE TABLE IF NOT EXISTS `kth_exchange_events` (
 DROP TABLE IF EXISTS `kth_instructors`;
 CREATE TABLE IF NOT EXISTS `kth_instructors` (
   `id` int(11) NOT NULL,
+  `disabled` tinyint(4) NOT NULL DEFAULT '0',
+  `area_id` int(11) NOT NULL DEFAULT '0',
+  `sort_key` varchar(25) NOT NULL,
   `full_name` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 --
 -- Dumpning av Data i tabell `kth_instructors`
 --
 /*
-INSERT INTO `kth_instructors` (`id`, `full_name`, `email`) VALUES
-(1, 'Thomas Lind', 'tholind@kth.se');
+INSERT INTO `kth_instructors` (`id`, `disabled`, `area_id`, `sort_key`, `full_name`, `email`) VALUES
+(1, 0, 1, '5', 'Thomas Lind', 'tholind@kth.se'),
+(2, 0, 1, '1', 'Miritt Zisser', 'miritt@kth.se'),
+(3, 0, 1, '2', 'Sara Akramy', 'akramy@kth.se'),
+(4, 0, 1, '3', 'Maria Unger', 'mariaun@kth.se'),
+(5, 0, 1, '4', 'Magdalena Svanberg', 'masvanbe@kth.se');
 */
 
 -- --------------------------------------------------------
@@ -871,12 +857,6 @@ ALTER TABLE `kth_areatype`
   ADD PRIMARY KEY (`id`);
 
 --
--- Index för tabell `kth_area_instructors`
---
-ALTER TABLE `kth_area_instructors`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Index för tabell `kth_area_places`
 --
 ALTER TABLE `kth_area_places`
@@ -984,11 +964,6 @@ ALTER TABLE `mrbs_zoneinfo`
 -- AUTO_INCREMENT för tabell `kth_areatype`
 --
 ALTER TABLE `kth_areatype`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT för tabell `kth_area_instructors`
---
-ALTER TABLE `kth_area_instructors`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT för tabell `kth_area_places`

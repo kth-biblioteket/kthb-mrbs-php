@@ -452,12 +452,10 @@ if ($is_admin || ($n_displayable_areas > 0))
   echo "<div id=\"instructor_form\">\n";
   if (isset($area))
   {
-    $res = sql_query("SELECT kth_instructors.id, full_name, email
+    $res = sql_query("SELECT id, full_name, email
                 FROM kth_instructors
-                JOIN kth_area_instructors
-                ON kth_instructors.id = kth_area_instructors.instructor_id
                 WHERE area_id = $area
-                ORDER BY kth_instructors.full_name");
+                ORDER BY full_name");
     if (! $res)
     {
       trigger_error(sql_error(), E_USER_WARNING);
@@ -543,7 +541,7 @@ if ($is_admin || ($n_displayable_areas > 0))
         $row_class = "odd";
         foreach ($instructors as $r)
         {
-          // Don't show ordinary users disabled rooms
+          // Don't show ordinary users disabled instructors
           if ($is_admin || !$r['disabled'])
           {
             $row_class = ($row_class == "even") ? "odd" : "even";
@@ -650,7 +648,7 @@ if ($is_admin || ($n_displayable_areas > 0))
         </div>
        
         <div>
-          <input type="submit" class="submit" value="<?php echo get_vocab("addroom") ?>">
+          <input type="submit" class="submit" value="<?php echo get_vocab("addinstructor") ?>">
         </div>
         
       </fieldset>
