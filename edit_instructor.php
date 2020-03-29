@@ -141,7 +141,7 @@ if ($phase == 2)
                 $assign_array[] = "area_id=$new_area";
                 break;
               case 'disabled':
-                $assign_array[] = "disabled=$room_disabled";
+                $assign_array[] = "disabled=$instructor_disabled";
                 break;
               case 'full_name':
                 $assign_array[] = "full_name='" . sql_escape($full_name) . "'";
@@ -177,6 +177,9 @@ if ($phase == 2)
         }
         
         $sql .= implode(",", $assign_array) . " WHERE id=$instructor";
+        if($environment == 'development') {
+          error_log($sql);
+        }
         if (sql_command($sql) < 0)
         {
           echo get_vocab("update_instructor_failed") . "<br>\n";
