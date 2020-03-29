@@ -76,7 +76,7 @@ if ($phase == 2)
 {
   // Unauthorised users shouldn't normally be able to reach Phase 2, but just in case
   // they have, check again that they are allowed to be here
-  if (isset($change_room) || isset($change_area))
+  if (isset($change_instructor) || isset($change_area))
   {
     if (!$is_admin)
     {
@@ -89,6 +89,10 @@ if ($phase == 2)
 
   // PHASE 2 (INSTRUCTOR) - UPDATE THE DATABASE
   // ------------------------------------
+  if($environment == 'development') {
+    error_log("change_instructor: " . $change_instructor);
+    error_log("instructor: " . $instructor);
+  }
   if (isset($change_instructor) && !empty($instructor))
   {
     // validate the email addresses
