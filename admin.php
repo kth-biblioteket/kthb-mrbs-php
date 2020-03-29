@@ -510,7 +510,7 @@ if ($is_admin || ($n_displayable_areas > 0))
         // ignore these columns, either because we don't want to display them,
         // or because we have already displayed them in the header column
 		//KTH english
-        $ignore = array('id', 'area_id', 'room_name', 'disabled', 'sort_key', 'custom_html', 'custom_html_en');
+        $ignore = array('id', 'area_id', 'full_name', 'disabled', 'sort_key');
         foreach($fields as $field)
         {
           if (!in_array($field['name'], $ignore))
