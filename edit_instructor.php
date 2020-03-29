@@ -12,7 +12,7 @@ $area_name = get_form_var('area_name', 'string');
 $instructor_email = get_form_var('email', 'string');
 
 $change_done = get_form_var('change_done', 'string');
-$change_instructor = get_form_var('change_room', 'string');
+$change_instructor = get_form_var('change_instructor', 'string');
 $change_area = get_form_var('change_area', 'string');
 
 // Get the information about the fields in the room table
