@@ -5,10 +5,13 @@ require "defaultincludes.inc";
 require_once "mrbs_sql.inc";
 
 // Get non-standard form variables
+$new_area = get_form_var('new_area', 'int');
+$old_area = get_form_var('old_area', 'int');
 $instructor = get_form_var('instructor', 'string');
 $full_name = get_form_var('full_name', 'string');
 $instructor_disabled = get_form_var('instructor_disabled', 'string');
 $sort_key = get_form_var('sort_key', 'string');
+$old_full_name = get_form_var('old_full_name', 'string');
 $area_name = get_form_var('area_name', 'string');
 $instructor_email = get_form_var('email', 'string');
 
@@ -51,12 +54,12 @@ $user = getUserName();
 $required_level = (isset($max_level) ? $max_level : 2);
 $is_admin = (authGetUserLevel($user) >= $required_level);
 
-// Done changing area or room information?
+// Done changing instructor information?
 if (isset($change_done))
 {
-  if (!empty($room)) // Get the area the room is in
+  if (!empty($instructor)) // Get the area the instructor is in
   {
-    $area = mrbsGetRoomArea($room);
+    $area = mrbsGetRoomArea($instructor);
   }
   Header("Location: admin.php?day=$day&month=$month&year=$year&area=$area");
   exit();
@@ -103,26 +106,27 @@ if ($phase == 2)
       {
         $valid_area = FALSE;
       }
-      // If so, check that the room name is not already used in the area
-      // (only do this if you're changing the room name or the area - if you're
-      // just editing the other details for an existing room we don't want to reject
-      // the edit because the room already exists!)
+      // If so
+      // check that the instructor name is not already used in the area
+      // (only do this if you're changing the instructor name or the area - if you're
+      // just editing the other details for an existing instructor we don't want to reject
+      // the edit because the instructor already exists!)
       // [SQL escaping done by sql_syntax_casesensitive_equals()]
-      elseif ( (($new_area != $old_area) || ($room_name != $old_room_name))
+      elseif ( (($new_area != $old_area) || ($full_name != $old_full_name))
               && sql_query1("SELECT COUNT(*)
-                               FROM $tbl_room
-                              WHERE" . sql_syntax_casesensitive_equals("room_name", $room_name) . "
+                               FROM kth_instructors
+                              WHERE" . sql_syntax_casesensitive_equals("full_name", $full_name) . "
                                 AND area_id=$new_area
                               LIMIT 1") > 0)
       {
-        $valid_room_name = FALSE;
+        $valid_full_name = FALSE;
       }
       // If everything is still OK, update the databasae
       else
       {
         // Convert booleans into 0/1 (necessary for PostgreSQL)
-        $room_disabled = (!empty($room_disabled)) ? 1 : 0;
-        $sql = "UPDATE $tbl_room SET ";
+        $instructor_disabled = (!empty($instructor_disabled)) ? 1 : 0;
+        $sql = "UPDATE kth_instructors SET ";
         $n_fields = count($fields);
         $assign_array = array();
         foreach ($fields as $field)
@@ -138,32 +142,14 @@ if ($phase == 2)
               case 'disabled':
                 $assign_array[] = "disabled=$room_disabled";
                 break;
-              case 'room_name':
-                $assign_array[] = "room_name='" . sql_escape($room_name) . "'";
+              case 'full_name':
+                $assign_array[] = "full_name='" . sql_escape($full_name) . "'";
                 break;
               case 'sort_key':
                 $assign_array[] = "sort_key='" . sql_escape($sort_key) . "'";
                 break;
-              case 'description':
-                $assign_array[] = "description='" . sql_escape($description) . "'";
-                break;
-              case 'capacity':
-                $assign_array[] = "capacity=$capacity";
-                break;
-              case 'room_admin_email':
-                $assign_array[] = "room_admin_email='" . sql_escape($room_admin_email) . "'";
-                break;
-              case 'custom_html':
-                $assign_array[] = "custom_html='" . sql_escape($custom_html) . "'";
-                break;
-			        case 'custom_html_en': //KTH
-                $assign_array[] = "custom_html_en='" . sql_escape($custom_html_en) . "'";
-                break;
-              case 'extra_info':
-                $assign_array[] = "extra_info='" . sql_escape($extra_info) . "'";
-                break;
-			        case 'extra_info_en': //KTH
-                $assign_array[] = "extra_info_en='" . sql_escape($extra_info_en) . "'";
+              case 'email':
+                $assign_array[] = "email='" . sql_escape($instructor_email) . "'";
                 break;
               // then look at any user defined fields
               default:
@@ -189,10 +175,10 @@ if ($phase == 2)
           }
         }
         
-        $sql .= implode(",", $assign_array) . " WHERE id=$room";
+        $sql .= implode(",", $assign_array) . " WHERE id=$instructor";
         if (sql_command($sql) < 0)
         {
-          echo get_vocab("update_room_failed") . "<br>\n";
+          echo get_vocab("update_instructor_failed") . "<br>\n";
           trigger_error(sql_error(), E_USER_WARNING);
           fatal_error(FALSE, get_vocab("fatal_db_error"));
         }
@@ -232,10 +218,7 @@ if (isset($change_instructor) && !empty($instructor))
     fatal_error(0, get_vocab("error_instructor") . $room . get_vocab("not_found"));
   }
   $row = sql_row_keyed($res, 0);
-  
-  echo "<h2>\n";
-  echo ($is_admin) ? get_vocab("editinstructor") : get_vocab("viewinstructor");
-  echo "</h2>\n";
+
   ?>
   <form class="form_general" id="edit_instructor" action="edit_instructor.php" method="post">
     <fieldset class="admin">
@@ -287,7 +270,7 @@ if (isset($change_instructor) && !empty($instructor))
                       'disabled'      => $disabled,
                       'create_hidden' => FALSE);
       generate_input($params);
-      echo "<input type=\"hidden\" name=\"old_instructor_name\" value=\"" . htmlspecialchars($row["full_name"]) . "\">\n";
+      echo "<input type=\"hidden\" name=\"old_full_name\" value=\"" . htmlspecialchars($row["full_name"]) . "\">\n";
       echo "</div>\n";
       
       // Status (Enabled or Disabled)
