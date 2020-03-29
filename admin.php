@@ -632,26 +632,21 @@ if ($is_admin || ($n_displayable_areas > 0))
   if ($is_admin && $areas_defined && !empty($area))
   {
   ?>
-    <form id="add_room" class="form_admin" action="add.php" method="post">
+    <form id="add_instructor" class="form_admin" action="add.php" method="post">
       <fieldset>
-      <legend><?php echo get_vocab("addroom") ?></legend>
+      <legend><?php echo get_vocab("addinstructor") ?></legend>
         
-        <input type="hidden" name="type" value="room">
+        <input type="hidden" name="type" value="instructor">
         <input type="hidden" name="area" value="<?php echo $area; ?>">
         
         <div>
-          <label for="room_name"><?php echo get_vocab("name") ?>:</label>
-          <input type="text" id="room_name" name="name" maxlength="<?php echo $maxlength['room.room_name'] ?>">
+          <label for="full_name"><?php echo get_vocab("name") ?>:</label>
+          <input type="text" id="full_name" name="name" maxlength="<?php echo $maxlength['instructor.full_name'] ?>">
         </div>
         
         <div>
-          <label for="room_description"><?php echo get_vocab("description") ?>:</label>
-          <input type="text" id="room_description" name="description" maxlength="<?php echo $maxlength['room.description'] ?>">
-        </div>
-        
-        <div>
-          <label for="room_capacity"><?php echo get_vocab("capacity") ?>:</label>
-          <input type="text" id="room_capacity" name="capacity">
+          <label for="email"><?php echo get_vocab("instructoremail") ?>:</label>
+          <input type="text" id="email" name="email" maxlength="<?php echo $maxlength['room.email'] ?>">
         </div>
        
         <div>
