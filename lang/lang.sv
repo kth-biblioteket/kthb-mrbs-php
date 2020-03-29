@@ -451,6 +451,7 @@ $vocab["no_rooms_for_area"]  = "Rum saknas för denna plats";
 $vocab["edit"]               = "Ändra";
 $vocab["delete"]             = "Radera";
 //KTH
+$vocab["instructors"]        = "Välj handledare";
 $vocab["rooms"]              = "Välj resurs";
 $vocab["in"]                 = "i";
 $vocab["noareas"]            = "Inget område";
@@ -464,6 +465,7 @@ $vocab["noarea"]             = "Inget område valt";
 $vocab["browserlang"]        = "Din webbläsare är inställd att använda språk(en)";
 $vocab["addroom"]            = "Lägg till rum";
 $vocab["capacity"]           = "Max antal personer";
+$vocab["noinstructors"]      = "Inga handledare.";
 $vocab["norooms"]            = "Inga rum.";
 $vocab["norooms_enabled"]    = "Inga rum har aktiverats.";
 $vocab["administration"]     = "Administration";

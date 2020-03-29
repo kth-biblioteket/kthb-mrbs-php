@@ -457,6 +457,7 @@ $vocab["no_rooms_for_area"]  = "No rooms defined for this area";
 $vocab["edit"]               = "Edit";
 $vocab["delete"]             = "Delete";
 //KTH
+$vocab["instructors"]        = "Pick instructor";
 $vocab["rooms"]              = "Pick resource";
 $vocab["in"]                 = "in";
 $vocab["noareas"]            = "No areas have been defined.";
@@ -470,6 +471,7 @@ $vocab["noarea"]             = "No area selected";
 $vocab["browserlang"]        = "Your browser is set with the following language preference order";
 $vocab["addroom"]            = "Add Room";
 $vocab["capacity"]           = "Capacity";
+$vocab["noinstructors"]      = "No instructors have been defined.";
 $vocab["norooms"]            = "No rooms have been defined.";
 $vocab["norooms_enabled"]    = "No rooms have been enabled.";
 $vocab["administration"]     = "Room Details";
