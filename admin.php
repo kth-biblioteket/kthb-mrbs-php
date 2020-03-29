@@ -601,7 +601,7 @@ if ($is_admin || ($n_displayable_areas > 0))
             {
               // Delete link
               echo "<td><div>\n";
-              echo "<a href=\"del.php?type=instructor&amp;area=$area&amp;instructor=" . $r['id'] . "\">\n";
+              echo "<a href=\"del.php?type=instructor&amp;area=$area&amp;instructor=" . $r['id'] . "&amp;email=" . $r['email'] . "\">\n";
               echo "<img src=\"images/delete.png\" width=\"16\" height=\"16\" 
                          alt=\"" . get_vocab("delete") . "\"
                          title=\"" . get_vocab("delete") . "\">\n";
