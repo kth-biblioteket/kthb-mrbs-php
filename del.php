@@ -127,9 +127,9 @@ if ($type == "instructor")
       echo "</ul>\n";
     }
    
-    echo "<div id=\"del_instructor_confirm\">\n";
+    echo "<div id=\"del_room_confirm\">\n";
     echo "<p>" .  get_vocab("sure") . "</p>\n";
-    echo "<div id=\"del_instructor_confirm_links\">\n";
+    echo "<div id=\"del_room_confirm_links\">\n";
     echo "<a href=\"del.php?type=instructor&amp;area=$area&amp;instructor=$instructor&amp;email=$email&amp;confirm=Y\"><span id=\"del_yes\">" . get_vocab("YES") . "!</span></a>\n";
     echo "<a href=\"admin.php\"><span id=\"del_no\">" . get_vocab("NO") . "!</span></a>\n";
     echo "</div>\n";
