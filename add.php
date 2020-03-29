@@ -9,7 +9,7 @@ require_once "mrbs_sql.inc";
 $name = get_form_var('name', 'string');
 $description = get_form_var('description', 'string');
 $capacity = get_form_var('capacity', 'int');
-$email = get_form_var('email', 'int');
+$email = get_form_var('email', 'string');
 $type = get_form_var('type', 'string');
 
 // Check the user is authorised for this page
