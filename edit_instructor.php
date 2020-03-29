@@ -19,7 +19,7 @@ $change_done = get_form_var('change_done', 'string');
 $change_instructor = get_form_var('change_instructor', 'string');
 $change_area = get_form_var('change_area', 'string');
 
-// Get the information about the fields in the room table
+// Get the information about the fields in the instructor table
 $fields = sql_field_info('kth_instructors');
 
 // Get any user defined form variables
@@ -68,6 +68,7 @@ if (isset($change_done))
 // Intialise the validation booleans
 $valid_email = TRUE;
 $valid_full_name = TRUE;
+$valid_area = TRUE;
 
 // PHASE 2
 // -------
@@ -314,40 +315,6 @@ if (isset($change_instructor) && !empty($instructor))
                       'create_hidden' => FALSE);
       generate_input($params);
       echo "</div>\n";
-    
-      // then look at any user defined fields  
-      foreach ($fields as $field)
-      {
-        if (!in_array($field['full_name'], $standard_fields['instructors']))
-        {
-          echo "<div>\n";
-          $params = array('label'         => get_loc_field_name('kth_instructors', $field['full_name']) . ":",
-                          'name'          => VAR_PREFIX . $field['full_name'],
-                          'value'         => $row[$field['full_name']],
-                          'disabled'      => $disabled,
-                          'create_hidden' => FALSE);
-          // Output a checkbox if it's a boolean or integer <= 2 bytes (which we will
-          // assume are intended to be booleans)
-          if (($field['nature'] == 'boolean') || 
-              (($field['nature'] == 'integer') && isset($field['length']) && ($field['length'] <= 2)) )
-          {
-            generate_checkbox($params);
-          }
-          // Output a textarea if it's a character string longer than the limit for a
-          // text input
-          elseif (($field['nature'] == 'character') && isset($field['length']) && ($field['length'] > $text_input_max))
-          {
-            $params['attributes'] = array('rows="4"', 'cols="40"');
-            generate_textarea($params);
-          }
-          // Otherwise output a text input
-          else
-          {
-            generate_input($params);
-          }
-          echo "</div>\n";
-        }
-      }
       echo "</fieldset>\n";
     
       // Submit and Back buttons (Submit only if they're an admin)  
