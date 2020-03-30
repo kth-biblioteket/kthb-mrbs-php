@@ -631,7 +631,7 @@ td.K,
 } /* KTH-grön(#B0C949), ljusblå(#7eddfc) */
 
 td.D.invalid.confirmed {
-    background-color: #CC6666 !important;;
+    background-color: #CE3232 !important; /* CC6666 */
 } /*röd*/
 
 td.I.confirmed div, 
