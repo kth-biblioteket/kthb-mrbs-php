@@ -634,7 +634,11 @@ td.D.invalid.confirmed {
     background-color: #CC6666 !important;;
 } /*röd*/
 
-td.I.confirmed div, td.I.confirmed a {
+td.I.confirmed div, 
+td.I.confirmed a,
+td.I.confirmed a:link,
+td.I.confirmed a:visited,
+td.I.confirmed a:hover {
     color: white;
 }
 
