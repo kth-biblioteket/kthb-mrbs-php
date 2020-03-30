@@ -468,11 +468,11 @@ function create_field_entry_rooms($disabled=FALSE)
 
 	//KTH engelska 
   if(isset($_COOKIE["mrbslang"])) {
-	if(isset($mrbslang)) {
-		$lang = $mrbslang;
-	} else {
-		$lang = $_COOKIE["mrbslang"];
-	}
+    if(isset($mrbslang)) {
+      $lang = $mrbslang;
+    } else {
+      $lang = $_COOKIE["mrbslang"];
+    }
   }
   //KTH visa inte (utom för admin, sätts i config)
   //191003 visa inte för någon
@@ -748,6 +748,7 @@ function create_field_entry_custom_field($field, $key, $is_admin, $user, $disabl
 {
   global $custom_fields, $tbl_entry, $area, $kth_places;
   global $is_mandatory_field, $text_input_max, $maxlength;
+  global $lang;
   //191003
   //ta bara med de fält som respektive area ska ha
   switch ($key)
@@ -782,9 +783,13 @@ function create_field_entry_custom_field($field, $key, $is_admin, $user, $disabl
         {
           $places[] = $row['id'];
           if ($row['name'] == '1none') {
-            $params['options']['none'] = 'Select an option';
+              $params['options']['none'] = $vocab["select_an_option"];
           } else {
-            $params['options'][$row['id']] = $row['name'];
+            if ($lang == "sv") {
+              $params['options'][$row['id']] = $row['name'];
+            } else {
+              $params['options'][$row['id']] = $row['name_en'];
+            }
           }
         }
         generate_select($params);
