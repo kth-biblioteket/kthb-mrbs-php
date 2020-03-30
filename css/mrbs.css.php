@@ -627,8 +627,8 @@ td.K,
 }
 
 .S {
-  background-color: #7eddfc !important
-} /* KTH-grön(#B0C949), ljusblå(#7eddfc) */
+  background-color: #9a6cb7 !important
+} /* KTH-grön(#B0C949), ljusblå(#7eddfc) lila(#9a6cb7 )*/
 
 td.D.invalid.confirmed {
     background-color: #CE3232 !important; /* CC6666 */
@@ -645,7 +645,13 @@ td.D.confirmed a,
 td.D.confirmed a:link,
 td.D.confirmed a:visited,
 .dwm_main tbody tr:hover td.D.confirmed a,
-td.D.confirmed a:hover {
+td.S.confirmed a:hover,
+td.S.confirmed div, 
+td.S.confirmed a,
+td.S.confirmed a:link,
+td.S.confirmed a:visited,
+.dwm_main tbody tr:hover td.D.confirmed a,
+td.S.confirmed a:hover {
     color: white;
 }
 
