@@ -627,8 +627,8 @@ td.K,
 }
 
 .S {
-  background-color: ##5D007A !important
-} /* KTH-grön(#B0C949), ljusblå(#7eddfc) lila(##5D007A )*/
+  background-color: #5D007A !important
+} /* KTH-grön(#B0C949), ljusblå(#7eddfc) lila(#5D007A )*/
 
 td.D.invalid.confirmed {
     background-color: #CE3232 !important; /* CC6666 */

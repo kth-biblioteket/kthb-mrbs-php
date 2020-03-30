@@ -94,7 +94,7 @@ $color_types = array(
     'H' => "#d9d982",
     'I' => "#CE3232", // KTH, original MRBS: green = "#99cc66" (red = "#CC6666") (other red = "ce3232")
     'J' => "#e6ffe6",
-    'S' => "##5D007A", //191003 special KTH-grön(#B0C949) ljusblå(#7eddfc) lila(##5D007A)
+    'S' => "#5D007A", //191003 special KTH-grön(#B0C949) ljusblå(#7eddfc) lila(##5D007A)
     'K' => "#ffffcd"); //KTH för bokningen som ska konfirmeras (gul)
     
 
