@@ -1454,7 +1454,7 @@ if (isset($change_area) &&!empty($area))
   
   //Times along top
   //Disable möjlighet att sätta times högst upp
-  echo "<input type=\"hidden\" id=\"times_along_top\" name=\"times_along_top\" value=0>";
+  echo "<input style=\"visibility:hidden\" type=\"radio\" id=\"times_along_top\" name=\"times_along_top\" value=0 checked=\"checked\">";
   /*
   echo "<div id=\"times_along_top\">\n";
   $options = array('0' => 'Side',
