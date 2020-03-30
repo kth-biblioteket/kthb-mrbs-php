@@ -748,7 +748,7 @@ function create_field_entry_custom_field($field, $key, $is_admin, $user, $disabl
 {
   global $custom_fields, $tbl_entry, $area, $room_id, $room, $kth_places;
   global $is_mandatory_field, $text_input_max, $maxlength;
-  global $lang;
+  global $lang, $environment;
 
   if($environment == 'development') {
     error_log("room " . $room);
