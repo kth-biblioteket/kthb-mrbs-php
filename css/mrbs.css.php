@@ -634,12 +634,18 @@ td.D.invalid.confirmed {
     background-color: #CC6666 !important;;
 } /*röd*/
 
-td.confirmed div, 
-td.confirmed a,
-td.confirmed a:link,
-td.confirmed a:visited,
-.dwm_main tbody tr:hover td.confirmed a,
-td.confirmed a:hover {
+td.I.confirmed div, 
+td.I.confirmed a,
+td.I.confirmed a:link,
+td.I.confirmed a:visited,
+.dwm_main tbody tr:hover td.I.confirmed a,
+td.I.confirmed a:hover,
+td.D.confirmed div, 
+td.D.confirmed a,
+td.D.confirmed a:link,
+td.D.confirmed a:visited,
+.dwm_main tbody tr:hover td.D.confirmed a,
+td.D.confirmed a:hover {
     color: white;
 }
 
