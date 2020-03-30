@@ -1417,7 +1417,7 @@ if (isset($change_area) &&!empty($area))
         
   // Mode - Times or Periods
   //Disable möjlighet att sätta perioder
-  echo "<input type=\"hidden\" id=\"area_enable_periods\" name=\"area_enable_periods\" value=0>";
+  echo "<input style=\"visibility:hidden\" type=\"radio\" id=\"area_enable_periods\" name=\"area_enable_periods\" value=0 checked=\"checked\">";
   /*
   echo "<div id=\"mode\">\n";
   $options = array('1' => get_vocab("mode_periods"),
@@ -1454,7 +1454,7 @@ if (isset($change_area) &&!empty($area))
   
   //Times along top
   //Disable möjlighet att sätta times högst upp
-  echo "<input style=\"visibility:hidden\" type=\"radio\" id=\"times_along_top\" name=\"times_along_top\" value=0 checked=\"checked\">";
+  echo "<input type=\"hidden\" id=\"times_along_top\" name=\"times_along_top\" value=0 checked=\"checked\">";
   /*
   echo "<div id=\"times_along_top\">\n";
   $options = array('0' => 'Side',
