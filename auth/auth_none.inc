@@ -208,7 +208,10 @@ function authValidateUser($user, $pass, $kthcas)
 				
 				//191003
 				if ($checkusergroup) {
-					if($source['user_group']['value'] != "10" && $source['user_group']['value'] != "20" && $source['user_group']['value'] != "23" && $source['user_group']['value'] != "24") {
+					if($source['user_group']['value'] != "10" 
+						&& $source['user_group']['value'] != "20" 
+						&& $source['user_group']['value'] != "23" 
+						&& $source['user_group']['value'] != "24") {
 						//"Other";
 						$message = "User group: \"" . $source['user_group']['desc'] . "\" ej behörig.";
 

@@ -186,7 +186,7 @@ $before_after_links_html = "
       <a href=\"day.php?area=$area$room_param\">" . get_vocab("gototoday") . "</a>
     </div>
     <div class=\"date_after\">
-      <a href=\"day.php?year=$ty&amp;month=$tm&amp;day=$td&amp;area=$area$room_param\">" . get_vocab("dayafter") . " <img src=\"images/arrow-right-white-bold.png\" alt=\"Föregående dag\">
+      <a href=\"day.php?year=$ty&amp;month=$tm&amp;day=$td&amp;area=$area$room_param\">" . get_vocab("dayafter") . " <img src=\"images/arrow-right-white-bold.png\" alt=\"Nästa dag\">
       </a>
     </div>
   </div>
