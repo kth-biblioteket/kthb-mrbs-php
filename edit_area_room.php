@@ -1416,6 +1416,7 @@ if (isset($change_area) &&!empty($area))
   echo "</div>\n";
         
   // Mode - Times or Periods
+  echo "<input type=\"hidden\" id=\"area_enable_periods\" name=\"area_enable_periods\" value=0>";
   /*
   echo "<div id=\"mode\">\n";
   $options = array('1' => get_vocab("mode_periods"),
@@ -1451,6 +1452,7 @@ if (isset($change_area) &&!empty($area))
   echo "</div>\n";
   
   //Times along top
+  echo "<input type=\"hidden\" id=\"times_along_top\" name=\"times_along_top\" value=0>";
   /*
   echo "<div id=\"times_along_top\">\n";
   $options = array('0' => 'Side',
@@ -1463,7 +1465,7 @@ if (isset($change_area) &&!empty($area))
   generate_radio_group($params);
   echo "</div>\n";
   */
-  
+
   //hide_links
   echo "<div id=\"hide_links\">\n";
   $options = array('1' => 'Yes',
