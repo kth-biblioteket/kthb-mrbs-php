@@ -634,6 +634,10 @@ td.D.invalid.confirmed {
     background-color: #CC6666 !important;;
 } /*röd*/
 
+td.I.confirmed div, td.I.confirmed a {
+    color: white;
+}
+
 /* ------------ DEL.PHP -----------------------------*/
 div#del_room_confirm {padding-bottom: 3em}
 #del_room_confirm p {text-align: center; font-size: large; font-weight: bold}
