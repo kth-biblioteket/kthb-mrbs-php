@@ -746,9 +746,14 @@ function create_field_entry_privacy_status($disabled=FALSE)
 //191003
 function create_field_entry_custom_field($field, $key, $is_admin, $user, $disabled=FALSE)
 {
-  global $custom_fields, $tbl_entry, $area, $room, $kth_places;
+  global $custom_fields, $tbl_entry, $area, $room_id, $room, $kth_places;
   global $is_mandatory_field, $text_input_max, $maxlength;
   global $lang;
+
+  if($environment == 'development') {
+    error_log("room " . $room);
+    error_log("room_id " . $room_id);
+  }
   //191003
   //ta bara med de fält som respektive area ska ha
   switch ($key)
@@ -769,7 +774,7 @@ function create_field_entry_custom_field($field, $key, $is_admin, $user, $disabl
         $places = array();
         $sql = "SELECT kth_places.id, kth_places.name, kth_places.name_en
                 FROM kth_places
-                WHERE area_id = $room
+                WHERE area_id = $room_id
                 ORDER BY kth_places.sort_key";
 
         $res = sql_query($sql);
