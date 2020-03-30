@@ -1451,6 +1451,7 @@ if (isset($change_area) &&!empty($area))
   echo "</div>\n";
   
   //Times along top
+  /*
   echo "<div id=\"times_along_top\">\n";
   $options = array('0' => 'Side',
                    '1' => 'Top');
@@ -1461,6 +1462,7 @@ if (isset($change_area) &&!empty($area))
                   'force_assoc' => TRUE);
   generate_radio_group($params);
   echo "</div>\n";
+  */
   
   //hide_links
   echo "<div id=\"hide_links\">\n";
