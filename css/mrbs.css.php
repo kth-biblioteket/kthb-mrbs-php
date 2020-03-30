@@ -651,7 +651,7 @@ td.S div,
 td.S.confirmed a,
 td.S.confirmed a:link,
 td.S.confirmed a:visited,
-.dwm_main tbody tr:hover td.D.confirmed a,
+.dwm_main tbody tr:hover td.S.confirmed a,
 td.S.confirmed a:hover {
     color: white;
 }
