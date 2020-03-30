@@ -631,7 +631,7 @@ td.K,
 } /* KTH-grön(#B0C949), ljusblå(#7eddfc) lila(#DCB8FF )*/
 
 td.D.invalid.confirmed {
-    background-color: #ff7070 !important; /* CC6666, ff7070, CE3232 */
+    background-color: #fd9595 !important; /* CC6666, fd9595, CE3232 */
 } /*röd*/
 
 td.I.confirmed div, 
@@ -1008,8 +1008,8 @@ table#colour_key {
 }
 /* 191003 */
 #colour_key .invalid {border: 1px solid #888888 !important;}
-#colour_key .I.tentative {border: 1px solid #A3A537 !important;} /*grön =48A537 orange =C9910A gul=A3A537 röd=A54637 röd=ff7070*/
-#colour_key .I.confirmed {border: 1px solid #ff7070 !important;}
+#colour_key .I.tentative {border: 1px solid #A3A537 !important;} /*grön =48A537 orange =C9910A gul=A3A537 röd=A54637 röd=fd9595*/
+#colour_key .I.confirmed {border: 1px solid #fd9595 !important;}
 #colour_key .K {border: 1px solid #C9910A !important;}
 #colour_key .B {border: 1px solid #CCCCCC !important;}
 #colour_key .S {border: 1px solid #9a72da !important;} /* KTH-grön(#83982d), ljusblå(#2d9898) lila(9a72da)*/
