@@ -627,8 +627,8 @@ td.K,
 }
 
 .S {
-  background-color: #5D007A !important
-} /* KTH-grön(#B0C949), ljusblå(#7eddfc) lila(#5D007A )*/
+  background-color: #DCB8FF !important
+} /* KTH-grön(#B0C949), ljusblå(#7eddfc) lila(#DCB8FF )*/
 
 td.D.invalid.confirmed {
     background-color: #CE3232 !important; /* CC6666 */
@@ -644,7 +644,10 @@ td.D.confirmed div,
 td.D.confirmed a,
 td.D.confirmed a:link,
 td.D.confirmed a:visited,
-.dwm_main tbody tr:hover td.D.confirmed a,
+.dwm_main tbody tr:hover td.D.confirmed a{
+    color: white;
+}
+
 td.S.confirmed a:hover,
 td.S.confirmed div,
 td.S div, 
@@ -653,7 +656,7 @@ td.S.confirmed a:link,
 td.S.confirmed a:visited,
 .dwm_main tbody tr:hover td.S.confirmed a,
 td.S.confirmed a:hover {
-    color: white;
+    color: black;
 }
 
 /* ------------ DEL.PHP -----------------------------*/
