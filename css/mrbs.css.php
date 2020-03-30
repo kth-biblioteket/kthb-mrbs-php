@@ -1476,7 +1476,7 @@ table.dwm_main {
 }
 
 .dwm_main a, div.celldiv {
-    font-size: 10px;
+    font-size: 12px;
 }
 /* 191003
 #dwm_header li {
