@@ -217,6 +217,9 @@ INSERT INTO `kth_periods` (`id`, `start_time`, `end_time`, `entry_start_time`, `
 DROP TABLE IF EXISTS `kth_places`;
 CREATE TABLE IF NOT EXISTS `kth_places` (
   `id` int(11) NOT NULL,
+  `disabled` tinyint(4) NOT NULL DEFAULT '0',
+  `area_id` int(11) NOT NULL DEFAULT '0',
+  `sort_key` varchar(25) NOT NULL,
   `name` varchar(100) NOT NULL,
   `name_en` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -225,9 +228,10 @@ CREATE TABLE IF NOT EXISTS `kth_places` (
 -- Dumpning av Data i tabell `kth_places`
 --
 
-INSERT INTO `kth_places` (`id`, `name`, `name_en`) VALUES
-(1, 'Huvudbiblioteket', 'Main Library'),
-(2, 'Distans', 'Distance');
+INSERT INTO `kth_places` (`id`, `disabled`, `area_id`, `sort_key`, `name`, `name_en`) VALUES
+(1, 0, 1, '3', 'Huvudbiblioteket', 'Main Library'),
+(2, 0, 1, '2', 'Distans', 'Distance'),
+(3, 0, 1, '1', '1none', '1none');
 
 -- --------------------------------------------------------
 
