@@ -1416,6 +1416,7 @@ if (isset($change_area) &&!empty($area))
   echo "</div>\n";
         
   // Mode - Times or Periods
+  /*
   echo "<div id=\"mode\">\n";
   $options = array('1' => get_vocab("mode_periods"),
                    '0' => get_vocab("mode_times"));
@@ -1433,7 +1434,7 @@ if (isset($change_area) &&!empty($area))
 	echo create_period_innerhtml($area);
 	echo "</div>\n";
   }
-  
+  */
   // KTH 
   //Default start page (view) 
   //day or week or month (override config settings: $default_view = "day";)
