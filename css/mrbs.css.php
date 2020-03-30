@@ -631,7 +631,7 @@ td.K,
 } /* KTH-grön(#B0C949), ljusblå(#7eddfc) lila(#DCB8FF )*/
 
 td.D.invalid.confirmed {
-    background-color: #CE3232 !important; /* CC6666 */
+    background-color: #ffa0a0 !important; /* CC6666, ffa0a0, CE3232 */
 } /*röd*/
 
 td.I.confirmed div, 
@@ -639,13 +639,17 @@ td.I.confirmed a,
 td.I.confirmed a:link,
 td.I.confirmed a:visited,
 .dwm_main tbody tr:hover td.I.confirmed a,
-td.I.confirmed a:hover,
+td.I.confirmed a:hover {
+    color: black;
+}
+
+
 td.D.confirmed div, 
 td.D.confirmed a,
 td.D.confirmed a:link,
 td.D.confirmed a:visited,
-.dwm_main tbody tr:hover td.D.confirmed a{
-    color: white;
+.dwm_main tbody tr:hover td.D.confirmed a {
+    color: black;
 }
 
 td.S.confirmed a:hover,
