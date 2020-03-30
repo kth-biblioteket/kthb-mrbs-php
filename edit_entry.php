@@ -746,7 +746,7 @@ function create_field_entry_privacy_status($disabled=FALSE)
 //191003
 function create_field_entry_custom_field($field, $key, $is_admin, $user, $disabled=FALSE)
 {
-  global $custom_fields, $tbl_entry, $area, $kth_places;
+  global $custom_fields, $tbl_entry, $area, $room, $kth_places;
   global $is_mandatory_field, $text_input_max, $maxlength;
   global $lang;
   //191003
