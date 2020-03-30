@@ -1416,6 +1416,7 @@ if (isset($change_area) &&!empty($area))
   echo "</div>\n";
         
   // Mode - Times or Periods
+  //Disable möjlighet att sätta perioder
   echo "<input type=\"hidden\" id=\"area_enable_periods\" name=\"area_enable_periods\" value=0>";
   /*
   echo "<div id=\"mode\">\n";
@@ -1452,6 +1453,7 @@ if (isset($change_area) &&!empty($area))
   echo "</div>\n";
   
   //Times along top
+  //Disable möjlighet att sätta times högst upp
   echo "<input type=\"hidden\" id=\"times_along_top\" name=\"times_along_top\" value=0>";
   /*
   echo "<div id=\"times_along_top\">\n";

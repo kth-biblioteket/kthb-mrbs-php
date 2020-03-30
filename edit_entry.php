@@ -770,7 +770,7 @@ function create_field_entry_custom_field($field, $key, $is_admin, $user, $disabl
         $places = array();
         $sql = "SELECT kth_places.id, kth_places.name, kth_places.name_en
                 FROM kth_places
-                WHERE area_id = $room_id
+                WHERE room_id = $room_id
                 ORDER BY kth_places.sort_key";
 
         $res = sql_query($sql);

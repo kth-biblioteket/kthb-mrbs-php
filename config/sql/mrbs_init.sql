@@ -218,7 +218,7 @@ DROP TABLE IF EXISTS `kth_places`;
 CREATE TABLE IF NOT EXISTS `kth_places` (
   `id` int(11) NOT NULL,
   `disabled` tinyint(4) NOT NULL DEFAULT '0',
-  `area_id` int(11) NOT NULL DEFAULT '0',
+  `room_id` int(11) NOT NULL DEFAULT '0',
   `sort_key` varchar(25) NOT NULL,
   `name` varchar(100) NOT NULL,
   `name_en` varchar(100) NOT NULL
