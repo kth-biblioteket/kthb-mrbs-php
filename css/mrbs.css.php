@@ -1009,10 +1009,10 @@ table#colour_key {
 /* 191003 */
 #colour_key .invalid {border: 1px solid #888888 !important;}
 #colour_key .I.tentative {border: 1px solid #A3A537 !important;} /*grön =48A537 orange =C9910A gul=A3A537 röd=A54637 röd=ff8080*/
-#colour_key .I.confirmed {border: 1px solid #ff8080 !important;}
+#colour_key .I.confirmed {border: 1px solid #a9a9a9 !important;}
 #colour_key .K {border: 1px solid #C9910A !important;}
 #colour_key .B {border: 1px solid #CCCCCC !important;}
-#colour_key .S {border: 1px solid #bb90ff !important;} /* KTH-grön(#83982d), ljusblå(#2d9898) lila(bb90ff)*/
+#colour_key .S {border: 1px solid #a9a9a9 !important;} /* KTH-grön(#83982d), ljusblå(#2d9898) lila(a06bf4)*/
 
 #colour_key .confirmed {
 	font-weight: normal;
