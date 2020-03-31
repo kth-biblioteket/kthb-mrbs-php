@@ -577,7 +577,7 @@ $vocab["custom_html_en"]             = "Informations text Engelska";
 $vocab["extra_info"]                = "Ingress text";
 
 //KTH
-$vocab["extra_info_en"]             = "Ingress text English";
+$vocab["extra_info_en"]             = "Ingress text Engelska";
 
 
 $vocab["custom_html_note"]        = "Det här fältet kan användas för att visa egen HTML-kod, t.ex. en inbäddad Google-karta";
