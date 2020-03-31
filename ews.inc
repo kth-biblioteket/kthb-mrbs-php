@@ -174,7 +174,7 @@ function cancelappointment($email_calendar, $event_id, $change_key, $start_date,
     return $result;    
 }
 
-function updateappointment($id, $subject, $location, $start, $end, $host, $username, $password) {
+function updateappointment($id, $subject, $email_attendee, $email_attendee_name, $location, $start, $end, $host, $username, $password) {
     
     $version = Client::VERSION_2013;
     $client = new Client($host, $username, $password, $version);
@@ -187,6 +187,12 @@ function updateappointment($id, $subject, $location, $start, $end, $host, $usern
             'end' => $end,
             'subject' => $subject,
             'location' => $location
+        )
+    );
+    $attendees = array(
+        array(
+            'name' => $email_attendee_name,
+            'email' => $email_attendee
         )
     );
     $request = new UpdateItemType();
@@ -226,6 +232,21 @@ function updateappointment($id, $subject, $location, $start, $end, $host, $usern
         $field->CalendarItem = new CalendarItemType();
         $field->CalendarItem->Location = $update['location'];
         $change->Updates->SetItemField[] = $field;
+
+        
+        //update attendees
+        $ra = 0;
+        $field = new SetItemFieldType();
+        $field->FieldURI = new PathToUnindexedFieldType();
+        $field->FieldURI->FieldURI = UnindexedFieldURIType::CALENDAR_REQUIRED_ATTENDEES;
+
+        foreach ($attendees as $guest) {
+            $field->CalendarItem->RequiredAttendees->Attendee[$ra]->Mailbox->EmailAddress = $guest['email'];
+            $field->CalendarItem->RequiredAttendees->Attendee[$ra]->Mailbox->Name = $guest['name'];
+            $field->CalendarItem->RequiredAttendees->Attendee[$ra]->Mailbox->RoutingType = RoutingType::SMTP;
+            $ra++;
+        }
+        $change->Updates->SetItemField[] = $field;  
 
         $request->ItemChanges[] = $change;
     }
@@ -301,7 +322,7 @@ function createappointment($email_calendar, $email_calendar_name, $subject, $ema
 
         $request->Items->CalendarItem[] = $event;
 
-        //Skapa i annan kalender(som inloggad har tillgång till)
+        //Skapa i annan kalender(som systemkonto har tillgång till)
         $request->SavedItemFolderId = new TargetFolderIdType();
         $request->SavedItemFolderId->DistinguishedFolderId = new DistinguishedFolderIdType();
         $request->SavedItemFolderId->DistinguishedFolderId->Id=DistinguishedFolderIdNameType::CALENDAR;

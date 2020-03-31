@@ -798,7 +798,8 @@ function mrbsDelEntry($user, $id, $series, $all, $truedelete)
     //ta inte bort vid true delete(cancel booking) om bokningen har typ == "I", 
     //dvs en vanlig bokning(bokad av användare)
     //(vid "save" sker också en delete men med en ny bokning skapad)
-    //TODO om admin avbokar en bokningbar tid, skicka mail till den om bokat.
+    //TODO om admin avbokar en bokningbar tid, skicka mail till den som bokat.
+    //Skicka även till instructor?
     $is_admin = (authGetUserLevel($user) >= 2);
     $start_date = getdate($row['start_time']);
     $startdate = new datetime($start_date['year'].'-'.$start_date['mon'].'-'.$start_date['mday'].' '.$start_date['hours'].':'.$start_date['minutes']);
@@ -842,9 +843,9 @@ function mrbsDelEntry($user, $id, $series, $all, $truedelete)
         $kth_exchange_events = sql_row_keyed($res, 0);
         if(sql_count($res) == 1) {
           //uppdatera exchangekalendern
-          //TODO sätt location
+          //TODO sätt location?
           try {
-            $outlook_result = updateappointment($kth_exchange_events['event_id'], get_mail_vocab("calendar_subject") . "-" . get_mail_vocab("bookable_entry_text"), '', $startdate, $enddate, $ews_host, $ews_user, $ews_password);
+            $outlook_result = updateappointment($kth_exchange_events['event_id'], get_mail_vocab("calendar_subject") . "-" . get_mail_vocab("bookable_entry_text"), '', '', '', $startdate, $enddate, $ews_host, $ews_user, $ews_password);
           }
           catch (exception $e) {
             $outlook_result['status'] = 'Error';
@@ -2615,7 +2616,7 @@ function mrbsMakeBookings($bookings, $id=NULL, $just_check=FALSE, $skip=FALSE, $
 
           if(sql_count($res) == 1) {  
             try {
-              $outlook_result = updateappointment($row['event_id'], get_mail_vocab("calendar_subject") . "-" . $booking['name'], $bookinglocation, $startdate, $enddate, $ews_host, $ews_user, $ews_password);
+              $outlook_result = updateappointment($row['event_id'], get_mail_vocab("calendar_subject") . "-" . $booking['name'], $booking['instructor'], $booking['instructor'], $bookinglocation, $startdate, $enddate, $ews_host, $ews_user, $ews_password);
             }
             catch (exception $e) {
               $outlook_result['status'] = 'Error';
