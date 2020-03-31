@@ -576,10 +576,14 @@ $vocab["max_per_week"]            = "Maximum number per week";
 $vocab["max_per_month"]           = "Maximum number per month";
 $vocab["max_per_year"]            = "Maximum number per year";
 $vocab["max_per_future"]          = "Maximum number in the future";
-$vocab["custom_html"]             = "Custom HTML";
+$vocab["custom_html"]             = "Information text";
 
 //KTH
-$vocab["custom_html_en"]             = "Custom HTML English";
+$vocab["custom_html_en"]            = "Information text English";
+$vocab["extra_info"]                = "Ingress text";
+
+//KTH
+$vocab["extra_info_en"]             = "Ingress text English";
 
 $vocab["custom_html_note"]        = "This field can be used for displaying your own HTML, for example an embedded Google map";
 $vocab["email_list_note"]         = "Enter a list of email addresses separated by commas or newlines";

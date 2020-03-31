@@ -570,10 +570,15 @@ $vocab["max_per_week"]            = "Högsta antal per vecka";
 $vocab["max_per_month"]           = "Högsta antal per månad";
 $vocab["max_per_year"]            = "Högsta antal per år";
 $vocab["max_per_future"]          = "Högsta antal framöver";
-$vocab["custom_html"]             = "Custom HTML";
+$vocab["custom_html"]             = "Informationstext";
 
 //KTH
-$vocab["custom_html_en"]             = "Custom HTML Engelska";
+$vocab["custom_html_en"]             = "Informations text Engelska";
+$vocab["extra_info"]                = "Ingress text";
+
+//KTH
+$vocab["extra_info_en"]             = "Ingress text English";
+
 
 $vocab["custom_html_note"]        = "Det här fältet kan användas för att visa egen HTML-kod, t.ex. en inbäddad Google-karta";
 $vocab["email_list_note"]         = "Ange en lista med e-postadresser separerade med kommatecken eller nya rader";
