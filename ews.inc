@@ -251,7 +251,16 @@ function updateappointment($id, $subject, $location, $start, $end, $host, $usern
     return $result;  
 }
 
-function createappointment($email_calendar, $email_calendar_name, $subject, $email_booker, $email_booker_name, $start, $end, $host, $username, $password) {
+/**
+ * 
+ * Funktion som skapar händels i outlook-kalender
+ * Parametrar
+ * email_calendar: kalender att boka i
+ * subject
+ * email_attandee, handledarens email
+ * email_attendee_name, handledarens namn
+ */
+function createappointment($email_calendar, $email_calendar_name, $subject, $email_attendee, $email_attendee_name, $start, $end, $host, $username, $password) {
     
     $version = Client::VERSION_2013;
     $client = new Client($host, $username, $password, $version);
@@ -259,8 +268,8 @@ function createappointment($email_calendar, $email_calendar_name, $subject, $ema
     $result = array();
     $attendees = array(
         array(
-            'name' => $email_booker_name,
-            'email' => $email_booker
+            'name' => $email_attendee_name,
+            'email' => $email_attendee
         )
     );
     $roomavailability = true;
@@ -275,7 +284,7 @@ function createappointment($email_calendar, $email_calendar_name, $subject, $ema
         $event->Start = $start->format('c');
         $event->End = $end->format('c');
         $event->Subject = $subject;
-        $event->Location = $email_room_name;
+        $event->Location = '';
 
         $event->Body = new BodyType();
         $event->Body->_ = '';
