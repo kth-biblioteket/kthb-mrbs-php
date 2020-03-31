@@ -640,7 +640,7 @@ td.I.confirmed a:link,
 td.I.confirmed a:visited,
 .dwm_main tbody tr:hover td.I.confirmed a,
 td.I.confirmed a:hover {
-    color: black;
+    color: #0B263B;
 }
 
 
@@ -649,7 +649,7 @@ td.D.confirmed a,
 td.D.confirmed a:link,
 td.D.confirmed a:visited,
 .dwm_main tbody tr:hover td.D.confirmed a {
-    color: black;
+    color: #0B263B;
 }
 
 td.S.confirmed a:hover,
@@ -660,7 +660,7 @@ td.S.confirmed a:link,
 td.S.confirmed a:visited,
 .dwm_main tbody tr:hover td.S.confirmed a,
 td.S.confirmed a:hover {
-    color: black;
+    color: #0B263B;
 }
 
 /* ------------ DEL.PHP -----------------------------*/
