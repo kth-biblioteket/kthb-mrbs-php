@@ -865,6 +865,11 @@ if ($is_admin || ($n_displayable_areas > 0))
           <label for="name"><?php echo get_vocab("name") ?>:</label>
           <input type="text" id="name" name="name" maxlength="<?php echo $maxlength['place.name'] ?>">
         </div>
+
+        <div>
+          <label for="room_id"><?php echo get_vocab("room_id") ?>:</label>
+          <input type="text" id="room_id" name="room_id">
+        </div>
        
         <div>
           <input type="submit" class="submit" value="<?php echo get_vocab("addplace") ?>">

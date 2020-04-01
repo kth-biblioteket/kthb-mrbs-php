@@ -11,6 +11,7 @@ $description = get_form_var('description', 'string');
 $capacity = get_form_var('capacity', 'int');
 $email = get_form_var('email', 'string');
 $type = get_form_var('type', 'string');
+$room_id = get_form_var('room_id', 'int');
 
 // Check the user is authorised for this page
 checkAuthorised();
@@ -44,7 +45,7 @@ elseif ($type == "instructor")
 
 elseif ($type == "place")
 {
-  $room = mrbsAddPlace($name, $area, $error, $email);
+  $room = mrbsAddPlace($name, $room_id, $error, $email);
 }
 
 $returl = "admin.php?area=$area" . (!empty($error) ? "&error=$error" : "");

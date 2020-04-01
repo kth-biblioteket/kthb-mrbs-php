@@ -2364,7 +2364,7 @@ function mrbsAddInstructor($name, $area, &$error, $email='')
 
 // Adds an instructor, returning the new id, or FALSE on failure with the
 // error in $error
-function mrbsAddPlace($name, $area, &$error, $email='')
+function mrbsAddPlace($name, $room_id, &$error, $email='')
 {
   global $maxlength, $environment;
   
@@ -2393,8 +2393,8 @@ function mrbsAddPlace($name, $area, &$error, $email='')
     return FALSE;
   }
   // If so, insert the place into the database
-  $sql = "INSERT INTO kth_places (name, name_en, sort_key)
-          VALUES ('$name_q', '', '$name_q')";
+  $sql = "INSERT INTO kth_places (name, name_en, sort_key, room_id)
+          VALUES ('$name_q', '', '$name_q',$room_id)";
   if($environment == 'development') {
     error_log($sql);
   }
