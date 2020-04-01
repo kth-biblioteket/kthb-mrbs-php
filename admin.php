@@ -675,7 +675,7 @@ if ($is_admin || ($n_displayable_areas > 0))
   echo "<div id=\"places_form\">\n";
   if (isset($area))
   {
-    $res = sql_query("SELECT id, name, name_en, room_id
+    $res = sql_query("SELECT kth_places.id, name, name_en, room_id
                 FROM kth_places
                 INNER JOIN mrbs_room
                 ON room_id = mrbs_room.id
