@@ -7,6 +7,7 @@ require "defaultincludes.inc";
 $type = get_form_var('type', 'string');
 $confirm = get_form_var('confirm', 'string');
 $instructor = get_form_var('instructor', 'int');
+$place = get_form_var('place', 'int');
 $email = get_form_var('email', 'string');
 
 
