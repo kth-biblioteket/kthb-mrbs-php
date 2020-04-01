@@ -157,7 +157,6 @@ if ($phase == 2)
               case 'name_en':
                 $assign_array[] = "name_en='" . sql_escape($name_en) . "'";
                 break;
-                */
               // then look at any user defined fields
               default:
                 $var = VAR_PREFIX . $field['name'];
