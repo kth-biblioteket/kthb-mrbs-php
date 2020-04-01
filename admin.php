@@ -672,7 +672,7 @@ if ($is_admin || ($n_displayable_areas > 0))
   }
   echo "</h2>\n";
 
-  echo "<div id=\"places_form\">\n";
+  echo "<div id=\"place_form\">\n";
   if (isset($area))
   {
     $res = sql_query("SELECT kth_places.id, name, name_en, room_id
@@ -825,7 +825,7 @@ if ($is_admin || ($n_displayable_areas > 0))
             {
               // Delete link
               echo "<td><div>\n";
-              echo "<a href=\"del.php?type=place&amp;area=$area&amp;place=" . $r['id'] . "\">\n";
+              echo "<a href=\"del.php?type=place&amp;area=$area&amp;room_id=" . $r['room_id'] . "&amp;place=" . $r['id'] . "\">\n";
               echo "<img src=\"images/delete.png\" width=\"16\" height=\"16\" 
                          alt=\"" . get_vocab("delete") . "\"
                          title=\"" . get_vocab("delete") . "\">\n";
