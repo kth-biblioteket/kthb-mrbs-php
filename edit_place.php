@@ -256,7 +256,7 @@ if (isset($change_place) && !empty($place))
       
       // The area select box ROOM???
       echo "<div>\n";
-      /*
+      
       $params = array('label'         => get_vocab("area") . ":",
                       'name'          => 'new_area',
                       'options'       => $areas,
@@ -265,7 +265,7 @@ if (isset($change_place) && !empty($place))
                       'disabled'      => $disabled,
                       'create_hidden' => FALSE);
       generate_select($params);
-      */
+      
       echo "<input type=\"hidden\" name=\"old_room\" value=\"" . $row['room_id'] . "\">\n";
       echo "</div>\n";
       
