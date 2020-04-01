@@ -2366,7 +2366,7 @@ function mrbsAddInstructor($name, $area, &$error, $email='')
 // error in $error
 function mrbsAddPlace($name, $area, &$error, $email='')
 {
-  global $maxlength;
+  global $maxlength, $environment;
   
   // First of all check that we've got a name
   if (!isset($name) || ($name === ''))
