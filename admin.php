@@ -658,5 +658,229 @@ if ($is_admin || ($n_displayable_areas > 0))
   echo "</div>\n";
 }
 
+// KTH
+// BOTTOM SECTION: PLACES IN THE SELECTED AREA
+// Only display the bottom section if the user is an admin or
+// else if there are some areas that can be displayed
+if ($is_admin || ($n_displayable_areas > 0))
+{
+  echo "<h2>\n";
+  echo get_vocab("places");
+  if(isset($area_name))
+  { 
+    echo " " . get_vocab("in") . " " . htmlspecialchars($area_name); 
+  }
+  echo "</h2>\n";
+
+  echo "<div id=\"places_form\">\n";
+  if (isset($area))
+  {
+    $res = sql_query("SELECT id, name, name_en, room_id
+                FROM kth_places
+                INNER JOIN mrbs_room
+                ON room_id = mrbs_room.id
+                WHERE area_id = $area
+                ORDER BY name");
+    if (! $res)
+    {
+      trigger_error(sql_error(), E_USER_WARNING);
+      fatal_error(FALSE, get_vocab("fatal_db_error"));
+    }
+    if (sql_count($res) == 0)
+    {
+      echo "<p>" . get_vocab("noplaces") . "</p>\n";
+    }
+    else
+    {
+       // Get the information about the fields in the places table
+      $fields = sql_field_info('kth_places');
+      // Build an array with the places info and also see if there are going
+      // to be any places to display (in other words places if you are not an
+      // admin whether any places are enabled)
+      $places = array();
+      $n_displayable_places = 0;
+      for ($i = 0; ($row = sql_row_keyed($res, $i)); $i++)
+      {
+        $places[] = $row;
+        if ($is_admin || !$row['disabled'])
+        {
+          $n_displayable_places++;
+        }
+      }
+
+      if ($n_displayable_places == 0)
+      {
+        echo "<p>" . get_vocab("noplaces_enabled") . "</p>\n";
+      }
+      else
+      {
+        echo "<div id=\"places_info\" class=\"datatable_container\">\n";
+        // Build the table.    We deal with the name and disabled columns
+        // first because they are not necessarily the first two columns in
+        // the table (eg if you are running PostgreSQL and have upgraded your
+        // database)
+        echo "<table id=\"places_table\" class=\"admin_table display\">\n";
+        
+        // The header
+        echo "<thead>\n";
+        echo "<tr>\n";
+
+        echo "<th>" . get_vocab("name") . "</th>\n";
+        if ($is_admin)
+        {
+        // Don't show ordinary users the disabled status:  they are only going to see enabled instructors
+          echo "<th>" . get_vocab("enabled") . "</th>\n";
+        }
+        // ignore these columns, either because we don't want to display them,
+        // or because we have already displayed them in the header column
+		//KTH english
+        $ignore = array('id', 'name', 'disabled', 'sort_key');
+        foreach($fields as $field)
+        {
+          if (!in_array($field['name'], $ignore))
+          {
+            switch ($field['name'])
+            {
+              // any user defined fields
+              default:
+                $text = get_loc_field_name('kth_places', $field['name']);
+                break;
+            }
+            // We don't use htmlspecialchars() here because the column names are
+            // trusted and some of them may deliberately contain HTML entities (eg &nbsp;)
+            echo "<th>$text</th>\n";
+          }
+        }
+        
+        if ($is_admin)
+        {
+          echo "<th>&nbsp;</th>\n";
+        }
+        
+        echo "</tr>\n";
+        echo "</thead>\n";
+        
+        // The body
+        echo "<tbody>\n";
+        $row_class = "odd";
+        foreach ($places as $r)
+        {
+          // Don't show ordinary users disabled places
+          if ($is_admin || !$r['disabled'])
+          {
+            $row_class = ($row_class == "even") ? "odd" : "even";
+            echo "<tr class=\"$row_class\">\n";
+
+            $html_name = htmlspecialchars($r['name']);
+            // We insert an invisible span containing the sort key so that the places will
+            // be sorted properly
+            echo "<td><div>" .
+                 "<span>" . htmlspecialchars($r['sort_key']) . "</span>" .
+                 "<a title=\"$html_name\" href=\"edit_place.php?change_place=1&amp;phase=1&amp;place=" . $r['id'] . "\">$html_name</a>" .
+                 "</div></td>\n";
+            if ($is_admin)
+            {
+              // Don't show ordinary users the disabled status:  they are only going to see enabled places
+              echo "<td class=\"boolean\"><div>" . ((!$r['disabled']) ? "<img src=\"images/check.png\" alt=\"check mark\" width=\"16\" height=\"16\">" : "&nbsp;") . "</div></td>\n";
+            }
+            foreach($fields as $field)
+            {
+              if (!in_array($field['name'], $ignore))
+              {
+                switch ($field['name'])
+                {
+                  // any user defined fields
+                  default:
+                    if (($field['nature'] == 'boolean') || 
+                        (($field['nature'] == 'integer') && isset($field['length']) && ($field['length'] <= 2)) )
+                    {
+                      // booleans: represent by a checkmark
+                      echo "<td class=\"boolean\"><div>";
+                      echo (!empty($r[$field['name']])) ? "<img src=\"images/check.png\" alt=\"check mark\" width=\"16\" height=\"16\">" : "&nbsp;";
+                      echo "</div></td>\n";
+                    }
+                    elseif (($field['nature'] == 'integer') && isset($field['length']) && ($field['length'] > 2))
+                    {
+                      // integer values
+                      echo "<td class=\"int\"><div>" . $r[$field['name']] . "</div></td>\n";
+                    }
+                    else
+                    {
+                      // strings
+                      $value = $r[$field['name']];
+                      $html = "<td title=\"" . htmlspecialchars($value) . "\"><div>";
+                      // Truncate before conversion, otherwise you could chop off in the middle of an entity
+                      $html .= htmlspecialchars(utf8_substr($value, 0, $max_content_length));
+                      $html .= (utf8_strlen($value) > $max_content_length) ? " ..." : "";
+                      $html .= "</div></td>\n";
+                      echo $html;
+                    }
+                    break;
+                }  // switch
+              }  // if
+            }  // foreach
+            
+            // Give admins a delete link
+            if ($is_admin)
+            {
+              // Delete link
+              echo "<td><div>\n";
+              echo "<a href=\"del.php?type=place&amp;area=$area&amp;place=" . $r['id'] . "\">\n";
+              echo "<img src=\"images/delete.png\" width=\"16\" height=\"16\" 
+                         alt=\"" . get_vocab("delete") . "\"
+                         title=\"" . get_vocab("delete") . "\">\n";
+              echo "</a>\n";
+              echo "</div></td>\n";
+            }
+            
+            echo "</tr>\n";
+          }
+        }
+
+        echo "</tbody>\n";
+        echo "</table>\n";
+        echo "</div>\n";
+        
+      }
+    }
+  }
+  else
+  {
+    echo get_vocab("noarea");
+  }
+
+  // Give admins a form for adding rooms to the area - provided 
+  // there's an area selected
+  if ($is_admin && $areas_defined && !empty($area))
+  {
+  ?>
+    <form id="add_instructor" class="form_admin" action="add.php" method="post">
+      <fieldset>
+      <legend><?php echo get_vocab("addinstructor") ?></legend>
+        
+        <input type="hidden" name="type" value="instructor">
+        <input type="hidden" name="area" value="<?php echo $area; ?>">
+        
+        <div>
+          <label for="full_name"><?php echo get_vocab("name") ?>:</label>
+          <input type="text" id="full_name" name="name" maxlength="<?php echo $maxlength['instructor.full_name'] ?>">
+        </div>
+        
+        <div>
+          <label for="email"><?php echo get_vocab("instructoremail") ?>:</label>
+          <input type="text" id="email" name="email" maxlength="<?php echo $maxlength['instructor.email'] ?>">
+        </div>
+       
+        <div>
+          <input type="submit" class="submit" value="<?php echo get_vocab("addinstructor") ?>">
+        </div>
+        
+      </fieldset>
+    </form>
+  <?php
+  }
+  echo "</div>\n";
+}
+
 output_trailer();
 

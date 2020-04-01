@@ -998,7 +998,7 @@ function notifyBookerOnBooking($data, $mail_previous, $new_entry, $series, $star
   
   $user = getUserName();
   $addresses['to']   = $user;
-  //$addresses['to']   = 'tholind@kth.se';
+
   if ($addresses === FALSE)
   {
     mail_debug('Email abandoned: no addresses.');
