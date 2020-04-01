@@ -118,7 +118,7 @@ if ($phase == 2)
       elseif ( (($new_room != $old_room) || ($name != $old_name))
               && sql_query1("SELECT COUNT(*)
                                FROM kth_places
-                              WHERE" . sql_syntax_casesensitive_equals("full_name", $full_name) . "
+                              WHERE" . sql_syntax_casesensitive_equals("name", $name) . "
                                 AND room_id=$new_room
                               LIMIT 1") > 0)
       {
