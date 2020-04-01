@@ -138,6 +138,36 @@ if ($type == "instructor")
   }
 }
 
+if ($type == "place")
+{
+  // We are supposed to delete an instructor
+  if (isset($confirm))
+  {
+    // They have confirmed it already, so go blast!
+    sql_begin();
+   
+    // Now take out the instructor itself
+    sql_command("delete from kth_places where id=$place");
+    sql_commit();
+   
+    // Go back to the admin page
+    Header("Location: admin.php?area=$area");
+  }
+  else
+  {
+    print_header($day, $month, $year, $area, isset($room) ? $room : "");
+   
+    echo "<div id=\"del_room_confirm\">\n";
+    echo "<p>" .  get_vocab("sure") . "</p>\n";
+    echo "<div id=\"del_room_confirm_links\">\n";
+    echo "<a href=\"del.php?type=place&amp;area=$area&amp;place=$place&amp;confirm=Y\"><span id=\"del_yes\">" . get_vocab("YES") . "!</span></a>\n";
+    echo "<a href=\"admin.php\"><span id=\"del_no\">" . get_vocab("NO") . "!</span></a>\n";
+    echo "</div>\n";
+    echo "</div>\n";
+    output_trailer();
+  }
+}
+
 if ($type == "area")
 {
   // We are only going to let them delete an area if there are
