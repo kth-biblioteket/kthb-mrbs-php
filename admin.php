@@ -854,25 +854,20 @@ if ($is_admin || ($n_displayable_areas > 0))
   if ($is_admin && $areas_defined && !empty($area))
   {
   ?>
-    <form id="add_instructor" class="form_admin" action="add.php" method="post">
+    <form id="add_place" class="form_admin" action="add.php" method="post">
       <fieldset>
-      <legend><?php echo get_vocab("addinstructor") ?></legend>
+      <legend><?php echo get_vocab("addplace") ?></legend>
         
-        <input type="hidden" name="type" value="instructor">
+        <input type="hidden" name="type" value="place">
         <input type="hidden" name="area" value="<?php echo $area; ?>">
         
         <div>
           <label for="full_name"><?php echo get_vocab("name") ?>:</label>
-          <input type="text" id="full_name" name="name" maxlength="<?php echo $maxlength['instructor.full_name'] ?>">
-        </div>
-        
-        <div>
-          <label for="email"><?php echo get_vocab("instructoremail") ?>:</label>
-          <input type="text" id="email" name="email" maxlength="<?php echo $maxlength['instructor.email'] ?>">
+          <input type="text" id="name" name="name" maxlength="<?php echo $maxlength['place.name'] ?>">
         </div>
        
         <div>
-          <input type="submit" class="submit" value="<?php echo get_vocab("addinstructor") ?>">
+          <input type="submit" class="submit" value="<?php echo get_vocab("addplace") ?>">
         </div>
         
       </fieldset>

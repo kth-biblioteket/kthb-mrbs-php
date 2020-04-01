@@ -2316,7 +2316,7 @@ function mrbsAddRoom($name, $area, &$error, $description='', $capacity='')
   return $room;
 }
 
-// Adds a room, returning the new id, or FALSE on failure with the
+// Adds an instructor, returning the new id, or FALSE on failure with the
 // error in $error
 function mrbsAddInstructor($name, $area, &$error, $email='')
 {
@@ -2360,6 +2360,50 @@ function mrbsAddInstructor($name, $area, &$error, $email='')
   // Release the mutex
   sql_mutex_unlock("kth_instructors");
   return $instructor;
+}
+
+// Adds an instructor, returning the new id, or FALSE on failure with the
+// error in $error
+function mrbsAddPlace($name, $area, &$error, $email='')
+{
+  global $maxlength;
+  
+  // First of all check that we've got a name
+  if (!isset($name) || ($name === ''))
+  {
+    $error = "empty_name";
+    return FALSE;
+  }
+  
+  // Truncate the name and description fields to the maximum length as a precaution.
+  $name = utf8_substr($name, 0, $maxlength['place.name']);
+  // Add SQL escaping
+  $name_q = sql_escape($name);
+
+  // Acquire a mutex to lock out others who might be editing rooms
+  if (!sql_mutex_lock("kth_places"))
+  {
+    fatal_error(TRUE, get_vocab("failed_to_acquire"));
+  }
+  // Check that the place name is unique within the area
+  if (sql_query1("SELECT COUNT(*) FROM kth_places WHERE name='$name_q' AND area_id=$area LIMIT 1") > 0)
+  {
+    sql_mutex_unlock("kth_places");
+    $error = "invalid_place_name";
+    return FALSE;
+  }
+  // If so, insert the place into the database
+  $sql = "INSERT INTO kth_places (name, sort_key)
+          VALUES ('$name_q', '$name_q')";
+  if (sql_command($sql) < 0)
+  {
+    trigger_error(sql_error(), E_USER_WARNING);
+    fatal_error(TRUE, get_vocab("fatal_db_error"));
+  }
+  $places = sql_insert_id('kth_places', 'id');
+  // Release the mutex
+  sql_mutex_unlock("kth_places");
+  return $place;
 }
 
 

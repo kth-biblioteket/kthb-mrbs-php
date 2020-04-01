@@ -42,6 +42,11 @@ elseif ($type == "instructor")
   $room = mrbsAddInstructor($name, $area, $error, $email);
 }
 
+elseif ($type == "place")
+{
+  $room = mrbsAddPlace($name, $area, $error, $email);
+}
+
 $returl = "admin.php?area=$area" . (!empty($error) ? "&error=$error" : "");
 header("Location: $returl");
 
