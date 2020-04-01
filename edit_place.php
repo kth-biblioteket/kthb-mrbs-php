@@ -104,6 +104,7 @@ if ($phase == 2)
       {
         fatal_error(TRUE, get_vocab("failed_to_acquire"));
       }
+      /*
       // Check the new area still exists
       if (sql_query1("SELECT COUNT(*) FROM $tbl_area WHERE id=$new_area LIMIT 1") < 1)
       {
@@ -115,7 +116,7 @@ if ($phase == 2)
       // just editing the other details for an existing place we don't want to reject
       // the edit because the place already exists!)
       // [SQL escaping done by sql_syntax_casesensitive_equals()]
-      elseif ( (($new_room != $old_room) || ($name != $old_name))
+      else*/if ( (($new_room != $old_room) || ($name != $old_name))
               && sql_query1("SELECT COUNT(*)
                                FROM kth_places
                               WHERE" . sql_syntax_casesensitive_equals("name", $name) . "
@@ -257,11 +258,11 @@ if (isset($change_place) && !empty($place))
       // The area select box ROOM???
       echo "<div>\n";
       
-      $params = array('label'         => get_vocab("area") . ":",
-                      'name'          => 'new_area',
+      $params = array('label'         => get_vocab("room") . ":",
+                      'name'          => 'new_room',
                       'options'       => $areas,
                       'force_assoc'   => TRUE,
-                      'value'         => $row['area_id'],
+                      'value'         => $row['room_id'],
                       'disabled'      => $disabled,
                       'create_hidden' => FALSE);
       generate_select($params);
