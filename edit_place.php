@@ -12,6 +12,7 @@ $new_room = get_form_var('new_room', 'int');
 $old_room = get_form_var('old_room', 'int');
 $place = get_form_var('place', 'string');
 $name = get_form_var('name', 'string');
+$name_en = get_form_var('name_en', 'string');
 $place_disabled = get_form_var('place_disabled', 'string');
 $sort_key = get_form_var('sort_key', 'string');
 $old_name = get_form_var('old_name', 'string');
@@ -153,9 +154,8 @@ if ($phase == 2)
               case 'sort_key':
                 $assign_array[] = "sort_key='" . sql_escape($sort_key) . "'";
                 break;
-              /*name_en??
-              case 'email':
-                $assign_array[] = "email='" . sql_escape($instructor_email) . "'";
+              case 'name_en':
+                $assign_array[] = "name_en='" . sql_escape($name_en) . "'";
                 break;
                 */
               // then look at any user defined fields
