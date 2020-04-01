@@ -146,7 +146,7 @@ if ($phase == 2)
               case 'disabled':
                 $assign_array[] = "disabled=$place_disabled";
                 break;
-              case 'full_name':
+              case 'name':
                 $assign_array[] = "name='" . sql_escape($name) . "'";
                 break;
               case 'sort_key':
