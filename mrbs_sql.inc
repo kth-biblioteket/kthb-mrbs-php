@@ -2393,8 +2393,8 @@ function mrbsAddPlace($name, $area, &$error, $email='')
     return FALSE;
   }
   // If so, insert the place into the database
-  $sql = "INSERT INTO kth_places (name, sort_key)
-          VALUES ('$name_q', '$name_q')";
+  $sql = "INSERT INTO kth_places (name, name_en, sort_key)
+          VALUES ('$name_q', '', '$name_q')";
   if($environment == 'development') {
     error_log($sql);
   }
