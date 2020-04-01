@@ -15,6 +15,7 @@ $name = get_form_var('name', 'string');
 $place_disabled = get_form_var('place_disabled', 'string');
 $sort_key = get_form_var('sort_key', 'string');
 $old_name = get_form_var('old_name', 'string');
+$old_name_en = get_form_var('old_name_en', 'string');
 $area_name = get_form_var('area_name', 'string');
 $room_id = get_form_var('room_id', 'int');
 
@@ -238,7 +239,7 @@ if (isset($change_place) && !empty($place))
            <?php 
            // It's impossible to have more than one of these error messages, so no need to worry
            // about paragraphs or line breaks.
-           echo ((FALSE == $valid_room) ? get_vocab('invalid_area') : "");
+           echo ((FALSE == $valid_room) ? get_vocab('invalid_room') : "");
            echo ((FALSE == $valid_name) ? get_vocab('invalid_name') : "");
            ?>
         </span>
@@ -280,6 +281,17 @@ if (isset($change_place) && !empty($place))
                       'create_hidden' => FALSE);
       generate_input($params);
       echo "<input type=\"hidden\" name=\"old_name\" value=\"" . htmlspecialchars($row["name"]) . "\">\n";
+      echo "</div>\n";
+
+      // Place name en
+      echo "<div>\n";
+      $params = array('label'         => get_vocab("name_en") . ":",
+                      'name'          => 'name_en',
+                      'value'         => $row['name_en'],
+                      'disabled'      => $disabled,
+                      'create_hidden' => FALSE);
+      generate_input($params);
+      echo "<input type=\"hidden\" name=\"old_name_en\" value=\"" . htmlspecialchars($row["name_en"]) . "\">\n";
       echo "</div>\n";
       
       // Status (Enabled or Disabled)
