@@ -2395,6 +2395,9 @@ function mrbsAddPlace($name, $area, &$error, $email='')
   // If so, insert the place into the database
   $sql = "INSERT INTO kth_places (name, sort_key)
           VALUES ('$name_q', '$name_q')";
+  if($environment == 'development') {
+    error_log($sql);
+  }
   if (sql_command($sql) < 0)
   {
     trigger_error(sql_error(), E_USER_WARNING);
