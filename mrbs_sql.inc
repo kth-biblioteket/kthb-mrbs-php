@@ -2386,7 +2386,7 @@ function mrbsAddPlace($name, $area, &$error, $email='')
     fatal_error(TRUE, get_vocab("failed_to_acquire"));
   }
   // Check that the place name is unique within the area
-  if (sql_query1("SELECT COUNT(*) FROM kth_places WHERE name='$name_q' AND area_id=$area LIMIT 1") > 0)
+  if (sql_query1("SELECT COUNT(*) FROM kth_places WHERE name='$name_q' LIMIT 1") > 0)
   {
     sql_mutex_unlock("kth_places");
     $error = "invalid_place_name";

@@ -862,7 +862,7 @@ if ($is_admin || ($n_displayable_areas > 0))
         <input type="hidden" name="area" value="<?php echo $area; ?>">
         
         <div>
-          <label for="full_name"><?php echo get_vocab("name") ?>:</label>
+          <label for="name"><?php echo get_vocab("name") ?>:</label>
           <input type="text" id="name" name="name" maxlength="<?php echo $maxlength['place.name'] ?>">
         </div>
        
