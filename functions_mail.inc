@@ -982,6 +982,107 @@ function notifyInstructorOnBooking($data, $mail_previous, $new_entry, $series, $
   return $result;  
 }
 
+/***************************
+
+Funktion som skickar mail till instructor vid avbokning av användaren(om bokningen har en instructor)
+//191003
+//TODO Mailtexter...
+***************************/
+function notifyInstructorOnDelete($data)
+{
+  global $mail_settings, $enable_periods;
+  
+  mail_debug('Preparing email for new or changed booking ...');
+
+  // Set up the addresses (from, to and cc)
+  
+  $addresses['from'] = get_mail_vocab("mail_from_address_default");
+  
+  $user = getUserName();
+  //Bokningens handläggare/instruktör
+  $addresses['to'] = $data['instructor'];
+  if ($addresses === FALSE)
+  {
+    mail_debug('Email abandoned: no addresses.');
+    return;
+  }
+  
+  // Set up the subject
+  //
+  // If we're sending iCalendar notifications, then it seems that some calendar
+  // applications use the email subject as the booking title instead of the iCal
+  // SUMMARY field.   As far as I can see this is wrong, but as a circumvention
+  // we'll put the booking title in the email subject line.   (See also
+  // SF Tracker id 3297799)
+  if ($mail_settings['icalendar'] && !$enable_periods)
+  {
+    $subject = $data['name'];
+  }
+  else
+  {
+    switch ($action)
+    {
+      case "approve":
+        $subject = get_mail_vocab("mail_subject_approved");
+        break;
+      case "more_info":
+        $subject = get_mail_vocab("mail_subject_more_info");
+        break;
+      case "remind":
+        $subject = get_mail_vocab("mail_subject_reminder");
+        break;
+      default:
+        if ($new_entry || $mail_previous['type'] == 'B')
+        {
+          $subject = get_mail_vocab("mail_subject_delete") .  " - " . date("Y-m-d H:i",$data['start_time']) . " - " . $data['name'] . " - " . getUserName();
+        }
+        else
+        {
+          $subject = get_mail_vocab("mail_subject_delete") . " - " . date("Y-m-d H:i",$data['start_time']) . " - " . $data['name'] . " - " . getUserName();
+        }
+        break;
+    }
+  }
+
+  // Create the text body
+  $compare = !$new_entry;
+  $text_body = array();
+  $text_body['content'] = '';
+  
+  // Create the HTML body
+  $html_body = array();
+  if ($mail_settings['html'])
+  {
+    //191003 Hämta html-mail från mallar/config
+    require_once "config\mail\instructor_mail_delete.inc";
+    $html_body['cid'] = generate_global_uid("html");
+  }
+  
+  // Create the iCalendar if required
+  $attachment = array();
+  if ($mail_settings['icalendar'] && !$enable_periods)
+  {
+    $attachment['method']   = "REQUEST";
+    $ical_components = array();
+    $ical_components[] = create_ical_event($attachment['method'], $data, $addresses, $series);
+    $attachment['content']  = create_icalendar($attachment['method'], $ical_components);
+    $attachment['name']     = $mail_settings['ics_filename'] . ".ics";
+  }
+
+  $result = sendMail($addresses,
+                     $subject,
+                     $text_body,
+                     $html_body,
+                     $attachment,
+                     get_mail_charset()); 
+  error_log("MRBS, mailresult: " . $result); 
+  if ($result == 1) {
+    error_log("MRBS, Bokningsmail skickat till: " . $addresses['to']); 
+  }
+
+  return $result;  
+}
+
 //KTH mailutskick 2018
 /***************************
 
