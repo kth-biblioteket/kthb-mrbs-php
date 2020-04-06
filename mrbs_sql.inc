@@ -862,7 +862,7 @@ function mrbsDelEntry($user, $id, $series, $all, $truedelete)
       if ($is_admin){
         $notifymailresult = notifyBookerOnCancel($row);
       } else {
-        $notifymailresult = notifyInstructorOnDelete($row)
+        $notifymailresult = notifyInstructorOnDelete($row);
       }
       $start_times[] = $row['start_time'];
     } else {
