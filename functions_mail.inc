@@ -1036,7 +1036,7 @@ function notifyBookerOnBooking($data, $mail_previous, $new_entry, $series, $star
         }
         else
         {
-          //mailadress ska INTE vara inloggad user utan den adress som bokningen redan har.
+          //mailadress för en ändrad bokning ska INTE vara inloggad user utan den adress som bokningen redan har.
           $addresses['to'] = $mail_previous['create_by'];
           $subject = get_vocab("mail_subject_changed_entry");
         }
