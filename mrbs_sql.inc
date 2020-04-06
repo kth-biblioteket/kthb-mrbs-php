@@ -845,7 +845,7 @@ function mrbsDelEntry($user, $id, $series, $all, $truedelete)
           //uppdatera exchangekalendern
           //TODO sätt location?
           try {
-            $outlook_result = updateappointment($kth_exchange_events['event_id'], get_mail_vocab("calendar_subject") . "-" . get_mail_vocab("bookable_entry_text"), '', '', '', $startdate, $enddate, $ews_host, $ews_user, $ews_password);
+            $outlook_result = updateappointment($kth_exchange_events['event_id'], get_mail_vocab("calendar_subject") . "-" . get_mail_vocab("bookable_entry_text"), $row['instructor'], $row['instructor'], '', $startdate, $enddate, $ews_host, $ews_user, $ews_password);
           }
           catch (exception $e) {
             $outlook_result['status'] = 'Error';
