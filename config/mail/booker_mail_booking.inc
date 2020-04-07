@@ -24,10 +24,10 @@ else {
   setlocale(LC_ALL,"eng");
 }
   
-if(strpos(get_campus($data['campus'], $mrbslang), 'zoom')) {
-  $html_body['content'] .= get_vocab("mail_text_digital");
-} else {
+if(!strpos(get_campus($data['campus'], $mrbslang), 'zoom')) {
   $html_body['content'] .= get_vocab("mail_text");
+} else {
+  $html_body['content'] .= get_vocab("mail_text_digital");
 }
 
 if ($data['campus'] > 0) {
