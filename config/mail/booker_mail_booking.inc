@@ -24,7 +24,7 @@ else {
   setlocale(LC_ALL,"eng");
 }
   
-if(!strpos(get_campus($data['campus'], $mrbslang), 'zoom')) {
+if(strpos(get_campus($data['campus'], $mrbslang), 'zoom')==false) {
   $html_body['content'] .= get_vocab("mail_text");
 } else {
   $html_body['content'] .= get_vocab("mail_text_digital");
