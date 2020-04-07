@@ -24,10 +24,12 @@ else {
   setlocale(LC_ALL,"eng");
 }
   
-//if fysiskt möte
-$html_body['content'] .= get_vocab("mail_text");
-//if digitalt möte
-//$html_body['content'] .= get_vocab("mail_text_digital"):
+if(strpos(get_campus($data['campus'], $mrbslang), 'zoom')) {
+  $html_body['content'] .= get_vocab("mail_text_digital");
+} else {
+  $html_body['content'] .= get_vocab("mail_text");
+}
+
 if ($data['campus'] > 0) {
   $html_body['content'] = str_replace("@@place",get_campus($data['campus'], $mrbslang),$html_body['content']);
 } else {
