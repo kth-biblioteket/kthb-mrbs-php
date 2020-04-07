@@ -24,12 +24,7 @@ else {
   setlocale(LC_ALL,"eng");
 }
 
-if($environment == 'development') {
-  error_log(strpos(get_campus($data['campus'], $mrbslang), 'zoom'));
-  error_log(get_campus($data['campus'], $mrbslang));
-}
-
-if(strpos(get_campus($data['campus'], $mrbslang), 'zoom')==false) {
+if(stripos(get_campus($data['campus'], $mrbslang), 'zoom')==false) {
   $html_body['content'] .= get_vocab("mail_text");
 } else {
   $html_body['content'] .= get_vocab("mail_text_digital");
