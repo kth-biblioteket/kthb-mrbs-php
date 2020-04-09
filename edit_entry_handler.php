@@ -780,6 +780,8 @@ if (!empty($result['id']) && $result['valid_booking'])
     if($environment == 'development') {
       error_log("Before mail");
       error_log($booking['type']);
+      print_r($booking);
+      exit;
     }
     //inga utskick på stängningsbokningar "C" eller specialbokninar "S"
     //Adminmail går endast till de areor som har email för områdesansvarig definierad via admingränssnittet(idag endast CAS)
