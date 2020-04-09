@@ -703,6 +703,23 @@ foreach ($rooms as $room_id)
 $just_check = $ajax && function_exists('json_encode') && !$commit;
 $this_id = (isset($id)) ? $id : NULL;
 //191003 Lagt till is_admin som parameter
+// If this is a modified entry then get the previous entry data
+// so that we can highlight the changes
+if (isset($id))
+{
+  if ($edit_type == "series")
+  {
+    $mail_previous = get_booking_info($repeat_id, TRUE);
+  }
+  else
+  {
+    $mail_previous = get_booking_info($id, FALSE);
+  }
+}
+else
+{
+  $mail_previous = array();
+}
 $result = mrbsMakeBookings($bookings, $this_id, $just_check, $skip, $original_room_id, $need_to_send_mail, $edit_type, $is_admin);
 // If we weren't just checking and this was a succesful booking and
 // we were editing an existing booking, then delete the old booking
@@ -758,23 +775,7 @@ if (!empty($result['id']) && $result['valid_booking'])
         $booking['area_name'] = $row['area_name_en'];
       }
     }
-    // If this is a modified entry then get the previous entry data
-    // so that we can highlight the changes
-    if (isset($id))
-    {
-      if ($edit_type == "series")
-      {
-        $mail_previous = get_booking_info($repeat_id, TRUE);
-      }
-      else
-      {
-        $mail_previous = get_booking_info($id, FALSE);
-      }
-    }
-    else
-    {
-      $mail_previous = array();
-    }
+    
     // Send the email
     if($environment == 'development') {
       error_log("Before mail");
