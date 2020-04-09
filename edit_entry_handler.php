@@ -715,6 +715,96 @@ if (!$just_check && $result['valid_booking'] && isset($id))
   mrbsDelEntry($user, $id, ($edit_type == "series"), 1, false);
 }
 
+// TODO Här bör alla mailutskick ligga så att en bokning inte kan gå fel pga att mailen inte fungerar/tar tid etc.
+// Send an email if neccessary, provided that the entry creation was successful
+if ($send_mail && !empty($result['id']) && $result['valid_booking'])
+{
+  // Only send an email if (a) this is a changed entry and we have to send emails
+  // on change or (b) it's a new entry and we have to send emails for new entries
+  if ((isset($result['id']) && $mail_settings['on_change']) || 
+      (!isset($result['id']) && $mail_settings['on_new']))
+  {
+    require_once "functions_mail.inc";
+    // Get room name and area name for email notifications.
+    // Would be better to avoid a database access just for that.
+    // Ran only if we need details
+    if ($mail_settings['details'])
+    {	//KTH mailutskick 2018 lagt till "room_number" så att det kommer med på utgående mail 
+      // samt "reminder_email_enabled" för att veta om aktuell area har aktiverat mailutskick, "area_type" som avgör mailvariant att skicka
+      // area map om kartbild ska bifogas
+      // confirmed_default för att veta om bokningar är confirmed som default på en area
+      $sql = "SELECT R.room_name, R.room_name_english, A.area_name, A.area_name_en, 
+              A.area_type, R.room_number, A.reminder_email_enabled, A.area_map, A.area_map_image, 
+              A.confirmed_default, R.mailtext, R.mailtext_en
+              FROM $tbl_room R, $tbl_area A
+              WHERE R.id=${booking['room_id']} AND R.area_id = A.id
+              LIMIT 1";
+      $res = sql_query($sql);
+      $row = sql_row_keyed($res, 0);
+      //KTH mailutskick 2018
+      $booking['area_type'] = $row['area_type'];
+      $booking['room_number'] = $row['room_number'];
+      $booking['mailtext'] = $row['mailtext'];
+      $booking['mailtext_en'] = $row['mailtext_en'];
+      $booking['reminder_email_enabled'] = $row['reminder_email_enabled'];
+      $booking['area_map'] = $row['area_map'];
+      $booking['area_map_image'] = $row['area_map_image'];
+      $booking['confirmed_default'] = $row['confirmed_default'];
+      if ($lang == "sv") {
+        $booking['room_name'] = $row['room_name'];
+        $booking['area_name'] = $row['area_name'];
+      } else {
+        $booking['room_name'] = $row['room_name_english'];
+        $booking['area_name'] = $row['area_name_en'];
+      }
+    }
+    // If this is a modified entry then get the previous entry data
+    // so that we can highlight the changes
+    if (isset($id))
+    {
+      if ($edit_type == "series")
+      {
+        $mail_previous = get_booking_info($repeat_id, TRUE);
+      }
+      else
+      {
+        $mail_previous = get_booking_info($id, FALSE);
+      }
+    }
+    else
+    {
+      $mail_previous = array();
+    }
+    // Send the email
+    if($environment == 'development') {
+      error_log("Before mail");
+    }
+    //inga utskick på stängningsbokningar "C" eller specialbokninar "S"
+    //Adminmail går endast till de areor som har email för områdesansvarig definierad via admingränssnittet(idag endast CAS)
+    if ($booking['reminder_email_enabled'] && $booking['type']!= "C" && $booking['type']!= "B" && $booking['type']!= "S" ) {
+      notifyAdminOnBooking($booking, $mail_previous, !isset($id), $is_repeat_table, $result['start_times']);
+    }
+    //191003 skicka mail till handläggare när någon bokar/ändrar en bokningsbar tid
+    if ($booking['instructor']!= "" && $booking['reminder_email_enabled'] && $booking['type']== "I") {
+      $notifymailresult = notifyInstructorOnBooking($booking, $mail_previous, !isset($id), $is_repeat_table, $result['start_times']);
+    }
+    //KTH generellt mailutskick 2018, mail till bokaren om arean har reminder_email_enabled = 1 
+    if ($mail_settings['booker'] && $booking['reminder_email_enabled'] && $booking['type']!= "C" && $booking['type']!= "S") {
+      //skicka INTE för bokningar som är: kvitterade OCH ändrade OCH med confirm default = 0 OCH det inte var en "B"(bokningsbar) tidigare
+      if (($booking['status'] == 0 && isset($id) && $booking['confirmed_default'] == 0 && $mail_previous['type'] != "B") || $booking['type'] == "B") {
+        //do nothing
+      } else {
+        //returnerar true/false
+        $notifymailresult = notifyBookerOnBooking($booking, $mail_previous, !isset($id), $is_repeat_table, $result['start_times']);
+        //error_log('Notify mail: ' . $notifymailresult);
+      }
+    }
+    if($environment == 'development') {
+      error_log("After mail");
+    }
+  }
+}
+
 // If this is an Ajax request, output the result and finish
 if ($ajax && function_exists('json_encode'))
 {

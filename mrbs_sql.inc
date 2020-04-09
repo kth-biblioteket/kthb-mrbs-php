@@ -2779,8 +2779,8 @@ function mrbsMakeBookings($bookings, $id=NULL, $just_check=FALSE, $skip=FALSE, $
     }
     $new_details[] = array('id' => $new_id, 'room_id' => $booking['room_id']);
     $booking['id'] = $new_id;  // Add in the id now we know it
-    
-    // ta bort alla andra okningar för samma instructor och dag
+    $result['id'] = $new_id;  // Add in the id now we know it
+    // ta bort alla andra bokningar för samma instructor och dag
     // om det är aktiverat (config)
     if($delete_other_bookings_same_day){
       deleteotherbookablebookingssameday($new_id, $id);

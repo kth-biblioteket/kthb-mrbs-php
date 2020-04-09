@@ -107,6 +107,7 @@ if(!empty($noshow)){
 		} else {
 			sql_commit();
 		}
+		
 		// [At the moment MRBS does not inform the user if it was not able to delete
 		// an entry, or, for a series, some entries in a series.  This could happen for
 		// example if a booking policy is in force that prevents the deletion of entries
@@ -115,6 +116,7 @@ if(!empty($noshow)){
 		if (($start_times !== FALSE) && (count($start_times) > 0))
 		{
 		  // Send a mail to the Administrator
+		  // TODO Flytta alla mail hit så att de skickas efter hela bokningen är färdig!!
 		  if ($notify_by_email)
 		  {
 				// Now that we've finished with mrbsDelEntry, change the id so that it's
