@@ -119,6 +119,14 @@ if(!empty($noshow)){
 		  // TODO Flytta alla mail hit så att de skickas efter hela bokningen är färdig!!
 		  if ($notify_by_email)
 		  {
+				//skicka avbokningsmail till bokare om admin har avbokat en tid
+				
+					if ($is_admin){
+						$notifymailresult = notifyBookerOnCancel($info);
+					} else {
+						$notifymailresult = notifyInstructorOnDelete($info);
+					}
+				
 				// Now that we've finished with mrbsDelEntry, change the id so that it's
 				// the repeat_id if we're looking at a series.   (This is a complete hack, 
 				// but brings us back into line with the rest of MRBS until the anomaly

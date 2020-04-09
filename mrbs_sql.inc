@@ -2787,6 +2787,7 @@ function mrbsMakeBookings($bookings, $id=NULL, $just_check=FALSE, $skip=FALSE, $
     }
     
     /*
+    Flyttat till edit_entry_handler!!
     // Send an email if neccessary, provided that the entry creation was successful
     if ($send_mail && !empty($new_id))
     {
