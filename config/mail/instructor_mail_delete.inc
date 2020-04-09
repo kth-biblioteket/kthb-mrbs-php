@@ -1,5 +1,12 @@
 <?php
 global $mrbslang;
+$css = '';
+$css_file = 'css/mrbs-mail.css';
+if (file_exists($css_file))
+{
+    $fh = fopen($css_file, 'r');
+    $css = fread($fh, filesize($css_file));
+}
 $html_body['content'] = '
 <!DOCTYPE html>
 <html>
