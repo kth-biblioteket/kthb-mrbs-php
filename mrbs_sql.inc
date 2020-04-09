@@ -858,12 +858,14 @@ function mrbsDelEntry($user, $id, $series, $all, $truedelete)
           }
         }
       }
+      /*
       //skicka avbokningsmail till bokare om admin har avbokat en tid
       if ($is_admin){
         $notifymailresult = notifyBookerOnCancel($row);
       } else {
         $notifymailresult = notifyInstructorOnDelete($row);
       }
+      */
       $start_times[] = $row['start_time'];
     } else {
       if($environment == 'development') {
