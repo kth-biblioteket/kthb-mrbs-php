@@ -2786,6 +2786,7 @@ function mrbsMakeBookings($bookings, $id=NULL, $just_check=FALSE, $skip=FALSE, $
       deleteotherbookablebookingssameday($new_id, $id);
     }
     
+    /*
     // Send an email if neccessary, provided that the entry creation was successful
     if ($send_mail && !empty($new_id))
     {
@@ -2874,6 +2875,7 @@ function mrbsMakeBookings($bookings, $id=NULL, $just_check=FALSE, $skip=FALSE, $
         }
       }
     }   
+    */
   } // end foreach $bookings
 
   sql_mutex_unlock("$tbl_entry");
