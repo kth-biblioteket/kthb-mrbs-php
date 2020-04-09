@@ -717,7 +717,7 @@ if (!$just_check && $result['valid_booking'] && isset($id))
 
 // TODO Här bör alla mailutskick ligga så att en bokning inte kan gå fel pga att mailen inte fungerar/tar tid etc.
 // Send an email if neccessary, provided that the entry creation was successful
-if ($send_mail && !empty($result['id']) && $result['valid_booking'])
+if (!empty($result['id']) && $result['valid_booking'])
 {
   // Only send an email if (a) this is a changed entry and we have to send emails
   // on change or (b) it's a new entry and we have to send emails for new entries
