@@ -1002,7 +1002,7 @@ function cell_html($cell, $query_strings, $is_invalid = FALSE, $ajaxuser = NULL)
         //Visa för admin och bokaren och för specialbokningar "S"
         $bookingdesc = "";
         $longbookingdesc = "";
-        if ((getWritable($cell[0]['create_by'], $user, $cell[0]['room_id']) && $is_invalid==FALSE) 
+        if ((getWritable($cell[0]['create_by'], $user, $cell[0]['room_id']) /*&& $is_invalid==FALSE*/) 
             || $is_admin || $color == "S") {
               $bookingdesc = $descr;
               $longbookingdesc = $long_descr;
