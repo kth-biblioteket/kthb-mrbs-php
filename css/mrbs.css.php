@@ -1463,7 +1463,7 @@ td.C, img.C {
 }
 
 table.dwm_main {
-    border-color: #a9a9a9;
+    border-color: #707070; /*#a9a9a9*/
     border-width: 1px;
     border-style: solid;
 }
@@ -1497,7 +1497,7 @@ table.dwm_main {
 
 .dwm_main td {
     height: 40px;
-	border-color: #a9a9a9;
+	border-color: #707070; /* #a9a9a9 */
 }
 
 .dwm_main a, div.celldiv {
