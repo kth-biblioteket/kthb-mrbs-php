@@ -1463,7 +1463,7 @@ td.C, img.C {
 }
 
 table.dwm_main {
-    border-color: #707070; /*#a9a9a9*/
+    border-color: #8c8c8c; /*#a9a9a9*/
     border-width: 1px;
     border-style: solid;
 }
@@ -1480,7 +1480,7 @@ table.dwm_main {
 	
 .dwm_main th, .dwm_main td.row_labels {
 	background-color: #24a0d8;
-	border-color: #707070; /* #d2d2d2; */
+	border-color: #8c8c8c; /* #d2d2d2; */
 }
 .dwm_main th:first-child {
     word-break: normal;
@@ -1497,7 +1497,7 @@ table.dwm_main {
 
 .dwm_main td {
     height: 40px;
-	border-color: #707070; /* #a9a9a9 */
+	border-color: #8c8c8c; /* #a9a9a9 */
 }
 
 .dwm_main a, div.celldiv {
