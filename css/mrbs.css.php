@@ -1480,7 +1480,7 @@ table.dwm_main {
 	
 .dwm_main th, .dwm_main td.row_labels {
 	background-color: #24a0d8;
-	border-color: #d2d2d2;
+	border-color: #707070; /* #d2d2d2; */
 }
 .dwm_main th:first-child {
     word-break: normal;
