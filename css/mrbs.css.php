@@ -250,15 +250,24 @@ $column_month = number_format($column_month, 1, '.', '');  // (%) tidy the numbe
 /*KTH få plats med extrainfo*/
 div#dwm_header {width: 70%; float: none; margin-top: 1.0em; margin-bottom: 0.5em}
 /* 191003 */
-div#dwm_header.screenonly {width: 100%; float: none; 
-margin-top: 0em; 
-margin-bottom: 0em}
+div#dwm_header.screenonly {
+  width: 100%; float: none; 
+  margin-top: 0em; 
+  margin-bottom: 0em
+}
 div#dwm_areas, div#dwm_rooms  {float: left; margin-right: 2.0em}
 /* KTH Blå på rubrik-länkar*/
 div#dwm_areas a, div#dwm_rooms a, div#more_info a {color: #24a0d8; font-weight: normal;text-decoration: none;}
 #dwm_header h3 {font-size: small; font-weight: normal; text-decoration: underline; 
     margin-top: 0; margin-bottom: 0.5em; padding-bottom: 0}
-#dwm_header ul {list-style-type: none; padding-left: 0; margin-left: 0; margin-top: 0; overflow: auto;}
+#dwm_header ul {
+  list-style-type: none; 
+  padding-left: 0; 
+  margin-left: 0; 
+  margin-top: 0; 
+  margin-bottom: 0; 
+  overflow: auto;
+}
 /* KTH margin och float left på rum och areas i header*/
 #dwm_header li {
   padding-left: 0; 
