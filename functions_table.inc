@@ -406,7 +406,7 @@ function checkifslotenabled($area, $room_id, $month, $day, $year, $s) {
 		$now = ($enable_periods) ? mktime(0, 0, 0) : time();
 		if ($max_active_bookings_enabled)
 		{
-      $sql = "SELECT count(*)
+      $sql = "SELECT *
               FROM $tbl_entry E, $tbl_room R
               WHERE E.start_time > UNIX_TIMESTAMP()
                  AND E.create_by='" . sql_escape($user) . "'
