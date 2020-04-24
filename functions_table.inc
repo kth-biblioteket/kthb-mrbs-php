@@ -416,9 +416,9 @@ function checkifslotenabled($area, $room_id, $month, $day, $year, $s) {
                  AND R.disabled=0";
 
       $res = sql_query($sql);
+      error_log("MRBS, : $sql");
       if (isset($res)) {
         if (sql_count($res) >= $max_active_bookings) {
-          error_log("MRBS, : $sql");
           $disabled = TRUE;
         }
       }
