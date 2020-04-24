@@ -402,8 +402,10 @@ function checkifslotenabled($area, $room_id, $month, $day, $year, $s) {
   }
   
   //TODO Kolla om användaren redan har max antal tillåtna aktiva bokningar ($max_active_bookings_enabled = TRUE, $max_active_bookings = 1)
-  error_log("MRBS, : $disabled");
   if ($disabled == FALSE) {
+    error_log("MRBS, : $disabled");
+    error_log("MRBS, : $max_active_bookings_enabled");
+    error_log("MRBS, : $max_active_bookings");
 		if ($max_active_bookings_enabled)
 		{
       $sql = "SELECT *
