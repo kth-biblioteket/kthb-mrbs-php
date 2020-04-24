@@ -235,6 +235,7 @@ function checkifslotenabled($area, $room_id, $month, $day, $year, $s) {
   global $resolution;
   global $default_bookings_open;
   global $user;
+  global $latecancel;
 
   $is_admin = (authGetUserLevel($user) >= 2);
 
@@ -695,7 +696,7 @@ function cell_html($cell, $query_strings, $is_invalid = FALSE, $ajaxuser = NULL)
   global $enable_periods, $times_along_top, $show_plus_link;
   global $approval_enabled, $confirmation_enabled;
 
-  global $is_kiosk, $default_bookings_open;
+  global $is_kiosk, $default_bookings_open, $latecancel;
   //KTH
   //echo "cell_html is_invalid " . $is_invalid . "<br>";
   if ($ajaxuser != NULL) {
@@ -1018,8 +1019,10 @@ function cell_html($cell, $query_strings, $is_invalid = FALSE, $ajaxuser = NULL)
         //eller om användaren är admin
         //eller om det är en kioskdator
         //191003 Visa även länk på alla B (bookable)
+        //TODO Visa länk för den som bokat tiden om latecancel=true
         
-        if ((getWritable($cell[0]['create_by'], $user, $cell[0]['room_id']) && $is_invalid==FALSE) 
+        if ((getWritable($cell[0]['create_by'], $user, $cell[0]['room_id']) && $is_invalid==FALSE)
+            || (getWritable($cell[0]['create_by'], $user, $cell[0]['room_id']) && $latecancel==TRUE) 
             || ($color == "B" && $is_invalid==FALSE) 
             || $is_admin 
             || $is_kiosk && $is_invalid==FALSE) {
@@ -1574,7 +1577,7 @@ function week_table_innerhtml($day, $month, $year, $room, $area, $timetohighligh
 
   //KTH kolla om bokningar ska tas bort
   deletetentativebookings();
-  //TODO ta bort "B" bokningar om sluttiden passerats
+  //ta bort "B" bokningar om sluttiden passerats
   deletebookablebookings();
   // Check that we've got a valid, enabled room
   $sql = "SELECT COUNT(*)
