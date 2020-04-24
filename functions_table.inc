@@ -409,7 +409,7 @@ function checkifslotenabled($area, $room_id, $month, $day, $year, $s) {
 		if ($max_active_bookings_enabled)
 		{
       $sql = "SELECT *
-              FROM $tbl_entry E, $tbl_room R
+              FROM mrbs_entry E, mrbs_room R
               WHERE E.start_time > UNIX_TIMESTAMP()
                  AND E.create_by='" . sql_escape($user) . "'
                  AND E.room_id=R.id
