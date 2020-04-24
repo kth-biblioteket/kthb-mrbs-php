@@ -403,7 +403,6 @@ function checkifslotenabled($area, $room_id, $month, $day, $year, $s) {
   
   //TODO Kolla om användaren redan har max antal tillåtna aktiva bokningar ($max_active_bookings_enabled = TRUE, $max_active_bookings = 1)
   if ($disabled == FALSE) {
-		$now = ($enable_periods) ? mktime(0, 0, 0) : time();
 		if ($max_active_bookings_enabled)
 		{
       $sql = "SELECT *
@@ -416,6 +415,7 @@ function checkifslotenabled($area, $room_id, $month, $day, $year, $s) {
       $res = sql_query($sql);
       if (isset($res)) {
         if (sql_count($res) >= $max_active_bookings) {
+          error_log("MRBS, : $sql");
           $disabled = TRUE;
         }
       }
