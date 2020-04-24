@@ -81,6 +81,7 @@ $vocab_override['sv']["entry.program"]  = "Program / institution";
 $vocab_override['sv']['entry.study_info'] = "Vad söker du information om? Beskriv syfte och frågeställning";
 $vocab_override['sv']['entry.previously'] = "Var har du tidigare sökt efter information?";
 $vocab_override['sv']['entry.subject_keywords'] = "Ge exempel på sökord och termer som är relevanta för ämnet";
+$vocab_override['sv']['entry.consultation_info'] = "Vad söker du information om? Beskriv kort ditt ämne/frågeställning och syftet med sökningen. Ange gärna om du redan har sökt och i så fall var och vilka sökord du använt.";
 $vocab_override['sv']['entry.other_info'] = "Övriga kommentarer";
 
 //Writing

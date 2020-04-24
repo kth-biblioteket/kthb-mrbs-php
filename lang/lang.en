@@ -81,6 +81,7 @@ $vocab_override['en']["entry.program"]  = "Programme / institution";
 $vocab_override['en']['entry.study_info'] = "What do you need information on? Describe the purpose and aim of your study";
 $vocab_override['en']['entry.previously'] = "Where have you previously searched for information?";
 $vocab_override['en']['entry.subject_keywords'] = "Please list some keywords and search terms relevant to the subject";
+$vocab_override['en']['entry.consultation_info'] = "What do you need information on? Describe the purpose and aim of your study. Please list some keywords and search terms relevant to the subject.";
 $vocab_override['en']['entry.other_info'] = "Other comments";
 
 

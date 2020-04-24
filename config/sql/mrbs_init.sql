@@ -365,6 +365,7 @@ CREATE TABLE IF NOT EXISTS `mrbs_entry` (
   `subject_keywords` varchar(500) DEFAULT NULL,
   `campus` int(11) DEFAULT NULL,
   `preferred_language` varchar(10) DEFAULT NULL,
+  `consultation_info` varchar(500) DEFAULT NULL,
   `other_info` varchar(500) DEFAULT NULL,
   `writing_help_get_started` smallint(6) DEFAULT NULL,
   `writing_help_overall_structure` smallint(6) DEFAULT NULL,
@@ -383,17 +384,17 @@ CREATE TABLE IF NOT EXISTS `mrbs_entry` (
   `oral_help_bodylanguage` smallint(6) DEFAULT NULL,
   `oral_help_images` smallint(6) DEFAULT NULL,
   `oral_help_keeptime` smallint(6) DEFAULT NULL,
-  `help_other` text DEFAULT NULL,
+  `help_other` text,
   `ical_uid` varchar(255) NOT NULL DEFAULT '',
   `ical_sequence` smallint(6) NOT NULL DEFAULT '0',
   `ical_recur_id` varchar(16) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=124 DEFAULT CHARSET=utf8;
 
 --
 -- Dumpning av Data i tabell `mrbs_entry`
 --
 /*
-INSERT INTO mrbs_grupprum.mrbs_entry (`start_time`, `end_time`, `entry_type`, `repeat_id`, `room_id`, `timestamp`, `instructor`, `create_by`, `modified_by`, `name`, `type`, `description`, `status`, `reminded`, `lang`, `confirmation_code`, `info_time`, `info_user`, `info_text`, `email`, `phone`, `user_group`, `program`, `study_info`, `previously`, `subject_keywords`, `campus`, `preferred_language`, `other_info`, `ical_uid`, `ical_sequence`, `ical_recur_id`) 
+INSERT INTO mrbs_grupprum.mrbs_entry (`start_time`, `end_time`, `entry_type`, `repeat_id`, `room_id`, `timestamp`, `instructor`, `create_by`, `modified_by`, `name`, `type`, `description`, `status`, `reminded`, `lang`, `confirmation_code`, `info_time`, `info_user`, `info_text`, `email`, `phone`, `user_group`, `program`, `study_info`, `previously`, `subject_keywords`, `campus`, `preferred_language`, `consultation_info`, `other_info`, `ical_uid`, `ical_sequence`, `ical_recur_id`) 
 */ 
 /*
 
@@ -406,7 +407,7 @@ mrbs_grupprum.mrbs_room.id as room_id,
 `timestamp`, null, 
 `create_by`, `modified_by`, `name`, `type`, mrbs.mrbs_entry.description, `status`, `reminded`, `lang`, 
 `confirmation_code`, `info_time`, `info_user`, `info_text`, 
-null, null, null, null, null, null, null, null, null, null, `ical_uid`, `ical_sequence`, `ical_recur_id`
+null, null, null, null, null, null, null, null, null, null, null, `ical_uid`, `ical_sequence`, `ical_recur_id`
 -- mrbs.mrbs_entry.room_id, 
 -- mrbs_grupprum.mrbs_room.room_name, 
 -- mrbs.mrbs_room.room_name, 
@@ -431,7 +432,7 @@ mrbs_cas.mrbs_room.id as room_id,
 `timestamp`, null, 
 `create_by`, `modified_by`, `name`, `type`, mrbs.mrbs_entry.description, `status`, `reminded`, `lang`, 
 `confirmation_code`, `info_time`, `info_user`, `info_text`, 
-null, null, null, null, null, null, null, null, null, null, `ical_uid`, `ical_sequence`, `ical_recur_id`
+null, null, null, null, null, null, null, null, null, null, null, `ical_uid`, `ical_sequence`, `ical_recur_id`
 -- mrbs.mrbs_entry.room_id, 
 -- mrbs_grupprum.mrbs_room.room_name, 
 -- mrbs.mrbs_room.room_name, 
@@ -495,6 +496,7 @@ CREATE TABLE IF NOT EXISTS `mrbs_entry_delete` (
   `subject_keywords` varchar(500) NOT NULL DEFAULT '0',
   `campus` int(11) NOT NULL DEFAULT '0',
   `preferred_language` int(10) NOT NULL,
+  `consultation_info` varchar(500) DEFAULT NULL,
   `other_info` varchar(500) NOT NULL,
   `writing_help_get_started` smallint(6) DEFAULT NULL,
   `writing_help_overall_structure` smallint(6) DEFAULT NULL,
@@ -600,6 +602,7 @@ CREATE TABLE IF NOT EXISTS `mrbs_repeat` (
   `subject_keywords` varchar(500) DEFAULT NULL,
   `campus` varchar(50) DEFAULT NULL,
   `preferred_language` int(10) DEFAULT NULL,
+  `consultation_info` varchar(500) DEFAULT NULL,
   `other_info` varchar(500) DEFAULT NULL,
   `writing_help_get_started` smallint(6) DEFAULT NULL,
   `writing_help_overall_structure` smallint(6) DEFAULT NULL,
