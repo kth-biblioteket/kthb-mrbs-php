@@ -236,6 +236,7 @@ function checkifslotenabled($area, $room_id, $month, $day, $year, $s) {
   global $default_bookings_open;
   global $user;
   global $latecancel;
+  global $max_active_bookings_enabled, $max_active_bookings;
 
   $is_admin = (authGetUserLevel($user) >= 2);
 
@@ -398,7 +399,28 @@ function checkifslotenabled($area, $room_id, $month, $day, $year, $s) {
 			$disabled = TRUE;
 			}
 		}
-	}
+  }
+  
+  //TODO Kolla om användaren redan har max antal tillåtna aktiva bokningar ($max_active_bookings_enabled = TRUE, $max_active_bookings = 1)
+  if ($disabled == FALSE) {
+		$now = ($enable_periods) ? mktime(0, 0, 0) : time();
+		if ($max_active_bookings_enabled)
+		{
+      $sql = "SELECT count(*)
+              FROM $tbl_entry E, $tbl_room R
+              WHERE E.start_time > UNIX_TIMESTAMP()
+                 AND E.create_by='" . sql_escape($user) . "'
+                 AND E.room_id=R.id
+                 AND R.disabled=0";
+
+      $res = sql_query($sql);
+      if (isset($res)) {
+        if (sql_count($res) >= $max_active_bookings) {
+          $disabled = TRUE;
+        }
+      }
+		}
+  }
 	//slut bokningspolicy
 	//echo "bokningspolicy " . $disabled . "<br>" ;
 	return $disabled;

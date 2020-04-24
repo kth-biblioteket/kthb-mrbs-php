@@ -246,8 +246,8 @@ function check_interval_hours(&$booking, $ignore, $repignore, $interval_type='da
 
     if (!isset($existing[$location][$interval_type][$interval_start]))
     {
-	  //KTH SQL för att hämta hur många timmar en user har bokade inom ett intervall
-	  $sql = "SELECT summa
+	    //KTH SQL för att hämta hur många timmar en user har bokade inom ett intervall
+	    $sql = "SELECT summa
 				 FROM (
 				 SELECT cast((end_time-start_time)/3600 AS UNSIGNED) as timmar, 
 				 SUM((end_time-start_time)/3600) as summa				 
@@ -260,73 +260,73 @@ function check_interval_hours(&$booking, $ignore, $repignore, $interval_type='da
 				 AND type != \"C\"";
       if ($only_area)
       {
-		$sql .= " AND R.area_id=$area_id";
+		    $sql .= " AND R.area_id=$area_id";
       }
       if ($ignore > 0)
       {
-		$sql .= " AND E.id <> $ignore";
+		    $sql .= " AND E.id <> $ignore";
       }
       if ($repignore > 0)
       {
-		$sql .= " AND E.repeat_id <> $repignore";
+		    $sql .= " AND E.repeat_id <> $repignore";
       }
-	  $sql .= " GROUP BY cast((end_time-start_time)/3600 AS UNSIGNED) 
+	      $sql .= " GROUP BY cast((end_time-start_time)/3600 AS UNSIGNED) 
 				 WITH ROLLUP
 				 HAVING timmar is null)
 				 t1";
       //echo $sql;
 	  
-	  $existing[$location][$interval_type][$interval_start] = sql_query1($sql);
-	  //echo $existing[$location][$interval_type][$interval_start];
-	  if ($existing[$location][$interval_type][$interval_start] == -1) {//returnerar -1 om inga timmar hittas
-		  $existing[$location][$interval_type][$interval_start] = 0;
-	  }
+      $existing[$location][$interval_type][$interval_start] = sql_query1($sql);
+      //echo $existing[$location][$interval_type][$interval_start];
+      if ($existing[$location][$interval_type][$interval_start] == -1) {//returnerar -1 om inga timmar hittas
+        $existing[$location][$interval_type][$interval_start] = 0;
+      }
 	  
 	  
-	  //"no-show"
-	  $sql = "SELECT summa
-				 FROM (
-				 SELECT cast((end_time-start_time)/3600 AS UNSIGNED) as timmar, 
-				 SUM((end_time-start_time)/3600) as summa				 
-				 FROM $tbl_entry" ."_no_show E, $tbl_room R
-                 WHERE E.start_time<$interval_end
-                 AND E.end_time>$interval_start
-                 AND E.create_by='" . sql_escape($booking['create_by']) . "'
-                 AND E.room_id=R.id
-                 AND R.disabled=0 
-				 AND type != \"C\"";
+      //"no-show"
+      $sql = "SELECT summa
+          FROM (
+          SELECT cast((end_time-start_time)/3600 AS UNSIGNED) as timmar, 
+          SUM((end_time-start_time)/3600) as summa				 
+          FROM $tbl_entry" ."_no_show E, $tbl_room R
+                  WHERE E.start_time<$interval_end
+                  AND E.end_time>$interval_start
+                  AND E.create_by='" . sql_escape($booking['create_by']) . "'
+                  AND E.room_id=R.id
+                  AND R.disabled=0 
+          AND type != \"C\"";
       if ($only_area)
       {
-		$sql .= " AND R.area_id=$area_id";
+        $sql .= " AND R.area_id=$area_id";
       }
       if ($ignore > 0)
       {
-		$sql .= " AND E.id <> $ignore";
+        $sql .= " AND E.id <> $ignore";
       }
       if ($repignore > 0)
       {
-		$sql .= " AND E.repeat_id <> $repignore";
+        $sql .= " AND E.repeat_id <> $repignore";
       }
-	  $sql .= " GROUP BY cast((end_time-start_time)/3600 AS UNSIGNED) 
-				 WITH ROLLUP
-				 HAVING timmar is null)
-				 t1";
-	  $no_show = sql_query1($sql);
-	  if ($no_show != -1) {//returnerar -1 om inga timmar hittas
-		  $existing[$location][$interval_type][$interval_start] += $no_show;
-	  }
+        $sql .= " GROUP BY cast((end_time-start_time)/3600 AS UNSIGNED) 
+          WITH ROLLUP
+          HAVING timmar is null)
+          t1";
+      $no_show = sql_query1($sql);
+      if ($no_show != -1) {//returnerar -1 om inga timmar hittas
+        $existing[$location][$interval_type][$interval_start] += $no_show;
+      }
 	  
-	  //echo ($existing[$location][$interval_type][$interval_start]);
+	    //echo ($existing[$location][$interval_type][$interval_start]);
       if ($existing[$location][$interval_type][$interval_start] < 0)
       {
         trigger_error(sql_error(), E_USER_WARNING);
         fatal_error(FALSE, get_vocab("fatal_db_error"));
       }
-	  //echo $booking['end_time'] - $booking['start_time'] ;
-	  //echo "end: " . $booking['end_time'];
+	    //echo $booking['end_time'] - $booking['start_time'] ;
+	    //echo "end: " . $booking['end_time'];
 	  
       $proposed[$location][$interval_type][$interval_start] = 1;
-	  $proposed[$location][$interval_type][$interval_start] = ($booking['end_time'] - $booking['start_time'])/3600;
+	    $proposed[$location][$interval_type][$interval_start] = ($booking['end_time'] - $booking['start_time'])/3600;
     }
     else
     {
@@ -334,7 +334,7 @@ function check_interval_hours(&$booking, $ignore, $repignore, $interval_type='da
     }
 
     $max_allowed = ($only_area) ? $max_hours_per_interval_area[$interval_type] : $max_hours_per_interval_global[$interval_type];
-	//echo "max: " . $max_hours_per_interval_area[$interval_type];
+	  //echo "max: " . $max_hours_per_interval_area[$interval_type];
     if (($existing[$location][$interval_type][$interval_start] + $proposed[$location][$interval_type][$interval_start]) >
          $max_allowed)
     {
