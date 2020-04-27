@@ -1041,7 +1041,7 @@ function cell_html($cell, $query_strings, $is_invalid = FALSE, $ajaxuser = NULL)
               $bookingdesc = "";
             } else {
               $bookingdesc = get_vocab("bookable_entry_text") ."\n";
-            ]
+            }
           }
           $longbookingdesc = $bookingdesc;
         }
