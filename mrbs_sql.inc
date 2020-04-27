@@ -2068,6 +2068,8 @@ function get_next_available_start_time_room($room_id, $date)
 {
   global $max_create_ahead_enabled, $max_create_ahead_secs;
 
+  $is_admin = (authGetUserLevel($user) >= 2);
+
   $room_id = (int)$room_id;
   $max_create_ahead = 60*60*24*7*52;//1 år
 
@@ -2076,11 +2078,11 @@ function get_next_available_start_time_room($room_id, $date)
           WHERE type = \"B\" 
           AND start_time > UNIX_TIMESTAMP(\"". $date ."\")";
 
-  if ($max_create_ahead_enabled) {
+  if ($max_create_ahead_enabled && !$is_admin) {
     $max_create_ahead = $max_create_ahead_secs;
     $sql .= " AND start_time < UNIX_TIMESTAMP() + $max_create_ahead";
   }
-  
+
   $sql .= " AND room_id = $room_id
           ORDER BY start_time asc";
 
@@ -2109,6 +2111,8 @@ function get_next_available_start_time_area($area_id, $date)
 {
   global $max_create_ahead_enabled, $max_create_ahead_secs;
 
+  $is_admin = (authGetUserLevel($user) >= 2);
+
   $area_id = (int)$area_id;
   $max_create_ahead = 60*60*24*7*52;//1 år
   $sql = "SELECT start_time
@@ -2118,7 +2122,7 @@ function get_next_available_start_time_area($area_id, $date)
           WHERE type = \"B\" 
           AND start_time > UNIX_TIMESTAMP(\"". $date ."\")";
 
-  if ($max_create_ahead_enabled) {
+  if ($max_create_ahead_enabled && !$is_admin) {
     $max_create_ahead = $max_create_ahead_secs;
     $sql .= " AND start_time < UNIX_TIMESTAMP() + $max_create_ahead";
   }
