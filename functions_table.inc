@@ -1037,7 +1037,11 @@ function cell_html($cell, $query_strings, $is_invalid = FALSE, $ajaxuser = NULL)
           if ($color != "B"){ 
             $bookingdesc = get_vocab("booked_entry_text") ."\n";
           } else {
-            $bookingdesc = get_vocab("bookable_entry_text") ."\n";
+            if($color == "B" && $is_invalid==TRUE && !$is_admin) {
+              $bookingdesc = "";
+            } else {
+              $bookingdesc = get_vocab("bookable_entry_text") ."\n";
+            ]
           }
           $longbookingdesc = $bookingdesc;
         }
@@ -1057,9 +1061,8 @@ function cell_html($cell, $query_strings, $is_invalid = FALSE, $ajaxuser = NULL)
           $html .= ($is_repeat) ? "<img class=\"repeat_symbol $c\" src=\"images/repeat.png\" alt=\"" . get_vocab("series") . "\" title=\"" . get_vocab("series") . "\" width=\"10\" height=\"10\">" : '';
           $html .= "$bookingdesc</a>\n";
         } else {
-          //om det inte är en "stängtbokning"
-          if ($color != "C" 
-            || (!$is_admin && $color == "B" && $is_invalid == TRUE)) { 
+          //visa text om det inte är en "stängtbokning"
+          if ($color != "C") { 
             $html .= ($is_repeat) ? "<img class=\"repeat_symbol $c\" src=\"images/repeat.png\" alt=\"" . get_vocab("series") . "\" title=\"" . get_vocab("series") . "\" width=\"10\" height=\"10\">" : '';
             $html .= "$bookingdesc\n";
           } else {
