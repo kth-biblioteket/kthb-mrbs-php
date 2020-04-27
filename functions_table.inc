@@ -370,14 +370,14 @@ function checkifslotenabled($area, $room_id, $month, $day, $year, $s) {
 		{
 		  if ($enable_periods)
 		  {
-			$min_create_ahead_secs -=  $min_create_ahead_secs % SECONDS_PER_DAY;
+			  $min_create_ahead_secs -=  $min_create_ahead_secs % SECONDS_PER_DAY;
 		  }
 		  $min_create_ahead = $min_create_ahead_secs;
 		  if (($slotinseconds - $now) < $min_create_ahead)
 		  {
-			toTimeString($min_create_ahead, $units);
-			$errors[] = get_vocab('min_create_time_before', $min_create_ahead, $units);
-			$disabled = TRUE;
+        toTimeString($min_create_ahead, $units);
+        $errors[] = get_vocab('min_create_time_before', $min_create_ahead, $units);
+        $disabled = TRUE;
 		  }
 		}
 	}
@@ -389,14 +389,14 @@ function checkifslotenabled($area, $room_id, $month, $day, $year, $s) {
 		{
 			if ($enable_periods)
 			{
-			$max_create_ahead_secs -=  $max_create_ahead_secs % SECONDS_PER_DAY;
+			  $max_create_ahead_secs -=  $max_create_ahead_secs % SECONDS_PER_DAY;
 			}
 			$max_create_ahead = $max_create_ahead_secs;
 			if (($slotinseconds - $now) > $max_create_ahead)
 			{
-			toTimeString($max_create_ahead, $units);
-			$errors[] = get_vocab('max_create_time_before', $max_create_ahead, $units);
-			$disabled = TRUE;
+        toTimeString($max_create_ahead, $units);
+        $errors[] = get_vocab('max_create_time_before', $max_create_ahead, $units);
+        $disabled = TRUE;
 			}
 		}
   }
@@ -1026,7 +1026,7 @@ function cell_html($cell, $query_strings, $is_invalid = FALSE, $ajaxuser = NULL)
         //Visa inte namnet på den som bokat
         //för bokningar som är default type "I"
         //Visa för admin och bokaren och för specialbokningar "S"
-        //TODO visa inte någon text för otillgängliga "B"-tider för användare
+        //Visa inte någon text för otillgängliga "B"-tider för användare
         $bookingdesc = "";
         $longbookingdesc = "";
         if ((getWritable($cell[0]['create_by'], $user, $cell[0]['room_id']) /*&& $is_invalid==FALSE*/) 

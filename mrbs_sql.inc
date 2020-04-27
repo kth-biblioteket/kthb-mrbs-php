@@ -2066,14 +2066,22 @@ function get_instructor($email)
 //Nästa bokningsbara tid för ett rum
 function get_next_available_start_time_room($room_id, $date)
 {
+  global $max_create_ahead_enabled, $max_create_ahead_secs;
 
   $room_id = (int)$room_id;
-    
+  $max_create_ahead = 60*60*24*7*52;//1 år
+
   $sql = "SELECT start_time
           FROM mrbs_entry 
           WHERE type = \"B\" 
-          AND start_time > UNIX_TIMESTAMP(\"". $date ."\")
-          AND room_id = $room_id
+          AND start_time > UNIX_TIMESTAMP(\"". $date ."\")";
+
+  if ($max_create_ahead_enabled) {
+    $max_create_ahead = $max_create_ahead_secs;
+    $sql .= " AND start_time < UNIX_TIMESTAMP() + $max_create_ahead";
+  }
+  
+  $sql .= " AND room_id = $room_id
           ORDER BY start_time asc";
 
   $sql .= " LIMIT 1";
@@ -2099,15 +2107,23 @@ function get_next_available_start_time_room($room_id, $date)
 //Nästa bokningsbara tid för en area
 function get_next_available_start_time_area($area_id, $date)
 {
-  $area_id = (int)$area_id;
+  global $max_create_ahead_enabled, $max_create_ahead_secs;
 
+  $area_id = (int)$area_id;
+  $max_create_ahead = 60*60*24*7*52;//1 år
   $sql = "SELECT start_time
           FROM mrbs_entry 
           JOIN mrbs_room ON
           mrbs_room.id = mrbs_entry.room_id
           WHERE type = \"B\" 
-          AND start_time > UNIX_TIMESTAMP(\"". $date ."\")
-          AND mrbs_room.area_id = $area_id
+          AND start_time > UNIX_TIMESTAMP(\"". $date ."\")";
+
+  if ($max_create_ahead_enabled) {
+    $max_create_ahead = $max_create_ahead_secs;
+    $sql .= " AND start_time < UNIX_TIMESTAMP() + $max_create_ahead";
+  }
+ 
+  $sql .= " AND mrbs_room.area_id = $area_id
           ORDER BY start_time asc";
 
   $sql .= " LIMIT 1";
