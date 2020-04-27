@@ -2068,6 +2068,7 @@ function get_next_available_start_time_room($room_id, $date)
 {
   global $max_create_ahead_enabled, $max_create_ahead_secs;
 
+  $user = getUserName();
   $is_admin = (authGetUserLevel($user) >= 2);
 
   $room_id = (int)$room_id;
@@ -2111,6 +2112,7 @@ function get_next_available_start_time_area($area_id, $date)
 {
   global $max_create_ahead_enabled, $max_create_ahead_secs;
 
+  $user = getUserName();
   $is_admin = (authGetUserLevel($user) >= 2);
 
   $area_id = (int)$area_id;
