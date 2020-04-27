@@ -1026,6 +1026,7 @@ function cell_html($cell, $query_strings, $is_invalid = FALSE, $ajaxuser = NULL)
         //Visa inte namnet på den som bokat
         //för bokningar som är default type "I"
         //Visa för admin och bokaren och för specialbokningar "S"
+        //TODO visa inte någon text för otillgängliga "B"-tider för användare
         $bookingdesc = "";
         $longbookingdesc = "";
         if ((getWritable($cell[0]['create_by'], $user, $cell[0]['room_id']) /*&& $is_invalid==FALSE*/) 
@@ -1044,7 +1045,7 @@ function cell_html($cell, $query_strings, $is_invalid = FALSE, $ajaxuser = NULL)
         //eller om användaren är admin
         //eller om det är en kioskdator
         //191003 Visa även länk på alla B (bookable)
-        //TODO Visa länk för den som bokat tiden om latecancel=true
+        //Visa länk för den som bokat tiden om latecancel=true
         
         if ((getWritable($cell[0]['create_by'], $user, $cell[0]['room_id']) && $is_invalid==FALSE)
             || (getWritable($cell[0]['create_by'], $user, $cell[0]['room_id']) && $latecancel==TRUE) 
@@ -1057,7 +1058,8 @@ function cell_html($cell, $query_strings, $is_invalid = FALSE, $ajaxuser = NULL)
           $html .= "$bookingdesc</a>\n";
         } else {
           //om det inte är en "stängtbokning"
-          if ($color != "C"){ 
+          if ($color != "C" 
+            || (!$is_admin && $color == "B" && $is_invalid == TRUE)) { 
             $html .= ($is_repeat) ? "<img class=\"repeat_symbol $c\" src=\"images/repeat.png\" alt=\"" . get_vocab("series") . "\" title=\"" . get_vocab("series") . "\" width=\"10\" height=\"10\">" : '';
             $html .= "$bookingdesc\n";
           } else {

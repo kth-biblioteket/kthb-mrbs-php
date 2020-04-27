@@ -59,13 +59,14 @@ CREATE TABLE IF NOT EXISTS `kth_entry_custom_fields` (
 -- Dumpning av Data i tabell `kth_entry_custom_fields`
 --
 /*
-Handledning
+--Handledning
 INSERT INTO `kth_entry_custom_fields` (`area_id`, `entry_field_name`, `type`, `sort_order`, `visible`, `enabled`, `mandatory`) VALUES
 (1, 'email', 'custom', 200, 1, 1, 1),
 (1, 'phone', 'custom', 300, 1, 1, 1),
 (1, 'user_group', 'custom', 150, 1, 0, 1),
 (1, 'campus', 'custom', 130, 1, 1, 1),
 (1, 'program', 'custom', 500, 1, 1, 1),
+(1, 'consultation_info', 'custom', 600, 1, 1, 1),
 (1, 'study_info', 'custom', 600, 1, 1, 1),
 (1, 'previously', 'custom', 700, 1, 1, 1),
 (1, 'subject_keywords', 'custom', 800, 1, 1, 1),
@@ -75,7 +76,7 @@ INSERT INTO `kth_entry_custom_fields` (`area_id`, `entry_field_name`, `type`, `s
 (1, 'end_time', 'standard', 101, 1, 1, 1),
 (1, 'name', 'standard', 140, 1, 1, 1);
 
-Talbok
+--Talbok
 INSERT INTO `kth_entry_custom_fields` (`area_id`, `entry_field_name`, `type`, `sort_order`, `visible`, `enabled`, `mandatory`) VALUES
 (1, 'email', 'custom', 200, 1, 1, 1),
 (1, 'phone', 'custom', 300, 1, 1, 1),
@@ -87,14 +88,14 @@ INSERT INTO `kth_entry_custom_fields` (`area_id`, `entry_field_name`, `type`, `s
 (1, 'name', 'standard', 140, 1, 1, 1),
 (1, 'other_info', 'custom', 900, 1, 1, 1);
 
-Grupprum/lässtudio
+--Grupprum/lässtudio
 INSERT INTO `kth_entry_custom_fields` (`area_id`, `entry_field_name`, `type`, `sort_order`, `visible`, `enabled`, `mandatory`) VALUES
 (1, 'name', 'standard', 100, 1, 1, 1),
 (1, 'start_time', 'standard', 110, 1, 1, 1),
 (1, 'end_time', 'standard', 120, 1, 1, 1),
 (1, 'confirmation_status', 'standard', 130, 1, 1, 1);
 
-CAS
+--CAS
 INSERT INTO `kth_entry_custom_fields` (`area_id`, `entry_field_name`, `type`, `sort_order`, `visible`, `enabled`, `mandatory`) VALUES
 (1, 'start_time', 'standard', 100, 1, 1, 1),
 (1, 'end_time', 'standard', 101, 1, 1, 1),
@@ -702,10 +703,10 @@ INSERT INTO `mrbs_room` (`disabled`, `area_id`, `room_name`, `room_name_english`
 
 --Talbok
 INSERT INTO `mrbs_room` (`id`, `disabled`, `area_id`, `room_name`, `room_name_english`, `sort_key`, `exchange_email`, `description`, `capacity`, `room_admin_email`, `custom_html`, `room_number`, `screen`, `mailtext`, `mailtext_en`, `morningstarts_monday`, `morningstarts_minutes_monday`, `eveningends_monday`, `eveningends_minutes_monday`, `morningstarts_tuesday`, `morningstarts_minutes_tuesday`, `eveningends_tuesday`, `eveningends_minutes_tuesday`, `morningstarts_wednesday`, `morningstarts_minutes_wednesday`, `eveningends_wednesday`, `eveningends_minutes_wednesday`, `morningstarts_thursday`, `morningstarts_minutes_thursday`, `eveningends_thursday`, `eveningends_minutes_thursday`, `morningstarts_friday`, `morningstarts_minutes_friday`, `eveningends_friday`, `eveningends_minutes_friday`, `morningstarts_saturday`, `morningstarts_minutes_saturday`, `eveningends_saturday`, `eveningends_minutes_saturday`, `morningstarts_sunday`, `morningstarts_minutes_sunday`, `eveningends_sunday`, `eveningends_minutes_sunday`) VALUES
-(1, 0, 1, 'Huvudbiblioteket', 'Main Library', '1', 'ece-kthb-undervisningsschema@ug.kth.se', '', 0, '', '', '', 0, '', '', 9, 0, 16, 0, 9, 0, 16, 0, 9, 0, 16, 0, 9, 0, 16, 0, 9, 0, 14, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(2, 0, 1, 'Kista', 'Kista', '2', 'ece-kthb-undervisningsschema@ug.kth.se', '', 0, '', '', '', 0, '', '', 9, 0, 16, 0, 9, 0, 16, 0, 9, 0, 16, 0, 9, 0, 16, 0, 9, 0, 14, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(3, 0, 1, 'Södertälje', 'Södertälje', '3', 'ece-kthb-undervisningsschema@ug.kth.se', '', 0, '', '', '', 0, '', '', 9, 0, 16, 0, 9, 0, 16, 0, 9, 0, 16, 0, 9, 0, 16, 0, 9, 0, 14, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(4, 0, 1, 'Flemingsberg', 'Flemingsberg', '4', 'ece-kthb-undervisningsschema@ug.kth.se', '', 1, '', '', '', 0, '', '', 9, 0, 16, 0, 9, 0, 16, 0, 9, 0, 16, 0, 9, 0, 16, 0, 9, 0, 14, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+(1, 0, 1, 'Huvudbiblioteket', 'Main Library', '1', 'gvs-kthb-talboksservice@ug.kth.se', '', 0, '', '', '', 0, '', '', 9, 0, 16, 0, 9, 0, 16, 0, 9, 0, 16, 0, 9, 0, 16, 0, 9, 0, 14, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(2, 0, 1, 'Kista', 'Kista', '2', 'gvs-kthb-talboksservice@ug.kth.se', '', 0, '', '', '', 0, '', '', 9, 0, 16, 0, 9, 0, 16, 0, 9, 0, 16, 0, 9, 0, 16, 0, 9, 0, 14, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3, 0, 1, 'Södertälje', 'Södertälje', '3', 'gvs-kthb-talboksservice@ug.kth.se', '', 0, '', '', '', 0, '', '', 9, 0, 16, 0, 9, 0, 16, 0, 9, 0, 16, 0, 9, 0, 16, 0, 9, 0, 14, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(4, 0, 1, 'Flemingsberg', 'Flemingsberg', '4', 'gvs-kthb-talboksservice@ug.kth.se', '', 1, '', '', '', 0, '', '', 9, 0, 16, 0, 9, 0, 16, 0, 9, 0, 16, 0, 9, 0, 16, 0, 9, 0, 14, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 --Readingstudios
 INSERT INTO `mrbs_room` (`disabled`, `area_id`, `room_name`, `room_name_english`, `sort_key`, `exchange_email`, `description`, `capacity`, `room_admin_email`, `custom_html`, `room_number`, `screen`, `mailtext`, `mailtext_en`) VALUES
