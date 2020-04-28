@@ -107,11 +107,11 @@ get_area_settings($area);
 echo "<div style=\"padding-bottom:10px;overflow:auto\">";
 print_modal($area,$lang,$area_map,$area_map_image);
 //200309 visa länk till nästa lediga bokning om bokningar är stängda som default
-//TODO hämta aktuell veckas sista slot och kolla om det finns lediga tider efter den
+//hämta aktuell veckas sista slot och kolla om det finns lediga tider efter den
+//TODO visa inte om användaren bryter mot policyregler
 $nextavailable = "";
 if (!$default_bookings_open) {
   $next_start_time = get_next_available_start_time_area($area,$ty.$tm.$td);
-  //$next_start_time = get_next_available_start_time_area($area,$year ."-". $month ."-". $day);
   if ($next_start_time) {
     $nextavailable = "
     <div style=\"text-align:right\">

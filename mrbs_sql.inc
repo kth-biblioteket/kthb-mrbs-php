@@ -2063,10 +2063,45 @@ function get_instructor($email)
 
 //KTH ny funktion.
 //191003
+//Kolla om användaren har en aktiv bokning som överskriver policy.
+function check_activebooking_policy($user)
+{ 
+  global $max_active_bookings;
+
+  $sql = "SELECT *
+          FROM mrbs_entry E, mrbs_room R
+          WHERE E.start_time > UNIX_TIMESTAMP()
+          AND E.create_by='" . sql_escape($user) . "'
+          AND E.room_id=R.id
+          AND R.disabled=0";
+
+  $res = sql_query($sql);
+  
+  if ($res === FALSE)
+  {
+    trigger_error(sql_error(), E_USER_WARNING);
+    return FALSE;
+  }
+
+  if (isset($res)) {
+    if (sql_count($res) >= $max_active_bookings) {
+      return TRUE;
+    } 
+    else {
+      return FALSE;
+    }
+  }
+ 
+}
+
+//KTH ny funktion.
+//191003
 //Nästa bokningsbara tid för ett rum
+//Är boka i förväg-begränsning aktiverad?
+//Är max aktiva bokningar aktiverad? Har användaren redan en aktiv bokning?
 function get_next_available_start_time_room($room_id, $date)
 {
-  global $max_create_ahead_enabled, $max_create_ahead_secs;
+  global $max_create_ahead_enabled, $max_create_ahead_secs, $max_active_bookings_enabled, $max_active_bookings;
 
   $user = getUserName();
   $is_admin = (authGetUserLevel($user) >= 2);
@@ -2108,6 +2143,7 @@ function get_next_available_start_time_room($room_id, $date)
 //KTH ny funktion.
 //191003
 //Nästa bokningsbara tid för en area
+//Är boka i förväg-begränsning aktiverad?
 function get_next_available_start_time_area($area_id, $date)
 {
   global $max_create_ahead_enabled, $max_create_ahead_secs;

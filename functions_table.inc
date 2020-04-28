@@ -403,9 +403,6 @@ function checkifslotenabled($area, $room_id, $month, $day, $year, $s) {
   
   //TODO Kolla om användaren redan har max antal tillåtna aktiva bokningar ($max_active_bookings_enabled = TRUE, $max_active_bookings = 1)
   if ($disabled == FALSE) {
-    error_log("MRBS, : $disabled");
-    error_log("MRBS, : $max_active_bookings_enabled");
-    error_log("MRBS, : $max_active_bookings");
 		if ($max_active_bookings_enabled)
 		{
       $sql = "SELECT *
@@ -416,7 +413,6 @@ function checkifslotenabled($area, $room_id, $month, $day, $year, $s) {
                  AND R.disabled=0";
 
       $res = sql_query($sql);
-      error_log("MRBS, : $sql");
       if (isset($res)) {
         if (sql_count($res) >= $max_active_bookings) {
           $disabled = TRUE;
@@ -425,7 +421,6 @@ function checkifslotenabled($area, $room_id, $month, $day, $year, $s) {
 		}
   }
 	//slut bokningspolicy
-	//echo "bokningspolicy " . $disabled . "<br>" ;
 	return $disabled;
 }							
 
@@ -1038,18 +1033,18 @@ function cell_html($cell, $query_strings, $is_invalid = FALSE, $ajaxuser = NULL)
             $bookingdesc = get_vocab("booked_entry_text") ."\n";
           } else {
             if($color == "B" && $is_invalid==TRUE && !$is_admin) {
-              $bookingdesc = "";
+              $bookingdesc = $vocab["bookable_entry_text_not_available"];
             } else {
               $bookingdesc = get_vocab("bookable_entry_text") ."\n";
             }
           }
           $longbookingdesc = $bookingdesc;
         }
-        //KTH Visa bara länk till edit_entry om bokningen är valid och om användaren är behörig 
+        //KTH Visa länk till edit_entry om bokningen är valid och om användaren är behörig 
         //eller om användaren är admin
         //eller om det är en kioskdator
         //191003 Visa även länk på alla B (bookable)
-        //Visa länk för den som bokat tiden om latecancel=true
+        //Visa länk för den som bokat tiden om latecancel=TRUE
         
         if ((getWritable($cell[0]['create_by'], $user, $cell[0]['room_id']) && $is_invalid==FALSE)
             || (getWritable($cell[0]['create_by'], $user, $cell[0]['room_id']) && $latecancel==TRUE) 
