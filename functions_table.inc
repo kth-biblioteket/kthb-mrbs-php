@@ -1033,7 +1033,7 @@ function cell_html($cell, $query_strings, $is_invalid = FALSE, $ajaxuser = NULL)
             $bookingdesc = get_vocab("booked_entry_text") ."\n";
           } else {
             if($color == "B" && $is_invalid==TRUE && !$is_admin) {
-              $bookingdesc = $vocab["bookable_entry_text_not_available"];
+              $bookingdesc = get_vocab("bookable_entry_text_not_available");
             } else {
               $bookingdesc = get_vocab("bookable_entry_text") ."\n";
             }
