@@ -70,7 +70,7 @@ $vocab["select_an_option"]			= "Select an option";
 $vocab["remembertoconfirm"]  = "Please don't forget that you must confirm this tentative booking before you start using the room! This can only be done from 15 minutes before to 15 minutes after the start time.";
 //191003
 $vocab["bookable_entry_text"]			= "Available";
-$vocab["bookable_entry_text_not_available"]	= "Not available for you";
+$vocab["bookable_entry_text_not_available"]	= "Free - Not available for you";
 $vocab["booked_entry_text"]			= "Booked";
 $vocab_override['en']["entry.instructor"]  = "Instructor";
 $vocab_override['en']["entry.campus"]  = "Location";

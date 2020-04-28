@@ -70,7 +70,7 @@ $vocab["select_an_option"]			= "Välj ett alternativ";
 $vocab["remembertoconfirm"]  = "Kom ihåg att du måste kvittera den här preliminära bokningen innan du börjar använda rummet! Det kan du endast göra från 15 minuter före till 15 minuter efter starttiden. ";
 //191003
 $vocab["bookable_entry_text"]			= "Ledig";
-$vocab["bookable_entry_text_not_available"]	= "Ledig men inte tillgänglig för dig";
+$vocab["bookable_entry_text_not_available"]	= "Ledig - inte tillgänglig för dig";
 $vocab["booked_entry_text"]			= "Bokad";
 $vocab_override['sv']["entry.instructor"]  = "Handledare";
 $vocab_override['sv']["entry.campus"]  = "Plats";
