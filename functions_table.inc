@@ -403,7 +403,7 @@ function checkifslotenabled($area, $room_id, $month, $day, $year, $s) {
   
   //TODO Kolla om användaren redan har max antal tillåtna aktiva bokningar ($max_active_bookings_enabled = TRUE, $max_active_bookings = 1)
   if ($disabled == FALSE) {
-		if ($max_active_bookings_enabled)
+		if ($max_active_bookings_enabled && !$is_admin)
 		{
       $sql = "SELECT *
               FROM mrbs_entry E, mrbs_room R

@@ -156,15 +156,23 @@ CREATE TABLE IF NOT EXISTS `kth_instructors` (
 --
 /*
 --Handledning
-INSERT INTO `kth_instructors` (`id`, `disabled`, `area_id`, `sort_key`, `full_name`, `email`) VALUES
-(1, 0, 1, '8', 'Thomas Lind', 'tholind@kth.se'),
-(2, 0, 1, '1', 'Miritt Zisser', 'miritt@kth.se'),
-(3, 0, 1, '2', 'Sara Akramy', 'akramy@kth.se'),
-(4, 0, 1, '3', 'Maria Unger', 'mariaun@kth.se'),
-(5, 0, 1, '4', 'Magdalena Svanberg', 'masvanbe@kth.se'),
-(6, 0, 1, '5', 'Lina Andrén', 'linaandr@kth.se'),
-(7, 0, 1, '6', 'Lenita Brodin Berggren', 'lenitabb@kth.se'),
-(8, 0, 1, '7', 'Ika Jorum', 'jorum@kth.se');
+INSERT INTO `kth_instructors` (`disabled`, `area_id`, `sort_key`, `full_name`, `email`) VALUES
+(0, 1, '8', 'Thomas Lind', 'tholind@kth.se'),
+(0, 1, '1', 'Miritt Zisser', 'miritt@kth.se'),
+(0, 1, '2', 'Sara Akramy', 'akramy@kth.se'),
+(0, 1, '3', 'Maria Unger', 'mariaun@kth.se'),
+(0, 1, '4', 'Magdalena Svanberg', 'masvanbe@kth.se'),
+(0, 1, '5', 'Lina Andrén', 'linaandr@kth.se'),
+(0, 1, '6', 'Lenita Brodin Berggren', 'lenitabb@kth.se'),
+(0, 1, '7', 'Ika Jorum', 'jorum@kth.se');
+
+--Talbok
+INSERT INTO `kth_instructors` (`disabled`, `area_id`, `sort_key`, `full_name`, `email`) VALUES
+(0, 1, '8', 'Thomas Lind', 'tholind@kth.se'),
+(0, 1, '1', 'Moa-Lisa Björk', 'mlbjork@kth.se'),
+(0, 1, '2', 'Michelle Mörck', 'mmorck@kth.se');
+(0, 1, '3', 'Viveka Norström Hallberg', 'vivekanh@kth.se'),
+(0, 1, '4', 'Eva Westphal', 'evwe@kth.se');
 
 */
 
