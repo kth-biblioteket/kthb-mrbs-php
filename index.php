@@ -37,5 +37,8 @@ switch ($default_view)
 //echo $redirect_str;
 $redirect_str .= "?year=$year&month=$month&day=$day&area=$area&room=$room";
 
+if($environment == 'development') {
+  error_log("redirect_str: " . $redirect_str);
+}
 header("Location: $redirect_str");
 
