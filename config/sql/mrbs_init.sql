@@ -64,14 +64,14 @@ INSERT INTO `kth_entry_custom_fields` (`area_id`, `entry_field_name`, `type`, `s
 (1, 'email', 'custom', 200, 1, 1, 1),
 (1, 'phone', 'custom', 300, 1, 1, 1),
 (1, 'user_group', 'custom', 150, 1, 0, 1),
-(1, 'campus', 'custom', 130, 1, 1, 1),
+(1, 'campus', 'custom', 410, 1, 1, 1),
 (1, 'program', 'custom', 500, 1, 1, 1),
 (1, 'consultation_info', 'custom', 600, 1, 1, 1),
 (1, 'study_info', 'custom', 600, 1, 1, 1),
 (1, 'previously', 'custom', 700, 1, 1, 1),
 (1, 'subject_keywords', 'custom', 800, 1, 1, 1),
-(1, 'instructor', 'custom', 110, 1, 1, 1),
-(1, 'preferred_language', 'custom', 120, 1, 1, 1),
+(1, 'instructor', 'custom', 400, 1, 1, 1),
+(1, 'preferred_language', 'custom', 420, 1, 1, 1),
 (1, 'start_time', 'standard', 100, 1, 1, 1),
 (1, 'end_time', 'standard', 101, 1, 1, 1),
 (1, 'name', 'standard', 140, 1, 1, 1);
@@ -81,8 +81,9 @@ INSERT INTO `kth_entry_custom_fields` (`area_id`, `entry_field_name`, `type`, `s
 (1, 'email', 'custom', 200, 1, 1, 1),
 (1, 'phone', 'custom', 300, 1, 1, 1),
 (1, 'user_group', 'custom', 150, 1, 0, 1),
+(1, 'campus', 'custom', 410, 1, 1, 1),
 (1, 'preferred_language', 'custom', 800, 1, 1, 1),
-(1, 'instructor', 'custom', 110, 1, 1, 1),
+(1, 'instructor', 'custom', 400, 1, 1, 1),
 (1, 'start_time', 'standard', 100, 1, 1, 1),
 (1, 'end_time', 'standard', 101, 1, 1, 1),
 (1, 'name', 'standard', 140, 1, 1, 1),
@@ -220,10 +221,20 @@ CREATE TABLE IF NOT EXISTS `kth_places` (
 -- Dumpning av Data i tabell `kth_places`
 --
 
-INSERT INTO `kth_places` (`id`, `disabled`, `room_id`, `sort_key`, `name`, `name_en`) VALUES
-(1, 0, 1, '3', 'Huvudbiblioteket', 'Main Library'),
-(2, 0, 1, '2', 'Distans', 'Distance'),
-(3, 0, 1, '1', '1none', '1none');
+/*
+--Handledning
+INSERT INTO `kth_places` (`disabled`, `room_id`, `sort_key`, `name`, `name_en`) VALUES
+(0, 1, '3', 'Huvudbiblioteket', 'Main Library'),
+(0, 1, '2', 'Distans', 'Distance'),
+(0, 1, '1', '1none', '1none');
+
+--Talbok
+INSERT INTO `kth_places` (`disabled`, `room_id`, `sort_key`, `name`, `name_en`) VALUES
+(0, 1, '3', 'KTH Biblioteket', 'KTH Library'),
+(0, 1, '2', 'Distans', 'Distance'),
+(0, 1, '1', '1none', '1none');
+
+*/
 
 -- --------------------------------------------------------
 
@@ -403,7 +414,7 @@ CREATE TABLE IF NOT EXISTS `mrbs_entry` (
 -- Dumpning av Data i tabell `mrbs_entry`
 --
 /*
-INSERT INTO mrbs_grupprum.mrbs_entry (`start_time`, `end_time`, `entry_type`, `repeat_id`, `room_id`, `timestamp`, `instructor`, `create_by`, `modified_by`, `name`, `type`, `description`, `status`, `reminded`, `lang`, `confirmation_code`, `info_time`, `info_user`, `info_text`, `email`, `phone`, `user_group`, `program`, `study_info`, `previously`, `subject_keywords`, `campus`, `preferred_language`, `consultation_info`, `other_info`, `ical_uid`, `ical_sequence`, `ical_recur_id`) 
+INSERT INTO mrbs_xxxxxx.mrbs_entry (`start_time`, `end_time`, `entry_type`, `repeat_id`, `room_id`, `timestamp`, `instructor`, `create_by`, `modified_by`, `name`, `type`, `description`, `status`, `reminded`, `lang`, `confirmation_code`, `info_time`, `info_user`, `info_text`, `email`, `phone`, `user_group`, `program`, `study_info`, `previously`, `subject_keywords`, `campus`, `preferred_language`, `consultation_info`, `other_info`, `ical_uid`, `ical_sequence`, `ical_recur_id`) 
 */ 
 /*
 
@@ -500,13 +511,13 @@ CREATE TABLE IF NOT EXISTS `mrbs_entry_delete` (
   `phone` varchar(12) DEFAULT NULL,
   `user_group` varchar(50) DEFAULT NULL,
   `program` varchar(100) DEFAULT NULL,
-  `study_info` varchar(500) NOT NULL DEFAULT '0',
-  `previously` varchar(500) NOT NULL DEFAULT '0',
-  `subject_keywords` varchar(500) NOT NULL DEFAULT '0',
-  `campus` int(11) NOT NULL DEFAULT '0',
-  `preferred_language` int(10) NOT NULL,
+  `study_info` varchar(500) DEFAULT NULL,
+  `previously` varchar(500) DEFAULT NULL,
+  `subject_keywords` varchar(500) DEFAULT NULL,
+  `campus` int(11) DEFAULT NULL,
+  `preferred_language` varchar(10) DEFAULT NULL,
   `consultation_info` varchar(500) DEFAULT NULL,
-  `other_info` varchar(500) NOT NULL,
+  `other_info` varchar(500) DEFAULT NULL,
   `writing_help_get_started` smallint(6) DEFAULT NULL,
   `writing_help_overall_structure` smallint(6) DEFAULT NULL,
   `writing_help_paragraph_structure` smallint(6) DEFAULT NULL,
@@ -610,7 +621,7 @@ CREATE TABLE IF NOT EXISTS `mrbs_repeat` (
   `previously` varchar(500) DEFAULT NULL,
   `subject_keywords` varchar(500) DEFAULT NULL,
   `campus` varchar(50) DEFAULT NULL,
-  `preferred_language` int(10) DEFAULT NULL,
+  `preferred_language` varchar(10) DEFAULT NULL,
   `consultation_info` varchar(500) DEFAULT NULL,
   `other_info` varchar(500) DEFAULT NULL,
   `writing_help_get_started` smallint(6) DEFAULT NULL,
@@ -813,6 +824,9 @@ CREATE TABLE IF NOT EXISTS `mrbs_zoneinfo` (
 INSERT INTO `mrbs_zoneinfo` (`id`, `timezone`, `outlook_compatible`, `vtimezone`, `last_updated`) VALUES
 (1, 'Europe/Stockholm', 1, 'BEGIN:VTIMEZONE\r\nTZID:Europe/Stockholm\r\nTZURL:http://tzurl.org/zoneinfo-outlook/Europe/Stockholm\r\nX-LIC-LOCATION:Europe/Stockholm\r\nBEGIN:DAYLIGHT\r\nTZOFFSETFROM:+0100\r\nTZOFFSETTO:+0200\r\nTZNAME:CEST\r\nDTSTART:19700329T020000\r\nRRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=-1SU\r\nEND:DAYLIGHT\r\nBEGIN:STANDARD\r\nTZOFFSETFROM:+0200\r\nTZOFFSETTO:+0100\r\nTZNAME:CET\r\nDTSTART:19701025T030000\r\nRRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU\r\nEND:STANDARD\r\nEND:VTIMEZONE', 1580482785);
 
+-- Kör till hit först!
+
+-- Kör sen resten
 --
 -- Index för dumpade tabeller
 --
