@@ -16,12 +16,6 @@ if($environment == 'development') {
 }
 switch ($default_view)
 {
-  case "month":
-    $redirect_str = "month.php";
-    break;
-  case "week":
-    $redirect_str = "week.php";
-    break;
   case 2:
     $redirect_str = "month.php";
     break;
