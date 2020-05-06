@@ -579,10 +579,10 @@ if (empty($returl) || ($returl_base[0] == "edit_entry.php") || ($returl_base[0] 
 {
   switch ($default_view)
   {
-    case "month":
+    case 2:
       $returl = "month.php";
       break;
-    case "week":
+    case 1:
       $returl = "week.php";
       break;
     default:

@@ -58,12 +58,6 @@ function print_theme_header($day, $month, $year, $area, $room) {
 	echo DOCTYPE;
 	$default_view = get_default_view($area); //KTH
 	switch ($default_view) {
-		case "month":
-			$redirect_str = "month.php";
-			break;
-		case "week":
-			$redirect_str = "week.php";
-			break;
 		case 2:
 			$redirect_str = "month.php";
 			break;

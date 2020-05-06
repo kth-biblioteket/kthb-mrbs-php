@@ -44,7 +44,7 @@ $refresh_rate = 15;
 $ajax_refresh_rate = 15;
 $view_week_number = TRUE;
 $times_along_top = TRUE;
-$default_view = "day";
+$default_view = 0;
 $default_room = 1;
 
 $auth["session"] =

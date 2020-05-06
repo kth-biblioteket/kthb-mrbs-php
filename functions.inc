@@ -2620,16 +2620,16 @@ function make_area_select_html($link, $current, $year, $month, $day)
 				switch ($default_view)
 				{
 				  case 2:
-					$link = "month.php";
-					break;
+            $link = "month.php";
+            break;
 				  case 1:
-					$link = "week.php";
-					break;
+            $link = "week.php";
+            break;
 				  case 0:
-					$link = "day.php";
-					break;
+            $link = "day.php";
+            break;
 				  default:
-					$link = "day.php";
+					  $link = "day.php";
 				}
 				//KTH skriv inte ut länk för aktuell area??(rubrik istället)
 				//if ($area_id != $current) {
