@@ -721,6 +721,7 @@ else
   $mail_previous = array();
 }
 $result = mrbsMakeBookings($bookings, $this_id, $just_check, $skip, $original_room_id, $need_to_send_mail, $edit_type, $is_admin);
+$booking['id'] = $result['id'];
 // If we weren't just checking and this was a succesful booking and
 // we were editing an existing booking, then delete the old booking
 if($environment == 'development') {
