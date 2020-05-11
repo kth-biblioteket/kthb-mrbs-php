@@ -32,7 +32,7 @@ $html_body['content'] = '
     Avbokad tid!
   </div>
   <div> 
-    Bokad av:' . $data['name'] .
+    Bokad av: ' . $data['name'] .
   '</div>
   </br>';
   $html_body['content'] .=    
