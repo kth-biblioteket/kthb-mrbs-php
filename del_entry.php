@@ -125,9 +125,9 @@ if(!empty($noshow)){
 						if ($mail_previous['type']!= "B") {
 							$notifymailresult = notifyBookerOnCancel($info);
 						}
-					} else {
-						$notifymailresult = notifyInstructorOnDelete($info);
-					}
+					} 
+					//Skicka mail till handledaren
+					$notifymailresult = notifyInstructorOnDelete($info);
 				
 				// Now that we've finished with mrbsDelEntry, change the id so that it's
 				// the repeat_id if we're looking at a series.   (This is a complete hack, 
