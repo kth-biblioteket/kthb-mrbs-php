@@ -119,10 +119,12 @@ if(!empty($noshow)){
 		  // TODO Flytta alla mail hit så att de skickas efter hela bokningen är färdig!!
 		  if ($notify_by_email)
 		  {
-				//skicka avbokningsmail till bokare om admin har avbokat en tid
+				//skicka avbokningsmail till bokare om admin har avbokat en bokad tid
 				
 					if ($is_admin){
-						$notifymailresult = notifyBookerOnCancel($info);
+						if ($mail_previous['type']!= "B") {
+							$notifymailresult = notifyBookerOnCancel($info);
+						}
 					} else {
 						$notifymailresult = notifyInstructorOnDelete($info);
 					}

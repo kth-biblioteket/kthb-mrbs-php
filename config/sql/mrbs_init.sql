@@ -91,9 +91,10 @@ INSERT INTO `kth_entry_custom_fields` (`area_id`, `entry_field_name`, `type`, `s
 
 --Grupprum/lässtudio
 INSERT INTO `kth_entry_custom_fields` (`area_id`, `entry_field_name`, `type`, `sort_order`, `visible`, `enabled`, `mandatory`) VALUES
-(1, 'name', 'standard', 100, 1, 1, 1),
-(1, 'start_time', 'standard', 110, 1, 1, 1),
-(1, 'end_time', 'standard', 120, 1, 1, 1),
+(1, 'name', 'standard', 110, 1, 1, 1),
+(1, 'decsription', 'standard', 115, 1, 1, 1),
+(1, 'start_time', 'standard', 100, 1, 1, 1),
+(1, 'end_time', 'standard', 105, 1, 1, 1),
 (1, 'confirmation_status', 'standard', 130, 1, 1, 1);
 
 --CAS

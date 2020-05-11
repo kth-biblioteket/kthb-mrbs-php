@@ -1,4 +1,5 @@
 /upgrade
 config.inc.php
 web.config
-gitpull.cmd
+gitpullref.cmd
+gitpullprod.cmd
