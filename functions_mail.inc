@@ -973,8 +973,12 @@ function notifyInstructorOnBooking($data, $mail_previous, $new_entry, $series, $
                      $text_body,
                      $html_body,
                      $attachment,
-                     get_mail_charset()); 
-  error_log("MRBS, mailresult: " . $result); 
+                     get_mail_charset());
+
+  if($environment == 'development') {
+    error_log("MRBS, mailresult: " . $result);
+  }
+
   if ($result == 1) {
     error_log("MRBS, Bokningsmail skickat till: " . $addresses['to']); 
   }
@@ -1074,8 +1078,12 @@ function notifyInstructorOnDelete($data)
                      $text_body,
                      $html_body,
                      $attachment,
-                     get_mail_charset()); 
-  error_log("MRBS, mailresult: " . $result); 
+                     get_mail_charset());
+                     
+  if($environment == 'development') {
+    error_log("MRBS, mailresult: " . $result);
+  }
+
   if ($result == 1) {
     error_log("MRBS, Bokningsmail skickat till: " . $addresses['to']); 
   }
@@ -1178,8 +1186,12 @@ function notifyBookerOnBooking($data, $mail_previous, $new_entry, $series, $star
                      $text_body,
                      $html_body,
                      $attachment,
-                     get_mail_charset()); 
-  error_log("MRBS, mailresult: " . $result); 
+                     get_mail_charset());
+
+  if($environment == 'development') {
+    error_log("MRBS, mailresult: " . $result);
+  }
+
   if ($result == 1) {
     error_log("MRBS, Bokningsmail skickat till: " . $addresses['to']); 
   }
@@ -1281,8 +1293,12 @@ function notifyBookerOnCancel($data)
                      $text_body,
                      $html_body,
                      $attachment,
-                     get_mail_charset()); 
-  error_log("MRBS, mailresult: " . $result); 
+                     get_mail_charset());
+
+  if($environment == 'development') {
+    error_log("MRBS, mailresult: " . $result);
+  }
+  
   if ($result == 1) {
     error_log("MRBS, cancelmail skickat till: " . $addresses['to']); 
   }

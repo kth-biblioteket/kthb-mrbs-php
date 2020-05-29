@@ -11,9 +11,11 @@ require "defaultincludes.inc";
 require_once "mrbs_sql.inc";
 $area = get_default_area();
 $default_view = get_default_view($area); //KTH
+
 if($environment == 'development') {
   error_log("default_view: " . $default_view);
 }
+
 switch ($default_view)
 {
   case 2:

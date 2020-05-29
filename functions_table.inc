@@ -204,7 +204,11 @@ function deleteotherbookablebookingssameday($inserted_entryid, $old_id) {
             AND id != $inserted_entryid
             AND id != $old_id
             AND type = 'B'";
-    error_log("MRBS, deleteothertbookablebookingssameday: $sql");
+
+    if($environment == 'development') {
+      error_log("MRBS, deleteothertbookablebookingssameday: $sql");
+    }
+    
     $res = sql_query($sql);
     if (isset($res)) {
         //TODO ta bort bokningen i exchange  

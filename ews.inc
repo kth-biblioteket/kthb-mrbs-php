@@ -170,7 +170,9 @@ function cancelappointment($email_calendar, $event_id, $change_key, $start_date,
         $result['status'] = 'Error';
         $result['message'] = 'Kunde inte avboka!';
     }
-    error_log(json_encode($result));
+    if($environment == 'development') {
+        error_log(json_encode($result));
+    }
     return $result;    
 }
 
