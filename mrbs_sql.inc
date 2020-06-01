@@ -896,6 +896,11 @@ function mrbsDelEntry($user, $id, $series, $all, $truedelete)
           }
         }
         $start_times[] = $row['start_time'];
+      } else {
+        if($environment == 'development') {
+          error_log("mrbsDelEntry");
+          error_log("DELETE FROM $tbl_entry WHERE id=" . $row['id'] . " returnerade 0(kunde inte ta bort rad)");
+        }
       }
     }
   }
