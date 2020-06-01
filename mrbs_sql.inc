@@ -2046,12 +2046,12 @@ function get_instructor($email)
   
   if($environment == 'development') {
     error_log("get_instructor");
-    error_log("SELECT full_name FROM kth_instructors WHERE email = $email");
+    error_log("SELECT full_name FROM kth_instructors WHERE email = '$email'");
   }
 
   $sql = "SELECT full_name
           FROM kth_instructors
-          WHERE email = $email";
+          WHERE email = '$email'";
 
   $sql .= " LIMIT 1";
   $res = sql_query($sql);
