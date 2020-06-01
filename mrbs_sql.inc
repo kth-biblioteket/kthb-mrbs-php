@@ -2043,7 +2043,12 @@ function get_instructor($email)
 {
 
   $email = (int)$email;
-    
+  
+  if($environment == 'development') {
+    error_log("get_instructor");
+    error_log("SELECT full_name FROM kth_instructors WHERE email = $email");
+  }
+
   $sql = "SELECT full_name
           FROM kth_instructors
           WHERE email = $email";
