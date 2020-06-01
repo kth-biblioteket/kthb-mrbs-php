@@ -980,7 +980,7 @@ function notifyInstructorOnBooking($data, $mail_previous, $new_entry, $series, $
   }
 
   if ($result == 1) {
-    error_log("MRBS, Bokningsmail skickat till: " . $addresses['to']); 
+    error_log("MRBS, Instructormail skickat till: " . $addresses['to']); 
   }
 
   return $result;  
