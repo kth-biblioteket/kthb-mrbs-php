@@ -2042,6 +2042,8 @@ function get_campus($id, $lang)
 function get_instructor($email)
 {
 
+  global $environment;
+  
   $email = (int)$email;
   
   if($environment == 'development') {
