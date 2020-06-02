@@ -621,7 +621,7 @@ CREATE TABLE IF NOT EXISTS `mrbs_repeat` (
   `study_info` text DEFAULT NULL,
   `previously` text DEFAULT NULL,
   `subject_keywords` text DEFAULT NULL,
-  `campus` varchar(50) DEFAULT NULL,
+  `campus` int(11) DEFAULT NULL,
   `preferred_language` varchar(10) DEFAULT NULL,
   `consultation_info` text DEFAULT NULL,
   `other_info` text DEFAULT NULL,
