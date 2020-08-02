@@ -44,10 +44,10 @@ if ($data['campus'] > 0) {
 }
 $html_body['content'] = str_replace("@@timedate",date("H:i",$data['start_time']) . ', ' . utf8_encode(strftime("%A %d %B",$data['start_time'])),$html_body['content']);
 //dont use $_SERVER['HTTP_HOST' for KIOSK
-if(stripos($_SERVER['HTTP_HOST'], 'kiosk')==false) {
+if(stripos($_SERVER['PHP_SELF'], 'kiosk')==false) {
   $phpself = $_SERVER['PHP_SELF'];
 } else {
-  if(stripos($_SERVER['HTTP_HOST'], 'readingstudio')==false) {
+  if(stripos($_SERVER['PHP_SELF'], 'readingstudio')==false) {
     $phpself = '/mrbsgrupprum';
   } else {
     $phpself = '/mrbsreadingstudio';
