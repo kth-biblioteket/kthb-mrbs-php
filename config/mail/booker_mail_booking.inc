@@ -48,9 +48,9 @@ if(stripos($_SERVER['PHP_SELF'], 'kiosk')==false) {
   $phpself = $_SERVER['PHP_SELF'];
 } else {
   if(stripos($_SERVER['PHP_SELF'], 'readingstudio')==false) {
-    $phpself = '/mrbsgrupprum';
+    $phpself = '/mrbsgrupprum/x.php';
   } else {
-    $phpself = '/mrbsreadingstudio';
+    $phpself = '/mrbsreadingstudio/x.php';
   }
 }
 $linktobooking = '<table border="0" cellspacing="0" cellpadding="0">
