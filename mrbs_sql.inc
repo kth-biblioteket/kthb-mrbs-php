@@ -891,6 +891,7 @@ function mrbsDelEntry($user, $id, $series, $all, $truedelete)
             if ($outlook_result['status'] == 'OK' ) {
             } else {
               //TODO Felhantering?
+              //Alternativ att bokningen ska raderas trots att den inte gick att ta bort i outlook. 
               return $outlook_result;
             }
           }
