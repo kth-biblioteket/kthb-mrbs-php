@@ -92,7 +92,7 @@ if ($phase == 2)
   
   require_once "functions_mail.inc";
 
-  // PHASE 2 (INSTRUCTOR) - UPDATE THE DATABASE
+  // PHASE 2 (PLACES) - UPDATE THE DATABASE
   // ------------------------------------
   if($environment == 'development') {
     error_log("change_place: " . $change_place);
