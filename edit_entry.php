@@ -782,6 +782,7 @@ function create_field_entry_custom_field($field, $key, $is_admin, $user, $disabl
           fatal_error(FALSE, get_vocab("fatal_db_error"));
         }
 
+        //Det ska finnas ett entry i kth_places som är "1none" som agerar dummy för att ha ett "select an option"
         for ($i = 0; ($row = sql_row_keyed($res, $i)); $i++)
         {
           $places[] = $row['id'];

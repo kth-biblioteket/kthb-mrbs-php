@@ -2961,7 +2961,7 @@ function mrbsMakeBookings($bookings, $id=NULL, $just_check=FALSE, $skip=FALSE, $
     //Om rummet har en exchangekalender definierad. Ej stängt/special
     if (get_exchange_email($booking['room_id']) != "" && $booking['type']!= "C" && $booking['type']!= "S") {
       if (isset($id)) {
-        sql_command("UPDATE kth_exchange_events SET entry_id = " . $booking['id'] . " WHERE entry_id = $id");
+        sql_command("UPDATE kth_exchange_events SET entry_id = " . $booking['id'] . ", change_key = " . $outlook_result['change_key'] . " WHERE entry_id = $id");
       } else {
         sql_command("INSERT INTO kth_exchange_events(entry_id, email, event_id, change_key) VALUES(" . $booking['id'] . ",'" . get_exchange_email($booking['room_id']) . "', '" . $outlook_result['event_id'] . "', '" . $outlook_result['change_key'] ."')");
       }

@@ -114,7 +114,7 @@ if ($phase == 2)
       }
       // If so
       // check that the place name is not already used in the room
-      // (only do this if you're changing the instructor name or the room - if you're
+      // (only do this if you're changing the place name or the room - if you're
       // just editing the other details for an existing place we don't want to reject
       // the edit because the place already exists!)
       // [SQL escaping done by sql_syntax_casesensitive_equals()]

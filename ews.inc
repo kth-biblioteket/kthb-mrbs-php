@@ -268,6 +268,7 @@ function updateappointment($id, $subject, $email_attendee, $email_attendee_name,
                 $result['status'] = 'OK';
                 $result['message'] = 'Event Updated';
                 $result['event_id'] = $id;
+                $result['change_key'] = $item->ItemId->ChangeKey;
             }
         }
     }
