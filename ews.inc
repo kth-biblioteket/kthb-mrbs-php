@@ -181,6 +181,8 @@ function updateappointment($id, $subject, $email_attendee, $email_attendee_name,
     $version = Client::VERSION_2013;
     $client = new Client($host, $username, $password, $version);
 
+    //$change_key = getChangeKey($email_calendar, $start_date, $end_date, $event_id, $client);
+
     $result = array();
     $event_updates = array(
         array(
@@ -254,6 +256,10 @@ function updateappointment($id, $subject, $email_attendee, $email_attendee_name,
     }
     
     $response = $client->UpdateItem($request);
+
+    if($environment == 'development') {
+        error_log(var_dump($response));
+      }
 
     $response_messages = $response->ResponseMessages->UpdateItemResponseMessage;
     foreach ($response_messages as $response_message) {
