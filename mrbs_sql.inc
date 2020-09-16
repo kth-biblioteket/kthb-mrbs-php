@@ -852,13 +852,20 @@ function mrbsDelEntry($user, $id, $series, $all, $truedelete)
             $outlook_result['message'] = $e;
           }
           if ($outlook_result['status'] == 'OK' ) {
+            //191003
+            //uppdatera event_id etc för outlookbokningen
+            if($environment == 'development') {
+              error_log("UPDATE kth_exchange_events SET change_key = '" . $outlook_result['change_key'] . "' WHERE entry_id = " . $row['id']);
+            }
+            sql_command("UPDATE kth_exchange_events SET change_key = '" . $outlook_result['change_key'] . "' WHERE entry_id = " . $row['id']);
+            }
           } else {
             //TODO Felhantering?
             return FALSE;
           }
         }
       }
-      /*flyttat till del_entry
+      /*flyttat till del_entry.php
       //skicka avbokningsmail till bokare om admin har avbokat en tid
       if ($is_admin){
         $notifymailresult = notifyBookerOnCancel($row);
