@@ -259,11 +259,6 @@ function updateappointment($id, $subject, $email_attendee, $email_attendee_name,
     
     $response = $client->UpdateItem($request);
 
-    //if($environment == 'development') {
-        error_log("updateappointment");
-        error_log(var_dump($response));
-      //}
-
     $response_messages = $response->ResponseMessages->UpdateItemResponseMessage;
     foreach ($response_messages as $response_message) {
         if ($response_message->ResponseClass != ResponseClassType::SUCCESS) {
