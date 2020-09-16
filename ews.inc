@@ -138,7 +138,9 @@ function cancelappointment($email_calendar, $event_id, $change_key, $start_date,
     $version = Client::VERSION_2013;
     $client = new Client($host, $username, $password, $version);
 
-    $change_key = getChangeKey($email_calendar, $start_date, $end_date, $event_id, $client);
+    if ($change_key = "") {
+        $change_key = getChangeKey($email_calendar, $start_date, $end_date, $event_id, $client);
+    }
     $result = array();
 
     if ($change_key != "") {
