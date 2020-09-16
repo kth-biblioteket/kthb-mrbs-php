@@ -855,6 +855,7 @@ function mrbsDelEntry($user, $id, $series, $all, $truedelete)
             //191003
             //uppdatera event_id etc för outlookbokningen
             if($environment == 'development') {
+              error_log("mrbsDelEntry");
               error_log("UPDATE kth_exchange_events SET change_key = '" . $outlook_result['change_key'] . "' WHERE entry_id = " . $row['id']);
             }
             sql_command("UPDATE kth_exchange_events SET change_key = '" . $outlook_result['change_key'] . "' WHERE entry_id = " . $row['id']);
@@ -2968,6 +2969,7 @@ function mrbsMakeBookings($bookings, $id=NULL, $just_check=FALSE, $skip=FALSE, $
     if (get_exchange_email($booking['room_id']) != "" && $booking['type']!= "C" && $booking['type']!= "S") {
       if (isset($id)) {
         if($environment == 'development') {
+          error_log("mrbsMakeBookings");
           error_log("UPDATE kth_exchange_events SET entry_id = " . $booking['id'] . ", change_key = '" . $outlook_result['change_key'] . "' WHERE entry_id = $id");
         }
         sql_command("UPDATE kth_exchange_events SET entry_id = " . $booking['id'] . ", change_key = '" . $outlook_result['change_key'] . "' WHERE entry_id = $id");
