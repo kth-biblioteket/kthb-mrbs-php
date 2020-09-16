@@ -125,6 +125,7 @@ function getChangeKey($email, $start_date, $end_date, $event_id, $client) {
             $id = $item->ItemId->Id;
             if($id==$event_id) {
                 $events_result = $item->ItemId->ChangeKey;
+                break;
             } else {
                 $events_result = "";
             }
