@@ -858,7 +858,6 @@ function mrbsDelEntry($user, $id, $series, $all, $truedelete)
               error_log("UPDATE kth_exchange_events SET change_key = '" . $outlook_result['change_key'] . "' WHERE entry_id = " . $row['id']);
             }
             sql_command("UPDATE kth_exchange_events SET change_key = '" . $outlook_result['change_key'] . "' WHERE entry_id = " . $row['id']);
-            }
           } else {
             //TODO Felhantering?
             return FALSE;
