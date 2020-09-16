@@ -178,6 +178,8 @@ function cancelappointment($email_calendar, $event_id, $change_key, $start_date,
 
 function updateappointment($id, $subject, $email_attendee, $email_attendee_name, $location, $start, $end, $host, $username, $password) {
     
+    global $environment;
+
     $version = Client::VERSION_2013;
     $client = new Client($host, $username, $password, $version);
 
