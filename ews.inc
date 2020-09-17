@@ -139,10 +139,8 @@ function cancelappointment($email_calendar, $event_id, $change_key, $start_date,
     $version = Client::VERSION_2013;
     $client = new Client($host, $username, $password, $version);
 
+    $change_key = getChangeKey($email_calendar, $start_date, $end_date, $event_id, $client);
     
-    //if ($change_key == "") {
-        $change_key = getChangeKey($email_calendar, $start_date, $end_date, $event_id, $client);
-    //}
     $result = array();
 
     if ($change_key != "") {
@@ -186,8 +184,6 @@ function updateappointment($id, $subject, $email_attendee, $email_attendee_name,
 
     $version = Client::VERSION_2013;
     $client = new Client($host, $username, $password, $version);
-
-    //$change_key = getChangeKey($email_calendar, $start_date, $end_date, $event_id, $client);
 
     $result = array();
     $event_updates = array(
@@ -285,7 +281,7 @@ function updateappointment($id, $subject, $email_attendee, $email_attendee_name,
 
 /**
  * 
- * Funktion som skapar händels i outlook-kalender
+ * Funktion som skapar händelse i outlook-kalender
  * Parametrar
  * email_calendar: kalender att boka i
  * subject
