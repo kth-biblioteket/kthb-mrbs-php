@@ -38,10 +38,12 @@ body {
 .note    {font-style: italic}
 
 /* KIOSK */
-
-.hideforkiosk {
-  display: none;
+<?php
+if ($is_kiosk) {
+  echo ".hideforkiosk { display: none; }" . "\n";
 }
+
+?>
 /* KTH 191003 */
 div#contents, div.trailer {
   float: left;
