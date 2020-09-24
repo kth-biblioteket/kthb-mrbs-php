@@ -1931,7 +1931,7 @@ function get_area_custom_html($id, $lang, $all=FALSE)
   return $row[0];
 }
 
-// KTH HTML att visa som info om arean(exvis bokningsregler, kontakter etc)
+// KTH HTML att visa som info om arean(exvis bokningsregler, kontakter, länkar etc)
 function get_area_extra_info($id, $lang, $all=FALSE)
 {
  global $tbl_area;
@@ -1939,12 +1939,12 @@ function get_area_extra_info($id, $lang, $all=FALSE)
   $id = (int)$id;
   
   if($lang=="sv") {
-	$field = "extra_info";
+	  $field = "extra_info";
   } else {
-	$field = "extra_info_en";
+	  $field = "extra_info_en";
   }
   $res = sql_query("SELECT $field FROM $tbl_area WHERE id=$id LIMIT 1");
-   if ($res === FALSE)
+  if ($res === FALSE)
   {
     trigger_error(sql_error(), E_USER_WARNING);
     return FALSE;

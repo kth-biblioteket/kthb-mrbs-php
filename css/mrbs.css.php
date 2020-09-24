@@ -37,6 +37,11 @@ body {
 .warning {color: <?php echo $highlight_font_color ?>}                        /* for warning messages */
 .note    {font-style: italic}
 
+/* KIOSK */
+
+.hideforkiosk {
+  display: none;
+}
 /* KTH 191003 */
 div#contents, div.trailer {
   float: left;
