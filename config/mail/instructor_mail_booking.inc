@@ -85,10 +85,19 @@ $html_body['content'] .=
                 <tr>
                     <td>Handledare: </td>
                     <td>' . get_instructor($data['instructor']) . '</td>
-                </tr>';
+                </tr>
+                <tr>
+                    <td>Användarens campus: </td>';
+                if ($data['my_campus'] > 0) {
+$html_body['content'] .=      
+                    '<td>'. get_kth_campus($data['my_campus'], 'sv') . '</td>';
+                    }
+$html_body['content'] .=
+                '</tr>';
                 for ($i = 0; ($row = sql_row_keyed($res, $i)); $i++)
                 {
-                    if($row['entry_field_name'] != 'campus' && $row['entry_field_name'] != 'instructor'){
+                    //TODO Bort med hårdkodning
+                    if($row['entry_field_name'] != 'campus' && $row['entry_field_name'] != 'instructor' && $row['entry_field_name'] != 'my_campus'){
 $html_body['content'] .=
                 '<tr>
                     <td>' . get_mail_vocab('entry.' . $row['entry_field_name']) . ': </td>
