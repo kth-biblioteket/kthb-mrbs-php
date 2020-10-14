@@ -754,6 +754,51 @@ function create_field_entry_custom_field($field, $key, $is_admin, $user, $disabl
   //ta bara med de fält som respektive area ska ha
   switch ($key)
     {//TODO hårdkodning bort.
+      case 'my_campus':
+        //TODO se till att inget fält är valt som default
+        //Men det ska kunna vara mandatory att välja.
+        echo "<div id=\"div_my_campus\">\n";
+        
+        $params = array('label' => get_loc_field_name($tbl_entry, $key) . ":",
+                  'name'        => VAR_PREFIX . 'my_campus',
+                  'disabled'    => $disabled,
+                  'options'     => array(),
+                  'force_assoc' => TRUE,  // in case the type keys happen to be digits
+                  'value'       => isset($custom_fields[$key]) ? $custom_fields[$key] : 'disabled',
+                  'mandatory'   => isset($is_mandatory_field["entry.$key"]) && $is_mandatory_field["entry.$key"]);
+
+        $places = array();
+        //Endast de som inte är disabled
+        $sql = "SELECT kth_campus.id, kth_campus.name, kth_campus.name_en
+                FROM kth_campus
+                WHERE kth_campus.disabled = 0
+                ORDER BY kth_campus.sort_key";
+
+        $res = sql_query($sql);
+        if ($res === FALSE)
+        {
+          trigger_error(sql_error(), E_USER_WARNING);
+          fatal_error(FALSE, get_vocab("fatal_db_error"));
+        }
+
+        //Det ska finnas ett entry i kth_campus som är "1none" som agerar dummy för att ha ett "select an option"
+        for ($i = 0; ($row = sql_row_keyed($res, $i)); $i++)
+        {
+          $places[] = $row['id'];
+          if ($row['name'] == '1none') {
+              $params['options']['none'] = $vocab["select_an_option"];
+          } else {
+            if ($lang == "sv") {
+              $params['options'][$row['id']] = $row['name'];
+            } else {
+              $params['options'][$row['id']] = $row['name_en'];
+            }
+          }
+        }
+        generate_select($params);
+
+        echo "</div>\n";
+        break;
       case 'campus':
         //TODO se till att inget fält är valt som default
         //Men det ska kunna vara mandatory att välja.

@@ -1063,6 +1063,9 @@ function mrbsCreateEntry($table, $data)
   $sql_col = array_map('sql_quote', $sql_col);
   $sql = "INSERT INTO $table (" . implode(', ', $sql_col) . ") VALUES (" . implode(', ',$sql_val) . ")";
   
+  if($environment == 'development') {
+    error_log("mrbsCreateEntry sql: " . $sql);
+  }
   if (sql_command($sql) < 0)
   {
     // probably because the table hasn't been created properly
@@ -2009,6 +2012,42 @@ function get_exchange_email($id, $all=FALSE)
 }
 
 //KTH ny funktion.
+//201013
+//Hämta my_campus
+function get_kth_campus($id, $lang)
+{
+
+  $id = (int)$id;
+  
+  if($lang=="sv") {
+    $places_field = "name";
+  } else {
+    $places_field = "name_en";
+  }
+    
+  $sql = "SELECT $places_field
+            FROM kth_campus
+           WHERE kth_campus.id=$id";
+
+  $sql .= " LIMIT 1";
+  $res = sql_query($sql);
+  
+  if ($res === FALSE)
+  {
+    trigger_error(sql_error(), E_USER_WARNING);
+    return FALSE;
+  }
+  
+  if (sql_count($res) == 0)
+  {
+    return NULL;
+  }
+  
+  $row = sql_row($res, 0);
+  return $row[0];
+}
+
+//KTH ny funktion.
 //191003
 //Hämta campus
 function get_campus($id, $lang)
@@ -2046,7 +2085,7 @@ function get_campus($id, $lang)
 
 //KTH ny funktion.
 //191003
-//Hämta campus
+//Hämta instructor
 function get_instructor($email)
 {
 

@@ -74,6 +74,7 @@ $vocab["bookable_entry_text_not_available"]	= "Free - Not available for you";
 $vocab["booked_entry_text"]			= "Booked";
 $vocab_override['en']["entry.instructor"]  = "Instructor";
 $vocab_override['en']["entry.campus"]  = "Location";
+$vocab_override['en']["entry.my_campus"]  = "My Campus";
 $vocab_override['en']["entry.preferred_language"]  = "Language";
 $vocab_override['en']["entry.user_group"]  = "User category";
 $vocab_override['en']["entry.email"]  = "Mail";

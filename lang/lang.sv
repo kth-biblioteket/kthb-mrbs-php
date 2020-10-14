@@ -74,6 +74,7 @@ $vocab["bookable_entry_text_not_available"]	= "Ledig - inte tillgänglig för di
 $vocab["booked_entry_text"]			= "Bokad";
 $vocab_override['sv']["entry.instructor"]  = "Handledare";
 $vocab_override['sv']["entry.campus"]  = "Plats";
+$vocab_override['en']["entry.my_campus"]  = "Mitt Campus";
 $vocab_override['sv']["entry.preferred_language"]  = "Språk";
 $vocab_override['sv']["entry.user_group"]  = "Användarkategori";
 $vocab_override['sv']["entry.email"]  = "Mejl";
