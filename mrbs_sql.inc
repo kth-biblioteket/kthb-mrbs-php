@@ -838,7 +838,7 @@ function mrbsDelEntry($user, $id, $series, $all, $truedelete)
       sql_command($sql);
       
       if(get_exchange_email($row['room_id']) != "") {
-        $sql = "SELECT * FROM kth_exchange_events WHERE entry_id = " . $row['id'] . " LIMIT 1";
+        $sql = "SELECT * FROM kth_exchange_events WHERE entry_id = " . $row['id'] . " AND id = (SELECT max(id) FROM kth_exchange_events WHERE entry_id = " . $row['id'] . ") LIMIT 1";
         $res = sql_query($sql);
         $kth_exchange_events = sql_row_keyed($res, 0);
         if(sql_count($res) == 1) {
@@ -2770,7 +2770,7 @@ function mrbsMakeBookings($bookings, $id=NULL, $just_check=FALSE, $skip=FALSE, $
         
       } else {
         if (isset($id)) {
-          $sql = "SELECT * FROM kth_exchange_events WHERE entry_id = " . $id . " LIMIT 1";
+          $sql = "SELECT * FROM kth_exchange_events WHERE entry_id = " . $id . " AND id = (SELECT max(id) FROM kth_exchange_events WHERE entry_id = " . $id . ") LIMIT 1";
           $res = sql_query($sql);
           $row = sql_row_keyed($res, 0);
           //get location (campus/room)
