@@ -884,7 +884,8 @@ function mrbsDelEntry($user, $id, $series, $all, $truedelete)
         if($is_admin && get_exchange_email($row['room_id']) != "") {
           $sql = "SELECT * 
                   FROM kth_exchange_events 
-                  WHERE entry_id = " . $row['id'] . " LIMIT 1";
+                  WHERE entry_id = " . $row['id'] . 
+                  " AND id = (SELECT max(id) FROM kth_exchange_events WHERE entry_id = " . $row['id'] . ") LIMIT 1";
           $res = sql_query($sql);
           $kth_exchange_events = sql_row_keyed($res, 0);
           if(sql_count($res) == 1) {
