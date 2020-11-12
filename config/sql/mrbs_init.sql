@@ -101,25 +101,29 @@ INSERT INTO `kth_entry_custom_fields` (`area_id`, `entry_field_name`, `type`, `s
 INSERT INTO `kth_entry_custom_fields` (`area_id`, `entry_field_name`, `type`, `sort_order`, `visible`, `enabled`, `mandatory`) VALUES
 (1, 'start_time', 'standard', 100, 1, 1, 1),
 (1, 'end_time', 'standard', 101, 1, 1, 1),
-(1, 'name', 'standard', 105, 1, 1, 1),
-(1, 'writing_help_get_started', 'custom', 108, 1, 1, 0),
-(1, 'writing_help_overall_structure', 'custom', 110, 1, 1, 0),
-(1, 'writing_help_paragraph_structure', 'custom', 120, 1, 1, 0),
-(1, 'writing_help_sentence_construction', 'custom', 130, 1, 1, 0),
-(1, 'writing_help_coherence_cohesion', 'custom', 140, 1, 1, 0),
-(1, 'writing_help_style_formality', 'custom', 150, 1, 1, 0),
-(1, 'writing_help_conventions', 'custom', 160, 1, 1, 0),
-(1, 'writing_help_citation', 'custom', 170, 1, 1, 0),
-(1, 'writing_help_references', 'custom', 180, 1, 1, 0),
-(1, 'writing_help_otherformal', 'custom', 190, 1, 1, 0),
-(1, 'oral_help_nervousness', 'custom', 200, 1, 1, 0),
-(1, 'oral_help_overall_structure', 'custom', 210, 1, 1, 0),
-(1, 'oral_help_act_interact', 'custom', 220, 1, 1, 0),
-(1, 'oral_help_interact_computer', 'custom', 230, 1, 1, 0),
-(1, 'oral_help_bodylanguage', 'custom', 240, 1, 1, 0),
-(1, 'oral_help_images', 'custom', 250, 1, 1, 0),
-(1, 'oral_help_keeptime', 'custom', 260, 1, 1, 0),
-(1, 'help_other', 'custom', 270, 1, 1, 0);
+(1, 'name', 'standard', 103, 1, 1, 1),
+(1, 'my_campus', 'custom', 104, 1, 1, 1),
+(1, 'program', 'custom', 106, 1, 1, 1),
+(1, 'instructor', 'custom', 108, 1, 1, 1),
+(1, 'campus', 'custom', 110, 1, 1, 1),
+(1, 'writing_help_get_started', 'custom', 200, 1, 1, 0),
+(1, 'writing_help_overall_structure', 'custom', 210, 1, 1, 0),
+(1, 'writing_help_paragraph_structure', 'custom', 220, 1, 1, 0),
+(1, 'writing_help_sentence_construction', 'custom', 230, 1, 1, 0),
+(1, 'writing_help_coherence_cohesion', 'custom', 240, 1, 1, 0),
+(1, 'writing_help_style_formality', 'custom', 250, 1, 1, 0),
+(1, 'writing_help_conventions', 'custom', 260, 1, 1, 0),
+(1, 'writing_help_citation', 'custom', 270, 1, 1, 0),
+(1, 'writing_help_references', 'custom', 280, 1, 1, 0),
+(1, 'writing_help_otherformal', 'custom', 290, 1, 1, 0),
+(1, 'oral_help_nervousness', 'custom', 300, 1, 1, 0),
+(1, 'oral_help_overall_structure', 'custom', 310, 1, 1, 0),
+(1, 'oral_help_act_interact', 'custom', 320, 1, 1, 0),
+(1, 'oral_help_interact_computer', 'custom', 330, 1, 1, 0),
+(1, 'oral_help_bodylanguage', 'custom', 340, 1, 1, 0),
+(1, 'oral_help_images', 'custom', 350, 1, 1, 0),
+(1, 'oral_help_keeptime', 'custom', 360, 1, 1, 0),
+(1, 'help_other', 'custom', 370, 1, 1, 0);
 */
 
 -- --------------------------------------------------------
@@ -151,7 +155,7 @@ CREATE TABLE IF NOT EXISTS `kth_instructors` (
   `sort_key` varchar(25) NOT NULL,
   `full_name` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumpning av Data i tabell `kth_instructors`
@@ -236,6 +240,32 @@ INSERT INTO `kth_places` (`disabled`, `room_id`, `sort_key`, `name`, `name_en`) 
 (0, 1, '1', '1none', '1none');
 
 */
+
+-- --------------------------------------------------------
+
+--
+-- Tabellstruktur `kth_campus`
+--
+
+CREATE TABLE IF NOT EXISTS `kth_campus` (
+  `id` int(11) NOT NULL,
+  `disabled` tinyint(4) NOT NULL DEFAULT '0',
+  `sort_key` varchar(25) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `name_en` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumpning av Data i tabell `kth_campus`
+--
+
+INSERT INTO `kth_campus` (`id`, `disabled`, `sort_key`, `name`, `name_en`) VALUES
+(1, 0, '1', 'Campus KTH', 'Campus KTH'),
+(2, 0, '2', 'Campus Kista', 'Campus Kista'),
+(3, 0, '3', 'Campus Södertälje', 'Campus Södertälje'),
+(4, 0, '4', 'Campus Flemingsberg', 'Campus Flemingsberg'),
+(5, 0, '5', 'Campus Solna', 'Campus Solna'),
+(6, 0, '0', '1none', '1none');
 
 -- --------------------------------------------------------
 
@@ -385,13 +415,14 @@ CREATE TABLE IF NOT EXISTS `mrbs_entry` (
   `phone` varchar(12) DEFAULT NULL,
   `user_group` varchar(50) DEFAULT NULL,
   `program` varchar(100) DEFAULT NULL,
-  `study_info` text DEFAULT NULL,
-  `previously` text DEFAULT NULL,
-  `subject_keywords` text DEFAULT NULL,
+  `study_info` text,
+  `previously` text,
+  `subject_keywords` text,
   `campus` int(11) DEFAULT NULL,
+  `my_campus` int(11) DEFAULT NULL,
   `preferred_language` varchar(10) DEFAULT NULL,
-  `consultation_info` text DEFAULT NULL,
-  `other_info` text DEFAULT NULL,
+  `consultation_info` text,
+  `other_info` text,
   `writing_help_get_started` smallint(6) DEFAULT NULL,
   `writing_help_overall_structure` smallint(6) DEFAULT NULL,
   `writing_help_paragraph_structure` smallint(6) DEFAULT NULL,
@@ -413,7 +444,7 @@ CREATE TABLE IF NOT EXISTS `mrbs_entry` (
   `ical_uid` varchar(255) NOT NULL DEFAULT '',
   `ical_sequence` smallint(6) NOT NULL DEFAULT '0',
   `ical_recur_id` varchar(16) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=124 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumpning av Data i tabell `mrbs_entry`
@@ -516,13 +547,14 @@ CREATE TABLE IF NOT EXISTS `mrbs_entry_delete` (
   `phone` varchar(12) DEFAULT NULL,
   `user_group` varchar(50) DEFAULT NULL,
   `program` varchar(100) DEFAULT NULL,
-  `study_info` text DEFAULT NULL,
-  `previously` text DEFAULT NULL,
-  `subject_keywords` text DEFAULT NULL,
+  `study_info` text,
+  `previously` text,
+  `subject_keywords` text,
   `campus` int(11) DEFAULT NULL,
+  `my_campus` int(11) DEFAULT NULL,
   `preferred_language` varchar(10) DEFAULT NULL,
-  `consultation_info` text DEFAULT NULL,
-  `other_info` text DEFAULT NULL,
+  `consultation_info` text,
+  `other_info` text,
   `writing_help_get_started` smallint(6) DEFAULT NULL,
   `writing_help_overall_structure` smallint(6) DEFAULT NULL,
   `writing_help_paragraph_structure` smallint(6) DEFAULT NULL,
@@ -540,7 +572,7 @@ CREATE TABLE IF NOT EXISTS `mrbs_entry_delete` (
   `oral_help_bodylanguage` smallint(6) DEFAULT NULL,
   `oral_help_images` smallint(6) DEFAULT NULL,
   `oral_help_keeptime` smallint(6) DEFAULT NULL,
-  `help_other` text DEFAULT NULL,
+  `help_other` text,
   `ical_uid` varchar(255) NOT NULL DEFAULT '',
   `ical_sequence` smallint(6) NOT NULL DEFAULT '0',
   `ical_recur_id` varchar(16) DEFAULT NULL
@@ -594,7 +626,6 @@ CREATE TABLE IF NOT EXISTS `mrbs_entry_no_show` (
 DROP TABLE IF EXISTS `mrbs_repeat`;
 CREATE TABLE IF NOT EXISTS `mrbs_repeat` (
   `id` int(11) NOT NULL,
-  `exchange_event_id` varchar(200) DEFAULT NULL,
   `start_time` int(11) NOT NULL DEFAULT '0',
   `end_time` int(11) NOT NULL DEFAULT '0',
   `rep_type` int(11) NOT NULL DEFAULT '0',
@@ -622,13 +653,14 @@ CREATE TABLE IF NOT EXISTS `mrbs_repeat` (
   `phone` varchar(12) DEFAULT NULL,
   `user_group` varchar(50) DEFAULT NULL,
   `program` varchar(100) DEFAULT NULL,
-  `study_info` text DEFAULT NULL,
-  `previously` text DEFAULT NULL,
-  `subject_keywords` text DEFAULT NULL,
+  `study_info` text,
+  `previously` text,
+  `subject_keywords` text,
   `campus` int(11) DEFAULT NULL,
+  `my_campus` int(11) DEFAULT NULL,
   `preferred_language` varchar(10) DEFAULT NULL,
-  `consultation_info` text DEFAULT NULL,
-  `other_info` text DEFAULT NULL,
+  `consultation_info` text,
+  `other_info` text,
   `writing_help_get_started` smallint(6) DEFAULT NULL,
   `writing_help_overall_structure` smallint(6) DEFAULT NULL,
   `writing_help_paragraph_structure` smallint(6) DEFAULT NULL,
@@ -646,7 +678,7 @@ CREATE TABLE IF NOT EXISTS `mrbs_repeat` (
   `oral_help_bodylanguage` smallint(6) DEFAULT NULL,
   `oral_help_images` smallint(6) DEFAULT NULL,
   `oral_help_keeptime` smallint(6) DEFAULT NULL,
-  `help_other` text DEFAULT NULL,
+  `help_other` text,
   `ical_uid` varchar(255) NOT NULL DEFAULT '',
   `ical_sequence` smallint(6) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -880,6 +912,12 @@ ALTER TABLE `kth_places`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Index för tabell `kth_campus`
+--
+ALTER TABLE `kth_campus`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Index för tabell `mrbs_area`
 --
 ALTER TABLE `mrbs_area`
@@ -977,6 +1015,13 @@ ALTER TABLE `kth_periods`
 --
 ALTER TABLE `kth_places`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT för tabell `kth_campus`
+--
+ALTER TABLE `kth_campus`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT för tabell `mrbs_area`
 --
