@@ -58,6 +58,7 @@ $html_body['content'] = '
                 </tbody>
             </table>
         </div>
+        <br>
         <table class="bookingdata">
             <tbody>
                 <tr>
