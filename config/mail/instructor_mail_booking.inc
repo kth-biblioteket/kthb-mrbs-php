@@ -35,17 +35,17 @@ $html_body['content'] = '
     '</style>
 </head>
 <body id="mrbs">
-    <!--[if mso]>
-        <style type="text/css">
-            body, table, td, h1, div {font-family: Arial, Helvetica, sans-serif !important;}
-            .bookingdata th, .bookingdata td {
-                text-align: left;
-                padding: 1px 1em;
-                margin: 0
-            }
-        </style>
-    <![endif]-->
     <div id="contents">
+        <!--[if mso]>
+            <style type="text/css">
+                body, table, td, h1, div {font-family: Arial, Helvetica, sans-serif !important;}
+                .bookingdata th, .bookingdata td {
+                    text-align: left;
+                    padding: 1px 1em;
+                    margin: 0;
+                }
+            </style>
+        <![endif]-->
         <h1>Bokning</h1>
         <div>
             <table border="0" cellspacing="0" cellpadding="0">
