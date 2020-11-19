@@ -66,6 +66,7 @@ div#contents {
 table.bookingdata {
   border-collapse: collapse;
   padding-top: 10px;
+  width: 100%;
 }
 
 table.bookingdata, .bookingdata th, .bookingdata td {

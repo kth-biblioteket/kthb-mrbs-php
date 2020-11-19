@@ -93,13 +93,14 @@ $html_body['content'] .=
                     <td>' . get_instructor($data['instructor']) . '</td>
                 </tr>
                 <tr>
-                    <th>Användarens campus: </th>';
+                    <th>Användarens campus: </th>
+                    <td>';
                 if ($data['my_campus'] > 0) {
-$html_body['content'] .=      
-                    '<td>'. get_kth_campus($data['my_campus'], 'sv') . '</td>';
+$html_body['content'] .= get_kth_campus($data['my_campus'], 'sv');
                     }
 $html_body['content'] .=
-                '</tr>';
+                    '</td>
+                </tr>';
                 //Övriga fält
                 for ($i = 0; ($row = sql_row_keyed($res, $i)); $i++)
                 {
