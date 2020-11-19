@@ -66,6 +66,10 @@ $html_body['content'] = '
                     <td>' . $data['name'] . '</td>
                 </tr>
                 <tr>
+                    <th>Email: </th>
+                    <td>' . $data['create_by'] . '</td>
+                </tr>
+                <tr>
                     <th>Område: </th>
                     <td>' . get_mail_vocab("mrbs") . '</td>
                 </tr>
@@ -106,10 +110,30 @@ $html_body['content'] .=
                 {
                     //TODO Bort med hårdkodning
                     if($row['entry_field_name'] != 'campus' && $row['entry_field_name'] != 'instructor' && $row['entry_field_name'] != 'my_campus'){
+                        //Hämta typ och konvertera ikryssade checkboxar till "Ja"
+                        $type_sql ="SELECT
+                            DATA_TYPE 
+                            FROM
+                            INFORMATION_SCHEMA.COLUMNS 
+                            WHERE
+                            TABLE_NAME = 'mrbs_entry'
+                            AND
+                            COLUMN_NAME = '" . $row['entry_field_name'] . "'";
+                        $type_res = sql_query($type_sql);
+                        $type_row = sql_row($type_res, 0);
+                        if($type_row[0] == 'smallint' || $type_row[0] == 'tinyint') {
+                            if($data[$row['entry_field_name']] == 1) {
+                                $currentfieldvalue = 'Ja';
+                            } else {
+                                $currentfieldvalue = '';
+                            }
+                        } else {
+                            $currentfieldvalue = $data[$row['entry_field_name']];
+                        }
 $html_body['content'] .=
                 '<tr>
                     <th>' . get_mail_vocab('entry.' . $row['entry_field_name']) . ': </th>
-                    <td>' . $data[$row['entry_field_name']] . '</td>
+                    <td>' . $currentfieldvalue . '</td>
                 </tr>'; 
                     }                   
                 }
