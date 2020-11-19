@@ -30,7 +30,12 @@ $html_body['content'] = '
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title></title>
-    <style type="text/css">'
+    <style type="text/css">
+        #mrbs th, #mrbs td {
+            text-align: left;
+            padding: 1px 1em;
+            margin: 0
+        }'
         . $css .
     '</style>
 </head>
@@ -94,13 +99,14 @@ $html_body['content'] .=
                     }
 $html_body['content'] .=
                 '</tr>';
+                //Övriga fält
                 for ($i = 0; ($row = sql_row_keyed($res, $i)); $i++)
                 {
                     //TODO Bort med hårdkodning
                     if($row['entry_field_name'] != 'campus' && $row['entry_field_name'] != 'instructor' && $row['entry_field_name'] != 'my_campus'){
 $html_body['content'] .=
                 '<tr>
-                    <td>' . get_mail_vocab('entry.' . $row['entry_field_name']) . ': </td>
+                    <th>' . get_mail_vocab('entry.' . $row['entry_field_name']) . ': </th>
                     <td>' . $data[$row['entry_field_name']] . '</td>
                 </tr>'; 
                     }                   
