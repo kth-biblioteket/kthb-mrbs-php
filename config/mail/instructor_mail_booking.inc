@@ -36,6 +36,14 @@ $html_body['content'] = '
 </head>
 <body id="mrbs">
     <div id="contents">
+        <style type="text/css">
+                    body, table, td, h1, div {font-family: Arial, Helvetica, sans-serif !important;}
+                    .bookingdata th, .bookingdata td {
+                        text-align: left;
+                        padding: 1px 1em;
+                        margin: 0;
+                    }
+        </style>
         <!--[if mso]>
             <style type="text/css">
                 body, table, td, h1, div {font-family: Arial, Helvetica, sans-serif !important;}
