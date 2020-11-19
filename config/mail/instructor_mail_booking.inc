@@ -53,26 +53,26 @@ $html_body['content'] = '
                 </tbody>
             </table>
         </div>
-        <table>
+        <table class="bookingdata">
             <tbody>
                 <tr>
-                    <td>Namn: </td>
+                    <th>Namn: </th>
                     <td>' . $data['name'] . '</td>
                 </tr>
                 <tr>
-                    <td>Område: </td>
+                    <th>Område: </th>
                     <td>' . get_mail_vocab("mrbs") . '</td>
                 </tr>
                 <tr>
-                    <td>Bokning: </td>
+                    <th>Bokning: </th>
                     <td>' . date("H:i",$data['start_time']) . ' till ' . date("H:i",$data['end_time']) . ', ' . utf8_encode(strftime("%A %d %B",$data['start_time'])) . '</td>
                 </tr>
                 <tr>
-                    <td>Typ: </td>
+                    <th>Typ: </th>
                     <td>' . get_mail_vocab("type." . $data['type']) . '</td>
                 </tr>
                 <tr>
-                    <td>Plats: </td>';
+                    <th>Plats: </th>';
                 if ($data['campus'] > 0) {
 $html_body['content'] .=      
                     '<td>'. get_campus($data['campus'], 'sv') . '</td>';
@@ -83,11 +83,11 @@ $html_body['content'] .=
 $html_body['content'] .=
                 '</tr>
                 <tr>
-                    <td>Handledare: </td>
+                    <th>Handledare: </th>
                     <td>' . get_instructor($data['instructor']) . '</td>
                 </tr>
                 <tr>
-                    <td>Användarens campus: </td>';
+                    <th>Användarens campus: </th>';
                 if ($data['my_campus'] > 0) {
 $html_body['content'] .=      
                     '<td>'. get_kth_campus($data['my_campus'], 'sv') . '</td>';

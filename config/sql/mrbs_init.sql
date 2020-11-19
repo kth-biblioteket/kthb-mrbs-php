@@ -180,6 +180,11 @@ INSERT INTO `kth_instructors` (`disabled`, `area_id`, `sort_key`, `full_name`, `
 (0, 1, '3', 'Viveka Norström Hallberg', 'vivekanh@kth.se'),
 (0, 1, '4', 'Eva Westphal', 'evwe@kth.se');
 
+--CAS
+INSERT INTO `kth_instructors` (`disabled`, `area_id`, `sort_key`, `full_name`, `email`) VALUES
+(0, 1, '8', 'Thomas Lind', 'tholind@kth.se'),
+(0, 1, '1', 'Ida Pinho', 'pinho@kth.se')
+
 */
 
 -- --------------------------------------------------------
@@ -235,8 +240,14 @@ INSERT INTO `kth_places` (`disabled`, `room_id`, `sort_key`, `name`, `name_en`) 
 
 --Talbok,inläsningstjänst
 INSERT INTO `kth_places` (`disabled`, `room_id`, `sort_key`, `name`, `name_en`) VALUES
-(0, 1, '3', 'KTH Biblioteket', 'KTH Library'),
-(0, 1, '2', 'Distans', 'Distance'),
+(0, 1, '3', 'KTH Biblioteket, Huvudbiblioteket', 'KTH Library, Main library'),
+(0, 1, '2', 'Distans, Zoom', 'Distance, Zoom'),
+(0, 1, '1', '1none', '1none');
+
+--CAS
+INSERT INTO `kth_places` (`disabled`, `room_id`, `sort_key`, `name`, `name_en`) VALUES
+(0, 1, '3', 'KTH Biblioteket, Huvudbiblioteket', 'KTH Library, Main library'),
+(0, 1, '2', 'Distans, Zoom', 'Distance, Zoom'),
 (0, 1, '1', '1none', '1none');
 
 */
@@ -450,7 +461,13 @@ CREATE TABLE IF NOT EXISTS `mrbs_entry` (
 -- Dumpning av Data i tabell `mrbs_entry`
 --
 /*
-INSERT INTO mrbs_xxxxxx.mrbs_entry (`start_time`, `end_time`, `entry_type`, `repeat_id`, `room_id`, `timestamp`, `instructor`, `create_by`, `modified_by`, `name`, `type`, `description`, `status`, `reminded`, `lang`, `confirmation_code`, `info_time`, `info_user`, `info_text`, `email`, `phone`, `user_group`, `program`, `study_info`, `previously`, `subject_keywords`, `campus`, `preferred_language`, `consultation_info`, `other_info`, `ical_uid`, `ical_sequence`, `ical_recur_id`) 
+INSERT INTO mrbs_xxxxxx.mrbs_entry (`start_time`, `end_time`, `entry_type`, `repeat_id`, 
+`room_id`, 
+`timestamp`, `instructor`, 
+`create_by`, `modified_by`, `name`, `type`, `description`, `status`, `reminded`, `lang`, 
+`confirmation_code`, `info_time`, `info_user`, `info_text`, 
+`email`, `phone`, `user_group`, `program`, `study_info`, `previously`, `subject_keywords`, `campus`, `preferred_language`, `consultation_info`, `other_info`, 
+`ical_uid`, `ical_sequence`, `ical_recur_id`) 
 */ 
 /*
 
@@ -463,7 +480,14 @@ mrbs_grupprum.mrbs_room.id as room_id,
 `timestamp`, null, 
 `create_by`, `modified_by`, `name`, `type`, mrbs.mrbs_entry.description, `status`, `reminded`, `lang`, 
 `confirmation_code`, `info_time`, `info_user`, `info_text`, 
-null, null, null, null, null, null, null, null, null, null, null, `ical_uid`, `ical_sequence`, `ical_recur_id`
+null, null, null, null, null, null, null, null, null, null, null,
+writing_help_get_started, writing_help_overall_structure, writing_help_paragraph_structure, 
+writing_help_sentence_construction, writing_help_coherence_cohesion, 	writing_help_style_formality, 
+writing_help_conventions, writing_help_citation, writing_help_references, writing_help_otherformal, 
+oral_help_nervousness,
+oral_help_overall_structure, oral_help_act_interact, oral_help_interact_computer, oral_help_bodylanguage,
+oral_help_images, oral_help_keeptime, help_other
+`ical_uid`, `ical_sequence`, `ical_recur_id`
 -- mrbs.mrbs_entry.room_id, 
 -- mrbs_grupprum.mrbs_room.room_name, 
 -- mrbs.mrbs_room.room_name, 
@@ -487,8 +511,15 @@ SELECT
 mrbs_cas.mrbs_room.id as room_id,
 `timestamp`, null, 
 `create_by`, `modified_by`, `name`, `type`, mrbs.mrbs_entry.description, `status`, `reminded`, `lang`, 
-`confirmation_code`, `info_time`, `info_user`, `info_text`, 
-null, null, null, null, null, null, null, null, null, null, null, `ical_uid`, `ical_sequence`, `ical_recur_id`
+`confirmation_code`, `info_time`, `info_user`, `info_text`,
+null, null, null, null, null, null, null, null, null, null, null, 
+writing_help_get_started, writing_help_overall_structure, writing_help_paragraph_structure, 
+writing_help_sentence_construction, writing_help_coherence_cohesion, 	writing_help_style_formality, 
+writing_help_conventions, writing_help_citation, writing_help_references, writing_help_otherformal, 
+oral_help_nervousness,
+oral_help_overall_structure, oral_help_act_interact, oral_help_interact_computer, oral_help_bodylanguage,
+oral_help_images, oral_help_keeptime, help_other
+ `ical_uid`, `ical_sequence`, `ical_recur_id`
 -- mrbs.mrbs_entry.room_id, 
 -- mrbs_grupprum.mrbs_room.room_name, 
 -- mrbs.mrbs_room.room_name, 
