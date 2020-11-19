@@ -55,8 +55,12 @@ div#contents {
 
 .bookingdata th, .bookingdata td {
     text-align: left;
-    padding: 1px 1em;
+    padding: 5px 5px;
     margin: 0;
+}
+
+.bookingdata th {
+    width: 200px;
 }
 
 table.bookingdata {
