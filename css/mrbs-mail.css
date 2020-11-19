@@ -59,11 +59,11 @@ div#contents {
     margin: 0;
 }
 
-.bookingdata table {
+table.bookingdata {
   border-collapse: collapse;
 }
 
-.bookingdata table, .bookingdata th, .bookingdata td {
+table.bookingdata, .bookingdata th, .bookingdata td {
   border: 1px solid black;
 }
 
