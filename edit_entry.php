@@ -846,6 +846,37 @@ function create_field_entry_custom_field($field, $key, $is_admin, $user, $disabl
         echo "</div>\n";
         break;
       
+      case 'kth_program':
+          //TODO se till att inget fält är valt som default
+          //Men det ska kunna vara mandatory att välja.
+          echo "<div id=\"div_kth_program\">\n";
+          
+          $params = array('label' => get_loc_field_name($tbl_entry, $key) . ":",
+                    'name'        => VAR_PREFIX . 'kth_program',
+                    'disabled'    => $disabled,
+                    'options'     => array(),
+                    'force_assoc' => TRUE,  // in case the type keys happen to be digits
+                    'value'       => isset($custom_fields[$key]) ? $custom_fields[$key] : 'disabled',
+                    'mandatory'   => isset($is_mandatory_field["entry.$key"]) && $is_mandatory_field["entry.$key"]);
+  
+          //Hämta program från KTH-api
+          $kth_programs = json_decode(getkthprograms());
+  
+          //dummy för att ha ett "select an option"
+          $params['options']['none'] = $vocab["select_an_option"];
+          //Loop all programs
+          foreach($kth_programs->programmes as $key => $value)
+          {
+              if ($lang == "sv") {
+                $params['options'][$value->code] = $value->title->sv;
+              } else {
+                $params['options'][$value->code] = $value->title->en;
+              }
+          }
+          generate_select($params);
+  
+          echo "</div>\n";
+          break;
       case 'instructor':
         echo "<div id=\"div_instructor\">\n";
         if (!$is_admin) {

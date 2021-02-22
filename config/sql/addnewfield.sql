@@ -1,4 +1,5 @@
-/* Exempel på att lägga till ett nytt fält */
+/* Exempel på att lägga till ett nytt fält, DATATYP? (int, varchar) */
+/* Lägg också till fältet i mrbs_init.sql*/
 
 /* KTH Campus för Handledning */
 
@@ -35,3 +36,10 @@ INSERT INTO `kth_campus` (`disabled`, `sort_key`, `name`, `name_en`) VALUES
 INSERT INTO `kth_entry_custom_fields` (`area_id`, `entry_field_name`, `type`, `sort_order`, `visible`, `enabled`, `mandatory`) VALUES
 (1, 'my_campus', 'custom', 411, 1, 1, 1);
 */
+
+/* KTH_program (som hämtas från kth-api*/
+ALTER TABLE `mrbs_entry` ADD `kth_program` varchar(50) NULL DEFAULT NULL AFTER `program`;
+
+ALTER TABLE `mrbs_repeat` ADD `kth_program` varchar(50) NULL DEFAULT NULL AFTER `program`;
+
+ALTER TABLE `mrbs_entry_delete` ADD `kth_program` varchar(50) NULL DEFAULT NULL AFTER `program`;

@@ -1023,7 +1023,10 @@ function mrbsCreateEntry($table, $data)
           if (!in_array($key, $standard_fields[$table_no_prefix]))
           {
             $sql_col[] = $key;
-            
+            if($environment == 'development') {
+              error_log("mrbsCreateEntry key: " . $key . ", value: " . $data[$key] . ", field nature: " . $field['nature']);
+
+            }
             // Depending on the nature of the custom field the treatment will vary
             switch ($field['nature'])
             {

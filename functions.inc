@@ -4,6 +4,8 @@
 //191003
 require_once "ews.inc";
 
+require_once "kth.inc";
+
 require_once "mrbs_sql.inc";
 
 function function_disabled($name)
@@ -147,48 +149,49 @@ function print_simple_header()
 // 191003
 function print_modal($area,$lang,$area_map,$area_map_image)
 {
+
   //KTH Modal box
-//191003
-echo "<div>
-        <div id=\"myModal\" class=\"modal fade show\" tabindex=\"-1\">
-          <div class=\"modal-dialog\" role=\"document\">
-            <div id=\"myModalrules\" class=\"modal-content\">
-              <div class=\"modal-header\">
-                <h4 class=\"modal-title\">" . get_vocab('bookingrules') . "</h4>
-                <button class=\"close\" type=\"button\" aria-label=\"Close\"><span aria-hidden=\"true\">×</span></button>
-              </div>
-              <div class=\"modal-body\">
-                <div id=\"modalhtml\">" . get_area_custom_html($area,$lang) . "</div>
-              </div>
-              <div class=\"modal-footer\">
-                <button class=\"btn btn-primary\" type=\"button\">OK</button>
-              </div>
-            </div>";
-if ($area_map) {
-echo        "<div id=\"myModalmap\" class=\"modal-content\">
-              <div class=\"modal-header\">
-                <h4 class=\"modal-title\">" . get_vocab('map') . "</h4>
-                <button class=\"close\" type=\"button\" aria-label=\"Close\"><span aria-hidden=\"true\">×</span></button>
-              </div>
-              <div class=\"modal-body\">
-                <div id=\"modalhtml\"><img src=\"images/$area_map_image\"></img></div>
-              </div>
-              <div class=\"modal-footer\">
-                <button class=\"btn btn-primary\" type=\"button\">OK</button>
-              </div>
-            </div>";
-}
-echo      "</div>
-          <div class=\"modal-backdrop fade show\"></div>
-        </div>
-      </div>";
-      //Länkar
-echo  "<div style=\"\">\n";
-echo    "<h2 id=\"ruleslink\" class=\"expandable-header\">". get_vocab('bookingrules') . "<span class=\"expandable\"></span></h2>\n";
-if ($area_map) {
-echo    "<h2 id=\"maplink\" class=\"expandable-header\">". get_vocab('map') . "<span class=\"expandable\"></span></h2>\n";
-}
-echo  "</div>\n";
+  //191003
+  echo "<div>
+          <div id=\"myModal\" class=\"modal fade show\" tabindex=\"-1\">
+            <div class=\"modal-dialog\" role=\"document\">
+              <div id=\"myModalrules\" class=\"modal-content\">
+                <div class=\"modal-header\">
+                  <h4 class=\"modal-title\">" . get_vocab('bookingrules') . "</h4>
+                  <button class=\"close\" type=\"button\" aria-label=\"Close\"><span aria-hidden=\"true\">×</span></button>
+                </div>
+                <div class=\"modal-body\">
+                  <div id=\"modalhtml\">" . get_area_custom_html($area,$lang) . "</div>
+                </div>
+                <div class=\"modal-footer\">
+                  <button class=\"btn btn-primary\" type=\"button\">OK</button>
+                </div>
+              </div>";
+  if ($area_map) {
+  echo        "<div id=\"myModalmap\" class=\"modal-content\">
+                <div class=\"modal-header\">
+                  <h4 class=\"modal-title\">" . get_vocab('map') . "</h4>
+                  <button class=\"close\" type=\"button\" aria-label=\"Close\"><span aria-hidden=\"true\">×</span></button>
+                </div>
+                <div class=\"modal-body\">
+                  <div id=\"modalhtml\"><img src=\"images/$area_map_image\"></img></div>
+                </div>
+                <div class=\"modal-footer\">
+                  <button class=\"btn btn-primary\" type=\"button\">OK</button>
+                </div>
+              </div>";
+  }
+  echo      "</div>
+            <div class=\"modal-backdrop fade show\"></div>
+          </div>
+        </div>";
+        //Länkar
+  echo  "<div style=\"\">\n";
+  echo    "<h2 id=\"ruleslink\" class=\"expandable-header\">". get_vocab('bookingrules') . "<span class=\"expandable\"></span></h2>\n";
+  if ($area_map) {
+  echo    "<h2 id=\"maplink\" class=\"expandable-header\">". get_vocab('map') . "<span class=\"expandable\"></span></h2>\n";
+  }
+  echo  "</div>\n";
 }
 
 // Print the page header

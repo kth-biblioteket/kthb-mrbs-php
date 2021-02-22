@@ -105,12 +105,17 @@ $html_body['content'] .= get_kth_campus($data['my_campus'], 'sv');
                     }
 $html_body['content'] .=
                     '</td>
+                </tr>
+                <tr>
+                    <th>KTH-Program: </th>
+                    <td>' . getkthprogram($data['kth_program'])->title . '</td>
                 </tr>';
                 //Övriga fält
                 for ($i = 0; ($row = sql_row_keyed($res, $i)); $i++)
                 {
                     //TODO Bort med hårdkodning
-                    if($row['entry_field_name'] != 'campus' && $row['entry_field_name'] != 'instructor' && $row['entry_field_name'] != 'my_campus'){
+                    if($row['entry_field_name'] != 'campus' && $row['entry_field_name'] != 'instructor' 
+                        && $row['entry_field_name'] != 'my_campus' && $row['entry_field_name'] != 'kth_program'){
                         //Hämta typ och konvertera ikryssade checkboxar till "Ja"
                         $type_sql ="SELECT
                             DATA_TYPE 
