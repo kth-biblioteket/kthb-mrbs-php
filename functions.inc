@@ -8,6 +8,26 @@ require_once "kth.inc";
 
 require_once "mrbs_sql.inc";
 
+//Funktioner för att läsa JWTtokens från KTH-login(id_token)
+function base64url_decode($base64url) {
+  return base64_decode(b64url2b64($base64url));
+}
+
+function b64url2b64($base64url) {
+  // "Shouldn't" be necessary, but why not
+  $padding = strlen($base64url) % 4;
+  if ($padding > 0) {
+    $base64url .= str_repeat("=", 4 - $padding);
+  }
+  return strtr($base64url, '-_', '+/');
+}
+
+function decodeJWT($jwt, $section = 0) {
+
+  $parts = explode(".", $jwt);
+  return json_decode(base64url_decode($parts[$section]));
+}
+
 function function_disabled($name)
 {
   $disabled = explode(', ', ini_get('disable_functions'));
