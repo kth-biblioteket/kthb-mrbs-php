@@ -14,8 +14,9 @@
       $HTTP_SESSION_VARS = array();
     }
 
+    //kth cas är nu ändrat till openid
     if(isset($_REQUEST['authmethod']) && $_REQUEST['authmethod']=='kthcas') {
-      header("location: https://$cas_server/logout");
+      header("location: $kth_auth_endpoint/oauth2/logout");
     } else {
       header("location: index.php");
     }
