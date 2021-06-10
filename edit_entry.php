@@ -71,9 +71,11 @@ $entry_fields = array('name', 'description', 'start_date', 'end_date', 'areas',
     
 //191003
 //Hämta vilka custom fields som finns och ska visas från DB-tabell
+//De som har visible = 1 visas för alla
+//De som har user_hidden = 1 visas inte för användaren.
 //200309 mandatory, ej för admins
 $custom_fields_toshow = array();
-$sql = "SELECT entry_field_name,type,mandatory
+$sql = "SELECT entry_field_name, type, mandatory, enabled, user_hidden, field_type
           FROM kth_entry_custom_fields
           WHERE area_id = $area
           AND visible = 1
@@ -95,6 +97,11 @@ for ($i = 0; ($row = sql_row_keyed($res, $i)); $i++)
     $custom_fields_map[$row['entry_field_name']] = $fields[$fields_key];
     if ($row['mandatory'] && !$is_admin){
       $is_mandatory_field['entry.'. $row['entry_field_name']] = true;
+    }
+    //210506
+    $custom_field_type['entry.'. $row['entry_field_name']] = $row['field_type'];
+    if ($row['user_hidden'] && !$is_admin){
+      $is_user_hidden_field['entry.'. $row['entry_field_name']] = true;
     }
   }
   if($row['entry_field_name'] == 'start_time'){
@@ -749,6 +756,7 @@ function create_field_entry_custom_field($field, $key, $is_admin, $user, $disabl
   global $custom_fields, $tbl_entry, $area, $room_id, $room, $kth_places;
   global $is_mandatory_field, $text_input_max, $maxlength;
   global $lang, $environment;
+  global $is_user_hidden_field, $custom_field_type;
 
   //191003
   //ta bara med de fält som respektive area ska ha
@@ -878,7 +886,16 @@ function create_field_entry_custom_field($field, $key, $is_admin, $user, $disabl
           echo "</div>\n";
           break;
       case 'instructor':
-        echo "<div id=\"div_instructor\">\n";
+        //210506
+        //Visa inte om user_hidden = 1
+        //TODO implementera denna parameter på alla fält
+        if (isset($is_user_hidden_field["entry.$key"]) && $is_user_hidden_field["entry.$key"]) {
+          echo "<div id=\"div_instructor\" style=\"display:none\">\n";
+        } else {
+          echo "<div id=\"div_instructor\">\n";
+        }
+        
+        //Disabled här => fältet är inaktivt för användare
         if (!$is_admin) {
             $disabled = true;
         }
@@ -959,8 +976,31 @@ function create_field_entry_custom_field($field, $key, $is_admin, $user, $disabl
         if (($field['nature'] == 'boolean') || 
           (($field['nature'] == 'integer') && isset($field['length']) && ($field['length'] <= 2)) )
         {
-          generate_checkbox($params);
+          //210506 Skapa "radio-knappar"
+          //Villkor hämtas från field_type
+          //1 = time, 2 = Input, 3 = text, 4 = Checkbox, 5 = Radio, 6 = Select
+          if ($custom_field_type["entry.$key"] == 4) {
+             generate_checkbox($params);
+          }
+          if ($custom_field_type["entry.$key"] == 5) {
+            echo "<div class=\"entry_radio\">";
+
+            //Var hämta värden?
+            //I dagsläget hårdkodat då CAS är de enda som har detta alternativ
+            $options = array('1' => 'Jag känner mig säker',
+            '2' => 'Jag vill diskutera');
+            $params = array('label' => get_loc_field_name($tbl_entry, $key) . ":",
+            'name'       => VAR_PREFIX . $key,
+            'value'      => isset($custom_fields[$key]) && !$customfieldfromuser ? $custom_fields[$key] : $fieldvalue,
+            'options'     => $options,
+            'force_assoc' => TRUE);
+
+            generate_radio_group($params);
+
+            echo "</div>\n";
+          }
         }
+        
         // Output a textarea if it's a character string longer than the limit for a
         // text input
         elseif (($field['nature'] == 'character') && isset($field['length']) && ($field['length'] > $text_input_max))

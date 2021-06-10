@@ -916,6 +916,12 @@ div.bad {color: #9D102D}
 .form_general th {font-weight: normal; font-style: italic; text-align: left; padding: 0.2em 0 0.2em 1em}
 
 
+/* KTH Radio buttons */
+.edit_entry .form_general .entry_radio label,
+.entry_radio .group {
+  width: 50% !important
+}
+
 /* ------------ EDIT_ENTRY_HANDLER.PHP ------------------*/
 .edit_entry_handler div#submit_buttons {float: left}
 .edit_entry_handler #submit_buttons form {float: left; margin: 1em 2em 1em 0}

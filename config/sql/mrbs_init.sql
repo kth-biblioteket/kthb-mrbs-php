@@ -14,6 +14,7 @@
 sDROP DATABASE IF EXISTS `mrbs_handledning`;
 sCREATE DATABASE IF NOT EXISTS `mrbs_handledning` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 sUSE `mrbs_handledning`;
+sGRANT ALL PRIVILEGES ON mrbs_handledning.*  TO 'mrbs'@'localhost';
 
 -- --------------------------------------------------------
 
@@ -41,17 +42,19 @@ INSERT INTO `kth_areatype` (`id`, `areatype`) VALUES
 
 --
 -- Tabellstruktur `kth_entry_custom_fields`
---
+-- field_type: 1 = time, 2 = Input, 3 = text, 4 = Checkbox, 5 = Radio, 6 = Select
 
 DROP TABLE IF EXISTS `kth_entry_custom_fields`;
 CREATE TABLE IF NOT EXISTS `kth_entry_custom_fields` (
   `id` int(11) NOT NULL,
   `area_id` int(11) NOT NULL,
   `entry_field_name` varchar(50) NOT NULL,
+  `field_type` int(11) NOT NULL,
   `type` varchar(50) NOT NULL,
   `sort_order` int(11) NOT NULL,
   `visible` int(11) NOT NULL,
   `enabled` int(11) NOT NULL,
+  `user_hidden` int(11) NOT NULL,
   `mandatory` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -60,70 +63,70 @@ CREATE TABLE IF NOT EXISTS `kth_entry_custom_fields` (
 --
 /*
 --Handledning
-INSERT INTO `kth_entry_custom_fields` (`area_id`, `entry_field_name`, `type`, `sort_order`, `visible`, `enabled`, `mandatory`) VALUES
-(1, 'email', 'custom', 200, 1, 1, 1),
-(1, 'phone', 'custom', 300, 1, 1, 1),
-(1, 'user_group', 'custom', 150, 1, 0, 1),
-(1, 'campus', 'custom', 410, 1, 1, 1),
-(1, 'program', 'custom', 500, 1, 1, 1),
-(1, 'consultation_info', 'custom', 600, 1, 1, 1),
-(1, 'study_info', 'custom', 600, 1, 1, 1),
-(1, 'previously', 'custom', 700, 1, 1, 1),
-(1, 'subject_keywords', 'custom', 800, 1, 1, 1),
-(1, 'instructor', 'custom', 400, 1, 1, 1),
-(1, 'preferred_language', 'custom', 420, 1, 1, 1),
-(1, 'start_time', 'standard', 100, 1, 1, 1),
-(1, 'end_time', 'standard', 101, 1, 1, 1),
-(1, 'name', 'standard', 140, 1, 1, 1);
+INSERT INTO `kth_entry_custom_fields` (`area_id`, `entry_field_name`, `field_type`, `type`, `sort_order`, `visible`, `enabled`, `user_hidden`, `mandatory`) VALUES
+(1, 'email', 'custom', 200, 1, 1, 0, 1),
+(1, 'phone', 'custom', 300, 1, 1, 0, 1),
+(1, 'user_group', 'custom', 150, 1, 0, 0, 1),
+(1, 'campus', 'custom', 410, 1, 1, 0, 1),
+(1, 'program', 'custom', 500, 1, 1, 0, 1),
+(1, 'consultation_info', 'custom', 600, 1, 1, 0, 1),
+(1, 'study_info', 'custom', 600, 1, 1, 0, 1),
+(1, 'previously', 'custom', 700, 1, 1, 0, 1),
+(1, 'subject_keywords', 'custom', 800, 1, 1, 0, 1),
+(1, 'instructor', 'custom', 400, 1, 1, 0, 1),
+(1, 'preferred_language', 'custom', 420, 1, 1, 0, 1),
+(1, 'start_time', 'standard', 100, 1, 1, 0, 1),
+(1, 'end_time', 'standard', 101, 1, 1, 0, 1),
+(1, 'name', 'standard', 140, 1, 1, 0, 1);
 
 --Talbok/inläsningstjänst
-INSERT INTO `kth_entry_custom_fields` (`area_id`, `entry_field_name`, `type`, `sort_order`, `visible`, `enabled`, `mandatory`) VALUES
-(1, 'email', 'custom', 200, 1, 1, 1),
-(1, 'phone', 'custom', 300, 1, 1, 1),
+INSERT INTO `kth_entry_custom_fields` (`area_id`, `entry_field_name`, `field_type`, `type`, `sort_order`, `visible`, `enabled`, `user_hidden`, `mandatory`) VALUES
+(1, 'email', 'custom', 200, 1, 1, 0, 1),
+(1, 'phone', 'custom', 300, 1, 1, 0, 1),
 (1, 'user_group', 'custom', 150, 1, 0, 1),
-(1, 'campus', 'custom', 410, 1, 1, 1),
-(1, 'preferred_language', 'custom', 800, 1, 1, 1),
-(1, 'instructor', 'custom', 400, 1, 1, 1),
-(1, 'start_time', 'standard', 100, 1, 1, 1),
-(1, 'end_time', 'standard', 101, 1, 1, 1),
-(1, 'name', 'standard', 140, 1, 1, 1),
-(1, 'other_info', 'custom', 900, 1, 1, 1);
+(1, 'campus', 'custom', 410, 1, 1, 0, 1),
+(1, 'preferred_language', 'custom', 800, 1, 1, 0, 1),
+(1, 'instructor', 'custom', 400, 1, 1, 0, 1),
+(1, 'start_time', 'standard', 100, 1, 1, 0, 1),
+(1, 'end_time', 'standard', 101, 1, 1, 0, 1),
+(1, 'name', 'standard', 140, 1, 1, 0, 1),
+(1, 'other_info', 'custom', 900, 1, 1, 0, 1);
 
 --Grupprum/lässtudio
-INSERT INTO `kth_entry_custom_fields` (`area_id`, `entry_field_name`, `type`, `sort_order`, `visible`, `enabled`, `mandatory`) VALUES
-(1, 'name', 'standard', 110, 1, 1, 1),
-(1, 'decsription', 'standard', 115, 1, 1, 1),
-(1, 'start_time', 'standard', 100, 1, 1, 1),
-(1, 'end_time', 'standard', 105, 1, 1, 1),
-(1, 'confirmation_status', 'standard', 130, 1, 1, 1);
+INSERT INTO `kth_entry_custom_fields` (`area_id`, `entry_field_name`, `field_type`, `type`, `sort_order`, `visible`, `enabled`, `user_hidden`, `mandatory`) VALUES
+(1, 'name', 'standard', 110, 1, 1, 0, 1),
+(1, 'decsription', 'standard', 115, 1, 1, 0, 1),
+(1, 'start_time', 'standard', 100, 1, 1, 0, 1),
+(1, 'end_time', 'standard', 105, 1, 1, 0, 1),
+(1, 'confirmation_status', 'standard', 130, 1, 1, 0, 1);
 
 --CAS
-INSERT INTO `kth_entry_custom_fields` (`area_id`, `entry_field_name`, `type`, `sort_order`, `visible`, `enabled`, `mandatory`) VALUES
-(1, 'start_time', 'standard', 100, 1, 1, 1),
-(1, 'end_time', 'standard', 101, 1, 1, 1),
-(1, 'name', 'standard', 103, 1, 1, 1),
-(1, 'my_campus', 'custom', 104, 1, 1, 1),
-(1, 'program', 'custom', 106, 1, 1, 1),
-(1, 'instructor', 'custom', 108, 1, 1, 1),
-(1, 'campus', 'custom', 110, 1, 1, 1),
-(1, 'writing_help_get_started', 'custom', 200, 1, 1, 0),
-(1, 'writing_help_overall_structure', 'custom', 210, 1, 1, 0),
-(1, 'writing_help_paragraph_structure', 'custom', 220, 1, 1, 0),
-(1, 'writing_help_sentence_construction', 'custom', 230, 1, 1, 0),
-(1, 'writing_help_coherence_cohesion', 'custom', 240, 1, 1, 0),
-(1, 'writing_help_style_formality', 'custom', 250, 1, 1, 0),
-(1, 'writing_help_conventions', 'custom', 260, 1, 1, 0),
-(1, 'writing_help_citation', 'custom', 270, 1, 1, 0),
-(1, 'writing_help_references', 'custom', 280, 1, 1, 0),
-(1, 'writing_help_otherformal', 'custom', 290, 1, 1, 0),
-(1, 'oral_help_nervousness', 'custom', 300, 1, 1, 0),
-(1, 'oral_help_overall_structure', 'custom', 310, 1, 1, 0),
-(1, 'oral_help_act_interact', 'custom', 320, 1, 1, 0),
-(1, 'oral_help_interact_computer', 'custom', 330, 1, 1, 0),
-(1, 'oral_help_bodylanguage', 'custom', 340, 1, 1, 0),
-(1, 'oral_help_images', 'custom', 350, 1, 1, 0),
-(1, 'oral_help_keeptime', 'custom', 360, 1, 1, 0),
-(1, 'help_other', 'custom', 370, 1, 1, 0);
+INSERT INTO `kth_entry_custom_fields` (`area_id`, `entry_field_name`, `field_type`, `type`, `sort_order`, `visible`, `enabled`, `user_hidden`, `mandatory`) VALUES
+(1, 'start_time', 1, 'standard', 100, 1, 1, 0, 1),
+(1, 'end_time', 1, 'standard', 101, 1, 1, 0, 1),
+(1, 'name', 2, 'standard', 103, 1, 1, 0, 1),
+(1, 'my_campus', 6, 'custom', 104, 1, 1, 0, 1),
+(1, 'program', 6,  'custom', 106, 1, 1, 0, 1),
+(1, 'instructor', 6, 'custom', 108, 1, 1, 1, 1),
+(1, 'campus', 6, 'custom', 110, 1, 1, 0, 1),
+(1, 'writing_help_get_started', 5, 'custom', 200, 1, 1, 0, 0),
+(1, 'writing_help_overall_structure', 5, 'custom', 210, 1, 1, 0, 0),
+(1, 'writing_help_paragraph_structure', 5, 'custom', 220, 1, 1, 0, 0),
+(1, 'writing_help_sentence_construction', 5, 'custom', 230, 1, 1, 0, 0),
+(1, 'writing_help_coherence_cohesion', 5, 'custom', 240, 1, 1, 0, 0),
+(1, 'writing_help_style_formality', 5, 'custom', 250, 1, 1, 0, 0),
+(1, 'writing_help_conventions', 5, 'custom', 260, 1, 1, 0, 0),
+(1, 'writing_help_citation', 5, 'custom', 270, 1, 1, 0, 0),
+(1, 'writing_help_references', 5, 'custom', 280, 1, 1, 0, 0),
+(1, 'writing_help_otherformal', 5, 'custom', 290, 1, 1, 0, 0),
+(1, 'oral_help_nervousness', 5, 'custom', 300, 1, 1, 0, 0),
+(1, 'oral_help_overall_structure', 5, 'custom', 310, 1, 1, 0, 0),
+(1, 'oral_help_act_interact', 5, 'custom', 320, 1, 1, 0, 0),
+(1, 'oral_help_interact_computer', 5, 'custom', 330, 1, 1, 0, 0),
+(1, 'oral_help_bodylanguage', 5, 'custom', 340, 1, 1, 0, 0),
+(1, 'oral_help_images', 5, 'custom', 350, 1, 1, 0, 0),
+(1, 'oral_help_keeptime', 5, 'custom', 360, 1, 1, 0, 0),
+(1, 'help_other', 3, 'custom', 370, 1, 1, 0, 0);
 */
 
 -- --------------------------------------------------------
@@ -251,6 +254,31 @@ INSERT INTO `kth_places` (`disabled`, `room_id`, `sort_key`, `name`, `name_en`) 
 (0, 1, '1', '1none', '1none');
 
 */
+
+-- --------------------------------------------------------
+
+--
+-- Tabellstruktur `kth_assignments`
+-- 
+
+DROP TABLE IF EXISTS `kth_assignments`;
+CREATE TABLE IF NOT EXISTS `kth_assignments` (
+  `id` int(11) NOT NULL,
+  `disabled` tinyint(4) NOT NULL DEFAULT '0',
+  `sort_key` varchar(25) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `name_en` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumpning av Data i tabell `kth_assignments`
+--
+
+INSERT INTO `kth_assignments` (`id`, `disabled`, `sort_key`, `name`, `name_en`) VALUES
+(1, 0, '1', 'Mitt kandidatexamensarbete', 'My candidate'),
+(2, 0, '2', 'Min presentation av kandidatexamensarbete', 'My presentation candidate'),
+(3, 0, '3', 'Mitt magisterexamensarbete', 'My magister'),
+(4, 0, '4', 'Min presentation av magisterexamensarbete', 'My presentation magister');
 
 -- --------------------------------------------------------
 
