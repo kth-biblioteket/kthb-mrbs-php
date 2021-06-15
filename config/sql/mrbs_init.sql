@@ -106,9 +106,10 @@ INSERT INTO `kth_entry_custom_fields` (`area_id`, `entry_field_name`, `field_typ
 (1, 'end_time', 1, 'standard', 101, 1, 1, 0, 1),
 (1, 'name', 2, 'standard', 103, 1, 1, 0, 1),
 (1, 'my_campus', 6, 'custom', 104, 1, 1, 0, 1),
-(1, 'program', 6,  'custom', 106, 1, 1, 0, 1),
+(1, 'kth_program', 6,  'custom', 106, 1, 1, 0, 1),
 (1, 'instructor', 6, 'custom', 108, 1, 1, 1, 1),
 (1, 'campus', 6, 'custom', 110, 1, 1, 0, 1),
+(1, 'kth_assignment', 6, 'custom', 112, 1, 1, 0, 1),
 (1, 'writing_help_get_started', 5, 'custom', 200, 1, 1, 0, 0),
 (1, 'writing_help_overall_structure', 5, 'custom', 210, 1, 1, 0, 0),
 (1, 'writing_help_paragraph_structure', 5, 'custom', 220, 1, 1, 0, 0),
@@ -273,12 +274,14 @@ CREATE TABLE IF NOT EXISTS `kth_assignments` (
 --
 -- Dumpning av Data i tabell `kth_assignments`
 --
-
-INSERT INTO `kth_assignments` (`id`, `disabled`, `sort_key`, `name`, `name_en`) VALUES
-(1, 0, '1', 'Mitt kandidatexamensarbete', 'My candidate'),
-(2, 0, '2', 'Min presentation av kandidatexamensarbete', 'My presentation candidate'),
-(3, 0, '3', 'Mitt magisterexamensarbete', 'My magister'),
-(4, 0, '4', 'Min presentation av magisterexamensarbete', 'My presentation magister');
+/*
+INSERT INTO `kth_assignments` (`disabled`, `sort_key`, `name`, `name_en`) VALUES
+(0, '1', 'Mitt kandidatexamensarbete', 'My candidate'),
+(0, '2', 'Min presentation av kandidatexamensarbete', 'My presentation candidate'),
+(0, '3', 'Mitt magisterexamensarbete', 'My magister'),
+(0, '4', 'Min presentation av magisterexamensarbete', 'My presentation magister'),
+(0, '0', '1none', '1none');;
+*/
 
 -- --------------------------------------------------------
 
@@ -454,6 +457,7 @@ CREATE TABLE IF NOT EXISTS `mrbs_entry` (
   `phone` varchar(12) DEFAULT NULL,
   `user_group` varchar(50) DEFAULT NULL,
   `program` varchar(100) DEFAULT NULL,
+  `kth_program` varchar(50) DEFAULT NULL,
   `study_info` text,
   `previously` text,
   `subject_keywords` text,
@@ -606,6 +610,7 @@ CREATE TABLE IF NOT EXISTS `mrbs_entry_delete` (
   `phone` varchar(12) DEFAULT NULL,
   `user_group` varchar(50) DEFAULT NULL,
   `program` varchar(100) DEFAULT NULL,
+  `kth_program` varchar(50) DEFAULT NULL,
   `study_info` text,
   `previously` text,
   `subject_keywords` text,
@@ -712,6 +717,7 @@ CREATE TABLE IF NOT EXISTS `mrbs_repeat` (
   `phone` varchar(12) DEFAULT NULL,
   `user_group` varchar(50) DEFAULT NULL,
   `program` varchar(100) DEFAULT NULL,
+  `kth_program` varchar(50) DEFAULT NULL,
   `study_info` text,
   `previously` text,
   `subject_keywords` text,
@@ -971,6 +977,12 @@ ALTER TABLE `kth_places`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Index för tabell `kth_assignments`
+--
+ALTER TABLE `kth_assignments`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Index för tabell `kth_campus`
 --
 ALTER TABLE `kth_campus`
@@ -1073,6 +1085,12 @@ ALTER TABLE `kth_periods`
 -- AUTO_INCREMENT för tabell `kth_places`
 --
 ALTER TABLE `kth_places`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT för tabell `kth_assignments`
+--
+ALTER TABLE `kth_assignments` 
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
