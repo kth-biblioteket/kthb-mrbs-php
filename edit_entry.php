@@ -857,7 +857,7 @@ function create_field_entry_custom_field($field, $key, $is_admin, $user, $disabl
         case 'kth_assignment':
           //TODO se till att inget fält är valt som default
           //Men det ska kunna vara mandatory att välja.
-          echo "<div id=\"div_kth_assigment\">\n";
+          echo "<div id=\"div_kth_assignment\">\n";
           
           $params = array('label' => get_loc_field_name($tbl_entry, $key) . ":",
                     'name'        => VAR_PREFIX . 'kth_assignment',
