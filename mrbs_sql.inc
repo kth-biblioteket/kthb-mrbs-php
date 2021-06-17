@@ -2016,6 +2016,42 @@ function get_exchange_email($id, $all=FALSE)
 }
 
 //KTH ny funktion.
+//210617
+//Hämta my_assignment
+function get_my_assignment($id, $lang)
+{
+
+  $id = (int)$id;
+  
+  if($lang=="sv") {
+    $places_field = "name";
+  } else {
+    $places_field = "name_en";
+  }
+    
+  $sql = "SELECT $places_field
+            FROM kth_assignments
+           WHERE kth_assignments.id=$id";
+
+  $sql .= " LIMIT 1";
+  $res = sql_query($sql);
+  
+  if ($res === FALSE)
+  {
+    trigger_error(sql_error(), E_USER_WARNING);
+    return FALSE;
+  }
+  
+  if (sql_count($res) == 0)
+  {
+    return NULL;
+  }
+  
+  $row = sql_row($res, 0);
+  return $row[0];
+}
+
+//KTH ny funktion.
 //201013
 //Hämta my_campus
 function get_kth_campus($id, $lang)

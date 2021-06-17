@@ -1032,8 +1032,13 @@ function create_field_entry_custom_field($field, $key, $is_admin, $user, $disabl
 
             //Var hämta värden?
             //I dagsläget hårdkodat då CAS är de enda som har detta alternativ
-            $options = array('1' => 'Jag känner mig säker',
-            '2' => 'Jag vill diskutera');
+
+            //Vilket värde ska vara default för radio? 
+            //Praxis är att ett alltid är ifyllt från start då man aldrig kan "oklicka" en radioknapp
+            $options = array(
+              '1' => get_vocab("imsure"),
+              '2' => get_vocab("iwanttodiscuss")
+            );
             $params = array('label' => get_loc_field_name($tbl_entry, $key) . ":",
             'name'       => VAR_PREFIX . $key,
             'value'      => isset($custom_fields[$key]) && !$customfieldfromuser ? $custom_fields[$key] : $fieldvalue,
