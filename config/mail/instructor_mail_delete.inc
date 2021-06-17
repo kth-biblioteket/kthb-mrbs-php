@@ -100,8 +100,8 @@ $html_body['content'] .=
                 '<tr>
                     <th>Min uppgift: </th>
                     <td>';
-                    if ($data['my_assignment'] > 0) {
-$html_body['content'] .= get_my_assignment($data['my_assignment'], 'sv');
+                    if ($data['kth_assignment'] > 0) {
+$html_body['content'] .= get_kth_assignment($data['kth_assignment'], 'sv');
                         }
 $html_body['content'] .=
                     '</td>
@@ -113,7 +113,8 @@ $html_body['content'] .=
                     if($row['entry_field_name'] != 'campus' 
                         && $row['entry_field_name'] != 'instructor' 
                         && $row['entry_field_name'] != 'my_campus'
-                        && $row['entry_field_name'] != 'my_assignment'){
+                        && $row['entry_field_name'] != 'kth_program'
+                        && $row['entry_field_name'] != 'kth_assignment'){
                         //Hämta typ och konvertera ikryssade checkboxar till "Ja"
                         $type_sql ="SELECT
                             DATA_TYPE 

@@ -2018,7 +2018,7 @@ function get_exchange_email($id, $all=FALSE)
 //KTH ny funktion.
 //210617
 //Hämta my_assignment
-function get_my_assignment($id, $lang)
+function get_kth_assignment($id, $lang)
 {
 
   $id = (int)$id;
