@@ -109,6 +109,16 @@ $html_body['content'] .=
                     <th>KTH-Program: </th>
                     <td>' . getkthprogram($data['kth_program'])->title . '</td>
                 </tr>';
+$html_body['content'] .=
+                '<tr>
+                    <th>Min uppgift: </th>
+                    <td>';
+                    if ($data['kth_assignment'] > 0) {
+$html_body['content'] .= get_kth_assignment($data['kth_assignment'], 'sv');
+                        }
+$html_body['content'] .=
+                    '</td>
+                </tr>';                
                 //Övriga fält
                 for ($i = 0; ($row = sql_row_keyed($res, $i)); $i++)
                 {
