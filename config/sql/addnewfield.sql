@@ -156,3 +156,60 @@ INSERT INTO `kth_entry_custom_fields` (`area_id`, `entry_field_name`, `field_typ
 (1, 'body_language_eye_contact', 6, 'custom', 260, 1, 1, 0, 1),
 (1, 'communicate_visual_info', 6, 'custom', 265, 1, 1, 0, 1),
 (1, 'present_digitally', 6, 'custom', 270, 1, 1, 0, 1)
+
+--
+-- Tabellstruktur `kth_radio_values`
+--
+DROP TABLE IF EXISTS `kth_radio_values`;
+CREATE TABLE IF NOT EXISTS `kth_radio_values` (
+  `id` int(11) NOT NULL,
+  `entry_field_name` varchar(50) NOT NULL,
+  `radio_id` int(11) NOT NULL,
+  `value_en` varchar(100) NOT NULL,
+  `value_sv` varchar(100) NOT NULL,
+  `default_choice` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Index för tabell `kth_radio_values`
+--
+ALTER TABLE `kth_radio_values`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT för tabell `kth_radio_values`
+--
+ALTER TABLE `kth_radio_values`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+  INSERT INTO `mrbs_cas`.`kth_radio_values` (`entry_field_name`, `radio_id`, `value_en`, `value_sv`, `default_choice`) VALUES 
+  ('understand_purpose_audience', '1', 'I feel confident!', 'Jag känner mig säker', '1'), 
+  ('understand_purpose_audience', '2', 'I''d like to discuss', 'Jag vill diskutera', '0'),
+  ('get_started_assignment', '1', 'I feel confident!', 'Jag känner mig säker', '1'), 
+  ('get_started_assignment', '2', 'I''d like to discuss', 'Jag vill diskutera', '0'),
+  ('understand_assignment_instruction', '1', 'I feel confident!', 'Jag känner mig säker', '1'), 
+  ('understand_assignment_instruction', '2', 'I''d like to discuss', 'Jag vill diskutera', '0'),
+  ('main_message_argument_logic', '1', 'I feel confident!', 'Jag känner mig säker', '1'), 
+  ('main_message_argument_logic', '2', 'I''d like to discuss', 'Jag vill diskutera', '0'),
+  ('overall_structure_text', '1', 'I feel confident!', 'Jag känner mig säker', '1'), 
+  ('overall_structure_text', '2', 'I''d like to discuss', 'Jag vill diskutera', '0'),
+  ('paragraph_sentence_structure', '1', 'I feel confident!', 'Jag känner mig säker', '1'), 
+  ('paragraph_sentence_structure', '2', 'I''d like to discuss', 'Jag vill diskutera', '0'),
+  ('using_sources_support_argument', '1', 'I feel confident!', 'Jag känner mig säker', '1'), 
+  ('using_sources_support_argument', '2', 'I''d like to discuss', 'Jag vill diskutera', '0'),
+  ('presenting_data_discuss_result', '1', 'I feel confident!', 'Jag känner mig säker', '1'), 
+  ('presenting_data_discuss_result', '2', 'I''d like to discuss', 'Jag vill diskutera', '0'),
+  ('grammar_punctuation', '1', 'I feel confident!', 'Jag känner mig säker', '1'), 
+  ('grammar_punctuation', '2', 'I''d like to discuss', 'Jag vill diskutera', '0'),
+  ('words_phrases', '1', 'I feel confident!', 'Jag känner mig säker', '1'), 
+  ('words_phrases', '2', 'I''d like to discuss', 'Jag vill diskutera', '0'),
+  ('academic_style', '1', 'I feel confident!', 'Jag känner mig säker', '1'), 
+  ('academic_style', '2', 'I''d like to discuss', 'Jag vill diskutera', '0'),
+  ('pronuncation', '1', 'I feel confident!', 'Jag känner mig säker', '1'), 
+  ('pronuncation', '2', 'I''d like to discuss', 'Jag vill diskutera', '0'),
+  ('body_language_eye_contact', '1', 'I feel confident!', 'Jag känner mig säker', '1'), 
+  ('body_language_eye_contact', '2', 'I''d like to discuss', 'Jag vill diskutera', '0'),
+  ('communicate_visual_info', '1', 'I feel confident!', 'Jag känner mig säker', '1'), 
+  ('communicate_visual_info', '2', 'I''d like to discuss', 'Jag vill diskutera', '0'),
+  ('present_digitally', '1', 'I feel confident!', 'Jag känner mig säker', '1'), 
+  ('present_digitally', '2', 'I''d like to discuss', 'Jag vill diskutera', '0');

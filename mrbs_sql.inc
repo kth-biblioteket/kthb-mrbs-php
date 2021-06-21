@@ -2017,6 +2017,39 @@ function get_exchange_email($id, $all=FALSE)
 
 //KTH ny funktion.
 //210617
+//Hämta radiovärden för custom field
+function get_custom_field_radio_values_array($entry_field_name, $lang)
+{
+  if($lang=="sv") {
+    $places_field = "value";
+  } else {
+    $places_field = "value_en";
+  }
+
+  $sql = "SELECT $places_field, radio_id
+          FROM kth_radio_values
+          WHERE kth_radio_values.entry_field_name ='$entry_field_name'";
+
+  $res = sql_query($sql);
+  
+  if ($res === FALSE)
+  {
+    trigger_error(sql_error(), E_USER_WARNING);
+    return FALSE;
+  }
+  else
+  {
+    $radioarray = array();
+    for ($i=0; $row = sql_row_keyed($res, $i); $i++)
+    {
+      $radioarray[$row['radio_id']] = $row[$places_field];
+    }
+  }
+  return $radioarray;
+}
+
+//KTH ny funktion.
+//210617
 //Hämta my_assignment
 function get_kth_assignment($id, $lang)
 {

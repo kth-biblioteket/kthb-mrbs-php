@@ -2,7 +2,7 @@
 global $area, $tbl_entry;
 setlocale(LC_ALL,"swedish");
 $custom_fields_toshow = array();
-$sql = "SELECT entry_field_name,type
+$sql = "SELECT entry_field_name, type, mandatory, enabled, user_hidden, field_type
         FROM kth_entry_custom_fields
         WHERE area_id = $area
         AND visible = 1
@@ -123,9 +123,13 @@ $html_body['content'] .=
                 for ($i = 0; ($row = sql_row_keyed($res, $i)); $i++)
                 {
                     //TODO Bort med hårdkodning
-                    if($row['entry_field_name'] != 'campus' && $row['entry_field_name'] != 'instructor' 
-                        && $row['entry_field_name'] != 'my_campus' && $row['entry_field_name'] != 'kth_program'){
+                    if($row['entry_field_name'] != 'campus' 
+                        && $row['entry_field_name'] != 'instructor' 
+                        && $row['entry_field_name'] != 'my_campus' 
+                        && $row['entry_field_name'] != 'kth_program'
+                        && $row['entry_field_name'] != 'kth_assignment'){
                         //Hämta typ och konvertera ikryssade checkboxar till "Ja"
+                        //Anpassa till radioknappval
                         $type_sql ="SELECT
                             DATA_TYPE 
                             FROM
@@ -137,6 +141,14 @@ $html_body['content'] .=
                         $type_res = sql_query($type_sql);
                         $type_row = sql_row($type_res, 0);
                         if($type_row[0] == 'smallint' || $type_row[0] == 'tinyint') {
+                            //Radio
+                            if($row['field_type']== 5) {
+
+                            }
+                            //Checkbox
+                            if($row['field_type']== 4) {
+
+                            }
                             if($data[$row['entry_field_name']] == 1) {
                                 $currentfieldvalue = 'Ja';
                             } else {
