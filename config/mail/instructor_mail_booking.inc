@@ -143,16 +143,16 @@ $html_body['content'] .=
                         if($type_row[0] == 'smallint' || $type_row[0] == 'tinyint') {
                             //Radio
                             if($row['field_type']== 5) {
-
+                                //Hämta aktuella värden
+                                $currentfieldvalue = get_custom_field_radio_value($row['entry_field_name'], $data[$row['entry_field_name']], $lang);
                             }
                             //Checkbox
                             if($row['field_type']== 4) {
-
-                            }
-                            if($data[$row['entry_field_name']] == 1) {
-                                $currentfieldvalue = 'Ja';
-                            } else {
-                                $currentfieldvalue = '';
+                                if($data[$row['entry_field_name']] == 1) {
+                                    $currentfieldvalue = 'Ja';
+                                } else {
+                                    $currentfieldvalue = '';
+                                }
                             }
                         } else {
                             $currentfieldvalue = $data[$row['entry_field_name']];

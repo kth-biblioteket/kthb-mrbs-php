@@ -112,10 +112,11 @@ $html_body['content'] .=
                     //TODO Bort med hårdkodning
                     if($row['entry_field_name'] != 'campus' 
                         && $row['entry_field_name'] != 'instructor' 
-                        && $row['entry_field_name'] != 'my_campus'
+                        && $row['entry_field_name'] != 'my_campus' 
                         && $row['entry_field_name'] != 'kth_program'
                         && $row['entry_field_name'] != 'kth_assignment'){
                         //Hämta typ och konvertera ikryssade checkboxar till "Ja"
+                        //Anpassa till radioknappval
                         $type_sql ="SELECT
                             DATA_TYPE 
                             FROM
@@ -127,10 +128,18 @@ $html_body['content'] .=
                         $type_res = sql_query($type_sql);
                         $type_row = sql_row($type_res, 0);
                         if($type_row[0] == 'smallint' || $type_row[0] == 'tinyint') {
-                            if($data[$row['entry_field_name']] == 1) {
-                                $currentfieldvalue = 'Ja';
-                            } else {
-                                $currentfieldvalue = '';
+                            //Radio
+                            if($row['field_type']== 5) {
+                                //Hämta aktuella värden
+                                $currentfieldvalue = get_custom_field_radio_value($row['entry_field_name'], $data[$row['entry_field_name']], $lang);
+                            }
+                            //Checkbox
+                            if($row['field_type']== 4) {
+                                if($data[$row['entry_field_name']] == 1) {
+                                    $currentfieldvalue = 'Ja';
+                                } else {
+                                    $currentfieldvalue = '';
+                                }
                             }
                         } else {
                             $currentfieldvalue = $data[$row['entry_field_name']];
@@ -145,6 +154,7 @@ $html_body['content'] .=
 $html_body['content'] .= 
             '</tbody>
         </table>
+    </div>
 </body>
 </html>
 '

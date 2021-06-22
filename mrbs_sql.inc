@@ -2017,16 +2017,50 @@ function get_exchange_email($id, $all=FALSE)
 
 //KTH ny funktion.
 //210617
-//Hämta radiovärden för custom field
+//Hämta radiovärden för custom field att visas i mail
+function get_custom_field_radio_value($entry_field_name, $radio_id, $lang)
+{
+  if($lang=="sv") {
+    $value_field_name = "value_sv";
+  } else {
+    $value_field_name = "value_en";
+  }
+
+  $sql = "SELECT $value_field_name
+          FROM kth_radio_values
+          WHERE kth_radio_values.entry_field_name ='$entry_field_name'
+          AND radio_id = $radio_id";
+
+  $sql .= " LIMIT 1";
+
+  $res = sql_query($sql);
+  
+  if ($res === FALSE)
+  {
+    trigger_error(sql_error(), E_USER_WARNING);
+    return FALSE;
+  }
+  if (sql_count($res) == 0)
+  {
+    return NULL;
+  }
+  
+  $row = sql_row($res, 0);
+  return $row[0];
+}
+
+//KTH ny funktion.
+//210617
+//Hämta radiovärden för custom field att visas vid bokning
 function get_custom_field_radio_values_array($entry_field_name, $lang)
 {
   if($lang=="sv") {
-    $places_field = "value";
+    $value_field_name = "value_sv";
   } else {
-    $places_field = "value_en";
+    $value_field_name = "value_en";
   }
 
-  $sql = "SELECT $places_field, radio_id
+  $sql = "SELECT $value_field_name, radio_id
           FROM kth_radio_values
           WHERE kth_radio_values.entry_field_name ='$entry_field_name'";
 
@@ -2042,7 +2076,7 @@ function get_custom_field_radio_values_array($entry_field_name, $lang)
     $radioarray = array();
     for ($i=0; $row = sql_row_keyed($res, $i); $i++)
     {
-      $radioarray[$row['radio_id']] = $row[$places_field];
+      $radioarray[$row['radio_id']] = $row[$value_field_name];
     }
   }
   return $radioarray;
