@@ -1647,7 +1647,7 @@ div#edit_entry_submit_back {
     font-family: "Open Sans";
     height: 38px;
     padding: 6px 10px;
-    margin: 0 0 15px 0;
+    margin: 0 15px 15px 0;
 }
 
 .edit_entry .form_general textarea {
